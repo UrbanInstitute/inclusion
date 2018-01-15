@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+  margin: 0;
+  background: #5c5859;
+}
+
+.line {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+
+.area {
+  fill: #e7e7e7;
+}
+
+</style>
+<body>
+<script src="//d3js.org/d3.v4.min.js"></script>
+<script>
+
+var margin = {top: 8, right: 10, bottom: 2, left: 10},
+    width = 80 - margin.left - margin.right,
+    height = 80 - margin.top - margin.bottom;
+
+var color = d3.scaleLinear()
+  .domain([-200,0,200])
+  .range(['#db2b27','#ffffff','#55b748']);
+
+
+var x = d3.scaleLinear()
+    .range([0,width]);
+
+var y = d3.scaleLinear()
+    .range([0, height]);
+
+var inclLine = d3.line()
+    .x(function(d) { return x(d.year); })
+    .y(function(d) { return y(d.overallInclusion); });
+
+var healthLine = d3.line()
+    .x(function(d) { return x(d.year); })
+    .y(function(d) { return y(d.econHealth); });
+
+d3.csv("data/econHealth.csv", type, function(error, data) {
+
+  var places = d3.nest()
+      .key(function(d) { return d.place; })
+      .entries(data);
+
+  places.forEach(function(s) {
+    s.incl1980 = s.values.filter(function(d){ return d.year == 1980})[0]["overallInclusion"];
+    s.incl1990 = s.values.filter(function(d){ return d.year == 1990})[0]["overallInclusion"];
+    s.incl2000 = s.values.filter(function(d){ return d.year == 2000})[0]["overallInclusion"];
+    s.incl2013 = s.values.filter(function(d){ return d.year == 2013})[0]["overallInclusion"];
+    s.health1980 = s.values.filter(function(d){ return d.year == 1980})[0]["econHealth"];
+    s.health1990 = s.values.filter(function(d){ return d.year == 1990})[0]["econHealth"];
+    s.health2000 = s.values.filter(function(d){ return d.year == 2000})[0]["econHealth"];
+    s.health2013 = s.values.filter(function(d){ return d.year == 2013})[0]["econHealth"];
+
+  });
+
+  x.domain([1980,2013]);
+  y.domain([0,274])
+
+  var svg = d3.select("body").selectAll("svg")
+      .data(places)
+    .enter().append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  svg.append("line")
+    .style("fill", "none")
+    .style("stroke",function(d){ return color ( (d.incl1980 - d.incl1990))})
+    .style("stroke-width","2.5px")
+    .attr("x1",x(1980))
+    .attr("x2",x(1990))
+    .attr("y1", function(d){return y(d.incl1980) })
+    .attr("y2", function(d){return y(d.incl1990) })
+
+  svg.append("line")
+    .style("fill", "none")
+    .style("stroke",function(d){ return color ( (d.incl1990 - d.incl2000))})
+    .style("stroke-width","2.5px")
+    .attr("x1",x(1990))
+    .attr("x2",x(2000))
+    .attr("y1", function(d){return y(d.incl1990) })
+    .attr("y2", function(d){return y(d.incl2000) })
+
+  svg.append("line")
+    .style("fill", "none")
+    .style("stroke",function(d){ return color ( (d.incl2000 - d.incl2013))})
+    .style("stroke-width","2.5px")
+    .attr("x1",x(2000))
+    .attr("x2",x(2013))
+    .attr("y1", function(d){return y(d.incl2000) })
+    .attr("y2", function(d){return y(d.incl2013) })
+
+
+
+
+
+  svg.append("line")
+    .style("fill", "none")
+    .style("stroke",function(d){ return color ( (d.health1980 - d.health1990))})
+    .style("stroke-width","2.5px")
+    .attr("stroke-dasharray","2.5,2.5")
+    .attr("x1",x(1980))
+    .attr("x2",x(1990))
+    .attr("y1", function(d){return y(d.health1980) })
+    .attr("y2", function(d){return y(d.health1990) })
+
+  svg.append("line")
+    .style("fill", "none")
+    .style("stroke",function(d){ return color ( (d.health1990 - d.health2000))})
+    .style("stroke-width","2.5px")
+    .attr("stroke-dasharray","2.5,2.5")
+    .attr("x1",x(1990))
+    .attr("x2",x(2000))
+    .attr("y1", function(d){return y(d.health1990) })
+    .attr("y2", function(d){return y(d.health2000) })
+
+  svg.append("line")
+    .style("fill", "none")
+    .style("stroke",function(d){ return color ( (d.health2000 - d.health2013))})
+    .style("stroke-width","2.5px")
+    .attr("stroke-dasharray","2.5,2.5")
+    .attr("x1",x(2000))
+    .attr("x2",x(2013))
+    .attr("y1", function(d){return y(d.health2000) })
+    .attr("y2", function(d){return y(d.health2013) })
+
+
+
+
+  // svg.append("path")
+  //     .attr("class", "line")
+  //     .style("fill", "none")
+  //     .style("stroke", "#1696d2")
+  //     .attr("d", function(d) {
+  //       // y.domain([d.minRank, d.maxRank]);
+  //       y.domain([0,274])
+  //       return inclLine(d.values);
+  //     });
+  // svg.append("path")
+  //     .attr("class", "line")
+  //     .style("fill", "none")
+  //     .style("stroke", "#fdbf11")
+  //     .attr("d", function(d) {
+  //       // y.domain([d.minRank, d.maxRank]);
+  //       return healthLine(d.values);
+  //     });
+
+  // Add a small label for the symbol name.
+  // svg.append("text")
+  //     .attr("x", 0)
+  //     .attr("y", 0)
+  //     .style("fill","white")
+  //     .style("text-anchor", "start")
+  //     .text(function(d) { return d.key; });
+});
+
+function type(d) {
+  d.year = +d.year;
+  d.econHealth = +d.econHealth;
+  d.overallInclusion = +d.overallInclusion;
+  d.raceInclusion = +d.raceInclusion;
+  d.econInclusion = +d.econInclusion;
+  return d;
+}
+
+</script>

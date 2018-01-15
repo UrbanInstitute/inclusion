@@ -1,0 +1,1097 @@
+place,year,econHealth,overallInclusion,raceInclusion,econInclusion
+"Fremont,CA",1980,20,10,11,22
+"Fremont,CA",1990,8,2,3,14
+"Fremont,CA",2000,10,1,4,9
+"Fremont,CA",2013,7,1,3,2
+"Daly City,CA",1980,36,3,2,19
+"Daly City,CA",1990,40,6,2,21
+"Daly City,CA",2000,29,2,2,25
+"Daly City,CA",2013,51,2,2,16
+"Torrance,CA",1980,15,6,6,8
+"Torrance,CA",1990,20,3,5,7
+"Torrance,CA",2000,38,7,11,10
+"Torrance,CA",2013,37,3,12,6
+"Santa Clara,CA",1980,21,13,18,21
+"Santa Clara,CA",1990,29,8,21,3
+"Santa Clara,CA",2000,17,8,23,4
+"Santa Clara,CA",2013,10,4,15,9
+"Elk Grove,CA",1980,52,56,40,145
+"Elk Grove,CA",1990,10,5,4,10
+"Elk Grove,CA",2000,1,5,13,5
+"Elk Grove,CA",2013,2,5,9,13
+"West Covina,CA",1980,27,7,4,28
+"West Covina,CA",1990,35,11,6,34
+"West Covina,CA",2000,82,9,8,27
+"West Covina,CA",2013,116,6,5,36
+"Sunnyvale,CA",1980,9,17,38,14
+"Sunnyvale,CA",1990,24,10,31,6
+"Sunnyvale,CA",2000,8,10,33,8
+"Sunnyvale,CA",2013,6,7,27,5
+"Bellevue,WA",1980,16,29,61,17
+"Bellevue,WA",1990,9,22,48,19
+"Bellevue,WA",2000,28,21,40,19
+"Bellevue,WA",2013,14,8,39,3
+"Carlsbad,CA",1980,26,138,198,85
+"Carlsbad,CA",1990,12,124,207,68
+"Carlsbad,CA",2000,25,51,113,26
+"Carlsbad,CA",2013,8,9,25,10
+"Naperville,IL",1980,3,1,13,1
+"Naperville,IL",1990,2,1,15,1
+"Naperville,IL",2000,2,3,20,1
+"Naperville,IL",2013,3,10,46,4
+"Killeen,TX",1980,273,259,82,272
+"Killeen,TX",1990,262,40,9,144
+"Killeen,TX",2000,188,12,3,72
+"Killeen,TX",2013,192,11,6,54
+"Miramar,FL",1980,31,18,10,49
+"Miramar,FL",1990,54,23,7,91
+"Miramar,FL",2000,134,4,1,50
+"Miramar,FL",2013,24,12,1,115
+"Burbank,CA",1980,49,62,94,61
+"Burbank,CA",1990,51,45,66,30
+"Burbank,CA",2000,80,28,36,36
+"Burbank,CA",2013,62,13,14,42
+"Henderson,NV",1980,170,115,70,215
+"Henderson,NV",1990,19,20,27,36
+"Henderson,NV",2000,6,15,19,28
+"Henderson,NV",2013,63,14,30,14
+"Glendale,CA",1980,51,91,78,162
+"Glendale,CA",1990,85,72,36,195
+"Glendale,CA",2000,112,57,17,177
+"Glendale,CA",2013,126,15,4,92
+"Roseville,CA",1980,149,45,35,90
+"Roseville,CA",1990,23,21,28,35
+"Roseville,CA",2000,16,22,37,24
+"Roseville,CA",2013,5,16,20,31
+"Livonia,MI",1980,14,5,25,5
+"Livonia,MI",1990,14,9,18,13
+"Livonia,MI",2000,18,17,48,7
+"Livonia,MI",2013,57,17,93,1
+"Norwalk,CA",1980,65,39,7,125
+"Norwalk,CA",1990,65,29,14,78
+"Norwalk,CA",2000,131,23,16,55
+"Norwalk,CA",2013,88,18,10,58
+"Clarksville,TN",1980,240,90,108,113
+"Clarksville,TN",1990,179,56,65,51
+"Clarksville,TN",2000,151,20,38,18
+"Clarksville,TN",2013,166,19,34,20
+"Pembroke Pines,FL",1980,12,8,5,18
+"Pembroke Pines,FL",1990,17,7,13,8
+"Pembroke Pines,FL",2000,12,6,6,22
+"Pembroke Pines,FL",2013,79,20,7,85
+"San Francisco,CA",1980,114,36,22,78
+"San Francisco,CA",1990,99,37,23,71
+"San Francisco,CA",2000,47,27,25,52
+"San Francisco,CA",2013,39,21,29,25
+"Sterling Heights,MI",1980,10,2,17,3
+"Sterling Heights,MI",1990,22,4,17,2
+"Sterling Heights,MI",2000,30,11,46,3
+"Sterling Heights,MI",2013,99,22,43,23
+"Simi Valley,CA",1980,11,15,8,43
+"Simi Valley,CA",1990,7,12,11,25
+"Simi Valley,CA",2000,26,13,26,15
+"Simi Valley,CA",2013,21,23,33,33
+"Plano,TX",1980,2,64,140,38
+"Plano,TX",1990,4,35,89,9
+"Plano,TX",2000,5,29,44,23
+"Plano,TX",2013,12,24,48,21
+"Thousand Oaks,CA",1980,6,37,33,52
+"Thousand Oaks,CA",1990,3,50,71,33
+"Thousand Oaks,CA",2000,9,38,69,32
+"Thousand Oaks,CA",2013,18,25,69,12
+"Cambridge,MA",1980,138,32,44,37
+"Cambridge,MA",1990,82,26,69,11
+"Cambridge,MA",2000,76,45,74,33
+"Cambridge,MA",2013,22,26,84,7
+"Hayward,CA",1980,77,25,14,54
+"Hayward,CA",1990,75,16,8,69
+"Hayward,CA",2000,70,18,12,53
+"Hayward,CA",2013,85,27,21,59
+"Downey,CA",1980,46,23,37,26
+"Downey,CA",1990,50,33,41,46
+"Downey,CA",2000,94,26,35,37
+"Downey,CA",2013,70,28,31,50
+"Fayetteville,NC",1980,227,262,242,233
+"Fayetteville,NC",1990,162,178,190,163
+"Fayetteville,NC",2000,228,73,70,83
+"Fayetteville,NC",2013,200,29,28,55
+"Jersey City,NJ",1980,256,54,45,109
+"Jersey City,NJ",1990,227,43,26,82
+"Jersey City,NJ",2000,204,24,15,61
+"Jersey City,NJ",2013,136,30,18,90
+"Antioch,CA",1980,70,35,16,81
+"Antioch,CA",1990,59,41,20,95
+"Antioch,CA",2000,33,25,7,90
+"Antioch,CA",2013,140,31,19,91
+"Overland Park,KS",1980,18,9,28,6
+"Overland Park,KS",1990,18,13,49,5
+"Overland Park,KS",2000,14,36,89,13
+"Overland Park,KS",2013,15,32,114,8
+"Huntington Beach,CA",1980,13,44,34,91
+"Huntington Beach,CA",1990,13,39,53,40
+"Huntington Beach,CA",2000,27,34,59,30
+"Huntington Beach,CA",2013,33,33,53,39
+"Virginia Beach,VA",1980,58,70,114,66
+"Virginia Beach,VA",1990,53,44,50,49
+"Virginia Beach,VA",2000,58,43,49,58
+"Virginia Beach,VA",2013,58,34,58,32
+"McKinney,TX",1980,228,263,160,270
+"McKinney,TX",1990,167,274,252,274
+"McKinney,TX",2000,3,273,271,259
+"McKinney,TX",2013,1,35,70,27
+"Fort Collins,CO",1980,75,96,129,99
+"Fort Collins,CO",1990,63,86,93,103
+"Fort Collins,CO",2000,40,74,77,74
+"Fort Collins,CO",2013,35,36,60,41
+"Chandler,AZ",1980,67,272,251,265
+"Chandler,AZ",1990,6,146,192,102
+"Chandler,AZ",2000,15,66,93,57
+"Chandler,AZ",2013,19,37,72,30
+"Norman,OK",1980,93,120,136,120
+"Norman,OK",1990,166,58,56,67
+"Norman,OK",2000,100,81,76,111
+"Norman,OK",2013,84,38,52,52
+"Grand Prairie,TX",1980,50,117,128,126
+"Grand Prairie,TX",1990,123,75,84,92
+"Grand Prairie,TX",2000,92,55,53,71
+"Grand Prairie,TX",2013,55,39,35,82
+"Oceanside,CA",1980,196,243,169,254
+"Oceanside,CA",1990,80,200,176,207
+"Oceanside,CA",2000,65,137,127,156
+"Oceanside,CA",2013,92,40,61,48
+"Hampton,VA",1980,144,59,87,56
+"Hampton,VA",1990,131,27,57,15
+"Hampton,VA",2000,145,39,54,41
+"Hampton,VA",2013,202,41,50,68
+"Chula Vista,CA",1980,96,51,32,142
+"Chula Vista,CA",1990,48,68,33,175
+"Chula Vista,CA",2000,83,46,27,127
+"Chula Vista,CA",2013,50,42,26,119
+"Peoria,AZ",1980,78,133,76,229
+"Peoria,AZ",1990,5,126,99,190
+"Peoria,AZ",2000,13,35,31,70
+"Peoria,AZ",2013,32,43,71,47
+"West Jordan,UT",1980,1,33,53,29
+"West Jordan,UT",1990,31,25,37,32
+"West Jordan,UT",2000,22,19,45,11
+"West Jordan,UT",2013,13,44,104,24
+"Vancouver,WA",1980,217,119,105,163
+"Vancouver,WA",1990,143,96,77,148
+"Vancouver,WA",2000,7,78,56,144
+"Vancouver,WA",2013,121,45,67,53
+"Ann Arbor,MI",1980,29,71,73,149
+"Ann Arbor,MI",1990,32,85,73,136
+"Ann Arbor,MI",2000,34,60,75,59
+"Ann Arbor,MI",2013,48,46,76,46
+"Everett,WA",1980,184,97,107,127
+"Everett,WA",1990,114,48,52,54
+"Everett,WA",2000,135,69,68,77
+"Everett,WA",2013,123,47,64,57
+"Newark,NJ",1980,270,85,31,241
+"Newark,NJ",1990,266,64,29,160
+"Newark,NJ",2000,269,65,32,171
+"Newark,NJ",2013,263,48,22,133
+"Anchorage municip,AK",1980,33,77,116,77
+"Anchorage municip,AK",1990,104,66,81,59
+"Anchorage municip,AK",2000,75,64,85,60
+"Anchorage municip,AK",2013,34,49,95,29
+"Chesapeake,VA",1980,73,122,170,104
+"Chesapeake,VA",1990,60,84,118,63
+"Chesapeake,VA",2000,45,58,81,45
+"Chesapeake,VA",2013,60,50,82,44
+"Vallejo,CA",1980,94,19,21,42
+"Vallejo,CA",1990,78,14,1,88
+"Vallejo,CA",2000,101,14,5,69
+"Vallejo,CA",2013,227,51,17,169
+"Berkeley,CA",1980,100,76,54,185
+"Berkeley,CA",1990,55,79,79,112
+"Berkeley,CA",2000,46,113,120,135
+"Berkeley,CA",2013,28,52,100,34
+"Palm Bay,FL",1980,84,80,161,47
+"Palm Bay,FL",1990,21,28,44,29
+"Palm Bay,FL",2000,121,30,29,46
+"Palm Bay,FL",2013,196,53,37,111
+"Pasadena,CA",1980,88,180,117,234
+"Pasadena,CA",1990,83,206,130,243
+"Pasadena,CA",2000,108,159,132,191
+"Pasadena,CA",2013,52,54,54,78
+"Seattle,WA",1980,81,58,106,44
+"Seattle,WA",1990,62,67,107,44
+"Seattle,WA",2000,52,59,116,34
+"Seattle,WA",2013,17,55,131,17
+"San Jose,CA",1980,23,88,89,135
+"San Jose,CA",1990,26,89,91,113
+"San Jose,CA",2000,19,68,66,81
+"San Jose,CA",2013,40,56,68,63
+"Cape Coral,FL",1980,59,27,55,20
+"Cape Coral,FL",1990,28,31,59,16
+"Cape Coral,FL",2000,55,31,51,20
+"Cape Coral,FL",2013,137,57,99,40
+"Arvada,CO",1980,8,11,30,9
+"Arvada,CO",1990,56,24,40,27
+"Arvada,CO",2000,31,37,55,39
+"Arvada,CO",2013,27,58,115,26
+"Fairfield,CA",1980,107,38,26,69
+"Fairfield,CA",1990,43,15,10,50
+"Fairfield,CA",2000,73,54,24,158
+"Fairfield,CA",2013,93,59,38,131
+"Mesquite,TX",1980,34,26,27,48
+"Mesquite,TX",1990,79,17,22,37
+"Mesquite,TX",2000,56,16,14,35
+"Mesquite,TX",2013,125,60,45,109
+"Scottsdale,AZ",1980,128,50,50,72
+"Scottsdale,AZ",1990,66,62,88,45
+"Scottsdale,AZ",2000,24,84,128,66
+"Scottsdale,AZ",2013,30,61,154,18
+"El Paso,TX",1980,164,158,74,253
+"El Paso,TX",1990,194,215,124,251
+"El Paso,TX",2000,210,165,86,237
+"El Paso,TX",2013,120,62,42,135
+"Orange,CA",1980,24,72,113,75
+"Orange,CA",1990,15,144,149,147
+"Orange,CA",2000,42,110,150,85
+"Orange,CA",2013,45,63,83,70
+"Olathe,KS",1980,37,22,65,7
+"Olathe,KS",1990,16,19,47,20
+"Olathe,KS",2000,11,32,103,6
+"Olathe,KS",2013,9,64,166,15
+"Victorville,CA",1980,257,47,42,74
+"Victorville,CA",1990,103,59,30,134
+"Victorville,CA",2000,177,48,22,147
+"Victorville,CA",2013,151,65,36,152
+"Corona,CA",1980,64,146,154,153
+"Corona,CA",1990,38,99,87,138
+"Corona,CA",2000,35,53,42,89
+"Corona,CA",2013,43,66,40,143
+"Boise City,ID",1980,120,53,79,50
+"Boise City,ID",1990,52,30,39,41
+"Boise City,ID",2000,44,50,73,43
+"Boise City,ID",2013,78,67,109,56
+"Westminster,CO",1980,19,46,48,55
+"Westminster,CO",1990,44,42,58,28
+"Westminster,CO",2000,21,40,63,38
+"Westminster,CO",2013,67,68,117,49
+"Fontana,CA",1980,237,34,19,79
+"Fontana,CA",1990,71,60,12,197
+"Fontana,CA",2000,144,61,21,195
+"Fontana,CA",2013,44,69,32,180
+"Murfreesboro,TN",1980,169,184,244,93
+"Murfreesboro,TN",1990,115,111,122,119
+"Murfreesboro,TN",2000,116,86,99,86
+"Murfreesboro,TN",2013,26,70,147,28
+"Fullerton,CA",1980,25,105,98,147
+"Fullerton,CA",1990,37,110,98,155
+"Fullerton,CA",2000,72,105,101,143
+"Fullerton,CA",2013,76,71,75,87
+"Midland,TX",1980,28,228,225,174
+"Midland,TX",1990,202,232,253,139
+"Midland,TX",2000,178,155,213,103
+"Midland,TX",2013,11,72,135,43
+"Lancaster,CA",1980,61,21,23,39
+"Lancaster,CA",1990,76,47,35,89
+"Lancaster,CA",2000,238,67,41,141
+"Lancaster,CA",2013,152,73,57,113
+"Gary,IN",1980,266,40,20,103
+"Gary,IN",1990,274,55,19,149
+"Gary,IN",2000,270,52,43,87
+"Gary,IN",2013,272,74,16,233
+"Corpus Christi,TX",1980,98,131,80,221
+"Corpus Christi,TX",1990,225,130,112,179
+"Corpus Christi,TX",2000,185,114,82,176
+"Corpus Christi,TX",2013,91,75,59,110
+"Parma,OH",1980,43,4,41,2
+"Parma,OH",1990,42,36,113,4
+"Parma,OH",2000,71,33,133,2
+"Parma,OH",2013,134,76,213,11
+"Tempe,AZ",1980,42,66,69,137
+"Tempe,AZ",1990,95,78,60,142
+"Tempe,AZ",2000,67,115,98,161
+"Tempe,AZ",2013,144,77,108,69
+"Hialeah,FL",1980,90,48,29,119
+"Hialeah,FL",1990,158,122,62,228
+"Hialeah,FL",2000,203,72,30,181
+"Hialeah,FL",2013,175,78,8,254
+"Lowell,MA",1980,142,150,234,53
+"Lowell,MA",1990,204,239,267,123
+"Lowell,MA",2000,119,139,192,92
+"Lowell,MA",2013,162,79,103,73
+"Inglewood,CA",1980,146,30,3,165
+"Inglewood,CA",1990,197,77,16,247
+"Inglewood,CA",2000,227,63,18,210
+"Inglewood,CA",2013,201,80,23,221
+"Columbia,MO",1980,80,185,188,164
+"Columbia,MO",1990,101,175,166,185
+"Columbia,MO",2000,109,132,148,117
+"Columbia,MO",2013,25,81,106,74
+"Carrollton,TX",1980,4,42,66,33
+"Carrollton,TX",1990,11,54,109,18
+"Carrollton,TX",2000,20,47,92,31
+"Carrollton,TX",2013,29,82,119,65
+"Pomona,CA",1980,182,123,36,257
+"Pomona,CA",1990,119,231,72,266
+"Pomona,CA",2000,193,162,71,248
+"Pomona,CA",2013,160,83,41,191
+"Rochester,MN",1980,44,20,51,10
+"Rochester,MN",1990,30,70,200,12
+"Rochester,MN",2000,39,120,255,29
+"Rochester,MN",2013,20,84,167,35
+"Ontario,CA",1980,109,81,58,193
+"Ontario,CA",1990,81,167,78,252
+"Ontario,CA",2000,163,95,57,179
+"Ontario,CA",2013,139,85,51,158
+"Thornton,CO",1980,7,41,24,100
+"Thornton,CO",1990,112,57,42,98
+"Thornton,CO",2000,23,56,39,109
+"Thornton,CO",2013,23,86,102,89
+"Visalia,CA",1980,99,216,179,210
+"Visalia,CA",1990,89,195,241,122
+"Visalia,CA",2000,154,152,208,104
+"Visalia,CA",2013,89,87,134,64
+"Elizabeth,NJ",1980,173,43,39,62
+"Elizabeth,NJ",1990,180,65,51,101
+"Elizabeth,NJ",2000,208,42,28,96
+"Elizabeth,NJ",2013,208,88,47,187
+"North Las Vegas,NV",1980,226,112,15,267
+"North Las Vegas,NV",1990,248,120,54,242
+"North Las Vegas,NV",2000,61,252,206,247
+"North Las Vegas,NV",2013,46,89,74,124
+"Sacramento,CA",1980,244,60,43,155
+"Sacramento,CA",1990,122,93,55,194
+"Sacramento,CA",2000,174,80,52,165
+"Sacramento,CA",2013,157,90,77,126
+"Davenport,IA",1980,92,165,243,64
+"Davenport,IA",1990,171,165,239,86
+"Davenport,IA",2000,125,158,240,73
+"Davenport,IA",2013,118,91,181,37
+"Modesto,CA",1980,187,98,85,158
+"Modesto,CA",1990,107,112,135,105
+"Modesto,CA",2000,162,94,105,94
+"Modesto,CA",2013,215,92,90,108
+"Hollywood,FL",1980,103,128,101,183
+"Hollywood,FL",1990,154,141,117,180
+"Hollywood,FL",2000,122,83,72,122
+"Hollywood,FL",2013,186,93,63,148
+"Newport News,VA",1980,176,231,252,146
+"Newport News,VA",1990,165,135,214,73
+"Newport News,VA",2000,136,122,173,88
+"Newport News,VA",2013,171,94,142,62
+"Colorado Springs,CO",1980,153,83,97,118
+"Colorado Springs,CO",1990,174,83,97,85
+"Colorado Springs,CO",2000,54,100,102,113
+"Colorado Springs,CO",2013,87,95,130,77
+"Detroit,MI",1980,272,102,49,225
+"Detroit,MI",1990,273,121,45,253
+"Detroit,MI",2000,264,44,9,172
+"Detroit,MI",2013,274,96,11,269
+"Jacksonville,FL",1980,191,229,214,196
+"Jacksonville,FL",1990,148,123,154,115
+"Jacksonville,FL",2000,130,96,114,91
+"Jacksonville,FL",2013,205,97,97,114
+"Eugene,OR",1980,139,137,130,156
+"Eugene,OR",1990,93,91,85,127
+"Eugene,OR",2000,107,109,130,110
+"Eugene,OR",2013,128,98,127,79
+"Fargo,ND",1980,101,140,261,24
+"Fargo,ND",1990,67,52,92,23
+"Fargo,ND",2000,62,70,174,17
+"Fargo,ND",2013,31,99,223,22
+"Gainesville,FL",1980,126,250,180,258
+"Gainesville,FL",1990,163,225,144,250
+"Gainesville,FL",2000,196,177,112,235
+"Gainesville,FL",2013,189,100,62,166
+"Albuquerque,NM",1980,122,73,67,160
+"Albuquerque,NM",1990,134,88,70,152
+"Albuquerque,NM",2000,137,97,60,175
+"Albuquerque,NM",2013,114,101,55,185
+"Tacoma,WA",1980,219,69,77,123
+"Tacoma,WA",1990,155,94,86,130
+"Tacoma,WA",2000,158,92,78,136
+"Tacoma,WA",2013,159,102,89,121
+"Irving,TX",1980,53,52,93,41
+"Irving,TX",1990,127,92,119,75
+"Irving,TX",2000,81,101,124,107
+"Irving,TX",2013,107,103,66,175
+"Wichita Falls,TX",1980,225,161,189,140
+"Wichita Falls,TX",1990,239,128,152,132
+"Wichita Falls,TX",2000,207,87,129,67
+"Wichita Falls,TX",2013,180,104,137,80
+"Paterson,NJ",1980,235,149,62,252
+"Paterson,NJ",1990,188,81,43,199
+"Paterson,NJ",2000,249,93,34,227
+"Paterson,NJ",2013,234,105,24,250
+"Lakewood,CO",1980,30,31,57,23
+"Lakewood,CO",1990,88,38,76,17
+"Lakewood,CO",2000,43,75,109,56
+"Lakewood,CO",2013,73,106,120,95
+"Concord,CA",1980,32,16,12,40
+"Concord,CA",1990,33,18,24,39
+"Concord,CA",2000,49,76,80,82
+"Concord,CA",2013,90,107,121,96
+"Camden,NJ",1980,274,159,63,262
+"Camden,NJ",1990,271,158,80,249
+"Camden,NJ",2000,274,204,64,269
+"Camden,NJ",2013,268,108,13,271
+"Manchester,NH",1980,89,78,123,63
+"Manchester,NH",1990,140,61,68,62
+"Manchester,NH",2000,64,111,220,48
+"Manchester,NH",2013,109,109,165,60
+"Madison,WI",1980,47,116,174,76
+"Madison,WI",1990,34,102,167,60
+"Madison,WI",2000,50,108,211,51
+"Madison,WI",2013,36,110,198,45
+"San Diego,CA",1980,123,132,104,190
+"San Diego,CA",1990,69,193,143,216
+"San Diego,CA",2000,88,184,149,211
+"San Diego,CA",2013,65,111,118,106
+"Spokane,WA",1980,212,124,121,154
+"Spokane,WA",1990,176,73,75,108
+"Spokane,WA",2000,194,106,106,138
+"Spokane,WA",2013,161,112,133,94
+"Anaheim,CA",1980,39,82,83,136
+"Anaheim,CA",1990,64,185,131,218
+"Anaheim,CA",2000,95,226,151,241
+"Anaheim,CA",2013,102,113,110,128
+"Hartford,CT",1980,249,141,84,216
+"Hartford,CT",1990,249,198,146,223
+"Hartford,CT",2000,273,186,96,246
+"Hartford,CT",2013,265,114,88,149
+"Columbus,OH",1980,199,126,124,150
+"Columbus,OH",1990,130,107,104,137
+"Columbus,OH",2000,127,99,107,106
+"Columbus,OH",2013,165,115,128,104
+"Billings,MT",1980,129,171,248,59
+"Billings,MT",1990,126,168,256,56
+"Billings,MT",2000,90,168,245,76
+"Billings,MT",2013,42,116,180,67
+"Birmingham,AL",1980,234,210,158,220
+"Birmingham,AL",1990,253,157,95,229
+"Birmingham,AL",2000,260,118,61,219
+"Birmingham,AL",2013,266,117,56,216
+"Athens-Clarke County unified government (bal,GA",1980,189,189,193,159
+"Athens-Clarke County unified government (bal,GA",1990,218,148,74,246
+"Athens-Clarke County unified government (bal,GA",2000,78,124,50,240
+"Athens-Clarke County unified government (bal,GA",2013,223,118,96,156
+"Boston,MA",1980,241,109,142,101
+"Boston,MA",1990,186,100,145,74
+"Boston,MA",2000,153,98,131,79
+"Boston,MA",2013,111,119,187,66
+"Stamford,CT",1980,35,249,273,131
+"Stamford,CT",1990,25,147,250,48
+"Stamford,CT",2000,37,129,229,54
+"Stamford,CT",2013,59,120,176,75
+"Abilene,TX",1980,116,163,164,172
+"Abilene,TX",1990,242,149,139,170
+"Abilene,TX",2000,223,125,119,148
+"Abilene,TX",2013,156,121,143,99
+"Garden Grove,CA",1980,40,86,99,115
+"Garden Grove,CA",1990,49,142,123,171
+"Garden Grove,CA",2000,98,121,134,125
+"Garden Grove,CA",2013,82,122,124,123
+"Provo,UT",1980,179,84,119,89
+"Provo,UT",1990,113,63,25,165
+"Provo,UT",2000,113,77,88,78
+"Provo,UT",2013,110,123,94,176
+"Cedar Rapids,IA",1980,54,63,182,13
+"Cedar Rapids,IA",1990,84,69,147,24
+"Cedar Rapids,IA",2000,63,71,193,14
+"Cedar Rapids,IA",2013,80,124,251,19
+"St. Petersburg,FL",1980,211,246,240,204
+"St. Petersburg,FL",1990,193,201,218,153
+"St. Petersburg,FL",2000,167,146,172,123
+"St. Petersburg,FL",2013,190,125,168,81
+"New Haven,CT",1980,253,134,115,173
+"New Haven,CT",1990,212,105,115,100
+"New Haven,CT",2000,266,88,79,121
+"New Haven,CT",2013,233,126,92,181
+"Richmond,CA",1980,172,57,68,107
+"Richmond,CA",1990,128,90,67,162
+"Richmond,CA",2000,126,82,62,137
+"Richmond,CA",2013,141,127,107,161
+"Santa Rosa,CA",1980,48,107,126,108
+"Santa Rosa,CA",1990,36,109,157,83
+"Santa Rosa,CA",2000,36,126,189,80
+"Santa Rosa,CA",2013,75,128,209,61
+"Portland,OR",1980,148,135,156,134
+"Portland,OR",1990,110,97,103,104
+"Portland,OR",2000,110,90,97,97
+"Portland,OR",2013,74,129,153,100
+"Elgin,IL",1980,79,145,258,31
+"Elgin,IL",1990,46,191,262,64
+"Elgin,IL",2000,60,107,222,42
+"Elgin,IL",2013,100,130,174,83
+"Riverside,CA",1980,95,108,92,166
+"Riverside,CA",1990,91,106,83,164
+"Riverside,CA",2000,148,117,90,174
+"Riverside,CA",2013,132,131,105,168
+"Pittsburgh,PA",1980,239,177,236,96
+"Pittsburgh,PA",1990,245,216,246,141
+"Pittsburgh,PA",2000,250,176,227,120
+"Pittsburgh,PA",2013,212,132,199,72
+"Beaumont,TX",1980,165,214,201,182
+"Beaumont,TX",1990,237,240,208,236
+"Beaumont,TX",2000,224,212,198,208
+"Beaumont,TX",2013,204,133,91,188
+"San Antonio,TX",1980,175,142,56,251
+"San Antonio,TX",1990,236,169,110,227
+"San Antonio,TX",2000,133,140,87,206
+"San Antonio,TX",2013,113,134,86,201
+"Norfolk,VA",1980,242,260,237,232
+"Norfolk,VA",1990,233,214,195,209
+"Norfolk,VA",2000,237,213,205,197
+"Norfolk,VA",2013,184,135,136,137
+"Worcester,MA",1980,135,211,267,57
+"Worcester,MA",1990,168,227,270,70
+"Worcester,MA",2000,139,172,262,64
+"Worcester,MA",2013,170,136,182,86
+"Portsmouth,VA",1980,183,255,218,240
+"Portsmouth,VA",1990,200,234,227,206
+"Portsmouth,VA",2000,216,170,170,170
+"Portsmouth,VA",2013,222,137,158,107
+"Hammond,IN",1980,145,55,120,27
+"Hammond,IN",1990,173,74,106,65
+"Hammond,IN",2000,199,62,104,44
+"Hammond,IN",2013,247,138,116,164
+"Bridgeport,CT",1980,201,230,196,224
+"Bridgeport,CT",1990,221,205,182,211
+"Bridgeport,CT",2000,240,130,91,180
+"Bridgeport,CT",2013,246,139,85,212
+"Garland,TX",1980,17,110,153,98
+"Garland,TX",1990,98,76,120,52
+"Garland,TX",2000,59,89,115,75
+"Garland,TX",2013,146,140,126,150
+"Alexandria,VA",1980,45,87,171,46
+"Alexandria,VA",1990,41,104,155,72
+"Alexandria,VA",2000,32,102,185,62
+"Alexandria,VA",2013,16,141,172,97
+"Augusta-Richmond County consolidated government (bal,GA",1980,263,264,216,255
+"Augusta-Richmond County consolidated government (bal,GA",1990,263,267,243,263
+"Augusta-Richmond County consolidated government (bal,GA",2000,4,91,67,149
+"Augusta-Richmond County consolidated government (bal,GA",2013,253,142,65,235
+"Denton,TX",1980,132,167,217,106
+"Denton,TX",1990,151,173,136,204
+"Denton,TX",2000,114,167,163,166
+"Denton,TX",2013,64,143,123,163
+"Independence,MO",1980,69,24,47,16
+"Independence,MO",1990,116,46,63,42
+"Independence,MO",2000,124,49,65,49
+"Independence,MO",2013,177,144,160,116
+"Stockton,CA",1980,245,143,125,171
+"Stockton,CA",1990,170,174,165,184
+"Stockton,CA",2000,214,195,135,226
+"Stockton,CA",2013,220,145,98,205
+"McAllen,TX",1980,174,238,151,259
+"McAllen,TX",1990,234,264,213,265
+"McAllen,TX",2000,211,154,121,204
+"McAllen,TX",2013,106,146,87,218
+"Topeka,KS",1980,155,101,157,67
+"Topeka,KS",1990,144,103,138,77
+"Topeka,KS",2000,146,116,142,108
+"Topeka,KS",2013,182,147,151,136
+"Lubbock,TX",1980,147,241,210,222
+"Lubbock,TX",1990,208,244,231,220
+"Lubbock,TX",2000,172,207,165,217
+"Lubbock,TX",2013,104,148,125,170
+"Canton,OH",1980,250,129,186,84
+"Canton,OH",1990,255,114,148,97
+"Canton,OH",2000,222,131,146,116
+"Canton,OH",2013,264,149,163,122
+"Savannah,GA",1980,222,270,246,256
+"Savannah,GA",1990,246,217,188,217
+"Savannah,GA",2000,244,209,126,245
+"Savannah,GA",2013,239,150,78,234
+"Costa Mesa,CA",1980,41,75,91,114
+"Costa Mesa,CA",1990,39,139,171,128
+"Costa Mesa,CA",2000,66,171,221,124
+"Costa Mesa,CA",2013,69,151,211,93
+"Columbus,GA",1980,238,242,219,207
+"Columbus,GA",1990,184,237,206,226
+"Columbus,GA",2000,191,166,167,159
+"Columbus,GA",2013,224,152,146,154
+"Bakersfield,CA",1980,83,178,148,202
+"Bakersfield,CA",1990,87,190,160,210
+"Bakersfield,CA",2000,138,223,162,233
+"Bakersfield,CA",2013,83,153,145,157
+"Las Vegas,NV",1980,140,221,177,218
+"Las Vegas,NV",1990,118,137,129,161
+"Las Vegas,NV",2000,93,191,139,221
+"Las Vegas,NV",2013,187,154,140,172
+"Raleigh,NC",1980,57,164,220,102
+"Raleigh,NC",1990,47,136,196,93
+"Raleigh,NC",2000,74,138,181,99
+"Raleigh,NC",2013,49,155,219,88
+"Pasadena,TX",1980,166,118,167,95
+"Pasadena,TX",1990,226,156,202,120
+"Pasadena,TX",2000,171,230,200,218
+"Pasadena,TX",2013,185,156,138,183
+"Dearborn,MI",1980,60,12,64,4
+"Dearborn,MI",1990,70,32,32,55
+"Dearborn,MI",2000,99,227,190,223
+"Dearborn,MI",2013,210,157,49,261
+"Charleston,SC",1980,198,269,259,244
+"Charleston,SC",1990,160,261,254,241
+"Charleston,SC",2000,141,237,223,209
+"Charleston,SC",2013,47,158,238,71
+"Pueblo,CO",1980,209,61,52,151
+"Pueblo,CO",1990,213,117,94,182
+"Pueblo,CO",2000,186,119,58,225
+"Pueblo,CO",2013,235,159,73,245
+"Springfield,MO",1980,221,68,95,94
+"Springfield,MO",1990,169,80,64,135
+"Springfield,MO",2000,176,104,125,112
+"Springfield,MO",2013,191,160,141,174
+"Trenton,NJ",1980,262,198,132,223
+"Trenton,NJ",1990,232,154,168,151
+"Trenton,NJ",2000,262,143,100,198
+"Trenton,NJ",2013,267,161,79,240
+"Reno,NV",1980,82,125,96,194
+"Reno,NV",1990,96,129,127,150
+"Reno,NV",2000,115,157,155,164
+"Reno,NV",2013,119,162,152,153
+"Roanoke,VA",1980,180,207,163,211
+"Roanoke,VA",1990,164,131,137,145
+"Roanoke,VA",2000,180,178,161,185
+"Roanoke,VA",2013,181,163,177,132
+"Tucson,AZ",1980,178,103,81,177
+"Tucson,AZ",1990,217,151,102,213
+"Tucson,AZ",2000,161,147,95,212
+"Tucson,AZ",2013,226,164,112,219
+"Lincoln,NE",1980,72,94,202,35
+"Lincoln,NE",1990,57,95,150,57
+"Lincoln,NE",2000,69,103,214,47
+"Lincoln,NE",2013,56,165,240,76
+"Lexington-Fayette urban c,KY",1980,86,237,239,186
+"Lexington-Fayette urban c,KY",1990,111,155,201,116
+"Lexington-Fayette urban c,KY",2000,102,156,201,119
+"Lexington-Fayette urban c,KY",2013,98,166,212,102
+"Durham,NC",1980,118,152,127,192
+"Durham,NC",1990,92,127,128,146
+"Durham,NC",2000,103,199,156,215
+"Durham,NC",2013,72,167,207,105
+"Baltimore,MD",1980,255,220,178,217
+"Baltimore,MD",1990,231,197,141,224
+"Baltimore,MD",2000,265,149,108,201
+"Baltimore,MD",2013,255,168,132,196
+"Nashville-Davidson metropolitan government (bal,TN",1980,108,175,211,121
+"Nashville-Davidson metropolitan government (bal,TN",1990,139,145,180,124
+"Nashville-Davidson metropolitan government (bal,TN",2000,117,148,158,139
+"Nashville-Davidson metropolitan government (bal,TN",2013,115,169,169,144
+"Flint,MI",1980,261,114,100,161
+"Flint,MI",1990,270,220,105,259
+"Flint,MI",2000,268,219,118,254
+"Flint,MI",2013,273,170,80,249
+"Green Bay,WI",1980,105,162,269,32
+"Green Bay,WI",1990,77,219,273,47
+"Green Bay,WI",2000,87,192,272,40
+"Green Bay,WI",2013,138,171,260,51
+"Providence,RI",1980,264,174,147,200
+"Providence,RI",1990,251,172,173,176
+"Providence,RI",2000,242,234,180,234
+"Providence,RI",2013,238,172,155,179
+"Austin,TX",1980,115,199,109,246
+"Austin,TX",1990,175,162,116,214
+"Austin,TX",2000,41,229,137,250
+"Austin,TX",2013,41,173,164,159
+"Albany,NY",1980,254,151,209,97
+"Albany,NY",1990,152,118,162,99
+"Albany,NY",2000,256,193,191,183
+"Albany,NY",2013,203,174,173,146
+"Greensboro,NC",1980,110,176,208,132
+"Greensboro,NC",1990,86,125,172,107
+"Greensboro,NC",2000,129,128,160,101
+"Greensboro,NC",2013,163,175,224,98
+"Palmdale,CA",1980,102,49,46,73
+"Palmdale,CA",1990,1,53,34,111
+"Palmdale,CA",2000,168,79,47,173
+"Palmdale,CA",2013,168,176,81,251
+"New Bedford,MA",1980,230,93,88,144
+"New Bedford,MA",1990,244,119,140,121
+"New Bedford,MA",2000,235,160,187,140
+"New Bedford,MA",2013,217,177,221,112
+"Orlando,FL",1980,159,226,213,188
+"Orlando,FL",1990,137,163,194,140
+"Orlando,FL",2000,152,190,169,200
+"Orlando,FL",2013,148,178,139,207
+"Warren,MI",1980,62,28,72,11
+"Warren,MI",1990,72,49,61,43
+"Warren,MI",2000,79,41,111,12
+"Warren,MI",2013,231,179,175,155
+"Arlington,TX",1980,63,104,146,80
+"Arlington,TX",1990,94,98,142,66
+"Arlington,TX",2000,57,133,168,102
+"Arlington,TX",2013,127,180,161,178
+"Des Moines,IA",1980,127,170,203,129
+"Des Moines,IA",1990,109,133,183,109
+"Des Moines,IA",2000,143,127,217,63
+"Des Moines,IA",2013,153,181,228,101
+"Akron,OH",1980,232,113,175,65
+"Akron,OH",1990,201,140,174,126
+"Akron,OH",2000,189,144,195,98
+"Akron,OH",2013,257,182,200,141
+"Tallahassee,FL",1980,203,268,235,260
+"Tallahassee,FL",1990,102,202,161,221
+"Tallahassee,FL",2000,205,221,153,238
+"Tallahassee,FL",2013,195,183,148,203
+"Washington,DC",1980,224,111,118,139
+"Washington,DC",1990,181,153,151,169
+"Washington,DC",2000,243,198,194,186
+"Washington,DC",2013,77,184,159,193
+"Philadelphia,PA",1980,265,188,173,184
+"Philadelphia,PA",1990,243,171,134,201
+"Philadelphia,PA",2000,252,151,138,163
+"Philadelphia,PA",2013,244,185,157,197
+"Salem,OR",1980,213,160,155,180
+"Salem,OR",1990,100,138,189,106
+"Salem,OR",2000,140,239,252,151
+"Salem,OR",2013,143,186,234,103
+"Joliet,IL",1980,215,155,256,45
+"Joliet,IL",1990,159,166,245,76
+"Joliet,IL",2000,77,245,251,169
+"Joliet,IL",2013,71,187,230,117
+"Oakland,CA",1980,223,89,71,175
+"Oakland,CA",1990,185,177,108,239
+"Oakland,CA",2000,157,205,147,228
+"Oakland,CA",2013,142,188,156,211
+"Charlotte,NC",1980,66,248,257,189
+"Charlotte,NC",1990,68,204,222,157
+"Charlotte,NC",2000,86,214,212,187
+"Charlotte,NC",2013,86,189,210,145
+"Oxnard,CA",1980,104,127,86,199
+"Oxnard,CA",1990,58,116,100,167
+"Oxnard,CA",2000,104,142,117,178
+"Oxnard,CA",2013,81,190,129,230
+"Gresham,OR",1980,5,14,9,34
+"Gresham,OR",1990,27,34,46,38
+"Gresham,OR",2000,105,183,228,130
+"Gresham,OR",2013,147,191,195,160
+"Lansing,MI",1980,161,65,103,58
+"Lansing,MI",1990,172,115,114,133
+"Lansing,MI",2000,175,85,84,100
+"Lansing,MI",2013,245,192,111,246
+"Baton Rouge,LA",1980,131,245,199,243
+"Baton Rouge,LA",1990,258,262,247,254
+"Baton Rouge,LA",2000,218,266,237,260
+"Baton Rouge,LA",2013,206,193,184,182
+"Louisville/Jefferson County metro government (bal,KY",1980,252,252,229,230
+"Louisville/Jefferson County metro government (bal,KY",1990,229,245,242,215
+"Louisville/Jefferson County metro government (bal,KY",2000,217,257,256,220
+"Louisville/Jefferson County metro government (bal,KY",2013,4,194,233,118
+"Wichita,KS",1980,74,205,226,130
+"Wichita,KS",1990,149,179,215,131
+"Wichita,KS",2000,147,161,210,114
+"Wichita,KS",2013,149,195,196,165
+"Salinas,CA",1980,181,218,181,206
+"Salinas,CA",1990,135,188,191,173
+"Salinas,CA",2000,181,136,143,131
+"Salinas,CA",2013,117,196,191,184
+"New York,NY",1980,194,179,133,209
+"New York,NY",1990,146,192,184,193
+"New York,NY",2000,187,194,175,202
+"New York,NY",2013,131,197,162,208
+"Little Rock,AR",1980,112,224,224,169
+"Little Rock,AR",1990,161,184,185,181
+"Little Rock,AR",2000,169,181,204,153
+"Little Rock,AR",2013,198,198,218,147
+"Chattanooga,TN",1980,188,236,245,181
+"Chattanooga,TN",1990,228,189,199,166
+"Chattanooga,TN",2000,213,169,179,162
+"Chattanooga,TN",2013,219,199,231,138
+"Cleveland,OH",1980,260,148,122,191
+"Cleveland,OH",1990,268,203,156,225
+"Cleveland,OH",2000,261,216,140,242
+"Cleveland,OH",2013,271,200,150,224
+"Yonkers,NY",1980,56,100,206,36
+"Yonkers,NY",1990,74,180,260,61
+"Yonkers,NY",2000,111,233,248,157
+"Yonkers,NY",2013,145,201,205,177
+"Aurora,CO",1980,22,67,90,92
+"Aurora,CO",1990,120,51,82,26
+"Aurora,CO",2000,53,123,136,126
+"Aurora,CO",2013,103,202,192,192
+"Dayton,OH",1980,271,106,102,143
+"Dayton,OH",1990,254,150,111,205
+"Dayton,OH",2000,253,164,123,213
+"Dayton,OH",2013,269,203,188,202
+"Laredo,TX",1980,185,95,1,273
+"Laredo,TX",1990,224,194,38,271
+"Laredo,TX",2000,198,145,10,274
+"Laredo,TX",2013,54,204,44,273
+"Sioux Falls,SD",1980,97,172,271,30
+"Sioux Falls,SD",1990,45,108,226,31
+"Sioux Falls,SD",2000,48,174,273,21
+"Sioux Falls,SD",2013,38,205,274,38
+"Oklahoma City,OK",1980,162,182,165,195
+"Oklahoma City,OK",1990,252,170,133,202
+"Oklahoma City,OK",2000,182,196,171,207
+"Oklahoma City,OK",2013,112,206,193,200
+"Mesa,AZ",1980,68,99,111,124
+"Mesa,AZ",1990,97,82,96,87
+"Mesa,AZ",2000,84,150,207,93
+"Mesa,AZ",2013,130,207,243,129
+"Chicago,IL",1980,231,192,143,208
+"Chicago,IL",1990,247,222,169,235
+"Chicago,IL",2000,229,180,152,199
+"Chicago,IL",2013,230,208,185,214
+"Kansas City,MO",1980,205,139,149,141
+"Kansas City,MO",1990,222,161,179,168
+"Kansas City,MO",2000,184,163,178,152
+"Kansas City,MO",2013,178,209,222,173
+"San Bernardino,CA",1980,233,202,110,249
+"San Bernardino,CA",1990,203,256,159,264
+"San Bernardino,CA",2000,257,241,122,262
+"San Bernardino,CA",2013,241,210,101,267
+"Waco,TX",1980,171,219,152,237
+"Waco,TX",1990,256,238,132,258
+"Waco,TX",2000,246,235,110,265
+"Waco,TX",2013,167,211,149,238
+"Syracuse,NY",1980,248,186,222,116
+"Syracuse,NY",1990,220,223,209,200
+"Syracuse,NY",2000,259,258,216,255
+"Syracuse,NY",2013,252,212,216,194
+"Fort Worth,TX",1980,158,217,145,239
+"Fort Worth,TX",1990,240,228,178,237
+"Fort Worth,TX",2000,160,200,145,216
+"Fort Worth,TX",2013,66,213,178,225
+"El Monte,CA",1980,204,212,60,271
+"El Monte,CA",1990,138,251,101,269
+"El Monte,CA",2000,202,228,94,268
+"El Monte,CA",2013,194,214,113,264
+"Long Beach,CA",1980,113,223,139,247
+"Long Beach,CA",1990,121,260,234,257
+"Long Beach,CA",2000,195,268,254,258
+"Long Beach,CA",2013,135,215,201,213
+"Tampa,FL",1980,207,204,138,227
+"Tampa,FL",1990,216,210,158,232
+"Tampa,FL",2000,212,201,157,214
+"Tampa,FL",2013,176,216,170,229
+"Denver,CO",1980,150,191,137,214
+"Denver,CO",1990,223,186,181,192
+"Denver,CO",2000,96,236,183,236
+"Denver,CO",2013,53,217,202,209
+"Scranton,PA",1980,236,74,212,12
+"Scranton,PA",1990,183,71,170,22
+"Scranton,PA",2000,241,135,270,16
+"Scranton,PA",2013,225,218,267,84
+"Amarillo,TX",1980,87,195,184,176
+"Amarillo,TX",1990,211,233,220,208
+"Amarillo,TX",2000,142,231,197,222
+"Amarillo,TX",2013,94,219,204,215
+"Toledo,OH",1980,247,193,230,111
+"Toledo,OH",1990,214,182,229,117
+"Toledo,OH",2000,206,187,236,129
+"Toledo,OH",2013,261,220,229,186
+"Brownsville,TX",1980,163,257,75,274
+"Brownsville,TX",1990,265,269,203,273
+"Brownsville,TX",2000,247,254,141,273
+"Brownsville,TX",2013,124,221,122,262
+"Peoria,IL",1980,177,225,253,122
+"Peoria,IL",1990,156,247,266,154
+"Peoria,IL",2000,183,256,268,196
+"Peoria,IL",2013,183,222,239,167
+"Mobile,AL",1980,160,247,254,187
+"Mobile,AL",1990,230,253,251,212
+"Mobile,AL",2000,225,253,242,231
+"Mobile,AL",2013,242,223,186,227
+"Columbia,SC",1980,206,256,247,212
+"Columbia,SC",1990,189,242,230,219
+"Columbia,SC",2000,230,263,224,256
+"Columbia,SC",2013,216,224,252,125
+"Salt Lake City,UT",1980,186,232,183,235
+"Salt Lake City,UT",1990,187,181,197,156
+"Salt Lake City,UT",2000,128,210,232,160
+"Salt Lake City,UT",2013,101,225,249,140
+"Indianapolis city (remai,IN",1980,190,156,194,133
+"Indianapolis city (remai,IN",1990,136,183,186,178
+"Indianapolis city (remai,IN",2000,166,153,166,146
+"Indianapolis city (remai,IN",2013,229,226,220,206
+"Waterbury,CT",1980,193,222,270,70
+"Waterbury,CT",1990,157,212,265,79
+"Waterbury,CT",2000,233,179,243,95
+"Waterbury,CT",2013,249,227,232,189
+"Glendale,AZ",1980,38,194,162,201
+"Glendale,AZ",1990,133,143,121,177
+"Glendale,AZ",2000,68,185,177,190
+"Glendale,AZ",2013,193,228,206,222
+"Erie,PA",1980,218,200,266,51
+"Erie,PA",1990,209,209,264,80
+"Erie,PA",2000,234,217,257,118
+"Erie,PA",2013,228,229,255,127
+"Aurora,IL",1980,111,130,190,86
+"Aurora,IL",1990,73,208,221,172
+"Aurora,IL",2000,51,203,184,205
+"Aurora,IL",2013,61,230,226,204
+"Youngstown,OH",1980,267,121,150,117
+"Youngstown,OH",1990,269,218,216,191
+"Youngstown,OH",2000,267,206,203,192
+"Youngstown,OH",2013,270,231,171,244
+"Lafayette,LA",1980,55,196,191,170
+"Lafayette,LA",1990,219,226,257,129
+"Lafayette,LA",2000,159,232,259,132
+"Lafayette,LA",2013,68,232,250,151
+"Cincinnati,OH",1980,251,208,204,168
+"Cincinnati,OH",1990,215,229,210,203
+"Cincinnati,OH",2000,239,248,219,232
+"Cincinnati,OH",2013,262,233,235,198
+"Tulsa,OK",1980,85,144,141,148
+"Tulsa,OK",1990,206,132,126,158
+"Tulsa,OK",2000,156,182,164,189
+"Tulsa,OK",2013,179,234,179,242
+"Allentown,PA",1980,136,153,268,25
+"Allentown,PA",1990,132,196,269,53
+"Allentown,PA",2000,221,224,250,145
+"Allentown,PA",2013,240,235,203,228
+"Buffalo,NY",1980,268,183,195,157
+"Buffalo,NY",1990,260,187,177,196
+"Buffalo,NY",2000,272,211,154,229
+"Buffalo,NY",2013,256,236,242,195
+"Escondido,CA",1980,154,154,144,178
+"Escondido,CA",1990,61,252,233,238
+"Escondido,CA",2000,91,255,234,244
+"Escondido,CA",2013,105,237,194,237
+"St. Louis,MO",1980,269,190,135,213
+"St. Louis,MO",1990,267,236,187,245
+"St. Louis,MO",2000,271,188,186,182
+"St. Louis,MO",2013,260,238,237,210
+"Montgomery,AL",1980,168,271,272,245
+"Montgomery,AL",1990,177,258,258,231
+"Montgomery,AL",2000,201,265,253,243
+"Montgomery,AL",2013,218,239,215,231
+"High Point,NC",1980,141,258,238,228
+"High Point,NC",1990,124,211,211,186
+"High Point,NC",2000,123,238,233,194
+"High Point,NC",2013,214,240,227,226
+"Los Angeles,CA",1980,125,261,176,264
+"Los Angeles,CA",1990,141,270,238,268
+"Los Angeles,CA",2000,192,269,247,270
+"Los Angeles,CA",2013,133,241,183,255
+"Huntsville,AL",1980,134,234,233,197
+"Huntsville,AL",1990,90,134,175,118
+"Huntsville,AL",2000,179,225,231,184
+"Huntsville,AL",2013,150,242,265,162
+"Fort Wayne,IN",1980,202,136,205,60
+"Fort Wayne,IN",1990,178,101,164,58
+"Fort Wayne,IN",2000,165,134,225,65
+"Fort Wayne,IN",2013,154,243,269,120
+"Rochester,NY",1980,246,215,187,203
+"Rochester,NY",1990,207,246,217,240
+"Rochester,NY",2000,255,249,182,253
+"Rochester,NY",2013,258,244,217,243
+"Knoxville,TN",1980,214,181,185,167
+"Knoxville,TN",1990,205,152,125,189
+"Knoxville,TN",2000,215,141,159,128
+"Knoxville,TN",2013,164,245,263,171
+"Milwaukee,WI",1980,143,168,215,112
+"Milwaukee,WI",1990,191,250,261,188
+"Milwaukee,WI",2000,231,244,241,193
+"Milwaukee,WI",2013,236,246,248,217
+"Clearwater,FL",1980,121,213,262,87
+"Clearwater,FL",1990,142,176,240,94
+"Clearwater,FL",2000,118,218,249,134
+"Clearwater,FL",2013,188,247,246,223
+"Santa Ana,CA",1980,71,251,172,261
+"Santa Ana,CA",1990,105,271,232,272
+"Santa Ana,CA",2000,150,261,209,261
+"Santa Ana,CA",2013,96,248,214,252
+"New Orleans,LA",1980,243,265,200,268
+"New Orleans,LA",1990,272,268,225,267
+"New Orleans,LA",2000,251,259,199,264
+"New Orleans,LA",2013,248,249,190,260
+"Springfield,IL",1980,130,203,250,88
+"Springfield,IL",1990,108,207,259,96
+"Springfield,IL",2000,155,243,263,142
+"Springfield,IL",2013,158,250,262,199
+"Duluth,MN",1980,137,157,231,71
+"Duluth,MN",1990,129,113,163,84
+"Duluth,MN",2000,120,175,260,68
+"Duluth,MN",2013,108,251,270,134
+"Wilmington,NC",1980,258,244,192,242
+"Wilmington,NC",1990,190,230,219,198
+"Wilmington,NC",2000,200,247,239,203
+"Wilmington,NC",2013,122,252,266,190
+"Memphis,TN",1980,208,267,263,226
+"Memphis,TN",1990,210,254,235,244
+"Memphis,TN",2000,219,208,144,230
+"Memphis,TN",2013,250,253,189,266
+"Kansas City,KS",1980,220,79,112,82
+"Kansas City,KS",1990,250,87,90,114
+"Kansas City,KS",2000,236,112,83,168
+"Kansas City,KS",2013,237,254,197,263
+"Omaha,NE",1980,117,166,241,68
+"Omaha,NE",1990,106,164,237,90
+"Omaha,NE",2000,85,215,261,105
+"Omaha,NE",2013,95,255,271,142
+"Minneapolis,MN",1980,91,201,221,128
+"Minneapolis,MN",1990,145,243,263,159
+"Minneapolis,MN",2000,97,242,264,133
+"Minneapolis,MN",2013,97,256,273,130
+"St. Paul,MN",1980,76,92,228,15
+"St. Paul,MN",1990,125,221,268,81
+"St. Paul,MN",2000,89,197,258,84
+"St. Paul,MN",2013,129,257,272,139
+"Rockford,IL",1980,106,206,223,138
+"Rockford,IL",1990,117,224,249,143
+"Rockford,IL",2000,173,189,218,155
+"Rockford,IL",2013,254,258,241,248
+"Jackson,MS",1980,119,273,264,263
+"Jackson,MS",1990,235,266,255,261
+"Jackson,MS",2000,248,246,196,239
+"Jackson,MS",2013,259,259,208,265
+"Macon,GA",1980,210,254,265,179
+"Macon,GA",1990,238,248,223,233
+"Macon,GA",2000,263,250,188,251
+"Macon,GA",2013,213,260,244,241
+"Richmond,VA",1980,192,227,166,236
+"Richmond,VA",1990,199,199,153,222
+"Richmond,VA",2000,226,220,176,224
+"Richmond,VA",2013,207,261,236,253
+"Fort Lauderdale,FL",1980,133,274,274,248
+"Fort Lauderdale,FL",1990,195,273,274,255
+"Fort Lauderdale,FL",2000,164,274,274,257
+"Fort Lauderdale,FL",2013,172,262,253,232
+"Fresno,CA",1980,195,169,131,205
+"Fresno,CA",1990,147,257,248,234
+"Fresno,CA",2000,232,264,244,249
+"Fresno,CA",2013,209,263,225,268
+"Springfield,MA",1980,197,233,255,152
+"Springfield,MA",1990,182,259,271,183
+"Springfield,MA",2000,220,251,269,154
+"Springfield,MA",2013,243,264,257,236
+"Miami,FL",1980,229,173,59,269
+"Miami,FL",1990,259,265,193,270
+"Miami,FL",2000,254,262,202,267
+"Miami,FL",2013,174,265,144,274
+"Evansville,IN",1980,157,209,249,105
+"Evansville,IN",1990,198,160,212,110
+"Evansville,IN",2000,190,173,226,115
+"Evansville,IN",2013,221,266,259,239
+"Grand Rapids,MI",1980,200,187,227,110
+"Grand Rapids,MI",1990,150,235,244,187
+"Grand Rapids,MI",2000,149,222,246,150
+"Grand Rapids,MI",2013,211,267,268,220
+"Atlanta,GA",1980,259,253,159,266
+"Atlanta,GA",1990,261,263,236,262
+"Atlanta,GA",2000,258,272,267,271
+"Atlanta,GA",2013,232,268,256,247
+"Winston-Salem,NC",1980,167,239,232,198
+"Winston-Salem,NC",1990,153,159,204,125
+"Winston-Salem,NC",2000,132,240,238,188
+"Winston-Salem,NC",2013,199,269,254,259
+"Phoenix,AZ",1980,124,240,197,238
+"Phoenix,AZ",1990,192,249,228,230
+"Phoenix,AZ",2000,106,270,266,263
+"Phoenix,AZ",2013,169,270,258,258
+"South Bend,IN",1980,216,147,207,83
+"South Bend,IN",1990,196,213,224,174
+"South Bend,IN",2000,209,202,215,167
+"South Bend,IN",2013,251,271,264,256
+"Houston,TX",1980,151,197,134,219
+"Houston,TX",1990,257,241,198,248
+"Houston,TX",2000,197,260,230,252
+"Houston,TX",2013,155,272,261,257
+"Shreveport,LA",1980,156,266,260,231
+"Shreveport,LA",1990,264,272,272,260
+"Shreveport,LA",2000,245,271,265,266
+"Shreveport,LA",2013,197,273,247,270
+"Dallas,TX",1980,152,235,168,250
+"Dallas,TX",1990,241,255,205,256
+"Dallas,TX",2000,170,267,235,272
+"Dallas,TX",2013,173,274,245,272
