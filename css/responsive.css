@@ -1,0 +1,128 @@
+#breakpoint1200, #breakpoint1000, #breakpoint900, #isMobile, #isPhone, #isSmallPhone, #isVerySmallPhone, #yearDatum, #inclusionTypeDatum, #scaleTypeDatum{
+	position: fixed;
+	width: 0px;
+	height: 0px;
+	top: 0px;
+	left: 0px;
+	pointer-events: none;
+	display: none;
+}
+@media(max-width: 1200px){
+/* home */
+	#breakpoint1200{
+		display: block;
+	}
+	#mainContent,#smallFooter div{
+		width: 900px;
+	}
+}
+@media(max-width: 1000px){
+/* home */
+	#breakpoint1000{
+		display: block;
+	}
+	#mainContent,#smallFooter div{
+		width: 800px;
+	}
+	#homeMap {
+	    top: 320px;
+	}
+}
+@media(max-width: 900px){
+/* home */
+	#breakpoint900{
+		display: block;
+	}
+	#homeCopy{
+		width: 100%;
+	}
+	#mainContent,#smallFooter div, #footerContent{
+		width: calc(100% - 100px);
+	}
+	#homeMap {
+	    top: 400px;
+	}
+}
+@media(max-width: 725px){
+/* home */
+	#isMobile{
+		display: block;
+	}
+	#homeCopy{
+		margin-top: 670px
+	}
+}
+@media(max-width: 620px){
+/* home */
+	#isPhone{
+		display: block;
+	}
+	#mainContent,#smallFooter div, #footerContent{
+		width: calc(100% - 80px);
+	}
+	#title, #subtitle{
+		font-size: 34px;
+	}
+	.introText{
+		font-size: 20px;
+	}
+}
+@media(max-width: 500px){
+/* home */
+	#isSmallPhone{
+		display: block;
+	}
+	#mainContent,#smallFooter div, #footerContent{
+		width: calc(100% - 50px);
+	}
+}
+@media(max-width: 400px){
+/* menu tabs*/
+.menuTab.menu{
+	display: block;
+	margin-left: 125px;
+	cursor: pointer;
+}
+.menuTab:not(.menu){
+	display: none;
+}
+.menuTab.menu img{
+	width: 13px;
+    top: -1px;
+    margin-left: 3px;
+    position: relative;
+}
+#menuBar span{
+	display: none;
+}
+#menuBack{
+	display: block;
+}
+.mobileMenuRow{
+	width: calc(100% - 80px);
+    margin-left: 40px;
+    display: block;
+    color: #353535;
+    text-transform: uppercase;
+    text-align: center;
+    height: 41px;
+    border-top: 1px solid #D2D2D2;
+    border-bottom: 1px solid #D2D2D2;
+    padding-top: 21px;
+    cursor: pointer;
+}
+.mobileMenuRow.cities{
+	border: none;
+}
+.mobileMenuRow.home{
+	margin-top: 100px;
+}
+.mobile.menu #menuClose{
+	right: 40px;
+}
+.mobileMenuRow:hover{
+	background: #1696d2;
+	color: #fff;
+	border: 1px solid #1696d2;
+}
+}

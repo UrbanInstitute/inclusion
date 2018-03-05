@@ -1,0 +1,5 @@
+var allText = {
+	"healthQuestion": ["Economically healthy cities tended to be more inclusive than economically distressed cities. This is especially true when it comes to economic inclusion."],
+	"sizeQuestion": ["Smaller cities tended to be more inclusive than larger ones."],
+	"changeQuestion": ["It depends. But, on average, cities that went through an economic recovery became more inclusive.","Forty-one of the 274 cities in our study moved from economically distressed to economically healthy at some point between 1980 and 2013. During their recovery periods, over half became more inclusive, jumping up an average 20 spots on overall inclusion, while 18 cities lost ground.","On average, improvements were greater than declines. For example, Midland, Texas, had the second-largest increase in overall inclusion during its recovery period, jumping 160 spots. On the other hand, North Las Vegas, which lost the most ground, dropped only 132 spots.","Racial inclusion tended to improve more than economic inclusion during an economic recovery. And small cities that went through a recovery tended to become more inclusive during their recovery than larger cities."]
+}

@@ -1,0 +1,416 @@
+*:focus{
+	outline: none;
+}
+body{
+	font-family: Lato;
+	color: #353535;
+}
+#mainContent{
+	width: 1120px;
+	margin: 0 auto;	
+}
+
+.thinButton{
+	padding: 8px 20px 8px 20px;
+	background-color: #1696d2;
+	color: #fff;
+	display: inline-block;
+	cursor: pointer;
+}
+.thinButton a, .thicButton a{
+	color: #fff;
+	text-decoration: none;
+}
+.thinButton:hover, .thicButton:hover{
+	background-color: #353535;
+}
+.thicButton{
+	padding: 13px 20px 13px 20px;
+	background-color: #1696d2;
+	color: #fff;
+	display: inline-block;
+	cursor: pointer;
+	margin-right: 5px;
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+a{
+	color: #1696d2;
+	text-decoration: none;
+}
+a.standard{
+	color: #1696d2;
+	text-decoration: none;
+}
+a.standard:hover{
+	color: #353535;
+}
+a.inverted{
+	color: #353535;
+	text-decoration: none;
+}
+a.inverted:hover{
+	color: #1696d2;
+}
+
+/*********************************************************************************/
+/*******************************       MENU      *********************************/
+/*********************************************************************************/
+
+#menuBar{
+	position: fixed;
+    width: 100%;
+    background: #F5F5F5;
+    top: 51px;
+    z-index: 98;
+    height: 49px;
+}
+
+#tabWrapper{
+	width: 300px;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+    background: none;
+}
+#tabWrapper span{
+	display: inline-block;
+    background: #999999;
+    width: 2px;
+    height: 25px;
+    position: absolute;
+    top: 14px;
+    height: 18px;
+    float: left;
+}
+
+.menuTab{
+	display: inline-block;
+    text-transform: uppercase;
+	font-size:14px;
+	margin-top:14px;
+}
+.menuTab.active, .menuTab:hover{
+	font-weight: bold;
+	color: #1696d2;
+}
+.menuTab.home{
+	width: 69px;
+}
+.menuTab.cities{
+	width: 98px;
+	position: relative;
+	left: 1px;
+	text-align: center;
+}
+.menuTab.groups{
+    width: 124px;
+    text-align: right;
+}
+.menuTab.menu{
+	display: none;
+}
+
+
+/*********************************************************************************/
+/***************************       MENU POPUP     ********************************/
+/*********************************************************************************/
+
+.menu.popup{
+	position: fixed;
+	top: 100px;
+	width: 100%;
+	background-color: #ffffff;
+	border-top: 1px solid #9D9D9D;
+	-webkit-box-shadow: 0px 16px 31px -11px rgba(105,105,105,0.62);
+	-moz-box-shadow: 0px 16px 31px -11px rgba(105,105,105,0.62);
+	box-shadow: 0px 16px 31px -11px rgba(105,105,105,0.62);
+	z-index: 9999;
+}
+.menu.popup:after, .menu.popup:before {
+	bottom: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+.city.menu.popup:after, .city.menu.popup:before{
+	left: calc(50% - 28px);
+}
+.group.menu.popup:after, .group.menu.popup:before{
+	left: calc(50% + 110px);
+}
+.menu.popup:after {
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #fff;
+	border-width: 12px;
+	margin-left: -12px;
+}
+.menu.popup:before {
+	border-color: rgba(157, 157, 157, 0);
+	border-bottom-color: #9D9D9D;
+	border-width: 14px;
+	margin-left: -14px;
+}
+
+.colContainer{
+	width: 1027px;
+	margin: 0 auto;
+}
+.popupColumn{
+    display: inline-block;
+    width: 20%;
+    font-size: 16px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.popupCity{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	cursor: pointer;
+}
+.popupCity:hover{
+	font-weight: bold;
+	color: #1696d2;
+}
+
+.popupRow{
+	padding-bottom: 30px;
+	padding-top: 30px;
+	border-bottom: 1px solid #9D9D9D
+}
+.popupRow_first{
+	margin-top: 20px;
+}
+.popupRow_last{
+	margin-bottom: 20px;
+	border-bottom: none;
+}
+.popupGroup{
+	font-size: 18px;
+    line-height: 1.2;
+    display: inline-block;
+	display: -webkit-inline-flex;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+    width: 280px; 
+    padding-left: 9px;
+    margin: 20px;
+}
+
+
+/*********************************************************************************/
+/***************************       HOME TITLE     ********************************/
+/*********************************************************************************/
+#titleContainer{
+	width: 100%;
+	border-bottom: 1px solid #9D9D9D;
+    padding-bottom: 70px;
+}
+#title, #subtitle{
+	display: block;
+	font-size: 40px;
+	width: 100%;
+	text-align: center;
+}
+#title{
+	margin-top: 220px;
+	font-weight: bold;
+}
+#subtitle{
+	font-weight: 300;
+	margin-bottom: 50px;
+}
+.introText{
+	font-size: 22px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+    text-align: center;
+}
+
+
+/*********************************************************************************/
+/*******************************       MAP      **********************************/
+/*********************************************************************************/
+
+#homeMap, #groupMap{
+	cursor: pointer;
+	width: 100%;
+    position: absolute;
+    top: 270px;
+}
+#homeMap{
+	top: 270px;
+}
+#groupMap{
+	top: -10px;
+}
+.states {
+  fill: #e3e3e3;
+  stroke: #fff;
+  stroke-width: 1px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+.cityText{
+	font-family: Lato;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.cell-path {
+  fill: none;
+  stroke: none;
+  pointer-events: all;
+}
+
+/*********************************************************************************/
+/*****************************       BODY COPY      ******************************/
+/*********************************************************************************/
+#homeCopy{
+    display: block;
+    margin-top: 900px;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.copyHeader{
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 35px;
+}
+.copyP, .copyUl{
+    font-size: 16px;
+    line-height: 26px;
+    margin-bottom: 22px;
+}
+.copyUl{
+	padding-left: 21px;
+	width: calc(100% - 21px);
+}
+.copyUl li{
+	text-align: left;
+    list-style: initial;
+    padding-left: 20px;
+    padding-bottom: 30px;
+}
+
+.copyOl li {
+    text-align: left;
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+/*********************************************************************************/
+/*****************************      HOME FOOTER      *****************************/
+/*********************************************************************************/
+
+#footerContainer{
+	margin-top: 90px;
+	background-color: #F5F5F5;
+}
+#footerContent{
+	width: 700px;
+	margin: 0 auto;
+}
+.footerHeader{
+	margin-top: 50px;
+	margin-bottom: 8px;
+	font-size: 34px;
+	font-weight: bold;
+	text-transform: uppercase;
+	display: inline-block;
+}
+#topFooterHeader{
+	padding-top: 44px;
+}
+.footerAbout, .footerCredits, .footerSpecialCredit{
+    font-size: 16px;
+    line-height: 26px;
+}
+.footerCredits, .footerSpecialCredit{
+	font-size: 14px;
+	font-style: italic;
+	line-height: 22px;
+}
+#bottomFooterCredits{
+	margin-bottom: 45px;
+}
+.creditsHeader{
+	font-size: 16px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+.creditsNames{
+	margin-bottom: 30px;
+	margin-top: 5px;
+	font-size: 16px;
+}
+#copyright{
+	margin-bottom: 100px;
+	display: inline-block;
+}
+
+
+/*********************************************************************************/
+/****************************      SCATTER PLOT      *****************************/
+/*********************************************************************************/
+#scatterSvg{
+	cursor: pointer;
+}
+.dot.hover{
+	fill: #fdbf11;
+}
+.fitLine{
+	stroke: #ec008b;
+	fill: none;
+	stroke-width: 2px;
+}
+
+
+/*********************************************************************************/
+/**************************       YEAR SELECT      *******************************/
+/*********************************************************************************/
+.yearSelect{
+	display: inline-block;
+	margin-right: 10px;
+	margin-bottom: 20px;
+	cursor: pointer;
+	font-size: 18px;
+}
+.yearSelect.active{
+	color: #1696d2;
+}
+
+/*********************************************************************************/
+/*********************       INCLUSION SELECT      *******************************/
+/*********************************************************************************/
+.inclusionSelect{
+	display: inline-block;
+	margin-right: 10px;
+	margin-bottom: 20px;
+	cursor: pointer;
+	font-size: 18px;
+}
+.inclusionSelect.active{
+	color: #1696d2;
+}
+
+/*********************************************************************************/
+/**************************       SCALE SELECT      ******************************/
+/*********************************************************************************/
+.scaleSelect{
+	display: inline-block;
+	margin-right: 10px;
+	margin-bottom: 20px;
+	cursor: pointer;
+	font-size: 18px;
+}
+.scaleSelect.active{
+	color: #1696d2;
+}
+

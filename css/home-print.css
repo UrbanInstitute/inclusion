@@ -1,0 +1,11 @@
+@media print{
+  #menuBar, #tooltipContainer, #stateSelectContainer, #citySelectLabel, #groupSelectLabel, #header-pinned, #controlsContainer{
+    display: none !important;
+  }
+  #print-fallback, #home-print-logo{
+    display: block;
+  }
+  #title{
+    margin-top: 80px;
+  }
+}

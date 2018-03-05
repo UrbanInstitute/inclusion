@@ -1,178 +1,247 @@
+
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
+<html>
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="description" content="DESC GOES HERE">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <title>Financial Health of Residents: A City-Level Dashboard</title>
 
-body {
-  font: 10px sans-serif;
-  margin: 0;
-  background: #5c5859;
-}
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@urbaninstitute">
+        <meta name="twitter:creator" content="@urbaninstitute">
+        <meta name="twitter:title" content="Financial Health of Residents: A City-Level Dashboard">
+        <meta name="twitter:description" content="The financial health of a city is closely intertwined with that of its residents. Our data dashboard provides a unique snapshot of residents’ financial health, including credit bureau data, to tell the story of city financial health. ">
+        <meta name="twitter:image" content="http://apps.urban.org/features/city-financial-health/img/social.jpg">
+        <meta property="og:title" content="Financial Health of Residents: A City-Level Dashboard" />
+        <meta property="og:description" content="The financial health of a city is closely intertwined with that of its residents. Our data dashboard provides a unique snapshot of residents’ financial health, including credit bureau data, to tell the story of city financial health. " />
+        <meta property="og:image" content="http://apps.urban.org/features/city-financial-health/img/social.jpg" />
+        <meta property="og:image:type" content="image/jpeg">
+        <meta property="og:url" content="urbn.is/cities">
 
-.line {
-  fill: none;
-  stroke: #666;
-  stroke-width: 1.5px;
-}
-
-.area {
-  fill: #e7e7e7;
-}
-
-</style>
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic,900" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/responsive.css">
+        <!-- <link rel="stylesheet" type="text/css" href="css/home-print.css"> -->
+        <link rel="stylesheet" type="text/css" href="css/urban-header.css">
+        <link rel="stylesheet" type="text/css" href="css/vendor/jquery-ui.css">
+        
+        <script type="application/ld+json">
+        {
+                        "@context": "http://schema.org",
+                        "@type": "NewsArticle",
+                        "headline": "Financial Health of Residents: A City-Level Dashboard",
+                        "url": "http://apps.urban.org/features/city-financial-health",
+                        "thumbnailUrl": "http://apps.urban.org/features/city-financial-health/img/social.jpg",
+                        "dateCreated": "2017-11-09T05:00:00.000Z",
+                        "articleSection": "Interactive Feature",
+                        "creator": ["Caroline Ratcliffe","Cary Lou","Diana Elliott","Signe-Mary McKernan"],
+                        "keywords": ["Families","Finance","Income and Wealth","Neighborhoods, Cities, and Metros","Poverty, Vulnerability, and the Safety Net"]
+        }
+        </script>
+</head>
 <body>
-<script src="//d3js.org/d3.v4.min.js"></script>
-<script>
+<!-- Google Tag Manager -->
+<!-- <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MKBD2W"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MKBD2W');</script> -->
+<!-- End Google Tag Manager -->
+<div id = "breakpoint1200"></div>
+<div id = "breakpoint1000"></div>
+<div id = "breakpoint900"></div>
+<div id = "isMobile"></div>
+<div id = "isPhone"></div>
+<div id = "isSmallPhone"></div>
+<div id = "isVerySmallPhone"></div>
 
-var margin = {top: 8, right: 10, bottom: 2, left: 10},
-    width = 80 - margin.left - margin.right,
-    height = 80 - margin.top - margin.bottom;
-
-var color = d3.scaleLinear()
-  .domain([-200,0,200])
-  .range(['#db2b27','#ffffff','#55b748']);
-
-
-var x = d3.scaleLinear()
-    .range([0,width]);
-
-var y = d3.scaleLinear()
-    .range([0, height]);
-
-var inclLine = d3.line()
-    .x(function(d) { return x(d.year); })
-    .y(function(d) { return y(d.overallInclusion); });
-
-var healthLine = d3.line()
-    .x(function(d) { return x(d.year); })
-    .y(function(d) { return y(d.econHealth); });
-
-d3.csv("data/econHealth.csv", type, function(error, data) {
-
-  var places = d3.nest()
-      .key(function(d) { return d.place; })
-      .entries(data);
-
-  places.forEach(function(s) {
-    s.incl1980 = s.values.filter(function(d){ return d.year == 1980})[0]["overallInclusion"];
-    s.incl1990 = s.values.filter(function(d){ return d.year == 1990})[0]["overallInclusion"];
-    s.incl2000 = s.values.filter(function(d){ return d.year == 2000})[0]["overallInclusion"];
-    s.incl2013 = s.values.filter(function(d){ return d.year == 2013})[0]["overallInclusion"];
-    s.health1980 = s.values.filter(function(d){ return d.year == 1980})[0]["econHealth"];
-    s.health1990 = s.values.filter(function(d){ return d.year == 1990})[0]["econHealth"];
-    s.health2000 = s.values.filter(function(d){ return d.year == 2000})[0]["econHealth"];
-    s.health2013 = s.values.filter(function(d){ return d.year == 2013})[0]["econHealth"];
-
-  });
-
-  x.domain([1980,2013]);
-  y.domain([0,274])
-
-  var svg = d3.select("body").selectAll("svg")
-      .data(places)
-    .enter().append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  svg.append("line")
-    .style("fill", "none")
-    .style("stroke",function(d){ return color ( (d.incl1980 - d.incl1990))})
-    .style("stroke-width","2.5px")
-    .attr("x1",x(1980))
-    .attr("x2",x(1990))
-    .attr("y1", function(d){return y(d.incl1980) })
-    .attr("y2", function(d){return y(d.incl1990) })
-
-  svg.append("line")
-    .style("fill", "none")
-    .style("stroke",function(d){ return color ( (d.incl1990 - d.incl2000))})
-    .style("stroke-width","2.5px")
-    .attr("x1",x(1990))
-    .attr("x2",x(2000))
-    .attr("y1", function(d){return y(d.incl1990) })
-    .attr("y2", function(d){return y(d.incl2000) })
-
-  svg.append("line")
-    .style("fill", "none")
-    .style("stroke",function(d){ return color ( (d.incl2000 - d.incl2013))})
-    .style("stroke-width","2.5px")
-    .attr("x1",x(2000))
-    .attr("x2",x(2013))
-    .attr("y1", function(d){return y(d.incl2000) })
-    .attr("y2", function(d){return y(d.incl2013) })
+<div id = "yearDatum"></div>
+<div id = "inclusionTypeDatum"></div>
+<div id = "scaleTypeDatum"></div>
 
 
+  <!-- START HEADER -->
+    <div id="header-pinned" class="no-touch">
+       <a target="_blank" href="http://www.urban.org" title="Home" rel="home" class="site-logo"></a>
+    <div class="title"><span class="feature-link"><a href="http://www.urban.org/features" class="title-linkback" alt="Urban Institute logo">Features</a></div>
+    <div class="share-icons">
+        <div class="shareThisP">
+            <span onclick="toggle_visibility('shareBox');">
+                    <div class="shareThisB"></div>
+                </span>
+            <div class="shareThisW" id="shareBox">
+
+                <div class="addthis_toolbox addthis_default_style  "addthis:title="" addthis:url="">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=urbn.is/cities" target="_blank" class="addthis_button_facebook at300b" title="Facebook" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-facebook" style="background-color: rgb(48, 88, 145);"><span class="at_a11y">Share on facebook</span></span></a>
+
+                    <a href="http://twitter.com/intent/tweet?text=Residents%27%20financial%20health%20tells%20the%20story%20of%20a%20city%27s%20financial%20health.%20Explore%20your%20city%3A%20http%3A%2F%2Furbn.is%2Fcities%20(via%20%40urbaninstitute)" target="_blank" class="addthis_button_twitter at300b" title="Tweet" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-twitter" style="background-color: rgb(44, 168, 210);"><span class="at_a11y">Share on twitter</span></span></a>
+
+                    <a href="mailto:?subject=New%20data%20tool%20from%20the%20Urban%20Institute&body=Hi!%20I%20thought%20you%27d%20be%20interested%20in%20this%20data%20tool%20from%20the%20Urban%20Institute%3A%20%E2%80%9CFinancial%20Health%20of%20Residents%3A%20A%20City-Level%20Dashboard%E2%80%9D%20urbn.is%2Fcities%20" target="_blank" class="addthis_button_email at300b" target="_blank" title="Email" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-email" style="background-color: rgb(115, 138, 141);"><span class="at_a11y">Share on email</span></span></a>
+                    <div class="atclear"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="headerimage" id="heroimage">
+      <div class="wrapper headerwrapper">
+      </div>
+    </div>
+  <!-- END HEADER -->
+
+
+  <!-- START MENU -->
+  <div id = "menuBar">
+    <div id = "tabWrapper">
+       <a class = "inverted" href = "index.html"><div class = "menuTab home active">Home</div></a>
+      <span></span>
+<!--       <div class = "menuTab cities">Cities</div>
+      <span></span>
+      <div class = "menuTab groups">Peer groups</div> -->
+      <div class = "menuTab menu">Menu <img src = "img/down-arrow.png"></div>
+    </div>
+  </div>
+  <!-- END MENU -->
+
+  <!-- MAIN CONTENT -->
+  <div id = "mainContent">
+    <!-- TITLE BLOCK -->
+    <div id = "titleContainer">
+      <div id = "title">Inclusion and Economic Health in US Cities</div>
+
+      <p class = "introText">Everyone should have the opportunity to contribute to and benefit from economic prosperity. This is our definition of inclusion and is a goal toward which all cities should strive. Being more inclusive can make cities stronger and more stable and gives all residents a chance to improve their quality of life.</p>
+      <p class = "introText">To better understand what makes cities inclusive, we collected data on the 274 largest US cities and ranked those cities on three measures of inclusion across four decades. We also measured economic health to see whether cities could harness growth to improve inclusion Use our dashboard to explore national trends, learn lessons from case-study cities, and dig deeper into your own city.</p>
+    </div>
+    <!-- END TITLE BLOCK -->
+
+    <!-- START MAP BLOCK -->
+    <div id = "graphContainer"> 
+    </div>
+    <!-- END MAP BLOCK -->
+
+    <!-- START HOME BODY COPY -->
+    <div id = "homeCopy">
+      <div class = "copyHeader">How did we measure inclusion?</div>
+      <p class = "copyP">Overall inclusion reflects the ability of historically excluded populations—in this case, lower-income residents and people of color—to contribute to and benefit from economic prosperity. We measure overall inclusion by combining economic inclusion and racial inclusion.</p>
+
+      <ul class = "copyUl">
+        <li>Economic inclusion reflects the ability of residents with lower incomes to contribute to and benefit from the economy. To measure economic inclusion, we looked at income segregation, housing affordability, the share of working poor residents, and educational attainment.</li>
+
+        <li>Racial inclusion reflects the ability of residents of color to contribute to and benefit from  economic prosperity. This measure considers the share of the city’s population that are people of color, racial segregation, and racial gaps in homeownership, poverty, and education attainment.</li>
+
+      </ul>
+      <p class = "copyP">To learn more about why we selected these indicators and how we measured them, click here.</p>
+
+      <div class = "copyHeader">How did we measure economic health?</div>
+      <p class = "copyP">Economic health captures the strength of a city’s local economy. To measure economic health, we looked at employment growth, the unemployment rate, the housing vacancy rate, and median family income.</p>
+
+      <div class = "copyHeader">What can cities do to become more inclusive?</div>
+      <p class = "copyP">Local decisions around policies, taxes, and services happen more often at the city level than the regional level, which is why we chose to focus on cities rather than metro areas. Cities can also tap into community groups and employers, whose actions can directly influence inclusion.</p>
+
+      <p class = "copyP">Although no single model for success exists, we can learn a lot from cities that have become more inclusive, particularly as they recovered from downturns. How did those cities try to ensure that all residents shared in the economic recovery?</p>
+
+      <p class = "copyP">We interviewed leaders from several cities that improved their racial and economic inclusion as they recovered from economic distress. By combining their insights with research about inclusive growth, we identified the following nine building blocks of inclusive growth.</p>
+
+      <ol class = "copyOl">
+        <li><strong>Adopt a shared vision</strong> early on and get buy-in from local stakeholders.</li>
+        <li><strong>Inspire and sustain bold public leadership</strong> from committed public officials or other dedicated stakeholders.</li>
+        <li><strong>Recruit partners from across sectors,</strong> including resident groups, the media, and business leaders. Diverse partners can create buy-in, generate and elevate insights, and support solutions. </li>
+        <li><strong>Build voice and power </strong>within traditionally underrepresented or disenfranchised communities. Ensure diverse representation in planning and political processes.</li>
+        <li><strong>Leverage existing assets and advantages,</strong> such as a city’s physical spaces and the potential of its residents. </li>
+        <li><strong>Think and act regionally.</strong> Job and housing markets cross jurisdictional lines and residents often live, work, and use services outside their city. Regional partnerships can help secure broadly shared prosperity.</li>
+        <li><strong>Reframe inclusion as integral to growth,</strong> leading to progress in both areas. A growing body of evidence suggests that diversity and inclusion is a catalyst for economic development.</li>
+        <li><strong>Adopt policies and programs to support inclusion.</strong> Policies and programs that promote inclusion in education, housing, economic development, and fiscal policy can lead to long-term success.</li>
+        <li><strong>Monitor inclusion measures over time.</strong> Setting inclusion goals with stakeholders and monitoring progress toward those goals adds a layer of accountability and helps the community feel ownership over success.</li>
+      </ol>
+
+
+    </div>
+    <!-- END HOME BODY COPY -->
+  </div>
+  <!-- END MAIN CONTENT -->
+
+  <!-- START FOOTER -->
+  <div id = "footerContainer">
+    <div id = "footerContent">
+      <div class = "footerHeader" id = "topFooterHeader">About the data</div>
+      <p class = "footerAbout">About the data text goes here</p>
+
+      <div class = "footerHeader">PROJECT CREDITS</div>
+
+      <p class = "footerCredits" id = "bottomFooterCredits">This feature was funded by The Kresge Foundation. We are grateful to them and to all our funders, who make it possible for Urban to advance its mission. The views expressed are those of the authors and should not be attributed to the Urban Institute, its trustees, or its funders. Funders do not determine research findings or the insights and recommendations of our experts. More information on our funding principles is available <a href = "https://www.urban.org/support/funding-principles" target = "_blank">here</a>. Read our terms of service <a href = "https://www.urban.org/terms-service" target = "_blank">here</a>.</p>
+
+      <div class = "creditsHeader">RESEARCH</div>
+      <div class = "creditsNames">Erika Poethig, Solomon Greene, Christina Stacy, Tanaya Srini, and Brady Meixell with Steven Kreg Brown and Diana Elliott</div>
+
+      <div class = "creditsHeader">DESIGN</div>
+      <div class = "creditsNames">Daniel Sund&eacute;n</div>
+
+      <div class = "creditsHeader">DEVELOPMENT</div>
+      <div class = "creditsNames">Ben Chartoff</div>
+
+      <div class = "creditsHeader">EDITING</div>
+      <div class = "creditsNames">Elizabeth Forney</div>
+
+      <div class = "creditsHeader">WRITING</div>
+      <div class = "creditsNames">Serena Lei</div>
+
+      <div id = "copyright">View this project on GitHub</div>
+
+    </div>
+  </div>
+  <!-- END FOOTER -->
+
+
+  <script src="js/vendor/d3.v4.min.js"></script>
+  <script src="js/vendor/topojson.v2.min.js"></script>
+  <script src="js/vendor/jquery.1.8.min.js"></script>
+  <script src="js/vendor/jquery-ui.min.js"></script>
+  <script src = "js/lineChart.js"></script>
+  <script src = "js/text.js"></script>
+  <script src = "js/main.js"></script>
+  <script src = "js/header.js"></script>
+
+
+  <script>
+  (function (i, s, o, g, r, a, m) {
+  i['GoogleAnalyticsObject'] = r;
+  i[r] = i[r] || function () { 
+  (i[r].q = i[r].q || []).push(arguments)
+  }, i[r].l = 1 * new Date();
+  a = s.createElement(o),  m = s.getElementsByTagName(o)[0];
+  a.async = 1;
+  a.src = g;
+  m.parentNode.insertBefore(a, m) 
+  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); 
+  ga('create', 'UA-57529944-1', 'auto'); 
+  ga('send', 'pageview');
+  </script>
+
+  <!-- START Parse.ly Include: Standard -->
+  <div id="parsely-root" style="display: none">
+  <span id="parsely-cfg" data-parsely-site="urban.org"></span>
+  </div>
+  <script>
+  (function(s, p, d) {
+  var h=d.location.protocol, i=p+"-"+s,
+  e=d.getElementById(i), r=d.getElementById(p+"-root"),
+  u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+  :"static."+p+".com";
+  if (e) return;
+  e = d.createElement(s); e.id = i; e.async = true;
+  e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+  })("script", "parsely", document);
+  </script>
+  <!-- END Parse.ly Include: Standard -->
 
 
 
-  svg.append("line")
-    .style("fill", "none")
-    .style("stroke",function(d){ return color ( (d.health1980 - d.health1990))})
-    .style("stroke-width","2.5px")
-    .attr("stroke-dasharray","2.5,2.5")
-    .attr("x1",x(1980))
-    .attr("x2",x(1990))
-    .attr("y1", function(d){return y(d.health1980) })
-    .attr("y2", function(d){return y(d.health1990) })
 
-  svg.append("line")
-    .style("fill", "none")
-    .style("stroke",function(d){ return color ( (d.health1990 - d.health2000))})
-    .style("stroke-width","2.5px")
-    .attr("stroke-dasharray","2.5,2.5")
-    .attr("x1",x(1990))
-    .attr("x2",x(2000))
-    .attr("y1", function(d){return y(d.health1990) })
-    .attr("y2", function(d){return y(d.health2000) })
-
-  svg.append("line")
-    .style("fill", "none")
-    .style("stroke",function(d){ return color ( (d.health2000 - d.health2013))})
-    .style("stroke-width","2.5px")
-    .attr("stroke-dasharray","2.5,2.5")
-    .attr("x1",x(2000))
-    .attr("x2",x(2013))
-    .attr("y1", function(d){return y(d.health2000) })
-    .attr("y2", function(d){return y(d.health2013) })
-
-
-
-
-  // svg.append("path")
-  //     .attr("class", "line")
-  //     .style("fill", "none")
-  //     .style("stroke", "#1696d2")
-  //     .attr("d", function(d) {
-  //       // y.domain([d.minRank, d.maxRank]);
-  //       y.domain([0,274])
-  //       return inclLine(d.values);
-  //     });
-  // svg.append("path")
-  //     .attr("class", "line")
-  //     .style("fill", "none")
-  //     .style("stroke", "#fdbf11")
-  //     .attr("d", function(d) {
-  //       // y.domain([d.minRank, d.maxRank]);
-  //       return healthLine(d.values);
-  //     });
-
-  // Add a small label for the symbol name.
-  // svg.append("text")
-  //     .attr("x", 0)
-  //     .attr("y", 0)
-  //     .style("fill","white")
-  //     .style("text-anchor", "start")
-  //     .text(function(d) { return d.key; });
-});
-
-function type(d) {
-  d.year = +d.year;
-  d.econHealth = +d.econHealth;
-  d.overallInclusion = +d.overallInclusion;
-  d.raceInclusion = +d.raceInclusion;
-  d.econInclusion = +d.econInclusion;
-  return d;
-}
-
-</script>
+</body>
+</html>
