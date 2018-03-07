@@ -233,6 +233,39 @@ a.inverted:hover{
 
 
 /*********************************************************************************/
+/********************      PAGE TEXT COMPONENTS      *****************************/
+/*********************************************************************************/
+#questionContainer{
+	display: inline-block;
+	float: left;
+    width: 206px;
+    border-right: 1px solid #707070;
+    height: 600px
+}
+#questionContainer .questionMenu{
+	width: 170px;
+	font-size: 20px;
+	color: #666666;
+	margin-bottom: 20px;
+	padding-left: 10px;
+	cursor: pointer;
+}
+#questionContainer .questionMenu.active{
+	font-weight: bold;
+	border-left: 1px solid #707070;
+}
+#graphContainer, #popupContainer, #sidebarContainer{
+	display: inline-block;
+	float: left;
+}
+#sidebarContainer{
+	width: 190px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+/*********************************************************************************/
 /*******************************       MAP      **********************************/
 /*********************************************************************************/
 
@@ -369,6 +402,17 @@ a.inverted:hover{
 	stroke: #ec008b;
 	fill: none;
 	stroke-width: 2px;
+}
+.axis line{
+	stroke: #dedddd;
+
+}
+.axis path{
+	display: none;
+}
+.axis text{
+	font-size: 12px;
+	font-family: Lato;
 }
 
 

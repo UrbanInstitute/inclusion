@@ -1,7 +1,14 @@
 var DATA_URL = "data/data.csv";
 var DOT_RADIUS = 8;
-var scatterMargin = {"left": 20, "right": 20, "top": 20, "bottom": 20}
+var scatterMargin = {"left": 40, "right": 0, "top": 0, "bottom": 10}
+var scatterSvg;
 
+function getScatterWidth(){
+	return 500;
+}
+function getScatterHeight(){
+	return 500;
+}
 function setYear(year){
 	d3.select("#yearDatum").datum(year)
 }
@@ -35,6 +42,7 @@ function getRankColor(rank){
     return color(rank)
 }
 
+//exponential regression from https://stackoverflow.com/questions/13590922/how-can-i-use-d3-js-to-create-a-trend-exponential-regression-line
 function square(x){return Math.pow(x,2);};
 
 function array_sum(arr){
@@ -71,6 +79,28 @@ function exp_regression(Y){
   return y_fit;
 }
 
+// linear regression from from http://bl.ocks.org/benvandyke/8459843
+function leastSquares(xSeries, ySeries) {
+	var reduceSumFunc = function(prev, cur) { return prev + cur; };
+	
+	var xBar = xSeries.reduce(reduceSumFunc) * 1.0 / xSeries.length;
+	var yBar = ySeries.reduce(reduceSumFunc) * 1.0 / ySeries.length;
+
+	var ssXX = xSeries.map(function(d) { return Math.pow(d - xBar, 2); })
+		.reduce(reduceSumFunc);
+	
+	var ssYY = ySeries.map(function(d) { return Math.pow(d - yBar, 2); })
+		.reduce(reduceSumFunc);
+		
+	var ssXY = xSeries.map(function(d, i) { return (d - xBar) * (ySeries[i] - yBar); })
+		.reduce(reduceSumFunc);
+		
+	var slope = ssXY / ssXX;
+	var intercept = yBar - (xBar * slope);
+	var rSquare = Math.pow(ssXY, 2) / (ssXX * ssYY);
+	
+	return [slope, intercept, rSquare];
+}
 
 
 
@@ -198,6 +228,8 @@ d3.csv(DATA_URL,function(d) {
 			}else{
 				yMax = d3.max(data, function(d){ return d["logpop" + "2013"] })
 			}
+		}else{
+			yMax = 274;
 		}
 		var yMin;
 		if(section == "size"){
@@ -207,6 +239,8 @@ d3.csv(DATA_URL,function(d) {
 				yMin = d3.min(data, function(d){ return d["logpop" + "1980"] })
 			}
 
+		}else{
+			yMin = 0;
 		}
 
 		var x = d3.scaleLinear().range([margin.left, width]).domain([1, 274])
@@ -218,6 +252,7 @@ d3.csv(DATA_URL,function(d) {
 		d3.selectAll(".dot").classed("hover", false)
 	}
 	function showScatterTooltip(d){
+		// console.log(d)
 		d3.selectAll(".dot").classed("hover", false)
 		var dot = d3.select(".dot." + d.className).classed("hover", true)
 		dot.node().parentNode.appendChild(dot.node())
@@ -233,37 +268,74 @@ d3.csv(DATA_URL,function(d) {
 		var yVar = (section == "size") ? "pop" + year : "rankeconhealth" + year
 		var scaleType = (section == "size") ? getScaleType() : false;
 		var margin = scatterMargin
-		var width = 500 - margin.left - margin.right;
-		var height = 500 - margin.top - margin.bottom;
+		var width = getScatterWidth() - margin.left - margin.right;
+		var height = getScatterHeight() - margin.top - margin.bottom;
 		var scales = getScatterScales(width, height, margin, section, getYear(), getInclusionType(), getScaleType())
 		var x = scales[0]
 		var y = scales[1]
 
-		var yVals = exp_regression(data.map(function(a) {return a[yVar.replace("log","")];}))
+		if(section == "size"){
+			var yVals = exp_regression(data.map(function(a) {return a[yVar.replace("log","")];}))
 
-		var lineData = []
-		for(var i = 1; i < yVals.length+1; i++){
-			var lineDatum = {"x": i, "y": yVals[i-1]}
-			lineData.push(lineDatum)
+			var lineData = []
+			for(var i = 1; i < yVals.length+1; i++){
+				var lineDatum = {"x": i, "y": yVals[i-1]}
+				lineData.push(lineDatum)
+			}
+
+			var line = d3.line()
+				.x(function(d) {return x(d.x);})
+				.y(function(d) {
+					if(scaleType == "log"){
+						return y(Math.log10(d.y));
+					}else{
+						return y(d.y)
+					}
+				})
+		}else{
+			var xVals = data.map(function(a){ return a[xVar]})
+			var yVals = data.map(function(a){ return a[yVar]})
+			var leastSquaresCoeff = leastSquares(xVals, yVals);
+			
+			var x1 = 1;
+			var y1 = leastSquaresCoeff[0] + leastSquaresCoeff[1];
+			var x2 = 274;
+			var y2 = leastSquaresCoeff[0] * xVals.length + leastSquaresCoeff[1];
+			var trendData = [[x1,y1,x2,y2]];
 		}
 
-		var line = d3.line()
-			.x(function(d) {return x(d.x);})
-			.y(function(d) {
-				if(scaleType == "log"){
-					return y(Math.log10(d.y));
-				}else{
-					return y(d.y)
-				}
-			})
-
-		var svg = container.append("svg")
+		scatterSvg = container.append("svg")
 			.attr("id", "scatterSvg")
 			.attr("width",width + margin.left + margin.right)
 			.attr("height",height + margin.left + margin.right)
 			.append("g")
 
-		svg.selectAll(".dot")
+		scatterSvg.append("g")
+			.attr("class", "axis axis--x")
+			.attr("transform", "translate(0," + (height) + ")")
+			.call(d3.axisBottom(x).ticks(5).tickSize(-height+margin.bottom));
+
+		scatterSvg.append("g")
+			.attr("class", "axis axis--y")
+			.attr("transform", "translate(" +margin.left + ",0)")
+			.call(d3.axisLeft(y).ticks(5).tickSize(-width+margin.left));
+
+		if(scaleType == "log" && section == "size"){
+			d3.selectAll(".axis.axis--y .tick text")
+				.text(null)
+				.append("tspan")
+				.attr("dx", "-.7em")
+				.text("10")
+				.append("tspan")
+				.attr("baseline-shift", "super")
+				.attr("font-size", "11px")
+				.text(function(d){
+					var f = d3.format(".2n")
+					return f(d)
+				})	
+		}
+
+		scatterSvg.selectAll(".dot")
 			.data(data)
 			.enter()
 			.append("circle")
@@ -287,8 +359,8 @@ d3.csv(DATA_URL,function(d) {
 			.style("opacity", .8)
 
 			var maxDistanceFromPoint = 100;
-			svg._tooltipped = svg._voronoi = null;
-			svg
+			scatterSvg._tooltipped = scatterSvg._voronoi = null;
+			scatterSvg
 				.on('mousemove', function() {
 					var scales = getScatterScales(width, height, margin, section, getYear(), getInclusionType(), getScaleType())
 					var x = scales[0]
@@ -296,32 +368,44 @@ d3.csv(DATA_URL,function(d) {
 
 					var xVar = getVarName(getYear(), getInclusionType());
 					var yVar = (section == "size") ? "pop" + getYear() : "rankeconhealth" + getYear()
-					if(getScaleType() == "log") yVar = "log" + yVar
+					if(getScaleType() == "log" && section == "size") yVar = "log" + yVar
 
-
-
-					if (!svg._voronoi) {
-						console.log("activate")
-						svg._voronoi = d3.voronoi()
+					if (!scatterSvg._voronoi) {
+						scatterSvg._voronoi = d3.voronoi()
 						.x(function(d) { return x(d[xVar]); })
 						.y(function(d) { return y(d[yVar]); })
 						(data);
 					}
 					var p = d3.mouse(this), site;
-					site = svg._voronoi.find(p[0], p[1], maxDistanceFromPoint);
-					if (site !== svg._tooltipped) {
-						if (svg._tooltipped) removeScatterTooltip(svg._tooltipped.data)
+					site = scatterSvg._voronoi.find(p[0], p[1], maxDistanceFromPoint);
+					if (site !== scatterSvg._tooltipped) {
+						if (scatterSvg._tooltipped) removeScatterTooltip(scatterSvg._tooltipped.data)
 						if (site) showScatterTooltip(site.data);
-						svg._tooltipped = site;
+						scatterSvg._tooltipped = site;
 					}
 				})
 				// .on("mouseout", function(){
 				// 	removeDotTooltip();
 				// })
 
-		    var path = svg.append("path")
-		    	.attr("class", "fitLine")
-				.attr("d", line(lineData))
+			if(section == "size"){
+			    scatterSvg.append("path")
+			    	.attr("class", "fitLine")
+					.attr("d", line(lineData))
+			}else{
+				scatterSvg.selectAll(".fitLine")
+					.data(trendData)
+					.enter()
+					.append("line")
+					.attr("class", "fitLine")
+					.attr("x1", function(d) { return x(d[0]); })
+					.attr("y1", function(d) { return y(d[1]); })
+					.attr("x2", function(d) { return x(d[2]); })
+					.attr("y2", function(d) { return y(d[3]); })
+
+			}
+
+
 
 
 
@@ -341,14 +425,14 @@ d3.csv(DATA_URL,function(d) {
 		var year = getYear();
 		var inclusionType = getInclusionType();
 
-		var container = "foo"
+		// var container = "foo"
 
-		hideAll();
-		buildYearSelector(container, "map");
-		buildInclusionTypeSelector(container, "map")
+		// hideAll();
+		// buildYearSelector(container, "map");
+		// buildInclusionTypeSelector(container, "map")
 
-		//draw map
-		var mapData = data.filter()
+		// //draw map
+		// var mapData = data.filter()
 
 	}
 	function updateMap(year, inclusionType){
@@ -364,7 +448,8 @@ d3.csv(DATA_URL,function(d) {
 		var yearContainer = graphContainer.append("div").attr("id", "yearContainer")
 		var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
 		var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
-		var paragraphContainer = d3.select("body")
+		var paragraphContainer = d3.select("#sidebarContainer")
+
 
 		buildYearSelector(yearContainer, "health")
 		buildInclusionTypeSelector(inclusionContainer, "health")
@@ -372,7 +457,71 @@ d3.csv(DATA_URL,function(d) {
 		buildParagraphs(paragraphContainer, "healthQuestion")
 	}
 	function updateHealthQuestion(year, inclusionType){
+		scatterSvg._voronoi = null;
 
+		var scales = getScatterScales(getScatterWidth() - scatterMargin.left - scatterMargin.right, getScatterHeight() - scatterMargin.top - scatterMargin.bottom, scatterMargin, "health", year, inclusionType, "linear")
+		var x = scales[0]
+		var y = scales[1]
+
+		var xVar = getVarName(year, inclusionType);
+		var yVar = "rankeconhealth" + year
+
+
+		scatterSvg.selectAll(".dot")
+			.transition()
+			.duration(500)
+			.delay(function(d, i){
+				return d[xVar]*2
+			})
+			.attr("cx", function(d){
+				return x(d[xVar])
+			})
+			.attr("cy", function(d){
+				return y(d[yVar])
+			})
+
+
+		var xVals = data.map(function(a){ return a[xVar]})
+		var yVals = data.map(function(a){ return a[yVar]})
+		var leastSquaresCoeff = leastSquares(xVals, yVals);
+		
+		var x1 = 1;
+		var y1 = leastSquaresCoeff[0] + leastSquaresCoeff[1];
+		var x2 = 274;
+		var y2 = leastSquaresCoeff[0] * xVals.length + leastSquaresCoeff[1];
+		var trendData = [[x1,y1,x2,y2]];
+
+		var fitLine = scatterSvg.selectAll(".fitLine")
+			.data(trendData)
+			.transition()
+			.duration(500 + 274*2)
+			.attr("y1", function(d) { return y(d[1]); })
+			.attr("y2", function(d) { return y(d[3]); })
+
+		// var yVals = exp_regression(data.map(function(a) {return a[yVar.replace("log","")];}))
+
+		// var lineData = []
+		// for(var i = 1; i < yVals.length+1; i++){
+		// 	var lineDatum = {"x": i, "y": yVals[i-1]}
+		// 	lineData.push(lineDatum)
+		// }
+
+		// var line = d3.line()
+		// 	.x(function(d) {return x(d.x);})
+		// 	.y(function(d) {
+		// 		if(scaleType == "log"){
+		// 			return y(Math.log10(d.y));
+		// 		}else{
+		// 			return y(d.y)
+		// 		}
+		// 	})
+
+		// var fitLine = d3.selectAll(".fitLine")
+		// 	.transition()
+		// 	.duration(500 + 274*2)
+		// 	.attr("d", line(lineData))
+
+		fitLine.node().parentNode.appendChild(fitLine.node())
 	}
 
 	function buildScaleTypeToggle(container, scaleType){
@@ -400,7 +549,7 @@ d3.csv(DATA_URL,function(d) {
 		var toggleContainer = graphContainer.append("div").attr("id", "toggleContainer")
 		var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
 		var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
-		var paragraphContainer = graphContainer.append("div").attr("id", "paragraphContainer")
+		var paragraphContainer = d3.select("#sidebarContainer")
 
 		buildYearSelector(yearContainer, "size")
 		buildInclusionTypeSelector(inclusionContainer, "size")
@@ -410,17 +559,17 @@ d3.csv(DATA_URL,function(d) {
 
 	}
 	function updateSizeQuestion(year, inclusionType, scaleType){
-		var svg = d3.select("#scatterSvg")
-		// svg._voronoi = null;
+		// var svg = d3.select("#scatterSvg")
+		scatterSvg._voronoi = null;
 
-		var scales = getScatterScales(+d3.select("#scatterSvg").attr("width") - scatterMargin.left - scatterMargin.right, +d3.select("#scatterSvg").attr("height") - scatterMargin.top - scatterMargin.bottom, scatterMargin, "size", year, inclusionType, scaleType)
+		var scales = getScatterScales(getScatterWidth() - scatterMargin.left - scatterMargin.right, getScatterHeight() - scatterMargin.top - scatterMargin.bottom, scatterMargin, "size", year, inclusionType, scaleType)
 		var x = scales[0]
 		var y = scales[1]
 		var xVar = getVarName(year, inclusionType);
 		var yVar = "pop" + year
 
 
-		svg.selectAll(".dot")
+		scatterSvg.selectAll(".dot")
 			.transition()
 			.duration(500)
 			.delay(function(d, i){
@@ -436,6 +585,32 @@ d3.csv(DATA_URL,function(d) {
 					return y(d[yVar])
 				}
 			})
+		var tickFormat = (scaleType == "log") ? "" : d3.format(".2s")
+		var oldScale = (d3.select(".axis--y .tick text tspan tspan").node() == null) ? "linear" : "log"
+		if(scaleType != oldScale){
+			d3.select(".axis.axis--y")
+				.transition()
+				.call(d3.axisLeft(y).ticks(5).tickSize(-(+d3.select("#scatterSvg").attr("width")-scatterMargin.left-scatterMargin.right-scatterMargin.left)).tickFormat(tickFormat))
+				.on("end", function(){
+					if(scaleType == "log"){
+						d3.selectAll(".axis.axis--y .tick text")
+							.text(null)
+							.append("tspan")
+							.attr("dx", "-.7em")
+							.text("10")
+							.append("tspan")
+							.attr("baseline-shift", "super")
+							.attr("font-size", "11px")
+							.text(function(d){
+								var f = d3.format(".2n")
+								return f(d)
+							})	
+					}
+				
+				})
+		}
+
+
 
 		var yVals = exp_regression(data.map(function(a) {return a[yVar.replace("log","")];}))
 
@@ -503,6 +678,10 @@ d3.csv(DATA_URL,function(d) {
 		var section = d3.select(this).attr("data-section")
 		d3.selectAll(".questionMenu").classed("active", false)
 		d3.select(this).classed("active", true)
+
+		d3.select("#graphContainer").selectAll("*").remove()
+		d3.select("#sidebarContainer").selectAll("*").remove()
+
 		if(section == "map"){ showMap() }
 		else if(section == "health"){ showHealthQuestion() }
 		else if(section == "size"){ showSizeQuestion() }
