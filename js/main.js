@@ -1,5 +1,6 @@
 var DATA_URL = "data/data.csv";
 var DOT_RADIUS = 8;
+var SMALL_MULT_SIZE = 200;
 var scatterMargin = {"left": 40, "right": 0, "top": 0, "bottom": 10}
 var scatterSvg;
 
@@ -134,7 +135,8 @@ d3.csv(DATA_URL,function(d) {
 		logpop1980: Math.log10(+d.pop1980),
 		logpop1990: Math.log10(+d.pop1990),
 		logpop2000: Math.log10(+d.pop2000),
-		logpop2013: Math.log10(+d.pop2013)
+		logpop2013: Math.log10(+d.pop2013),
+		everrecover: (d.everrecover == 1)
 	};
 }, function(data){
 	function init(){
@@ -142,7 +144,7 @@ d3.csv(DATA_URL,function(d) {
 		setInclusionType("overall");
 		setScaleType("log");
 		// showMap();
-		showSizeQuestion();
+		showChangeQuestion();
 	}
 	function hideAll(){
 
@@ -413,6 +415,7 @@ d3.csv(DATA_URL,function(d) {
 
 	function buildParagraphs(container, key){
 		container
+			.attr("class", key)
 			.selectAll("p")
 			.data(allText[key])
 			.enter()
@@ -445,6 +448,7 @@ d3.csv(DATA_URL,function(d) {
 		var varName = getVarName(year, inclusionType);
 
 		var graphContainer = d3.select("#graphContainer")
+		graphContainer.attr("class", "healthQuestion")
 		var yearContainer = graphContainer.append("div").attr("id", "yearContainer")
 		var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
 		var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
@@ -498,29 +502,6 @@ d3.csv(DATA_URL,function(d) {
 			.attr("y1", function(d) { return y(d[1]); })
 			.attr("y2", function(d) { return y(d[3]); })
 
-		// var yVals = exp_regression(data.map(function(a) {return a[yVar.replace("log","")];}))
-
-		// var lineData = []
-		// for(var i = 1; i < yVals.length+1; i++){
-		// 	var lineDatum = {"x": i, "y": yVals[i-1]}
-		// 	lineData.push(lineDatum)
-		// }
-
-		// var line = d3.line()
-		// 	.x(function(d) {return x(d.x);})
-		// 	.y(function(d) {
-		// 		if(scaleType == "log"){
-		// 			return y(Math.log10(d.y));
-		// 		}else{
-		// 			return y(d.y)
-		// 		}
-		// 	})
-
-		// var fitLine = d3.selectAll(".fitLine")
-		// 	.transition()
-		// 	.duration(500 + 274*2)
-		// 	.attr("d", line(lineData))
-
 		fitLine.node().parentNode.appendChild(fitLine.node())
 	}
 
@@ -545,6 +526,7 @@ d3.csv(DATA_URL,function(d) {
 		var scaleType = getScaleType();
 
 		var graphContainer = d3.select("#graphContainer")
+		graphContainer.attr("class", "sizeQuestion")
 		var yearContainer = graphContainer.append("div").attr("id", "yearContainer")
 		var toggleContainer = graphContainer.append("div").attr("id", "toggleContainer")
 		var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
@@ -642,27 +624,48 @@ d3.csv(DATA_URL,function(d) {
 
 	function buildChangeDropdown(x, y){
 		//change handler
-		updateChangeQuestion(inclusionType, x, y)
+		// updateChangeQuestion(inclusionType, x, y)
 	}
 
 	function showChangeQuestion(){
-		var changeData = data.filter()
-		var chartContainer = d3.select("body")
-		var paragraphContainer = d3.select("body")
-		var inclusionType = getInclusionType()
+		var heightScalar = .7;
+		var changeData = data.filter(function(a){ return a.everrecover })
+			.sort(function(a, b){ return a.rankoverallinclusionindex2013 > b.rankoverallinclusionindex2013})
 
-		var x;
-		var y;
+		var graphContainer = d3.select("#graphContainer")
+		graphContainer.attr("class", "changeQuestion")
+		var paragraphContainer = d3.select("#sidebarContainer")
+		var inclusionType = getInclusionType()
+		var marginSmall = {"left": 10, "right": 10, "top": 60, "bottom": 50}
+		var w = SMALL_MULT_SIZE - marginSmall.left - marginSmall.right;
+		var h = SMALL_MULT_SIZE*heightScalar - marginSmall.left - marginSmall.right
+
+		var x = d3.scaleLinear().range([marginSmall.left, w]).domain([1980, 2013])
+		var y = d3.scaleLinear().range([h, marginSmall.bottom]).domain([0,274])
 
 		buildChangeDropdown(x, y)
 
-		var chartDiv = chartContainer
+		var chartDiv = graphContainer
 			.selectAll(".chartDiv")
 			.data(changeData)
 			.enter()
 			.append("div")
+			.attr("class", "chartDiv")
+			.style("width", SMALL_MULT_SIZE + "px")
+			.style("height", SMALL_MULT_SIZE + "px")
 
-		var svg = chartDiv.append("svg");
+		chartDiv.append("div")
+			.attr("class","chartTitle")
+			.text(function(d){
+				return d.place + ", " + d.stateabrev
+			})
+
+		var svg = chartDiv.append("svg")
+			.attr("width", SMALL_MULT_SIZE)
+			.attr("height", SMALL_MULT_SIZE*heightScalar)
+
+
+		
 		addCorrelationRect(svg, x, y, inclusionType, "econHealth");
 		addLineSeries(svg, x, y, inclusionType, false);
 		addLineSeries(svg, x, y, "econHealth", false);
@@ -685,6 +688,7 @@ d3.csv(DATA_URL,function(d) {
 		if(section == "map"){ showMap() }
 		else if(section == "health"){ showHealthQuestion() }
 		else if(section == "size"){ showSizeQuestion() }
+		else if(section == "change"){ showChangeQuestion() }
 	})
 
 	init();

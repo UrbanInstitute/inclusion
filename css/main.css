@@ -258,12 +258,21 @@ a.inverted:hover{
 	display: inline-block;
 	float: left;
 }
-#sidebarContainer{
+#sidebarContainer.healthQuestion, #sidebarContainer.sizeQuestion{
 	width: 190px;
     margin-left: 20px;
     margin-right: 20px;
 }
-
+#sidebarContainer.changeQuestion{
+	width: 700px;
+	display: block;
+	margin-left: 20px;
+	float: none;
+}
+#graphContainer.changeQuestion{
+	width: 700px;
+	margin-left: 20px;
+}
 
 /*********************************************************************************/
 /*******************************       MAP      **********************************/
@@ -415,7 +424,35 @@ a.inverted:hover{
 	font-family: Lato;
 }
 
-
+/*********************************************************************************/
+/***********************      CHANGE LINE CHARTS      ****************************/
+/*********************************************************************************/
+.chartDiv{
+	border: 1px solid #dedddd;
+	margin-right: 20px;
+	margin-bottom: 30px;
+	display: inline-block;
+	float: left;
+}
+.changeLine{
+	stroke-width: 2px;
+	fill: none;
+}
+.changeDot{
+	stroke: none;
+}
+.changeLine.rank{
+	stroke: #12719E;
+}
+.changeDot.rank{
+	fill: #12719E;
+}
+.changeLine.econHealth{
+	stroke: #F7C100;
+}
+.changeDot.econHealth{
+	fill: #F7C100;
+}
 /*********************************************************************************/
 /**************************       YEAR SELECT      *******************************/
 /*********************************************************************************/
