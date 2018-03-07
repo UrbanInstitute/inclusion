@@ -15,11 +15,9 @@ function addLineSeries(svg, x, y, indicator, animate){
 				.attr("x1", x(years[i]))
 				.attr("x2", x(years[i+1]))
 				.attr("y1", function(d){
-					console.log(d)
 					return y(d[newIndicator + years[i]])
 				})
 				.attr("y2", function(d){
-					console.log(d)
 					return y(d[newIndicator + years[i+1]])
 				})
 		}

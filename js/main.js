@@ -144,23 +144,67 @@ d3.csv(DATA_URL,function(d) {
 		setInclusionType("overall");
 		setScaleType("log");
 		// showMap();
-		showChangeQuestion();
+		// showChangeQuestion();
+		showSizeQuestion();
 	}
 	function hideAll(){
 
 	}
 	function buildYearSelector(container, section){
-		//click handler
-		container.
-			selectAll(".yearSelect")
+		var width = 390;
+		var height = 70;
+
+		container
+			.style("width", width + "px")
+		var svg = container.append("svg")
+			.attr("width", width)
+			.attr("height", height)
+			.append("g")
+		svg.append("line")
+			.attr("x1", 40)
+			.attr("x2", width - 40)
+			.attr("y1", 40)
+			.attr("y2", 40)
+			.style("stroke", "#707070")
+
+
+		var g = svg.selectAll(".yearSelect")
 			.data(["1980","1990","2000","2013"])
 			.enter()
-			.append("div")
+			.append("g")
+			.attr("transform", function(d, i){
+				var nudge = 30;
+				return "translate(" + (i*((width*.8)/3) + nudge) + ",0)"
+			})
 			.attr("class", function(d){
 				return (getYear() == d) ? "yearSelect active" : "yearSelect"
 			})
-			.text(function(d){ return d})
 			.on("click", function(d){
+				d3.select("g.active circle.outer")
+					.transition()
+					.attr("r", 9)
+					.attr("cx", 9)
+				d3.select("g.active circle.inner")
+					.transition()
+					.attr("r", 7)
+					.attr("cx", 9)
+					.style("fill", "#696969")
+				d3.select("g.active .yLabel")
+					.style("font-weight", "normal")
+
+				d3.select(this).select("circle.outer")
+					.transition()
+					.attr("r", 12)
+					.attr("cx", 12)
+				d3.select(this).select("circle.inner")
+					.transition()
+					.attr("r", 10)
+					.attr("cx", 12)
+					.style("fill", "#12719E")
+				d3.select(this).select(".yLabel")
+					.style("font-weight", "bold")
+
+
 				setYear(d)
 				d3.selectAll(".yearSelect.active").classed("active", false)
 				d3.select(this).classed("active", true)
@@ -175,6 +219,46 @@ d3.csv(DATA_URL,function(d) {
 
 				}
 			})
+
+		g.append("text")
+			.attr("class", "yLabel")
+			.text(function(d){ return d})
+			.style("font-weight", function(d){
+				return (getYear() == d) ? "bold" : "normal";
+			})
+			.style("font-size", "16px")
+			.style("color", "##707070")
+			.attr("y", 20)
+			.attr("x", -9.5)
+
+		g.append("circle")
+			.attr("class", "outer")
+			.attr("r", function(d){
+				return (getYear() == d) ? 12 : 9;
+			})
+			.attr("cx", function(d){
+				return (getYear() == d) ? 12 : 9;
+			})
+			.attr("cy", 40)
+			.style("stroke", "#707070")
+			.style("fill", "#ffffff")
+		g.append("circle")
+			.attr("class", "inner")
+			.attr("r", function(d){
+				return (getYear() == d) ? 10 : 7;
+			})
+			.attr("cx", function(d){
+				return (getYear() == d) ? 12 : 9;
+			})
+			.attr("cy", 40)
+			.style("stroke", "none")
+			.style("fill", function(d){
+				return (getYear() == d) ? "#12719E" : "#696969";
+				"#ffffff"
+			})
+
+
+			// .text(function(d){ return d})
 
 	}
 	function buildInclusionTypeSelector(container, section){
