@@ -147,8 +147,8 @@ d3.csv(DATA_URL,function(d) {
 		setYear("2013");
 		setInclusionType("overall");
 		setScaleType("log");
-		// showMap();
-		showChangeQuestion();
+		showMap();
+		// showChangeQuestion();
 		// showSizeQuestion();
 	}
 	function hideAll(){
