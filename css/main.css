@@ -466,19 +466,31 @@ a.inverted:hover{
 .yearSelect.active{
 	color: #1696d2;
 }
+#yearContainer{
+	margin: 0 auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
 
 /*********************************************************************************/
 /*********************       INCLUSION SELECT      *******************************/
 /*********************************************************************************/
 .inclusionSelect{
-	display: inline-block;
-	margin-right: 10px;
-	margin-bottom: 20px;
-	cursor: pointer;
-	font-size: 18px;
+    display: inline-block;
+    margin-right: 0px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 161px;
+    border: 1px solid #95989A;
+    padding: 10px 20px 10px 20px;
+    text-align: center;
+    color: #414141;
 }
 .inclusionSelect.active{
-	color: #1696d2;
+	color: #ffffff;
+	font-weight: bold;
+	background: #414141
 }
 
 /*********************************************************************************/

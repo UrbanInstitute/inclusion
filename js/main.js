@@ -5,7 +5,7 @@ var scatterMargin = {"left": 40, "right": 0, "top": 0, "bottom": 10}
 var scatterSvg;
 
 function getScatterWidth(){
-	return 500;
+	return 600;
 }
 function getScatterHeight(){
 	return 500;
@@ -262,8 +262,7 @@ d3.csv(DATA_URL,function(d) {
 
 	}
 	function buildInclusionTypeSelector(container, section){
-		//click handler
-		// var d = "foo"
+		var buttonLabels = {"overall": "Overall inclusion rank", "econ": "Economic inclusion rank", "race": "Racial inclusion rank"}
 		container.
 			selectAll(".inclusionSelect")
 			.data(["overall","econ","race"])
@@ -272,7 +271,7 @@ d3.csv(DATA_URL,function(d) {
 			.attr("class", function(d){
 				return (getInclusionType() == d) ? "inclusionSelect active" : "inclusionSelect"
 			})
-			.text(function(d){ return d})
+			.text(function(d){ return buttonLabels[d] })
 			.on("click", function(d){
 				setInclusionType(d)
 				d3.selectAll(".inclusionSelect.active").classed("active", false)
