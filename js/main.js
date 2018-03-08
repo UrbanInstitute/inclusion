@@ -108,44 +108,48 @@ function leastSquares(xSeries, ySeries) {
 
 
 d3.csv(DATA_URL,function(d) {
-	return {
-		className: d.place.toLowerCase().replace(/[^\w\s]+/g, "").replace(/\s/g,"_") + "_" + d.stateabrev,
-		place: d.place,
-		stateabrev: d.stateabrev,
-		rankeconhealth1980: +d.rankeconhealth1980,
-		rankeconinclusionindex1980: +d.rankeconinclusionindex1980,
-		rankraceinclusionindex1980: +d.rankraceinclusionindex1980,
-		rankoverallinclusionindex1980: +d.rankoverallinclusionindex1980,
-		rankeconhealth1990: +d.rankeconhealth1990,
-		rankeconinclusionindex1990: +d.rankeconinclusionindex1990,
-		rankraceinclusionindex1990: +d.rankraceinclusionindex1990,
-		rankoverallinclusionindex1990: +d.rankoverallinclusionindex1990,
-		rankeconhealth2000: +d.rankeconhealth2000,
-		rankeconinclusionindex2000: +d.rankeconinclusionindex2000,
-		rankraceinclusionindex2000: +d.rankraceinclusionindex2000,
-		rankoverallinclusionindex2000: +d.rankoverallinclusionindex2000,
-		rankeconhealth2013: +d.rankeconhealth2013,
-		rankeconinclusionindex2013: +d.rankeconinclusionindex2013,
-		rankraceinclusionindex2013: +d.rankraceinclusionindex2013,
-		rankoverallinclusionindex2013: +d.rankoverallinclusionindex2013,
-		pop1980: +d.pop1980,
-		pop1990: +d.pop1990,
-		pop2000: +d.pop2000,
-		pop2013: +d.pop2013,
-		logpop1980: Math.log10(+d.pop1980),
-		logpop1990: Math.log10(+d.pop1990),
-		logpop2000: Math.log10(+d.pop2000),
-		logpop2013: Math.log10(+d.pop2013),
-		everrecover: (d.everrecover == 1)
-	};
+	d[0] = +d.fakelon;
+	d[1] = +d.fakelat;
+	d.className = d.place.toLowerCase().replace(/[^\w\s]+/g, "").replace(/\s/g,"_") + "_" + d.stateabrev;
+	d.place = d.place;
+	d.stateabrev = d.stateabrev;
+	d.rankeconhealth1980 = +d.rankeconhealth1980;
+	d.rankeconinclusionindex1980 = +d.rankeconinclusionindex1980;
+	d.rankraceinclusionindex1980 = +d.rankraceinclusionindex1980;
+	d.rankoverallinclusionindex1980 = +d.rankoverallinclusionindex1980;
+	d.rankeconhealth1990 = +d.rankeconhealth1990;
+	d.rankeconinclusionindex1990 = +d.rankeconinclusionindex1990;
+	d.rankraceinclusionindex1990 = +d.rankraceinclusionindex1990;
+	d.rankoverallinclusionindex1990 = +d.rankoverallinclusionindex1990;
+	d.rankeconhealth2000 = +d.rankeconhealth2000;
+	d.rankeconinclusionindex2000 = +d.rankeconinclusionindex2000;
+	d.rankraceinclusionindex2000 = +d.rankraceinclusionindex2000;
+	d.rankoverallinclusionindex2000 = +d.rankoverallinclusionindex2000;
+	d.rankeconhealth2013 = +d.rankeconhealth2013;
+	d.rankeconinclusionindex2013 = +d.rankeconinclusionindex2013;
+	d.rankraceinclusionindex2013 = +d.rankraceinclusionindex2013;
+	d.rankoverallinclusionindex2013 = +d.rankoverallinclusionindex2013;
+	d.pop1980 = +d.pop1980;
+	d.pop1990 = +d.pop1990;
+	d.pop2000 = +d.pop2000;
+	d.pop2013 = +d.pop2013;
+	d.logpop1980 =  Math.log10(+d.pop1980);
+	d.logpop1990 = Math.log10(+d.pop1990);
+	d.logpop2000 = Math.log10(+d.pop2000);
+	d.logpop2013 = Math.log10(+d.pop2013);
+	d.everrecover = (d.everrecover == 1);
+	d.recoverstart = [1980,1990][Math.floor(Math.random()*2)];
+	d.recoverend = [2000,2013][Math.floor(Math.random()*2)];
+	return d
 }, function(data){
+	console.log(data)
 	function init(){
 		setYear("2013");
 		setInclusionType("overall");
 		setScaleType("log");
 		// showMap();
-		// showChangeQuestion();
-		showSizeQuestion();
+		showChangeQuestion();
+		// showSizeQuestion();
 	}
 	function hideAll(){
 
@@ -343,8 +347,6 @@ d3.csv(DATA_URL,function(d) {
 		dot.node().parentNode.appendChild(dot.node())
 		var fitLine = d3.select(".fitLine")
 		fitLine.node().parentNode.appendChild(fitLine.node())
-
-
 	}
 	function buildScatterPlot(container, section){
 		var year = getYear();
@@ -507,6 +509,16 @@ d3.csv(DATA_URL,function(d) {
 			
 	}
 
+	function removeMapTooltip(d){
+		d3.selectAll(".dot").classed("hover", false)
+	}
+	function showMapTooltip(d){
+		// console.log(d)
+		d3.selectAll(".dot").classed("hover", false)
+		var dot = d3.select(".dot." + d.className).classed("hover", true)
+		dot.node().parentNode.appendChild(dot.node())
+	}
+
 	function showMap(){
 		var year = getYear();
 		var inclusionType = getInclusionType();
@@ -520,9 +532,104 @@ d3.csv(DATA_URL,function(d) {
 		// //draw map
 		// var mapData = data.filter()
 
+		var year = getYear();
+		var inclusionType = getInclusionType();
+		var varName = getVarName(year, inclusionType);
+
+		var graphContainer = d3.select("#graphContainer")
+		graphContainer.attr("class", "mapQuestion")
+		var yearContainer = graphContainer.append("div").attr("id", "yearContainer")
+		var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
+		var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
+
+
+		buildYearSelector(yearContainer, "map")
+		buildInclusionTypeSelector(inclusionContainer, "map")
+
+		var w = getScatterWidth();
+		var h = w*.618;
+
+		var projection = d3.geoAlbersUsa()
+			.scale(w*1.31)
+			.translate([w/2, h/2]);
+
+		var path = d3.geoPath()
+			.projection(projection);
+
+		var voronoi = d3.voronoi()
+			.extent([[-1, -1], [w + 1, h + 1]]);
+
+		var svg = plotContainer
+			.append("svg")
+			.style("width", w + "px")
+			.style("height", h + "px")
+			.append("g");
+
+		var mapData = data.filter(function(d){
+			return (projection([d[0], d[1] ]) != null)
+		})
+
+
+		d3.json("data/map.json", function(error, us) {
+
+			svg.selectAll(".states")
+				.data(topojson.object(us, us.objects.states).geometries)
+				.enter()
+				.append("path")
+				.attr("class", "states")
+				.attr("d", path);
+
+			var dots = svg.append("g")
+			dots.selectAll(".dot")
+				.data(mapData)
+				.enter()
+				.append("circle")
+				.attr("class", function(d){
+					return "dot " + d.className;
+				})
+				.attr("cx", function(d){
+					var coords = (projection([d[0], d[1] ]) == null) ? [0,0] : projection([d[0], d[1] ])
+					return coords[0]
+				})
+				.attr("cy", function(d){
+					var coords = (projection([d[0], d[1] ]) == null) ? [0,0] : projection([d[0], d[1] ])
+					return coords[1]
+				})
+				.attr("r",5)
+				.attr("fill", function(d){ return getRankColor(d[varName])});
+
+
+			var cell = svg.selectAll(".cell")
+				.data(mapData)
+				.enter().append("g")
+				.attr("class", "cell")
+				.on("mouseover", function(d){
+					showMapTooltip(d)
+				})
+				.on("click", function(d){
+					console.log(d)
+				})
+				.on("mouseout", function(d){
+					removeMapTooltip()
+				});
+			console.log(mapData.map(projection))
+			cell.append("g")
+				.append("path")
+				.data(voronoi.polygons(mapData.map(projection)))
+				.attr("class", "cell-path")
+				.attr("d", function(d) { return d ? "M" + d.join("L") + "Z" : null; });
+
+		})
+
+
 	}
 	function updateMap(year, inclusionType){
-
+		d3.selectAll(".dot")
+			.transition()
+			.duration(600)
+			.attr("fill", function(d){
+				return getRankColor(d[getVarName(year, inclusionType)])
+			})
 	}
 
 	function showHealthQuestion(){

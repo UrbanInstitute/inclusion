@@ -37,6 +37,31 @@ function updateLineSeries(svg, x, y, selector, indicator){
 
 }
 function addCorrelationRect(svg, x, y, indicator1, indicator2){
+	svg.append("rect")
+		.attr("class", "corellationRect")
+		.attr("x", function(d){ return x(d.recoverstart)})
+		.attr("y", y(290))
+		.attr("height", y(0))
+		.attr("width", function(d){ return x(d.recoverend) - x(d.recoverstart)})
+		.style("fill", function(d){
+			var dir1, dir2, new1, new2, yr1, yr2;
+			yr1 = d.recoverstart;
+			yr2 = d.recoverend;
+			if(indicator1 == "econHealth"){
+				new1 = "rankeconhealth"
+			}else{
+				new1 = "rank" + indicator1 + "inclusionindex"
+			}
+			if(indicator2 == "econHealth"){
+				new2 = "rankeconhealth"
+			}else{
+				new2 = "rank" + indicator1 + "inclusionindex"
+			}
+
+			dir1 = (d[new1 + yr1] > d[new1 + yr2]) ? "down" : "up"
+			dir2 = (d[new2 + yr1] > d[new2 + yr2]) ? "down" : "up"
+			return (dir1 == dir2) ? "#E4F3E2" : "#FFCCCC"
+		})
 
 }
 function updateCorrelationRect(svg, x, y, indicator1, indicator2){
