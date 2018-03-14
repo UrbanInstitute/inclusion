@@ -1,7 +1,11 @@
 var DATA_URL = "data/data.csv";
 var DOT_RADIUS = 8;
 var SMALL_MULT_SIZE = 200;
-var scatterMargin = {"left": 40, "right": 0, "top": 0, "bottom": 10}
+var SMALL_MULT_ROW_COUNT = 4;
+var SMALL_MULT_RIGHT_PADDING = 17;
+var SMALL_MULT_BOTTOM_PADDING = 22;
+
+var scatterMargin = {"left": 80, "right": 0, "top": 0, "bottom": 50}
 var scatterSvg;
 
 function getScatterWidth(){
@@ -108,8 +112,8 @@ function leastSquares(xSeries, ySeries) {
 
 
 d3.csv(DATA_URL,function(d) {
-	d[0] = +d.fakelon;
-	d[1] = +d.fakelat;
+	d[0] = +d.lon;
+	d[1] = +d.lat;
 	d.className = d.place.toLowerCase().replace(/[^\w\s]+/g, "").replace(/\s/g,"_") + "_" + d.stateabrev;
 	d.place = d.place;
 	d.stateabrev = d.stateabrev;
@@ -149,11 +153,150 @@ d3.csv(DATA_URL,function(d) {
 		setScaleType("log");
 		showMap();
 		// showChangeQuestion();
+		buildSearchBox();
 		// showSizeQuestion();
 	}
 	function hideAll(){
 
 	}
+	function buildSearchBox(){
+  $( function() {
+    $.widget( "custom.combobox", {
+      _create: function() {
+        this.wrapper = $( "<span>" )
+          .addClass( "custom-combobox" )
+          .insertAfter( this.element );
+ 
+        this.element.hide();
+        this._createAutocomplete();
+        this._createShowAllButton();
+      },
+ 
+      _createAutocomplete: function() {
+        var selected = this.element.children( ":selected" ),
+          value = selected.val() ? selected.text() : "";
+ 
+        this.input = $( "<input>" )
+          .appendTo( this.wrapper )
+          .val( value )
+          .attr( "title", "" )
+          .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+          .autocomplete({
+            delay: 0,
+            minLength: 0,
+            source: $.proxy( this, "_source" )
+          })
+          .tooltip({
+            classes: {
+              "ui-tooltip": "ui-state-highlight"
+            }
+          });
+ 
+        this._on( this.input, {
+          autocompleteselect: function( event, ui ) {
+            ui.item.option.selected = true;
+            this._trigger( "select", event, {
+              item: ui.item.option
+            });
+          },
+ 
+          autocompletechange: "_removeIfInvalid"
+        });
+      },
+ 
+      _createShowAllButton: function() {
+        var input = this.input,
+          wasOpen = false;
+ 
+        $( "<a>" )
+          .attr( "tabIndex", -1 )
+          .attr( "title", "Show All Items" )
+          .tooltip()
+          .appendTo( this.wrapper )
+          .button({
+            icons: {
+              primary: "ui-icon-triangle-1-s"
+            },
+            text: false
+          })
+          .removeClass( "ui-corner-all" )
+          .addClass( "custom-combobox-toggle ui-corner-right" )
+          .on( "mousedown", function() {
+            wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+          })
+          .on( "click", function() {
+            input.trigger( "focus" );
+ 
+            // Close if already visible
+            if ( wasOpen ) {
+              return;
+            }
+ 
+            // Pass empty string as value to search for, displaying all results
+            input.autocomplete( "search", "" );
+          });
+      },
+ 
+      _source: function( request, response ) {
+        var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+        response( this.element.children( "option" ).map(function() {
+          var text = $( this ).text();
+          if ( this.value && ( !request.term || matcher.test(text) ) )
+            return {
+              label: text,
+              value: text,
+              option: this
+            };
+        }) );
+      },
+ 
+      _removeIfInvalid: function( event, ui ) {
+ 
+        // Selected an item, nothing to do
+        if ( ui.item ) {
+          return;
+        }
+ 
+        // Search for a match (case-insensitive)
+        var value = this.input.val(),
+          valueLowerCase = value.toLowerCase(),
+          valid = false;
+        this.element.children( "option" ).each(function() {
+          if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+            this.selected = valid = true;
+            return false;
+          }
+        });
+ 
+        // Found a match, nothing to do
+        if ( valid ) {
+          return;
+        }
+ 
+        // Remove invalid value
+        this.input
+          .val( "" )
+          .attr( "title", value + " didn't match any item" )
+          .tooltip( "open" );
+        this.element.val( "" );
+        this._delay(function() {
+          this.input.tooltip( "close" ).attr( "title", "" );
+        }, 2500 );
+        this.input.autocomplete( "instance" ).term = "";
+      },
+ 
+      _destroy: function() {
+        this.wrapper.remove();
+        this.element.show();
+      }
+    });
+ 
+    $( "#combobox" ).combobox();
+    $( "#toggle" ).on( "click", function() {
+      $( "#combobox" ).toggle();
+    });
+  } );
+}
 	function buildYearSelector(container, section){
 		var width = 390;
 		var height = 70;
@@ -318,7 +461,7 @@ d3.csv(DATA_URL,function(d) {
 				yMax = d3.max(data, function(d){ return d["logpop" + "2013"] })
 			}
 		}else{
-			yMax = 274;
+			yMax = 0;
 		}
 		var yMin;
 		if(section == "size"){
@@ -329,10 +472,10 @@ d3.csv(DATA_URL,function(d) {
 			}
 
 		}else{
-			yMin = 0;
+			yMin = 274;
 		}
 
-		var x = d3.scaleLinear().range([margin.left, width]).domain([1, 274])
+		var x = d3.scaleLinear().range([margin.left, width]).domain([ 274, 1])
 		var y = d3.scaleLinear().range([height, margin.bottom]).domain([yMin,yMax])
 		return [x,y]
 	}
@@ -397,10 +540,17 @@ d3.csv(DATA_URL,function(d) {
 			.attr("height",height + margin.left + margin.right)
 			.append("g")
 
-		scatterSvg.append("g")
-			.attr("class", "axis axis--x")
-			.attr("transform", "translate(0," + (height) + ")")
-			.call(d3.axisBottom(x).ticks(5).tickSize(-height+margin.bottom));
+		if(section == "size"){
+			scatterSvg.append("g")
+				.attr("class", "axis axis--x")
+				.attr("transform", "translate(0," + (height) + ")")
+				.call(d3.axisBottom(x).ticks(5).tickSize(-height+margin.bottom));
+		}else{
+			scatterSvg.append("g")
+				.attr("class", "axis axis--x")
+				.attr("transform", "translate(0," + (20) + ")")
+				.call(d3.axisTop(x).ticks(5).tickSize(-height+margin.bottom));		
+		}
 
 		scatterSvg.append("g")
 			.attr("class", "axis axis--y")
@@ -441,7 +591,7 @@ d3.csv(DATA_URL,function(d) {
 				}
 			})
 			.attr("fill", function(d){
-				return getRankColor(d[xVar])
+				return getRankColor(d["rankoverallinclusionindex2013"])
 			})
 			.style("opacity", .8)
 
@@ -542,6 +692,7 @@ d3.csv(DATA_URL,function(d) {
 		var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
 		var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
 
+		graphContainer.style("height", "auto")
 
 		buildYearSelector(yearContainer, "map")
 		buildInclusionTypeSelector(inclusionContainer, "map")
@@ -639,6 +790,8 @@ d3.csv(DATA_URL,function(d) {
 
 		var graphContainer = d3.select("#graphContainer")
 		graphContainer.attr("class", "healthQuestion")
+		graphContainer.style("height", "auto")
+
 		var yearContainer = graphContainer.append("div").attr("id", "yearContainer")
 		var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
 		var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
@@ -722,6 +875,7 @@ d3.csv(DATA_URL,function(d) {
 		var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
 		var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
 		var paragraphContainer = d3.select("#sidebarContainer")
+		graphContainer.style("height", "auto")
 
 		buildYearSelector(yearContainer, "size")
 		buildInclusionTypeSelector(inclusionContainer, "size")
@@ -812,18 +966,39 @@ d3.csv(DATA_URL,function(d) {
 
 	}
 
-	function buildChangeDropdown(x, y){
-		//change handler
-		// updateChangeQuestion(inclusionType, x, y)
+	function buildChangeDropdown(container, x, y){
+		var inclusionType = getInclusionType();
+		var menu = container.append("select")
+		var types = [{"value": "overall", "text": "OVERALL INCLUSION"},{"value": "race", "text": "RACIAL INCLUSION"},{"value": "econ", "text": "ECONOMIC INCLUSION"}]
+
+		menu.selectAll("option")
+			.data(types)
+			.enter()
+			.append("option")
+			.attr("value", function(d){ console.log(d); return d.value })
+			.attr("selected", function(d){ return (d.value == inclusionType) ? "selected" : null })
+			.text(function(d){ return d.text })
+
+		$( $(menu.node()) ).selectmenu({
+			change: function(event, menuData){
+				var val = menuData.item.value;
+				updateChangeQuestion(val, x, y)
+			}
+
+  		});
+
+
+
 	}
 
 	function showChangeQuestion(){
 		var heightScalar = .7;
 		var changeData = data.filter(function(a){ return a.everrecover })
-			.sort(function(a, b){ return a.rankoverallinclusionindex2013 > b.rankoverallinclusionindex2013})
+			.sort(function(a, b){ return (a["rankoverallinclusionindex" + a.recoverend] - a["rankoverallinclusionindex" + a.recoverstart]) > (b["rankoverallinclusionindex" + a.recoverend] - b["rankoverallinclusionindex" + a.recoverstart]) })
 
 		var graphContainer = d3.select("#graphContainer")
 		graphContainer.attr("class", "changeQuestion")
+
 		var paragraphContainer = d3.select("#sidebarContainer")
 		var inclusionType = getInclusionType()
 		var marginSmall = {"left": 10, "right": 10, "top": 60, "bottom": 50}
@@ -831,18 +1006,24 @@ d3.csv(DATA_URL,function(d) {
 		var h = SMALL_MULT_SIZE*heightScalar - marginSmall.left - marginSmall.right
 
 		var x = d3.scaleLinear().range([marginSmall.left, w]).domain([1980, 2013])
-		var y = d3.scaleLinear().range([h, marginSmall.bottom]).domain([0,274])
+		var y = d3.scaleLinear().range([h, marginSmall.bottom]).domain([274,0])
 
-		buildChangeDropdown(x, y)
+		graphContainer.style("height", ((Math.ceil(changeData.length/SMALL_MULT_ROW_COUNT)) * (SMALL_MULT_SIZE + SMALL_MULT_BOTTOM_PADDING) )  + "px")
 
 		var chartDiv = graphContainer
 			.selectAll(".chartDiv")
 			.data(changeData)
 			.enter()
 			.append("div")
-			.attr("class", "chartDiv")
+			.attr("class", function(d){ return "chartDiv " + d.className })
 			.style("width", SMALL_MULT_SIZE + "px")
 			.style("height", SMALL_MULT_SIZE + "px")
+			.style("left", function(d, i){
+				return ((i%SMALL_MULT_ROW_COUNT) * (SMALL_MULT_SIZE + SMALL_MULT_RIGHT_PADDING)) + "px"
+			})
+			.style("top", function(d, i){
+				return (Math.floor(i/SMALL_MULT_ROW_COUNT) * (SMALL_MULT_SIZE + SMALL_MULT_BOTTOM_PADDING)) + "px"
+			})
 
 		chartDiv.append("div")
 			.attr("class","chartTitle")
@@ -860,10 +1041,36 @@ d3.csv(DATA_URL,function(d) {
 		addLineSeries(svg, x, y, inclusionType, false);
 		addLineSeries(svg, x, y, "econHealth", false);
 		buildParagraphs(paragraphContainer, "changeQuestion");
+		var menuContainer = paragraphContainer.append("div").attr("id", "menuContainer")
+		buildChangeDropdown(menuContainer, x, y)
+
+
 	}
 	function updateChangeQuestion(inclusionType, x, y){
+		setInclusionType(inclusionType)
+
+		var sortData = data.filter(function(a){ return a.everrecover })
+			.sort(function(a, b){ return (a["rank" + inclusionType + "inclusionindex" + a.recoverend] - a["rank" + inclusionType + "inclusionindex" + a.recoverstart]) > (b["rank" + inclusionType + "inclusionindex" + a.recoverend] - b["rank" + inclusionType + "inclusionindex" + a.recoverstart]) })
+			.map(function(a){
+				return a.className
+			})
+
+
+		d3.selectAll(".chartDiv")
+			.transition()
+			.delay(500)
+			.duration(1000)
+			.style("left", function(d){
+				var i = sortData.indexOf(d.className)
+				return ((i%SMALL_MULT_ROW_COUNT) * (SMALL_MULT_SIZE + SMALL_MULT_RIGHT_PADDING)) + "px"
+			})
+			.style("top", function(d){
+				var i = sortData.indexOf(d.className)
+				return (Math.floor(i/SMALL_MULT_ROW_COUNT) * (SMALL_MULT_SIZE + SMALL_MULT_BOTTOM_PADDING)) + "px"
+			})
+
 		var svg = d3.selectAll(".chartDiv").select("svg")
-		updateLineSeries(svg, x, y, ".inclusionLine", inclusionType);
+		updateLineSeries(svg, x, y, inclusionType);
 		updateCorrelationRect(svg, x, y, inclusionType, "econHealth");
 	}
 
@@ -882,5 +1089,28 @@ d3.csv(DATA_URL,function(d) {
 	})
 
 	init();
+
+})
+
+$(window).scroll(function(e){
+  var el = d3.select('#menuContainer'); 
+  if(el.node() == null){
+  	return false
+  }else{
+	  var isPositionFixed = (el.style('position') == 'fixed');
+	  var bottom = el.node().getBoundingClientRect().bottom
+	  var topCharts = d3.select("#graphContainer").node().getBoundingClientRect().top
+	  console.log(bottom, topCharts)
+	  if (bottom < 143 && !isPositionFixed){ 
+	    $('#menuContainer').css({'position': 'fixed', 'top': '100px'}); 
+	    d3.select("#sidebarContainer").style("padding-bottom", "46px")
+	  }
+	  else if (bottom <= topCharts && isPositionFixed)
+	  {
+	    $('#menuContainer').css({'position': 'static', 'top': '0px'}); 
+	    d3.select("#sidebarContainer").style("padding-bottom", "0px")
+	  } 
+	}
+
 
 })

@@ -725,7 +725,7 @@ button.ui-button::-moz-focus-inner {
 	height: 44px;
    	background: url(../../img/dropdown-bg.png) no-repeat right #ffffff;
    	background-size: 44px 44px;
-	border: 1px solid #D2D2D2;   	
+	border: 1px solid #ffffff;   	
    	/*width: 45px;*/
 }
 .ui-selectmenu-icon.ui-icon {
