@@ -142,8 +142,8 @@ d3.csv(DATA_URL,function(d) {
 	d.logpop2000 = Math.log10(+d.pop2000);
 	d.logpop2013 = Math.log10(+d.pop2013);
 	d.everrecover = (d.everrecover == 1);
-	d.recoverstart = [1980,1990][Math.floor(Math.random()*2)];
-	d.recoverend = [2000,2013][Math.floor(Math.random()*2)];
+	d.recoverstart = (d.recovperiod != "x") ? +(d.recovperiod.split("-")[0]) : 0;
+	d.recoverend = (d.recovperiod != "x") ? +(d.recovperiod.split("-")[1]) : 0;
 	return d
 }, function(data){
 	console.log(data)
