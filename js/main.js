@@ -5,7 +5,7 @@ var SMALL_MULT_ROW_COUNT = 4;
 var SMALL_MULT_RIGHT_PADDING = 17;
 var SMALL_MULT_BOTTOM_PADDING = 22;
 
-var scatterMargin = {"left": 80, "right": 0, "top": 0, "bottom": 50}
+var scatterMargin = {"left": 10, "right": 80, "top": 0, "bottom": 50}
 var scatterSvg;
 
 function getScatterWidth(){
@@ -43,7 +43,7 @@ function getVarName(year, inclusionType){
 function getRankColor(rank){
 	var color = d3.scaleThreshold()
     	.domain([0,45.666,45.666*2,45.666*3,45.666*4,45.666*5,274])
-    	.range(["#fff","#A2D4EC","#73BFE2","#46ABDB","#1696D2","#12719E","#0A4C6A"]);
+    	.range(["#fff","#0a4c6a","#46abdb","#cfe8f3","#fff2cf","#fccb41","#ca5800"]);
     return color(rank)
 }
 
@@ -146,7 +146,6 @@ d3.csv(DATA_URL,function(d) {
 	d.recoverend = (d.recovperiod != "x") ? +(d.recovperiod.split("-")[1]) : 0;
 	return d
 }, function(data){
-	console.log(data)
 	function init(){
 		setYear("2013");
 		setInclusionType("overall");
@@ -160,6 +159,21 @@ d3.csv(DATA_URL,function(d) {
 
 	}
 	function buildSearchBox(){
+	var sorted = data.sort(function(a, b){
+			var textA = a.className;
+			var textB = b.className;
+			return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+
+		})
+	d3.select("#combobox")
+		.selectAll("option")
+		.data(sorted)
+		.enter()
+		.append("option")
+		.attr("value", function(d){ return d.className})
+		.html(function(d){ return d.place + ", " + d.stateabrev })
+
+
   $( function() {
     $.widget( "custom.combobox", {
       _create: function() {
@@ -475,7 +489,7 @@ d3.csv(DATA_URL,function(d) {
 			yMin = 274;
 		}
 
-		var x = d3.scaleLinear().range([margin.left, width]).domain([ 274, 1])
+		var x = d3.scaleLinear().range([margin.left, width]).domain([ 274, 0])
 		var y = d3.scaleLinear().range([height, margin.bottom]).domain([yMin,yMax])
 		return [x,y]
 	}
@@ -484,7 +498,6 @@ d3.csv(DATA_URL,function(d) {
 		d3.selectAll(".dot").classed("hover", false)
 	}
 	function showScatterTooltip(d){
-		// console.log(d)
 		d3.selectAll(".dot").classed("hover", false)
 		var dot = d3.select(".dot." + d.className).classed("hover", true)
 		dot.node().parentNode.appendChild(dot.node())
@@ -552,10 +565,49 @@ d3.csv(DATA_URL,function(d) {
 				.call(d3.axisTop(x).ticks(5).tickSize(-height+margin.bottom));		
 		}
 
+		container.style("position","relative")
+
+		if(section == "size"){
+			container.append("div")
+				.attr("class", "axisLabel rotate size")
+				.attr("id", "ml_y_1")
+				.text("Larger")
+			container.append("div")
+				.attr("class", "axisLabel rotate size")
+				.attr("id", "ml_y_2")
+				.text("Smaller")
+			container.append("div")
+				.attr("class", "axisLabel size")
+				.attr("id", "ml_x_1")
+				.text("More inclusive")
+			container.append("div")
+				.attr("class", "axisLabel size")
+				.attr("id", "ml_x_2")
+				.text("Less inclusive")
+
+		}else{
+			container.append("div")
+				.attr("class", "axisLabel rotate econHealth")
+				.attr("id", "ml_y_1")
+				.text("More healthy")
+			container.append("div")
+				.attr("class", "axisLabel rotate econHealth")
+				.attr("id", "ml_y_2")
+				.text("Less healhty")
+			container.append("div")
+				.attr("class", "axisLabel econHealth")
+				.attr("id", "ml_x_1")
+				.text("More inclusive")
+			container.append("div")
+				.attr("class", "axisLabel econHealth")
+				.attr("id", "ml_x_2")
+				.text("Less inclusive")
+		}
+
 		scatterSvg.append("g")
 			.attr("class", "axis axis--y")
-			.attr("transform", "translate(" +margin.left + ",0)")
-			.call(d3.axisLeft(y).ticks(5).tickSize(-width+margin.left));
+			.attr("transform", "translate(" + (width + 30) + ",0)")
+			.call(d3.axisRight(y).ticks(5).tickSize(-width-20));
 
 		if(scaleType == "log" && section == "size"){
 			d3.selectAll(".axis.axis--y .tick text")
@@ -663,7 +715,6 @@ d3.csv(DATA_URL,function(d) {
 		d3.selectAll(".dot").classed("hover", false)
 	}
 	function showMapTooltip(d){
-		// console.log(d)
 		d3.selectAll(".dot").classed("hover", false)
 		var dot = d3.select(".dot." + d.className).classed("hover", true)
 		dot.node().parentNode.appendChild(dot.node())
@@ -721,15 +772,100 @@ d3.csv(DATA_URL,function(d) {
 		})
 
 
+
+		var active = d3.select(null);
 		d3.json("data/map.json", function(error, us) {
+			var zoomOut = plotContainer.append("div")
+				.attr("id","zoomOut")
+				.text("Zoom out")
+				.on("click", reset)
 
 			svg.selectAll(".states")
 				.data(topojson.object(us, us.objects.states).geometries)
 				.enter()
 				.append("path")
 				.attr("class", "states")
-				.attr("d", path);
+				.attr("d", path)
+				.on("mouseover", function(d){
+					console.log(this)
+					d3.select(this).classed("hover", true)
+				})
+				.on("mouseout", function(d){
+					d3.select(this).classed("hover", false)	
+				})
+			    .on("click", function(d){
+			    	clicked(this, d)
+			    });
 
+			function clicked(obj, d) {
+				zoomOut.transition().style("opacity",1)
+				active.classed("active", false);
+				active = d3.select(obj).classed("active", true);
+
+				var bounds = path.bounds(d),
+				dx = bounds[1][0] - bounds[0][0],
+				dy = bounds[1][1] - bounds[0][1],
+				x = (bounds[0][0] + bounds[1][0]) / 2,
+				y = (bounds[0][1] + bounds[1][1]) / 2,
+				scale = .9 / Math.max(dx / w, dy / h),
+				translate = [w / 2 - scale * x, h / 2 - scale * y];
+
+				svg.transition()
+				.duration(750)
+				.style("stroke-width", 1.5 / scale + "px")
+				.attr("transform", "translate(" + translate + ")scale(" + scale + ")");
+
+				d3.selectAll(".dot")
+					.transition()
+					.duration(750)
+					.attr("r",2)
+
+				var cell = svg.selectAll(".cell")
+					.data(mapData)
+					.enter().append("g")
+					.attr("class", "cell")
+					.on("mouseover", function(d){
+						showMapTooltip(d)
+					})
+					.on("click", function(d){
+						clicked(
+							svg.selectAll(".states").node(),
+							topojson.object(us, us.objects.states).geometries.filter(function(s){
+								return s.properties.postal == d.stateabrev
+							})[0]
+						)
+					})
+					.on("mouseout", function(d){
+						removeMapTooltip()
+					})
+					.style("pointer-events", function(){ return (active == null) ? "none" : "all"})
+				cell.append("g")
+					.append("path")
+					.data(voronoi.polygons(mapData.map(projection)))
+					.attr("class", "cell-path")
+					.attr("d", function(d) { return d ? "M" + d.join("L") + "Z" : null; });	
+			}
+
+			function reset() {
+				removeMapTooltip(null);
+				zoomOut.transition().style("opacity",0)
+				d3.selectAll(".cell").remove()
+				active.classed("active", false);
+				active = d3.select(null);
+
+				svg.transition()
+				.duration(750)
+				.style("stroke-width", "1.5px")
+				.attr("transform", "");
+
+				d3.selectAll(".dot")
+					.transition()
+					.duration(750)
+					.attr("r",4)
+			}
+
+
+			console.log(mapData)
 			var dots = svg.append("g")
 			dots.selectAll(".dot")
 				.data(mapData)
@@ -746,31 +882,18 @@ d3.csv(DATA_URL,function(d) {
 					var coords = (projection([d[0], d[1] ]) == null) ? [0,0] : projection([d[0], d[1] ])
 					return coords[1]
 				})
-				.attr("r",5)
+				.attr("r",function(d){
+					return 4
+				})
+				.style("opacity",.75)
 				.attr("fill", function(d){ return getRankColor(d[varName])});
 
 
-			var cell = svg.selectAll(".cell")
-				.data(mapData)
-				.enter().append("g")
-				.attr("class", "cell")
-				.on("mouseover", function(d){
-					showMapTooltip(d)
-				})
-				.on("click", function(d){
-					console.log(d)
-				})
-				.on("mouseout", function(d){
-					removeMapTooltip()
-				});
-			console.log(mapData.map(projection))
-			cell.append("g")
-				.append("path")
-				.data(voronoi.polygons(mapData.map(projection)))
-				.attr("class", "cell-path")
-				.attr("d", function(d) { return d ? "M" + d.join("L") + "Z" : null; });
+
 
 		})
+
+
 
 
 	}
@@ -916,7 +1039,7 @@ d3.csv(DATA_URL,function(d) {
 		if(scaleType != oldScale){
 			d3.select(".axis.axis--y")
 				.transition()
-				.call(d3.axisLeft(y).ticks(5).tickSize(-(+d3.select("#scatterSvg").attr("width")-scatterMargin.left-scatterMargin.right-scatterMargin.left)).tickFormat(tickFormat))
+				.call(d3.axisRight(y).ticks(5).tickSize(-(+d3.select("#scatterSvg").attr("width")-scatterMargin.left-scatterMargin.right)-40).tickFormat(tickFormat))
 				.on("end", function(){
 					if(scaleType == "log"){
 						d3.selectAll(".axis.axis--y .tick text")
