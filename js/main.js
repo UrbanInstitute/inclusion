@@ -8,6 +8,21 @@ var SMALL_MULT_BOTTOM_PADDING = 22;
 var scatterMargin = {"left": 10, "right": 80, "top": 0, "bottom": 50}
 var scatterSvg;
 
+
+function parseQueryString(query) {
+        var obj = {},
+            qPos = query.indexOf("?"),
+	    tokens = query.substr(qPos + 1).split('&'),
+	    i = tokens.length - 1;
+	if (qPos !== -1 || query.indexOf("=") !== -1) {
+		for (; i >= 0; i--) {
+			var s = tokens[i].split('=');
+			obj[unescape(s[0])] = s.hasOwnProperty(1) ? unescape(s[1]) : null;
+		};
+	}
+	return obj;
+}
+
 function getScatterWidth(){
 	return 600;
 }
@@ -43,7 +58,7 @@ function getVarName(year, inclusionType){
 function getRankColor(rank){
 	var color = d3.scaleThreshold()
     	.domain([0,45.666,45.666*2,45.666*3,45.666*4,45.666*5,274])
-    	.range(["#fff","#0a4c6a","#46abdb","#cfe8f3","#fff2cf","#fccb41","#ca5800"]);
+    	.range(["#0a4c6a","#46abdb","#cfe8f3","#fff2cf","#fccb41","#ca5800","#fff"].reverse());
     return color(rank)
 }
 
@@ -150,10 +165,35 @@ d3.csv(DATA_URL,function(d) {
 		setYear("2013");
 		setInclusionType("overall");
 		setScaleType("log");
-		showMap();
-		// showChangeQuestion();
 		buildSearchBox();
-		// showSizeQuestion();
+		var parameters = parseQueryString(window.location.search);
+		if(parameters.hasOwnProperty("topic")){
+			d3.select("body").classed("cityPage", false)
+			if(parameters.topic == "economic-health"){
+				d3.select(".questionMenu.health").classed("active", true)
+				showHealthQuestion()
+			}
+			else if(parameters.topic == "city-size"){
+				d3.select(".questionMenu.size").classed("active", true)
+				showSizeQuestion()
+			}
+			else if(parameters.topic == "economic-recovery"){
+				d3.select(".questionMenu.change").classed("active", true)
+				showChangeQuestion()
+			}
+			else{
+				d3.select(".questionMenu.map").classed("active", true)
+				showMap()
+			}
+		}
+		else if(parameters.hasOwnProperty("city")){
+			buildCityPage(parameters.city)
+		}
+		else{
+			d3.select("body").classed("cityPage", false)
+			d3.select(".questionMenu.map").classed("active", true)
+			showMap()
+		}
 	}
 	function hideAll(){
 
@@ -848,6 +888,7 @@ d3.csv(DATA_URL,function(d) {
 
 			function reset() {
 				removeMapTooltip(null);
+
 				zoomOut.transition().style("opacity",0)
 				d3.selectAll(".cell").remove()
 				active.classed("active", false);
@@ -1210,6 +1251,11 @@ d3.csv(DATA_URL,function(d) {
 		else if(section == "size"){ showSizeQuestion() }
 		else if(section == "change"){ showChangeQuestion() }
 	})
+
+	function buildCityPage(city){
+		console.log(city)
+		d3.select("body").classed("cityPage", true)
+	}
 
 	init();
 
