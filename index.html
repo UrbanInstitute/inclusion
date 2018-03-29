@@ -101,11 +101,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <!-- START MENU -->
   <div id = "menuBar">
     <div id = "tabWrapper">
-       <a class = "inverted" href = "index.html"><div class = "menuTab home active">Home</div></a>
-      <span></span>
-<!--       <div class = "menuTab cities">Cities</div>
-      <span></span>
-      <div class = "menuTab groups">Peer groups</div> -->
+       <a href = "index.html?topic=map"><div class = "menuTab home active">Home</div></a>
       <div class = "menuTab menu">Menu <img src = "img/down-arrow.png"></div>
     </div>
   </div>
@@ -116,19 +112,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- TITLE BLOCK -->
     <div id = "titleContainer">
       <div id = "title"></div>
+      <div id = "datePublished">April 19, 2018</div>
       <div id = "subtitle"></div>
     </div>
     <!-- END TITLE BLOCK -->
 
-
+    <div id = "questionTitle"></div>
 
 
     <!-- START MAP BLOCK -->
     <div id = "questionContainer">
-      <div class = "questionMenu map" data-section="map">Return to map</div>
+      <div class = "questionMenu map" data-section="map"><img src = "img/close-button.png">Go to map</div>
       <div class = "questionMenu health" data-section="health">How does economic health relate to inclusion?</div>
       <div class = "questionMenu size" data-section="size">How does city size relate to inclusion?</div>
-      <div class ="questionMenu change" data-section="change">How does inclusion change duringan a city’s economic recovery?</div>
+      <div class ="questionMenu change" data-section="change">How does inclusion change during a city’s economic recovery?</div>
     </div>
 
     <div id = "popupContainer">

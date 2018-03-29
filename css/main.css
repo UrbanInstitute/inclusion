@@ -61,36 +61,30 @@ a.inverted:hover{
 	position: fixed;
     width: 100%;
     background: #F5F5F5;
-    top: 51px;
+    top: 49px;
     z-index: 98;
     height: 49px;
 }
 
 #tabWrapper{
-	width: 300px;
+	width: 69px;
     display: block;
     margin: 0 auto;
     cursor: pointer;
     background: none;
 }
-#tabWrapper span{
-	display: inline-block;
-    background: #999999;
-    width: 2px;
-    height: 25px;
-    position: absolute;
-    top: 14px;
-    height: 18px;
-    float: left;
+#tabWrapper a{
+	text-align: center;
+	color: #333;
 }
-
 .menuTab{
 	display: inline-block;
     text-transform: uppercase;
 	font-size:14px;
+	font-weight: bold;
 	margin-top:14px;
 }
-.menuTab.active, .menuTab:hover{
+.menuTab:hover{
 	font-weight: bold;
 	color: #1696d2;
 }
@@ -216,8 +210,21 @@ a.inverted:hover{
 	text-align: center;
 }
 #title{
-	margin-top: 220px;
-	font-weight: bold;
+    margin: 0 auto;
+    margin-top: 220px;
+    font-weight: bold;
+    width: 80%;
+    text-align: left;
+}
+#datePublished{
+	color: #707070;
+	font-style: italic;
+	font-size: 20px;
+    width: 80%;
+    text-align: left;
+    margin: 0 auto;
+    margin-top: 10px;
+    font-weight: 300;
 }
 #subtitle{
 	font-size: 14px;
@@ -226,23 +233,37 @@ a.inverted:hover{
 	/*margin-bottom: 50px;*/
 }
 .introText{
-	font-size: 22px;
-    font-style: italic;
+    text-align: left;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 28px;
+    font-size: 20px;
     font-weight: 300;
     line-height: 1.5;
-    text-align: center;
+    color: #333333;
 }
 
 
 /*********************************************************************************/
 /********************      PAGE TEXT COMPONENTS      *****************************/
 /*********************************************************************************/
+#questionTitle{
+    font-size: 30px;
+    font-weight: bold;
+    width: 100%;
+    padding-left: 210px;
+    margin-top: 60px;
+}
 #questionContainer{
 	display: inline-block;
 	float: left;
     width: 206px;
     border-right: 1px solid #707070;
-    height: 600px
+    height: 600px;
+    position: relative;
+}
+#popupContainer, #questionContainer{
+	margin-top: 30px;
 }
 #questionContainer .questionMenu{
 	width: 170px;
@@ -255,6 +276,21 @@ a.inverted:hover{
 #questionContainer .questionMenu.active{
 	font-weight: bold;
 	border-left: 1px solid #707070;
+}
+.questionMenu.map{
+	color: #AFAFAF !important;
+	text-transform: uppercase;
+	position: absolute;
+    top: -114px;
+}
+.questionMenu.map img{
+	height: 38px;
+	top: 13px;
+	padding-right: 20px;
+	position: relative;
+}
+.questionMenu.map.active{
+	display: none;
 }
 #graphContainer, #popupContainer, #sidebarContainer{
 	display: inline-block;
@@ -278,8 +314,53 @@ a.inverted:hover{
 }
 
 /*********************************************************************************/
+/*****************************       LEGEND      *********************************/
+/*********************************************************************************/
+.mapQuestion #legendContainer{
+	width: 140px;
+    position: absolute;
+    top: 210px;
+    right: -120px;
+}
+#legend-title{
+	color: #414141;
+    border-bottom: 1px solid #707070;
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 3px;
+    margin-bottom: 10px;
+}
+.legendDot{
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+#legend-more, #legend-less{
+	font-size: 14px;
+    font-weight: bold;
+    color: #707070;
+    width: 60px;
+    position: absolute;
+    left: 30px;
+}
+#legend-more{
+    top: 29px;
+}
+#legend-less{
+	top: 145px;
+}
+/*********************************************************************************/
 /*******************************       MAP      **********************************/
 /*********************************************************************************/
+#graphContainer.mapQuestion {
+	position: relative;
+	margin-left: 70px;
+}
+.mapQuestion #inclusionContainer{
+	margin-top: 25px;
+}
 .mapQuestion #plotContainer{
 	position: relative;
 }

@@ -4,6 +4,7 @@ var SMALL_MULT_SIZE = 200;
 var SMALL_MULT_ROW_COUNT = 4;
 var SMALL_MULT_RIGHT_PADDING = 17;
 var SMALL_MULT_BOTTOM_PADDING = 22;
+var COLORS = ["#0a4c6a","#46abdb","#cfe8f3","#fff2cf","#fccb41","#ca5800"]
 
 var scatterMargin = {"left": 10, "right": 80, "top": 0, "bottom": 50}
 var scatterSvg;
@@ -21,6 +22,13 @@ function parseQueryString(query) {
 		};
 	}
 	return obj;
+}
+function updateQueryString(queryString){
+	if (history.pushState) {
+    	var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryString;
+    	window.history.pushState({path:newurl},'',newurl);
+	}
+
 }
 
 function getScatterWidth(){
@@ -58,7 +66,7 @@ function getVarName(year, inclusionType){
 function getRankColor(rank){
 	var color = d3.scaleThreshold()
     	.domain([0,45.666,45.666*2,45.666*3,45.666*4,45.666*5,274])
-    	.range(["#fff","#0a4c6a","#46abdb","#cfe8f3","#fff2cf","#fccb41","#ca5800"]);
+    	.range(["#fff"].concat(COLORS));
     return color(rank)
 }
 
@@ -72,6 +80,7 @@ function array_sum(arr){
 }
 
 function exp_regression(Y){
+ 
   var n = Y.length;
   var X = d3.range(1,n+1);
 
@@ -96,6 +105,7 @@ function exp_regression(Y){
     y_fit.push(Math.exp(a)*Math.exp(b*x));
   });
 
+  console.log(y_fit, Y)
   return y_fit;
 }
 
@@ -162,6 +172,7 @@ d3.csv(DATA_URL,function(d) {
 	return d
 }, function(data){
 	function init(){
+
 		setYear("2013");
 		setInclusionType("overall");
 		setScaleType("log");
@@ -503,7 +514,44 @@ d3.csv(DATA_URL,function(d) {
 
 		// }
 	}
-
+	function buildLegend(container, section){
+		container.append("div")
+			.attr("id","legend-title")
+			.text("2013 overall inclusion")
+		var dotContainer = container.append("div")
+			.attr("id","legend-dots")
+		dotContainer.selectAll(".legendDot")
+			.data(COLORS)
+			.enter()
+			.append("div")
+			.attr("class","legendDot")
+			.style("background", function(d){ return d})
+			.on("mouseover", function(d,i){
+				if(section == "map"){
+					var r = (d3.select(".states.active").node() == null) ? 8 : 4;
+					var dots = d3.selectAll(".dot.r" + i)
+					dots.transition()
+						.attr("r",r)
+					dots.each(function(){
+						this.parentNode.appendChild(this)
+					})
+				}
+			})
+			.on("mouseout", function(d,i){
+				if(section == "map"){
+					var r = (d3.select(".states.active").node() == null) ? 4 : 2;
+					var dots = d3.selectAll(".dot.r" + i)
+					dots.transition()
+						.attr("r",r)
+				}
+			})
+		container.append("div")
+			.attr("id","legend-more")
+			.text("More inclusive")
+		container.append("div")
+			.attr("id","legend-less")
+			.text("Less inclusive")
+	}
 
 	function getScatterScales(width, height, margin, section, year, inclusionType, scaleType){
 		// var year = getYear();
@@ -852,6 +900,9 @@ d3.csv(DATA_URL,function(d) {
 	}
 
 	function showMap(){
+		d3.select("#questionTitle").html("")
+		
+		updateQueryString("?topic=map")
 		var year = getYear();
 		var inclusionType = getInclusionType();
 
@@ -872,12 +923,14 @@ d3.csv(DATA_URL,function(d) {
 		graphContainer.attr("class", "mapQuestion")
 		var yearContainer = graphContainer.append("div").attr("id", "yearContainer")
 		var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
+		var legendContainer = graphContainer.append("div").attr("id", "legendContainer")
 		var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
 
 		graphContainer.style("height", "auto")
 
 		buildYearSelector(yearContainer, "map")
 		buildInclusionTypeSelector(inclusionContainer, "map")
+		buildLegend(legendContainer,"map")
 
 		var w = getScatterWidth();
 		var h = w*.618;
@@ -931,6 +984,7 @@ d3.csv(DATA_URL,function(d) {
 				zoomOut.transition().style("opacity",1)
 				active.classed("active", false);
 				active = d3.select(obj).classed("active", true);
+				console.log(active.node())
 
 				var bounds = path.bounds(d),
 				dx = bounds[1][0] - bounds[0][0],
@@ -1005,7 +1059,8 @@ d3.csv(DATA_URL,function(d) {
 				.enter()
 				.append("circle")
 				.attr("class", function(d){
-					return "dot " + d.className;
+					var rank = COLORS.reverse().indexOf(getRankColor(d[varName]))
+					return "dot " + d.className + " r" + rank;
 				})
 				.attr("cx", function(d){
 					var coords = (projection([d[0], d[1] ]) == null) ? [0,0] : projection([d[0], d[1] ])
@@ -1026,20 +1081,34 @@ d3.csv(DATA_URL,function(d) {
 
 		})
 
+		var inclusionText = {"econ": " economic inclusion", "race": " racial inclusion", "overall": " overall inclusion"}
+		var inclusionSpace = {"econ": 18, "race": -10, "overall": 0}
 
-
+		d3.select("#legend-title").text(year + inclusionText[inclusionType])
+		d3.select("#legendContainer").style("width", (140 + inclusionSpace[inclusionType]) + "px").style("right", (-120 - inclusionSpace[inclusionType]) + "px")
 
 	}
 	function updateMap(year, inclusionType){
+		var varName = getVarName(year, inclusionType);
+		var inclusionText = {"econ": " economic inclusion", "race": " racial inclusion", "overall": " overall inclusion"}
+		var inclusionSpace = {"econ": 18, "race": -10, "overall": 0}
 		d3.selectAll(".dot")
+			.attr("class", function(d){
+				var rank = COLORS.reverse().indexOf(getRankColor(d[varName]))
+				return "dot " + d.className + " r" + rank;
+			})
 			.transition()
 			.duration(600)
 			.attr("fill", function(d){
 				return getRankColor(d[getVarName(year, inclusionType)])
 			})
+		d3.select("#legend-title").text(year + inclusionText[inclusionType])
+		d3.select("#legendContainer").style("width", (140 + inclusionSpace[inclusionType]) + "px").style("right", (-120 - inclusionSpace[inclusionType]) + "px")
 	}
 
 	function showHealthQuestion(){
+		d3.select("#questionTitle").html(d3.select(".questionMenu[data-section=health]").html())
+		updateQueryString("?topic=economic-health")
 		var year = getYear();
 		var inclusionType = getInclusionType();
 		var varName = getVarName(year, inclusionType);
@@ -1122,6 +1191,8 @@ d3.csv(DATA_URL,function(d) {
 			})
 	}
 	function showSizeQuestion(){
+		d3.select("#questionTitle").html(d3.select(".questionMenu[data-section=size]").html())
+		updateQueryString("?topic=city-size")
 		var scaleType = getScaleType();
 
 		var graphContainer = d3.select("#graphContainer")
@@ -1248,6 +1319,8 @@ d3.csv(DATA_URL,function(d) {
 	}
 
 	function showChangeQuestion(){
+		d3.select("#questionTitle").html(d3.select(".questionMenu[data-section=change]").html())
+		updateQueryString("?topic=economic-recovery")
 		var heightScalar = .7;
 		var changeData = data.filter(function(a){ return a.everrecover })
 			.sort(function(a, b){ return (a["rankoverallinclusionindex" + a.recoverend] - a["rankoverallinclusionindex" + a.recoverstart]) > (b["rankoverallinclusionindex" + a.recoverend] - b["rankoverallinclusionindex" + a.recoverstart]) })
@@ -1342,6 +1415,8 @@ d3.csv(DATA_URL,function(d) {
 		else if(section == "health"){ showHealthQuestion() }
 		else if(section == "size"){ showSizeQuestion() }
 		else if(section == "change"){ showChangeQuestion() }
+
+
 	})
 
 	function buildCityPage(city){
@@ -1374,4 +1449,4 @@ $(window).scroll(function(e){
 	}
 
 
-})
+})	
