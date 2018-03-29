@@ -58,7 +58,7 @@ function getVarName(year, inclusionType){
 function getRankColor(rank){
 	var color = d3.scaleThreshold()
     	.domain([0,45.666,45.666*2,45.666*3,45.666*4,45.666*5,274])
-    	.range(["#0a4c6a","#46abdb","#cfe8f3","#fff2cf","#fccb41","#ca5800","#fff"].reverse());
+    	.range(["#fff","#0a4c6a","#46abdb","#cfe8f3","#fff2cf","#fccb41","#ca5800"]);
     return color(rank)
 }
 
@@ -168,6 +168,7 @@ d3.csv(DATA_URL,function(d) {
 		buildSearchBox();
 		var parameters = parseQueryString(window.location.search);
 		if(parameters.hasOwnProperty("topic")){
+			buildHeader(data, false)
 			d3.select("body").classed("cityPage", false)
 			if(parameters.topic == "economic-health"){
 				d3.select(".questionMenu.health").classed("active", true)
@@ -187,9 +188,11 @@ d3.csv(DATA_URL,function(d) {
 			}
 		}
 		else if(parameters.hasOwnProperty("city")){
+			buildHeader(data, parameters.city)
 			buildCityPage(parameters.city)
 		}
 		else{
+			buildHeader(data, false)
 			d3.select("body").classed("cityPage", false)
 			d3.select(".questionMenu.map").classed("active", true)
 			showMap()
@@ -619,11 +622,11 @@ d3.csv(DATA_URL,function(d) {
 			container.append("div")
 				.attr("class", "axisLabel size")
 				.attr("id", "ml_x_1")
-				.text("More inclusive")
+				.text("Less inclusive")
 			container.append("div")
 				.attr("class", "axisLabel size")
 				.attr("id", "ml_x_2")
-				.text("Less inclusive")
+				.text("More inclusive")
 
 		}else{
 			container.append("div")
@@ -637,11 +640,11 @@ d3.csv(DATA_URL,function(d) {
 			container.append("div")
 				.attr("class", "axisLabel econHealth")
 				.attr("id", "ml_x_1")
-				.text("More inclusive")
+				.text("Less inclusive")
 			container.append("div")
 				.attr("class", "axisLabel econHealth")
 				.attr("id", "ml_x_2")
-				.text("Less inclusive")
+				.text("More inclusive")
 		}
 
 		scatterSvg.append("g")
@@ -713,6 +716,31 @@ d3.csv(DATA_URL,function(d) {
 						scatterSvg._tooltipped = site;
 					}
 				})
+				.on("click", function(){
+					var scales = getScatterScales(width, height, margin, section, getYear(), getInclusionType(), getScaleType())
+					var x = scales[0]
+					var y = scales[1]
+
+					var xVar = getVarName(getYear(), getInclusionType());
+					var yVar = (section == "size") ? "pop" + getYear() : "rankeconhealth" + getYear()
+					if(getScaleType() == "log" && section == "size") yVar = "log" + yVar
+
+					if (!scatterSvg._voronoi) {
+						scatterSvg._voronoi = d3.voronoi()
+						.x(function(d) { return x(d[xVar]); })
+						.y(function(d) { return y(d[yVar]); })
+						(data);
+					}
+					var p = d3.mouse(this), site;
+					site = scatterSvg._voronoi.find(p[0], p[1], maxDistanceFromPoint);
+					// if (site !== scatterSvg._tooltipped) {
+					// 	if (scatterSvg._tooltipped) removeScatterTooltip(scatterSvg._tooltipped.data)
+					// 	if (site) showScatterTooltip(site.data);
+					// 	scatterSvg._tooltipped = site;
+					// }
+					console.log(site.data)
+					window.open("index.html?city=" + site.data.className, "_blank")
+				})
 				// .on("mouseout", function(){
 				// 	removeDotTooltip();
 				// })
@@ -749,6 +777,69 @@ d3.csv(DATA_URL,function(d) {
 			.append("p")
 			.html(function(d){ return d})
 			
+	}
+	function buildHeader(data, city){
+		var text = "",
+			datum = {}
+		if(city == false){
+			d3.select("#titleContainer #title").text("Inclusion and Economic Health in US Cities")
+			d3.select("#titleContainer #subtitle").text("").style("display","none")
+			text = allText.mainHeader
+		}else{
+			datum = data.filter(function(o){ return o.className == city })[0]
+			d3.select("#titleContainer #title").text(datum.place + ", " + datum.stateabrev)
+			d3.select("#titleContainer #subtitle").text("2013 Population " + d3.format(",")(datum.pop2013)).style("display","block")
+			if(datum.rankoverallinclusionindex2000 == datum.rankoverallinclusionindex2013){
+				console.log("a")
+				text = allText.cityHeaderNoOverallChange
+			}
+			else if(datum.rankeconhealth2000 == datum.rankeconhealth2013){
+				console.log("b")
+				text = allText.cityHeaderNoHealthChange
+			}else{
+				console.log("c", datum)
+				text = allText.cityHeaderBothChange
+			}
+		}
+
+		var ps = d3.select("#titleContainer")
+			.selectAll("p")
+			.data(text)
+			.enter()
+			.append("p")
+			.attr("class", "introText")
+			.html(function(d){ return d })
+
+		ps.selectAll(".ch-cityName")
+			.datum(datum)
+			.html(function(d){ return d.place })
+		ps.selectAll(".ch-overallRank13")
+			.datum(datum)
+			.html(function(d){ return d.rankoverallinclusionindex2013 })
+		ps.selectAll(".ch-econRank13")
+			.datum(datum)
+			.html(function(d){ return d.rankeconinclusionindex2013 })
+		ps.selectAll(".ch-racialRank13")
+			.datum(datum)
+			.html(function(d){ return d.rankraceinclusionindex2013 })
+		ps.selectAll(".ch-healthRank13")
+			.datum(datum)
+			.html(function(d){ return d.rankeconhealth2013 })
+		ps.selectAll(".ch-overallRank00")
+			.datum(datum)
+			.html(function(d){ return d.rankoverallinclusionindex2000 })
+		ps.selectAll(".ch-healthRank00")
+			.datum(datum)
+			.html(function(d){ return d.rankeconhealth2000 })
+		ps.selectAll(".ch-healthWord")
+			.datum(datum)
+			.html(function(d){ return (d.rankeconhealth2013 > d.rankeconhealth2000) ? "increased" : "decreased" })
+		ps.selectAll(".ch-overallWord")
+			.datum(datum)
+			.html(function(d){ return (d.rankoverallinclusionindex2013 > d.rankoverallinclusionindex2000) ? "more" : "less" })
+		ps.selectAll(".ch-overallWord2")
+			.datum(datum)
+			.html(function(d){ return (d.rankoverallinclusionindex2013 > d.rankoverallinclusionindex2000) ? "jumping" : "falling" })
 	}
 
 	function removeMapTooltip(d){
@@ -827,7 +918,6 @@ d3.csv(DATA_URL,function(d) {
 				.attr("class", "states")
 				.attr("d", path)
 				.on("mouseover", function(d){
-					console.log(this)
 					d3.select(this).classed("hover", true)
 				})
 				.on("mouseout", function(d){
@@ -874,6 +964,8 @@ d3.csv(DATA_URL,function(d) {
 								return s.properties.postal == d.stateabrev
 							})[0]
 						)
+						window.open("index.html?city=" + d.className,'_blank');
+
 					})
 					.on("mouseout", function(d){
 						removeMapTooltip()

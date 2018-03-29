@@ -220,8 +220,10 @@ a.inverted:hover{
 	font-weight: bold;
 }
 #subtitle{
-	font-weight: 300;
-	margin-bottom: 50px;
+	font-size: 14px;
+	color: #333333;
+	margin-top: 10px;
+	/*margin-bottom: 50px;*/
 }
 .introText{
 	font-size: 22px;
