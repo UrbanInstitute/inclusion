@@ -320,7 +320,7 @@ a.inverted:hover{
 	width: 140px;
     position: absolute;
     top: 210px;
-    right: -120px;
+    right: -150px;
 }
 #legend-title{
 	color: #414141;
@@ -365,7 +365,7 @@ a.inverted:hover{
 	position: relative;
 }
 .mapQuestion #plotContainer svg{
-	cursor: pointer;
+	/*cursor: pointer;*/
 }
 #zoomOut{
     position: absolute;
@@ -374,7 +374,7 @@ a.inverted:hover{
     background: rgba(0,0,0,.8);
     padding: 10px;
     color: white;
-    cursor: pointer;
+    cursor: zoom-out;
     opacity: 0;
 }
 
@@ -396,6 +396,7 @@ a.inverted:hover{
   stroke-width: 1px;
   stroke-linejoin: round;
   stroke-linecap: round;
+  cursor: zoom-in;
 }
 .mapQuestion .dot{
 	pointer-events: none;
@@ -413,6 +414,18 @@ a.inverted:hover{
   fill: none;
   stroke: none;
   pointer-events: all;
+}
+.cell-path.grab{
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+.cell-path.grabbing{
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grabing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
 }
 
 /*********************************************************************************/
@@ -625,13 +638,51 @@ body.cityPage #questionContainer{
 /**************************      CITY SEARCH      ********************************/
 /*********************************************************************************/
 
-
 #searchContainer{
 	width: 100%;
     display: inline-block;
     background: #696969;
     height: 102px;
     position: relative;
+}
+#searchContainer div.ui-widget{
+	width: 705px;
+    top: 10px;
+    margin: 0 auto;
+    position: relative;
+}
+#searchContainer .custom-combobox-input.ui-widget.ui-widget-content.ui-autocomplete-input{
+	width: 705px;
+    height: 60px;
+    border: 1px solid #707070;
+    border-radius: 0px;
+    background: white;
+}
+#searchContainer .ui-button .ui-icon {
+    background-image: url(../img/search-icon.png);
+}
+#searchContainer .ui-button.ui-widget.ui-button-icon-only.custom-combobox-toggle.ui-corner-right{
+	width: 66px;
+	height: 63px;
+	position: absolute;
+	top: 4px;
+	right: -3px;
+	background: none;
+	border: none;
+}
+#searchContainer .ui-button-icon.ui-icon.ui-icon-triangle-1-s{
+	width: 62px;
+	height: 62px;
+	background-size: 38px;
+	top: 7px;
+	left: 8px;
+	background-position-x: 21px;
+	background-position-y: 14px;
+}
+#searchContainer input.custom-combobox-input.ui-widget.ui-widget-content.ui-state-default.ui-corner-left.ui-autocomplete-input{
+    font-family: Lato;
+    font-size: 21px;
+    font-weight: bold;
 }
 
 /*********************************************************************************/

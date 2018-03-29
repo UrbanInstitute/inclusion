@@ -213,19 +213,22 @@ d3.csv(DATA_URL,function(d) {
 
 	}
 	function buildSearchBox(){
-	var sorted = data.sort(function(a, b){
+	var sorted = [{"className":"default","text": "See how your city ranks"}].concat(data.sort(function(a, b){
 			var textA = a.className;
 			var textB = b.className;
 			return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
 
 		})
+	)
 	d3.select("#combobox")
 		.selectAll("option")
 		.data(sorted)
 		.enter()
 		.append("option")
 		.attr("value", function(d){ return d.className})
-		.html(function(d){ return d.place + ", " + d.stateabrev })
+		.html(function(d){
+			return (d.className == "default") ? d.text : d.place + ", " + d.stateabrev
+		})
 
 
   $( function() {
@@ -278,7 +281,8 @@ d3.csv(DATA_URL,function(d) {
  
         $( "<a>" )
           .attr( "tabIndex", -1 )
-          .attr( "title", "Show All Items" )
+          // .attr("STUFF GOES HERE")
+          .attr( "title", "Click to see all cities" )
           .tooltip()
           .appendTo( this.wrapper )
           .button({
@@ -363,6 +367,8 @@ d3.csv(DATA_URL,function(d) {
     $( "#toggle" ).on( "click", function() {
       $( "#combobox" ).toggle();
     });
+
+
   } );
 }
 	function buildYearSelector(container, section){
@@ -906,15 +912,6 @@ d3.csv(DATA_URL,function(d) {
 		var year = getYear();
 		var inclusionType = getInclusionType();
 
-		// var container = "foo"
-
-		// hideAll();
-		// buildYearSelector(container, "map");
-		// buildInclusionTypeSelector(container, "map")
-
-		// //draw map
-		// var mapData = data.filter()
-
 		var year = getYear();
 		var inclusionType = getInclusionType();
 		var varName = getVarName(year, inclusionType);
@@ -955,7 +952,50 @@ d3.csv(DATA_URL,function(d) {
 			return (projection([d[0], d[1] ]) != null)
 		})
 
+var startx, starty;
+function dragStart(){
+	d3.selectAll(".cell-path").classed("grab", false)
+	d3.selectAll(".cell-path").classed("grabbing", true)
+	var currentTrans =  d3.select("#plotContainer svg .states").attr("transform")
+	var offsetX, offsetY;
+	if(currentTrans != null && currentTrans != ""){
+		currentTrans = currentTrans.replace("translate(","").replace(")","").split(",")
+		offsetX = +currentTrans[0]
+		offsetY = +currentTrans[1]
+	}else{
+		offsetX = 0
+		offsetY = 0
+	}
+	
+	
+	startx = +d3.event.x - offsetX
+	starty = +d3.event.y - offsetY
 
+}
+function dragEnd(){
+	d3.selectAll(".cell-path").classed("grab", true)
+	d3.selectAll(".cell-path").classed("grabbing", false)
+	startx = null
+	starty = null
+}
+function dragged() {
+  var dx = (d3.event.x - startx),
+  dy = (d3.event.y - starty)
+  // console.log(d3.selectAll("#plotContainer svg .states").attr("transform"))
+  // if (this.nextSibling) this.parentNode.appendChild(this);
+  d3.selectAll("#plotContainer svg .states").attr("transform", "translate(" + dx + "," + dy + ")");
+  d3.selectAll("#plotContainer svg circle").attr("transform", "translate(" + dx + "," + dy + ")");
+  d3.selectAll("#plotContainer svg .cell").attr("transform", "translate(" + dx + "," + dy + ")");
+}
+function nozoom() {
+  d3.event.preventDefault();
+}
+
+var drag = d3.drag()
+    // .origin(function(d) { return {x: d[0], y: d[1]}; })
+    .on("start", dragStart)
+    .on("drag", dragged)
+    .on("end", dragEnd);	
 
 		var active = d3.select(null);
 		d3.json("data/map.json", function(error, us) {
@@ -964,12 +1004,17 @@ d3.csv(DATA_URL,function(d) {
 				.text("Zoom out")
 				.on("click", reset)
 
-			svg.selectAll(".states")
+			svg
+			    .on("touchstart", nozoom)
+    .on("touchmove", nozoom)
+
+			.selectAll(".states")
 				.data(topojson.object(us, us.objects.states).geometries)
 				.enter()
 				.append("path")
 				.attr("class", "states")
 				.attr("d", path)
+
 				.on("mouseover", function(d){
 					d3.select(this).classed("hover", true)
 				})
@@ -978,13 +1023,20 @@ d3.csv(DATA_URL,function(d) {
 				})
 			    .on("click", function(d){
 			    	clicked(this, d)
-			    });
+			    })
+
+
+
+
+
+
+
 
 			function clicked(obj, d) {
 				zoomOut.transition().style("opacity",1)
 				active.classed("active", false);
 				active = d3.select(obj).classed("active", true);
-				console.log(active.node())
+				console.log(path.bounds(d))
 
 				var bounds = path.bounds(d),
 				dx = bounds[1][0] - bounds[0][0],
@@ -1009,22 +1061,31 @@ d3.csv(DATA_URL,function(d) {
 					.enter().append("g")
 					.attr("class", "cell")
 					.on("mouseover", function(d){
+						d3.selectAll(".cell-path").classed("grab", true)
+						d3.selectAll(".cell-path").classed("grabbing", false)
 						showMapTooltip(d)
 					})
 					.on("click", function(d){
-						clicked(
-							svg.selectAll(".states").node(),
-							topojson.object(us, us.objects.states).geometries.filter(function(s){
-								return s.properties.postal == d.stateabrev
-							})[0]
-						)
-						window.open("index.html?city=" + d.className,'_blank');
+						// clicked(
+						// 	svg.selectAll(".states").node(),
+						// 	topojson.object(us, us.objects.states).geometries.filter(function(s){
+						// 		return s.properties.postal == d.stateabrev
+						// 	})[0]
+						// )
+
+
+						// window.open("index.html?city=" + d.className,'_blank');
 
 					})
+
+
 					.on("mouseout", function(d){
 						removeMapTooltip()
 					})
 					.style("pointer-events", function(){ return (active == null) ? "none" : "all"})
+					.call(drag);
+
+
 				cell.append("g")
 					.append("path")
 					.data(voronoi.polygons(mapData.map(projection)))
@@ -1044,6 +1105,10 @@ d3.csv(DATA_URL,function(d) {
 				.duration(750)
 				.style("stroke-width", "1.5px")
 				.attr("transform", "");
+
+  d3.selectAll("#plotContainer svg .states").attr("transform", "");
+  d3.selectAll("#plotContainer svg circle").attr("transform", "");
+  d3.selectAll("#plotContainer svg .cell").attr("transform", "");
 
 				d3.selectAll(".dot")
 					.transition()
@@ -1085,7 +1150,7 @@ d3.csv(DATA_URL,function(d) {
 		var inclusionSpace = {"econ": 18, "race": -10, "overall": 0}
 
 		d3.select("#legend-title").text(year + inclusionText[inclusionType])
-		d3.select("#legendContainer").style("width", (140 + inclusionSpace[inclusionType]) + "px").style("right", (-120 - inclusionSpace[inclusionType]) + "px")
+		d3.select("#legendContainer").style("width", (140 + inclusionSpace[inclusionType]) + "px").style("right", (-150 - inclusionSpace[inclusionType]) + "px")
 
 	}
 	function updateMap(year, inclusionType){
@@ -1103,7 +1168,7 @@ d3.csv(DATA_URL,function(d) {
 				return getRankColor(d[getVarName(year, inclusionType)])
 			})
 		d3.select("#legend-title").text(year + inclusionText[inclusionType])
-		d3.select("#legendContainer").style("width", (140 + inclusionSpace[inclusionType]) + "px").style("right", (-120 - inclusionSpace[inclusionType]) + "px")
+		d3.select("#legendContainer").style("width", (140 + inclusionSpace[inclusionType]) + "px").style("right", (-150 - inclusionSpace[inclusionType]) + "px")
 	}
 
 	function showHealthQuestion(){

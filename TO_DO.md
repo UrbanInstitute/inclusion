@@ -1,6 +1,12 @@
+daniel list
+- xd file icons
+- adding legend to map, same as scatter, but on right side
+
+
 Mobile
 City page
 Print view
+all dots size increase on hover
 
 all
 	city search
@@ -13,6 +19,7 @@ map
 	legend
 	positioning
 	tooltips
+	grab and drag?
 scatter
 	legend
 	tooltips
