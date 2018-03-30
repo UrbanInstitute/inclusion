@@ -281,7 +281,6 @@ d3.csv(DATA_URL,function(d) {
  
         $( "<a>" )
           .attr( "tabIndex", -1 )
-          // .attr("STUFF GOES HERE")
           .attr( "title", "Click to see all cities" )
           .tooltip()
           .appendTo( this.wrapper )
@@ -559,6 +558,115 @@ d3.csv(DATA_URL,function(d) {
 			.text("Less inclusive")
 	}
 
+	function removeTooltip(fade){
+		if(fade){
+			d3.selectAll("#tt-container")
+				.transition()
+				.style("opacity",0)
+				.on("end", function(){
+					d3.select(this).remove()
+				})
+		}else{
+			d3.selectAll("#tt-container").remove()
+		}
+	}
+	function showTooltip(svg, x, y, datum, section){
+		removeTooltip(false);
+		x = x - svg.node().getBoundingClientRect().left
+		y = y - svg.node().getBoundingClientRect().top
+		var ttw = 220,
+		 	tth = (section == "map") ? 120 : 150,
+			w = getScatterWidth(),
+			h = (section == "map") ? w*.618 : w,
+			transX,
+			transY;
+
+		var left, up;
+		if(x + ttw + 15 > w){
+			left = true;
+		}else{
+			left = false;
+		}
+
+		if(y + tth + 15 > h){
+			up = true
+		}else{
+			up = false
+		}
+
+
+		if(section == "map"){
+			transX = (left) ? (x - ttw ) : x + 10,
+			transY = (up) ? y - tth  : y + 10
+		}else{
+			transX = (left) ? (x - ttw - 2) : x + 20,
+			transY = (up) ? y - tth + 18  : y + 28			
+		}
+
+
+		var tt = d3.select(svg.node().parentNode).append("div")
+			.datum(datum)
+			.attr("id", "tt-container")
+			.classed("left", left)
+			.classed("right", !left)
+			.classed("up", up)
+			.classed("down", !up)
+			.style("left", transX + "px")
+			.style("top", transY + "px")
+			.style("width", (ttw-24)+"px")
+			.style("height", (tth-24)+"px")
+
+
+		tt.append("div")
+			.attr("id","tt-title")
+			.text(function(d){
+				return d.place + ", " + d.stateabrev
+			})
+		if(section == "size"){
+			tt.append("div")
+				.attr("class","tt-text")
+				.text(function(d){
+					var year = getYear();
+					return "Population: " + d3.format(",")(d["pop" + year]) + " in " + year
+				})
+
+		}
+		tt.append("div")
+			.attr("class","tt-text")
+			.text(function(d){
+				var inclusionType = getInclusionType()
+				var year = getYear()
+				var varName = getVarName(year, inclusionType)
+				var fullTypes = {"overall": "overall inclusion", "econ": "economic inclusion", "race": "racial inclusion"}
+
+				return "Rank: " + d[varName] + " of 274 cities on " + fullTypes[inclusionType] + " in " + year
+			})
+
+		tt.append("div")
+			.attr("id", "tt-click")
+			.html(function(d){
+				return "<a href = \"index.html?city=" + d.className + "\" target = \"_blank\"> Click to see city profile<i class=\"fas fa-arrow-right\"></i></a>"
+
+			})
+
+		// 	// .attr("transform", "translate(" + transX + "," + transY + ")")
+		// tt.append("rect")
+		// 	.attr("width", ttw)
+		// 	.attr("height", tth)
+		// 	.style("fill","#EEEEEE")
+
+		// tt.append("text")
+		// 	.attr("id","tt-title")
+		// 	.attr("x", 10)
+		// 	.attr("y", 25)
+
+
+// 
+
+
+
+	}
+
 	function getScatterScales(width, height, margin, section, year, inclusionType, scaleType){
 		// var year = getYear();
 		// var inclusionType = getInclusionType();
@@ -787,17 +895,16 @@ d3.csv(DATA_URL,function(d) {
 					}
 					var p = d3.mouse(this), site;
 					site = scatterSvg._voronoi.find(p[0], p[1], maxDistanceFromPoint);
-					// if (site !== scatterSvg._tooltipped) {
-					// 	if (scatterSvg._tooltipped) removeScatterTooltip(scatterSvg._tooltipped.data)
-					// 	if (site) showScatterTooltip(site.data);
-					// 	scatterSvg._tooltipped = site;
-					// }
 					console.log(site.data)
-					window.open("index.html?city=" + site.data.className, "_blank")
+					// window.open("index.html?city=" + site.data.className, "_blank")
+						showTooltip(
+							d3.select("#plotContainer svg"),
+							d3.select(".dot." + site.data.className).node().getBoundingClientRect().left,
+							d3.select(".dot." + site.data.className).node().getBoundingClientRect().top,
+							site.data,
+							section)
+
 				})
-				// .on("mouseout", function(){
-				// 	removeDotTooltip();
-				// })
 
 			if(section == "size"){
 			    scatterSvg.append("path")
@@ -896,10 +1003,10 @@ d3.csv(DATA_URL,function(d) {
 			.html(function(d){ return (d.rankoverallinclusionindex2013 > d.rankoverallinclusionindex2000) ? "jumping" : "falling" })
 	}
 
-	function removeMapTooltip(d){
+	function mapdeHover(d){
 		d3.selectAll(".dot").classed("hover", false)
 	}
-	function showMapTooltip(d){
+	function mapHover(d){
 		d3.selectAll(".dot").classed("hover", false)
 		var dot = d3.select(".dot." + d.className).classed("hover", true)
 		dot.node().parentNode.appendChild(dot.node())
@@ -952,52 +1059,50 @@ d3.csv(DATA_URL,function(d) {
 			return (projection([d[0], d[1] ]) != null)
 		})
 
-var startx, starty;
-function dragStart(){
-	d3.selectAll(".cell-path").classed("grab", false)
-	d3.selectAll(".cell-path").classed("grabbing", true)
-	var currentTrans =  d3.select("#plotContainer svg .states").attr("transform")
-	var offsetX, offsetY;
-	if(currentTrans != null && currentTrans != ""){
-		currentTrans = currentTrans.replace("translate(","").replace(")","").split(",")
-		offsetX = +currentTrans[0]
-		offsetY = +currentTrans[1]
-	}else{
-		offsetX = 0
-		offsetY = 0
-	}
+		var startx, starty;
+		function dragStart(){
+			removeTooltip(true);
+			d3.selectAll(".cell-path").classed("grab", false)
+			d3.selectAll(".cell-path").classed("grabbing", true)
+			var currentTrans =  d3.select("#plotContainer svg .states").attr("transform")
+			var offsetX, offsetY;
+			if(currentTrans != null && currentTrans != ""){
+				currentTrans = currentTrans.replace("translate(","").replace(")","").split(",")
+				offsetX = +currentTrans[0]
+				offsetY = +currentTrans[1]
+			}else{
+				offsetX = 0
+				offsetY = 0
+			}
 	
-	
-	startx = +d3.event.x - offsetX
-	starty = +d3.event.y - offsetY
+			startx = +d3.event.x - offsetX
+			starty = +d3.event.y - offsetY
 
-}
-function dragEnd(){
-	d3.selectAll(".cell-path").classed("grab", true)
-	d3.selectAll(".cell-path").classed("grabbing", false)
-	startx = null
-	starty = null
-}
-function dragged() {
-  var dx = (d3.event.x - startx),
-  dy = (d3.event.y - starty)
-  // console.log(d3.selectAll("#plotContainer svg .states").attr("transform"))
-  // if (this.nextSibling) this.parentNode.appendChild(this);
-  d3.selectAll("#plotContainer svg .states").attr("transform", "translate(" + dx + "," + dy + ")");
-  d3.selectAll("#plotContainer svg circle").attr("transform", "translate(" + dx + "," + dy + ")");
-  d3.selectAll("#plotContainer svg .cell").attr("transform", "translate(" + dx + "," + dy + ")");
-}
-function nozoom() {
-  d3.event.preventDefault();
-}
+		}
+		function dragEnd(){
+			d3.selectAll(".cell-path").classed("grab", true)
+			d3.selectAll(".cell-path").classed("grabbing", false)
+			startx = null
+			starty = null
+		}
+		function dragged() {
+		  var dx = (d3.event.x - startx),
+		  dy = (d3.event.y - starty)
+		  d3.selectAll("#plotContainer svg .states").attr("transform", "translate(" + dx + "," + dy + ")");
+		  d3.selectAll("#plotContainer svg circle").attr("transform", "translate(" + dx + "," + dy + ")");
+		  d3.selectAll("#plotContainer svg .cell").attr("transform", "translate(" + dx + "," + dy + ")");
+		}
+		function nozoom() {
+		  d3.event.preventDefault();
+		}
 
-var drag = d3.drag()
-    // .origin(function(d) { return {x: d[0], y: d[1]}; })
-    .on("start", dragStart)
-    .on("drag", dragged)
-    .on("end", dragEnd);	
+		var drag = d3.drag()
+		    .on("start", dragStart)
+		    .on("drag", dragged)
+		    .on("end", dragEnd);	
 
 		var active = d3.select(null);
+
 		d3.json("data/map.json", function(error, us) {
 			var zoomOut = plotContainer.append("div")
 				.attr("id","zoomOut")
@@ -1005,32 +1110,23 @@ var drag = d3.drag()
 				.on("click", reset)
 
 			svg
-			    .on("touchstart", nozoom)
-    .on("touchmove", nozoom)
-
-			.selectAll(".states")
-				.data(topojson.object(us, us.objects.states).geometries)
-				.enter()
-				.append("path")
-				.attr("class", "states")
-				.attr("d", path)
-
-				.on("mouseover", function(d){
-					d3.select(this).classed("hover", true)
-				})
-				.on("mouseout", function(d){
-					d3.select(this).classed("hover", false)	
-				})
-			    .on("click", function(d){
-			    	clicked(this, d)
-			    })
-
-
-
-
-
-
-
+				.on("touchstart", nozoom)
+    			.on("touchmove", nozoom)
+				.selectAll(".states")
+					.data(topojson.object(us, us.objects.states).geometries)
+					.enter()
+					.append("path")
+					.attr("class", "states")
+					.attr("d", path)
+					.on("mouseover", function(d){
+						d3.select(this).classed("hover", true)
+					})
+					.on("mouseout", function(d){
+						d3.select(this).classed("hover", false)	
+					})
+				    .on("click", function(d){
+				    	clicked(this, d)
+				    })
 
 			function clicked(obj, d) {
 				zoomOut.transition().style("opacity",1)
@@ -1063,24 +1159,26 @@ var drag = d3.drag()
 					.on("mouseover", function(d){
 						d3.selectAll(".cell-path").classed("grab", true)
 						d3.selectAll(".cell-path").classed("grabbing", false)
-						showMapTooltip(d)
+						mapHover(d)
 					})
 					.on("click", function(d){
-						// clicked(
-						// 	svg.selectAll(".states").node(),
-						// 	topojson.object(us, us.objects.states).geometries.filter(function(s){
-						// 		return s.properties.postal == d.stateabrev
-						// 	})[0]
-						// )
-
-
+						var coords = (projection([d[0], d[1] ]) == null) ? [0,0] : projection([d[0], d[1] ])
+						// return coords[0]
+						
+						// console.log(event.clientX, event.clientY)
+						showTooltip(
+							d3.select("#plotContainer svg"),
+							d3.select(".dot." + d.className).node().getBoundingClientRect().left,
+							d3.select(".dot." + d.className).node().getBoundingClientRect().top,
+							d,
+							"map")
 						// window.open("index.html?city=" + d.className,'_blank');
 
 					})
 
 
 					.on("mouseout", function(d){
-						removeMapTooltip()
+						mapdeHover()
 					})
 					.style("pointer-events", function(){ return (active == null) ? "none" : "all"})
 					.call(drag);
@@ -1094,7 +1192,8 @@ var drag = d3.drag()
 			}
 
 			function reset() {
-				removeMapTooltip(null);
+				removeTooltip(true);
+				mapdeHover(null);
 
 				zoomOut.transition().style("opacity",0)
 				d3.selectAll(".cell").remove()
@@ -1106,9 +1205,9 @@ var drag = d3.drag()
 				.style("stroke-width", "1.5px")
 				.attr("transform", "");
 
-  d3.selectAll("#plotContainer svg .states").attr("transform", "");
-  d3.selectAll("#plotContainer svg circle").attr("transform", "");
-  d3.selectAll("#plotContainer svg .cell").attr("transform", "");
+				d3.selectAll("#plotContainer svg .states").attr("transform", "");
+				d3.selectAll("#plotContainer svg circle").attr("transform", "");
+				d3.selectAll("#plotContainer svg .cell").attr("transform", "");
 
 				d3.selectAll(".dot")
 					.transition()
@@ -1154,6 +1253,7 @@ var drag = d3.drag()
 
 	}
 	function updateMap(year, inclusionType){
+		removeTooltip(true);
 		var varName = getVarName(year, inclusionType);
 		var inclusionText = {"econ": " economic inclusion", "race": " racial inclusion", "overall": " overall inclusion"}
 		var inclusionSpace = {"econ": 18, "race": -10, "overall": 0}
@@ -1194,6 +1294,7 @@ var drag = d3.drag()
 		buildParagraphs(paragraphContainer, "healthQuestion")
 	}
 	function updateHealthQuestion(year, inclusionType){
+		removeTooltip(true)
 		scatterSvg._voronoi = null;
 
 		var scales = getScatterScales(getScatterWidth() - scatterMargin.left - scatterMargin.right, getScatterHeight() - scatterMargin.top - scatterMargin.bottom, scatterMargin, "health", year, inclusionType, "linear")
@@ -1239,21 +1340,68 @@ var drag = d3.drag()
 	}
 
 	function buildScaleTypeToggle(container, scaleType){
-		container.
-			selectAll(".scaleSelect")
-			.data(["linear","log"])
-			.enter()
+		// container.
+		// 	selectAll(".scaleSelect")
+		// 	.data(["linear","log"])
+		// 	.enter()
+		// 	.append("div")
+		// 	.attr("class", function(d){
+		// 		return (getScaleType() == d) ? "scaleSelect active" : "scaleSelect"
+		// 	})
+		// 	.text(function(d){ return d})
+		// 	.on("click", function(d){
+		// 		setScaleType(d)
+		// 		d3.selectAll(".scaleSelect.active").classed("active", false)
+		// 		d3.select(this).classed("active", true)
+		// 		updateSizeQuestion(getYear(), getInclusionType(), d)
+		// 	})
+		container.append("div")
+			.attr("id","scaleLabel")
+			.text("Y-axis scale: ")
+		container
 			.append("div")
-			.attr("class", function(d){
-				return (getScaleType() == d) ? "scaleSelect active" : "scaleSelect"
+			.attr("class", function(){
+				return (getScaleType() == "linear") ? "linear scaleSelect active" : "linear scaleSelect"
 			})
-			.text(function(d){ return d})
+			.text("Linear")
 			.on("click", function(d){
-				setScaleType(d)
+				setScaleType("linear")
 				d3.selectAll(".scaleSelect.active").classed("active", false)
 				d3.select(this).classed("active", true)
-				updateSizeQuestion(getYear(), getInclusionType(), d)
+				updateSizeQuestion(getYear(), getInclusionType(), "linear")
 			})
+		function slide(){
+			if(d3.select(".scaleSelect.log").classed("active")){
+				setScaleType("linear")
+				d3.selectAll(".scaleSelect.active").classed("active", false)
+				d3.select(".scaleSelect.linear").classed("active", true)
+				updateSizeQuestion(getYear(), getInclusionType(), "linear")
+			}else{
+				setScaleType("log")
+				d3.selectAll(".scaleSelect.active").classed("active", false)
+				d3.select(".scaleSelect.log").classed("active", true)
+				updateSizeQuestion(getYear(), getInclusionType(), "log")
+			}
+		}
+		container.append("div")
+			.attr("id", "sliderContainer")
+			.on("click", slide)
+		container.append("div")
+			.attr("id", "sliderButton")
+			.on("click", slide)
+		container
+			.append("div")
+			.attr("class", function(){
+				return (getScaleType() == "log") ? "log scaleSelect active" : "log scaleSelect"
+			})
+			.text("Logarithmic")
+			.on("click", function(d){
+				setScaleType("log")
+				d3.selectAll(".scaleSelect.active").classed("active", false)
+				d3.select(this).classed("active", true)
+				updateSizeQuestion(getYear(), getInclusionType(), "log")
+			})
+
 	}
 	function showSizeQuestion(){
 		d3.select("#questionTitle").html(d3.select(".questionMenu[data-section=size]").html())
@@ -1277,7 +1425,10 @@ var drag = d3.drag()
 
 	}
 	function updateSizeQuestion(year, inclusionType, scaleType){
-		// var svg = d3.select("#scatterSvg")
+		removeTooltip(true)
+		if(scaleType == "linear"){ d3.select("#sliderButton").transition().style("left","171px") }
+		else{ d3.select("#sliderButton").transition().style("left","194px") }
+
 		scatterSvg._voronoi = null;
 
 		var scales = getScatterScales(getScatterWidth() - scatterMargin.left - scatterMargin.right, getScatterHeight() - scatterMargin.top - scatterMargin.bottom, scatterMargin, "size", year, inclusionType, scaleType)

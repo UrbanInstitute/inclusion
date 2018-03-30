@@ -1,4 +1,22 @@
+Friday
+- add legends to scatterplots
+
+Mon - Tues
+- Add legend, hover, and labels to small multiple graphs
+- Build out city page
+- Build out print view
+
+Wed
+- Build out mobile/responsive behavior
+
+Thurs-Fri
+- Design audit and updates
+
+
+
+
 daniel list
+- sticky menu
 - xd file icons
 - adding legend to map, same as scatter, but on right side
 
