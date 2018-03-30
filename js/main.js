@@ -213,7 +213,7 @@ d3.csv(DATA_URL,function(d) {
 
 	}
 	function buildSearchBox(){
-	var sorted = [{"className":"default","text": "See how your city ranks"}].concat(data.sort(function(a, b){
+	var sorted = [{"className":"default","text": "See how your city ranks"}].concat(data.concat().sort(function(a, b){
 			var textA = a.className;
 			var textB = b.className;
 			return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
