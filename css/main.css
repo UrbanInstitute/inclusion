@@ -646,13 +646,13 @@ body.cityPage #questionContainer{
     position: relative;
 }
 #searchContainer div.ui-widget{
-	width: 705px;
-    top: 10px;
+	width: 682px;
+    top: 19px;
     margin: 0 auto;
     position: relative;
 }
 #searchContainer .custom-combobox-input.ui-widget.ui-widget-content.ui-autocomplete-input{
-	width: 705px;
+	width: 682px;
     height: 60px;
     border: 1px solid #707070;
     border-radius: 0px;
@@ -666,7 +666,7 @@ body.cityPage #questionContainer{
 	height: 63px;
 	position: absolute;
 	top: 4px;
-	right: -3px;
+	right: -20px;
 	background: none;
 	border: none;
 }
@@ -682,7 +682,28 @@ body.cityPage #questionContainer{
 #searchContainer input.custom-combobox-input.ui-widget.ui-widget-content.ui-state-default.ui-corner-left.ui-autocomplete-input{
     font-family: Lato;
     font-size: 21px;
+    padding-left: 23px	;
     font-weight: bold;
+}
+.ui-menu.ui-widget.ui-widget-content.ui-autocomplete.ui-front{
+	width: 705px;
+}
+li.ui-menu-item{
+	font-family: Lato;
+}
+
+.ui-state-active{
+    border: 1px solid #1696d2 !important;
+    background: #1696d2 !important;
+    cursor: pointer;
+}
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight {
+	border: 1px solid #fdbf11 !important;
+	background: #fdbf11 !important;
+	color: #ffffff !important;
+	font-family: Lato;
 }
 
 /*********************************************************************************/
