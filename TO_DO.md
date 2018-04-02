@@ -1,9 +1,11 @@
-Friday
-- add legends to scatterplots
+fix scatter so click is on cell, not on dot
+dot grow on hover
+add "questions" header above q's
+
 
 Mon - Tues
-- Add legend, hover, and labels to small multiple graphs
 - Build out city page
+- Add legend, to small multiple graphs
 - Build out print view
 
 Wed
@@ -14,35 +16,21 @@ Thurs-Fri
 
 
 
-
-daniel list
-- sticky menu
-- xd file icons
-- adding legend to map, same as scatter, but on right side
-
-
 Mobile
 City page
 Print view
 all dots size increase on hover
 
 all
-	city search
-	sticky menu
 	style
 		menu
 		header
 		graphic height
 map
-	legend
 	positioning
-	tooltips
-	grab and drag?
 scatter
-	legend
 	tooltips
 	axis labels
-	Linear/log toggle
 recovery period
 	axes
 	legend and sticky
@@ -52,9 +40,6 @@ recovery period
 
 - nice to have: dot transitions btwn map/scatter
 
-q for daniel
-- stick legend, sticky sidenav
-- colors
 
 q's for researchers:
 

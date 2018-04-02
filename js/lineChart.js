@@ -69,7 +69,7 @@ function addCorrelationRect(svg, x, y, indicator1, indicator2){
 		.attr("class", "corellationRect")
 		.attr("x", function(d){ return x(d.recoverstart)})
 		.attr("y", y(0))
-		.attr("height", y(290))
+		.attr("height", y(274)-y(0))
 		.attr("width", function(d){ return x(d.recoverend) - x(d.recoverstart)})
 		.style("fill", function(d){
 			var dir1, dir2, new1, new2, yr1, yr2;
