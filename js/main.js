@@ -198,8 +198,9 @@ d3.csv(DATA_URL,function(d) {
 			}
 		}
 		else if(parameters.hasOwnProperty("city")){
+			var print = (parameters.hasOwnProperty("print"))
 			buildHeader(data, parameters.city)
-			buildCityPage(parameters.city)
+			buildCityPage(parameters.city, print)
 		}
 		else{
 			buildHeader(data, false)
@@ -1653,6 +1654,7 @@ d3.csv(DATA_URL,function(d) {
 		var svg = chartDiv.append("svg")
 			.attr("width", SMALL_MULT_SIZE)
 			.attr("height", SMALL_MULT_SIZE*heightScalar)
+		
 		svg.append("rect")
 			.attr("fill","#fff")
 			.attr("stroke","none")
@@ -1670,57 +1672,7 @@ d3.csv(DATA_URL,function(d) {
 			.call(d3.axisTop(x).tickValues([1980, 1990, 2000, 2013]).tickFormat(d3.format(".0f")));
 	
 		svg.on("mousemove", function(d){
-			d3.selectAll(".smallTT").remove()
-			var yrs = [1980, 1990, 2000, 2013]
-			var diffs = yrs.map(function(a){ return Math.abs(a- x.invert(d3.event.offsetX))})
-			var year = yrs[diffs.indexOf(d3.min(diffs))]
-			var inclusionType = getInclusionType()
-
-			var ind = yrs.indexOf(year)
-			d3.select(this).selectAll(".changeDot")
-				.transition()
-				.attr("r", function(){
-					return (d3.select(this).classed("y" + ind)) ? 8 : 5;
-				})
-
-			var health = d["rankeconhealth" + year]
-			var incl = d["rank" + inclusionType + "inclusionindex" + year]
-			var top, bottom;
-			if(health <= incl){
-				top = health
-				bottom = incl
-			}else{
-				top = incl
-				bottom = health
-			}
-			var tt1 = d3.select(this).append("g")
-				.attr("class","smallTT")
-				.attr("transform", function(){
-					return "translate(" + (x(year) - 10) + "," + (y(top) - 10) + ")"
-				})
-			tt1.append("rect")
-				.style("fill","rgba(255,255,255,.7)")
-				.attr("x",-4)
-				.attr("y",-13)
-				.attr("height",16)
-				.attr("width", 30)
-
-			tt1.append("text").text(d3.format(".0f")(top))
-
-			var tt2 = d3.select(this).append("g")
-				.attr("class","smallTT")
-				.attr("transform", function(){
-					return "translate(" + (x(year) - 10) + "," + (y(bottom) + 20) + ")"
-				})
-			tt2.append("rect")
-				.style("fill","rgba(255,255,255,.7)")
-				.attr("x",-4)
-				.attr("y",-13)
-				.attr("height",16)
-				.attr("width", 30)
-
-			tt2.append("text").text(d3.format(".0f")(bottom))
-			
+			mousemoveLineChart(d3.select(this), d, x, y, d3.event.offsetX, "rankeconhealth", "rank" + getInclusionType() + "inclusionindex")			
 		})
 		.on("mouseout", function(){
 			d3.select(this).selectAll(".changeDot")
@@ -1729,8 +1681,8 @@ d3.csv(DATA_URL,function(d) {
 			d3.selectAll(".smallTT").remove()
 		})
 		addCorrelationRect(svg, x, y, inclusionType, "econHealth");
-		addLineSeries(svg, x, y, inclusionType, false);
-		addLineSeries(svg, x, y, "econHealth", false);
+		addLineSeries(svg, x, y, inclusionType, false, false);
+		addLineSeries(svg, x, y, "econHealth", false, false);
 		buildParagraphs(paragraphContainer, "changeQuestion");
 		var menuContainer = paragraphContainer.append("div").attr("id", "menuContainer")
 		buildChangeDropdown(menuContainer, x, y)
@@ -1790,8 +1742,109 @@ d3.csv(DATA_URL,function(d) {
 
 	})
 
-	function buildCityPage(city){
+	function buildCityPage(city, print){
+		console.log(print)
 		d3.select("body").classed("cityPage", true)
+		var heightScalar = .9;
+		var datum = data.filter(function(o){ return o.className == city })[0]
+
+		var graphContainer = d3.select("#graphContainer")
+		graphContainer.attr("class", "cityPage")
+
+		var topContainer = graphContainer.append("div").attr("id", "topContainer")
+		var moreContainer = graphContainer.append("div").attr("id", "moreContainer")
+		
+		var inclusionType = "overall"
+
+		var marginSmall = {"left": 50, "right": 40, "top": 40, "bottom": 60},
+			topSize = 280,
+			moreSize = 200,
+			wTop = topSize - marginSmall.left - marginSmall.right,
+			hTop = topSize*heightScalar - marginSmall.left - marginSmall.right,
+			wMore = moreSize - marginSmall.left - marginSmall.right,
+			hMore = moreSize*heightScalar - marginSmall.left - marginSmall.right,
+			xTop = d3.scaleLinear().range([marginSmall.left, topSize-marginSmall.right]).domain([1980, 2013]),
+			xMore = d3.scaleLinear().range([marginSmall.left, moreSize-marginSmall.right]).domain([1980, 2013]),
+			yTop = d3.scaleLinear().range([topSize*heightScalar - marginSmall.bottom, marginSmall.top]).domain([274,0]);
+
+		var topIndicators = ["econHealth","overall","race","econ"]
+		var moreIndicators = {
+			"econHealth":
+				[
+					["pctemploymentchange","Employment growth"],
+					["unemprate","Unemployment rate"],
+					["vacancyrate","Housing vacancy rate"],
+					["medfamincome","Median family income"]
+				],
+			"race":
+				[
+					["Citypctnonwhite","People of color as a share of the population"],
+					["RacialSeg","Racial segregation"],
+					["hogap","Racial homeownership gap"],
+					["povgap","Racial poverty gap"],
+					["racialeducationgap","Racial education gap"],
+				],
+			"econ":
+				[
+					["incseg","Income segregation"],
+					["rentburden","Rent-burdened residents"],
+					["workingpoor","Working–poor families"],
+					["pct1619notinschool","High school drop-out rate"],
+				]
+
+			}
+
+
+		for(var i = 0; i < topIndicators.length; i++){
+			var topDiv = topContainer.append("div").attr("class","topDiv")
+			var indicator = topIndicators[i]
+			var titles = {"overall": "Overall inclusion rank", "econ": "Economic inclusion rank", "race": "Racial inclusion rank", "econHealth": "Economic health rank"}
+
+			topDiv.append("div")
+				.attr("class", "chartTitle")
+				.text(titles[indicator])
+
+			var svg = topDiv.append("svg")
+				.datum(datum)
+				.attr("data-indicator", indicator)
+				.attr("width", topSize)
+				.attr("height", topSize*heightScalar)
+			svg.append("rect")
+				.attr("fill","#fff")
+				.attr("stroke","none")
+				.attr("x",0)
+				.attr("y",0)
+				.attr("width", wTop)
+				.attr("height", topSize*heightScalar - 50)
+			svg.append("g")
+				.attr("class", "axis axis--y")
+				.attr("transform", "translate(" + (topSize - 20) + ",0)")
+				.call(d3.axisLeft(yTop).tickValues([0,100,200,274]).tickSize(topSize - 50));
+			svg.append("g")
+				.attr("class", "axis axis--x")
+				.attr("transform", "translate(0," + marginSmall.top + ")")
+				.call(d3.axisTop(xTop).tickValues([1980, 1990, 2000, 2013]).tickFormat(d3.format(".0f")));
+		
+			svg.on("mousemove", function(d){
+				var ind = (d3.select(this).attr("data-indicator") == "econHealth") ? "rankeconhealth" : "rank" + d3.select(this).attr("data-indicator") + "inclusionindex"
+				console.log(ind)
+				mousemoveLineChart(d3.select(this), d, xTop, yTop, d3.event.offsetX, ind, false )			
+			})
+			.on("mouseout", function(){
+				d3.select(this).selectAll(".changeDot")
+					.transition()
+					.attr("r", 5)
+				d3.selectAll(".smallTT").remove()
+			})
+			addLineSeries(svg, xTop, yTop, indicator, false, true);
+
+
+
+
+		}
+
+
+
 	}
 
 	init();

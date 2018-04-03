@@ -770,6 +770,9 @@ body.cityPage #popupContainer{
 body.cityPage #questionContainer{
 	display: none;
 }
+.topDiv{
+	display: inline-block;
+}
 
 /*********************************************************************************/
 /**************************      CITY SEARCH      ********************************/

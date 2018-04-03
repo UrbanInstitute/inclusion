@@ -1,7 +1,7 @@
-function addLineSeries(svg, x, y, indicator, animate){
+function addLineSeries(svg, x, y, indicator, animate, isCity){
 	var colorClass, newIndicator;
 	if(indicator == "econHealth"){
-		colorClass = "econHealth"
+		colorClass = (isCity) ? "rank" : "econHealth"
 		newIndicator = "rankeconhealth"
 	}else{
 		colorClass = "rank"
@@ -114,4 +114,61 @@ function updateCorrelationRect(svg, x, y, indicator1, indicator2){
 			dir2 = (d[new2 + yr1] > d[new2 + yr2]) ? "down" : "up"
 			return (dir1 == dir2) ? "#E4F3E2" : "#FFCCCC"
 		})
+}
+function mousemoveLineChart(svg, d, x, y, mouseX, indicator1, indicator2){
+	d3.selectAll(".smallTT").remove()
+	var yrs = [1980, 1990, 2000, 2013]
+	var diffs = yrs.map(function(a){ return Math.abs(a- x.invert(mouseX))})
+	var year = yrs[diffs.indexOf(d3.min(diffs))]
+
+	var ind = yrs.indexOf(year)
+	svg.selectAll(".changeDot")
+		.transition()
+		.attr("r", function(){
+			return (svg.classed("y" + ind)) ? 8 : 5;
+		})
+
+	var top, bottom;
+	if(indicator2){
+		var i1 = d[indicator1 + year]
+		var i2 = d[indicator2 + year]
+		if(i1 <= i2){
+			top = i1
+			bottom = i2
+		}else{
+			top = i2
+			bottom = i1
+		}
+	}else{
+		top = d[indicator1 + year]
+	}
+	var tt1 = svg.append("g")
+		.attr("class","smallTT")
+		.attr("transform", function(){
+			return "translate(" + (x(year) - 10) + "," + (y(top) - 10) + ")"
+		})
+	tt1.append("rect")
+		.style("fill","rgba(255,255,255,.7)")
+		.attr("x",-4)
+		.attr("y",-13)
+		.attr("height",16)
+		.attr("width", 30)
+
+	tt1.append("text").text(d3.format(".0f")(top))
+
+	if(indicator2){
+		var tt2 = svg.append("g")
+			.attr("class","smallTT")
+			.attr("transform", function(){
+				return "translate(" + (x(year) - 10) + "," + (y(bottom) + 20) + ")"
+			})
+		tt2.append("rect")
+			.style("fill","rgba(255,255,255,.7)")
+			.attr("x",-4)
+			.attr("y",-13)
+			.attr("height",16)
+			.attr("width", 30)
+
+		tt2.append("text").text(d3.format(".0f")(bottom))
+	}
 }
