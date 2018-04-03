@@ -580,7 +580,7 @@ d3.csv(DATA_URL,function(d) {
 		removeTooltip(false);
 		x = x - svg.node().getBoundingClientRect().left
 		y = y - svg.node().getBoundingClientRect().top
-		var ttw = 220,
+		var ttw = 240,
 		 	tth = (section == "map") ? 120 : 150,
 			w = getScatterWidth(),
 			h = (section == "map") ? w*.618 : w,
@@ -625,9 +625,16 @@ d3.csv(DATA_URL,function(d) {
 
 		tt.append("div")
 			.attr("id","tt-title")
-			.text(function(d){
-				return d.place + ", " + d.stateabrev
+			.html(function(d){
+				return d.place + ", " + d.stateabrev + "<i class=\"fa fa-times\" aria-hidden=\"true\"></i>"
 			})
+			.on("click", function(){
+				if(d3.event.layerX >= ttw -40){
+					d3.select("#tt-container").remove()
+				}
+			})
+		d3.select("#tt-title svg")
+			.on("click", function(){ console.log("ASDF")})
 		if(section == "size"){
 			tt.append("div")
 				.attr("class","tt-text")
@@ -709,8 +716,14 @@ d3.csv(DATA_URL,function(d) {
 		d3.selectAll(".dot").classed("hover", false)
 	}
 	function showScatterTooltip(d){
-		d3.selectAll(".dot").classed("hover", false)
-		var dot = d3.select(".dot." + d.className).classed("hover", true)
+		d3.selectAll(".dot:not(." + d.className + ")")
+			.classed("hover", false)
+			.transition()
+			.attr("r",8)
+		var dot = d3.select(".dot." + d.className)
+			.classed("hover", true)
+			.transition()
+			.attr("r",12)
 		dot.node().parentNode.appendChild(dot.node())
 		var fitLine = d3.select(".fitLine")
 		fitLine.node().parentNode.appendChild(fitLine.node())
@@ -763,6 +776,10 @@ d3.csv(DATA_URL,function(d) {
 			.attr("width",width + margin.left + margin.right)
 			.attr("height",height + margin.left + margin.right)
 			.append("g")
+		scatterSvg.append("rect")
+			.attr("width",width + margin.left + margin.right)
+			.attr("height",height + margin.left + margin.right)
+			.style("fill","transparent")
 
 		if(section == "size"){
 			scatterSvg.append("g")
@@ -772,8 +789,8 @@ d3.csv(DATA_URL,function(d) {
 		}else{
 			scatterSvg.append("g")
 				.attr("class", "axis axis--x")
-				.attr("transform", "translate(0," + (20) + ")")
-				.call(d3.axisTop(x).tickValues([1,50,100,150,200,274]).tickSize(-height+margin.bottom));		
+				.attr("transform", "translate(0," + (40) + ")")
+				.call(d3.axisTop(x).tickValues([1,50,100,150,200,274]).tickSize(-height+margin.bottom - 24));		
 		}
 
 		container.style("position","relative")
@@ -817,12 +834,12 @@ d3.csv(DATA_URL,function(d) {
 		if(section == "size"){
 			scatterSvg.append("g")
 				.attr("class", "axis axis--y")
-				.attr("transform", "translate(" + (width + 30) + ",0)")
+				.attr("transform", "translate(" + (width + 20) + ",0)")
 				.call(d3.axisRight(y).ticks(5).tickSize(-width-20));			
 		}else{
 			scatterSvg.append("g")
 				.attr("class", "axis axis--y")
-				.attr("transform", "translate(" + (width + 30) + ",0)")
+				.attr("transform", "translate(" + (width + 10) + ",0)")
 				.call(d3.axisRight(y).tickValues([1,50,100,150,200,274]).tickSize(-width-20));	
 		}
 
@@ -1015,11 +1032,17 @@ d3.csv(DATA_URL,function(d) {
 	}
 
 	function mapdeHover(d){
-		d3.selectAll(".dot").classed("hover", false)
+		d3.selectAll(".dot")
+			.classed("hover", false)
+			.transition()
+			.attr("r",2)
 	}
 	function mapHover(d){
 		d3.selectAll(".dot").classed("hover", false)
-		var dot = d3.select(".dot." + d.className).classed("hover", true)
+		var dot = d3.select(".dot." + d.className)
+			.classed("hover", true)
+			.transition()
+			.attr("r",5)
 		dot.node().parentNode.appendChild(dot.node())
 	}
 
@@ -1037,6 +1060,7 @@ d3.csv(DATA_URL,function(d) {
 		var graphContainer = d3.select("#graphContainer")
 		graphContainer.attr("class", "mapQuestion")
 		var yearContainer = graphContainer.append("div").attr("id", "yearContainer")
+		var note = graphContainer.append("div").attr("id","noteContainer")
 		var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
 		var legendContainer = graphContainer.append("div").attr("id", "legendContainer")
 		var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
@@ -1047,6 +1071,8 @@ d3.csv(DATA_URL,function(d) {
 		buildYearSelector(yearContainer, "map")
 		buildInclusionTypeSelector(inclusionContainer, "map")
 		buildLegend(legendContainer,"map")
+
+		note.text("Click to zoom in")
 
 		var w = getScatterWidth();
 		var h = w*.618;
@@ -1145,6 +1171,8 @@ d3.csv(DATA_URL,function(d) {
 				active.classed("active", false);
 				active = d3.select(obj).classed("active", true);
 
+				d3.select("#noteContainer").text("Click a dot for more information")
+
 				var bounds = path.bounds(d),
 				dx = bounds[1][0] - bounds[0][0],
 				dy = bounds[1][1] - bounds[0][1],
@@ -1202,6 +1230,8 @@ d3.csv(DATA_URL,function(d) {
 			function reset() {
 				removeTooltip(true);
 				mapdeHover(null);
+
+				d3.select("#noteContainer").text("Click to zoom in")
 
 				zoomOut.transition().style("opacity",0)
 				d3.selectAll(".cell").remove()
@@ -1618,7 +1648,7 @@ d3.csv(DATA_URL,function(d) {
 				var change = d["rankoverallinclusionindex" + d.recoverend] - d["rankoverallinclusionindex" + d.recoverstart]
 				var changeWord = (change < 0) ? "rose" : "fell"
 
-				return "<span class = \"inclSpan\">Overall inclusion</span> " + changeWord + " " + Math.abs(change) + " ranks during <span class = \"healthSpan\">economic recovery</span> period"	
+				return "<span class = \"inclSpan\">Overall inclusion</span> " + changeWord + " " + Math.abs(change) + " ranks during the <span class = \"healthSpan\">economic recovery</span> period."	
 			})
 		var svg = chartDiv.append("svg")
 			.attr("width", SMALL_MULT_SIZE)
@@ -1721,7 +1751,7 @@ d3.csv(DATA_URL,function(d) {
 				var change = d["rank" + inclusionType + "inclusionindex" + d.recoverend] - d["rank" + inclusionType + "inclusionindex" + d.recoverstart]
 				var changeWord = (change < 0) ? "rose" : "fell"
 				var changeTypes = {"overall": "Overall inclusion ", "econ": "Economic inclusion ", "race": "Racial inclusion "}
-				return changeTypes[inclusionType] + changeWord + " " + Math.abs(change) + " ranks during economic recovery period"	
+				return changeTypes[inclusionType] + changeWord + " " + Math.abs(change) + " ranks during the economic recovery period."	
 			})
 
 

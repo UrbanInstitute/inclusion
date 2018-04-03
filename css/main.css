@@ -55,6 +55,9 @@ a.inverted{
 a.inverted:hover{
 	color: #1696d2;
 }
+select{
+	display: none;
+}
 
 /*********************************************************************************/
 /*******************************       MENU      *********************************/
@@ -383,6 +386,12 @@ a.inverted:hover{
 /*********************************************************************************/
 /*******************************       MAP      **********************************/
 /*********************************************************************************/
+#noteContainer{
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 7px;
+}
+
 #graphContainer.mapQuestion {
 	position: relative;
 	margin-left: 70px;
@@ -552,6 +561,7 @@ a.inverted:hover{
 	margin-top: 20px;
 	margin-right: 20px;
 	position: relative;
+	pointer-events: visible;
 }
 .dot.hover{
 	fill: #ec008b;
@@ -588,12 +598,20 @@ a.inverted:hover{
 	top: 450px;
     left: 575px;
 }
-#ml_x_1{
+#ml_x_1.size{
 	top: 30px;
     left: 0px;
 }
-#ml_x_2{
+#ml_x_2.size{
 	top: 30px;
+    right: 62px;
+}
+#ml_x_1.econHealth{
+	top: 10px;
+    left: 0px;
+}
+#ml_x_2.econHealth{
+	top: 10px;
     right: 62px;
 }
 .axisLabel.rotate {
@@ -666,6 +684,7 @@ a.inverted:hover{
 	font-size: 12px;
 	margin-left: 10px;
     margin-top: 5px;
+    width: 200px;
 }
 /*.chartSubtitle .inclSpan{
     background: rgba(18,113,158,.8);
@@ -720,6 +739,11 @@ a.inverted:hover{
 	font-size: 20px;
 	color: #666666;
 	font-weight: bold;
+}
+#tt-title svg{
+	float: right;
+	cursor: pointer;
+	padding-top: 2px;
 }
 .tt-text{
     padding-top: 6px;
