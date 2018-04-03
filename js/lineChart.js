@@ -1,7 +1,7 @@
-function addLineSeries(svg, x, y, indicator, animate, isCity){
+function addLineSeries(svg, x, y, indicator, animate, isCityTop){
 	var colorClass, newIndicator;
 	if(indicator == "econHealth"){
-		colorClass = (isCity) ? "rank" : "econHealth"
+		colorClass = (isCityTop) ? "rank" : "econHealth"
 		newIndicator = "rankeconhealth"
 	}else{
 		colorClass = "rank"
@@ -28,7 +28,9 @@ function addLineSeries(svg, x, y, indicator, animate, isCity){
 			.attr("cy", function(d){
 				return y(d[newIndicator + years[i]])
 			})
-			.attr("r", 5)
+			.attr("r", function(){
+				return 5
+			})
 
 	}
 

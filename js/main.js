@@ -168,6 +168,113 @@ d3.csv(DATA_URL,function(d) {
 	d.everrecover = (d.everrecover == 1);
 	d.recoverstart = (d.recovperiod != "x") ? +(d.recovperiod.split("-")[0]) : 0;
 	d.recoverend = (d.recovperiod != "x") ? +(d.recovperiod.split("-")[1]) : 0;
+	d.pctemploymentchange1980 = +d.pctemploymentchange1980;
+	d.MEANpctemploymentchange1980 = +d.MEANpctemploymentchange1980;
+	d.pctemploymentchange1990 = +d.pctemploymentchange1990;
+	d.MEANpctemploymentchange1990 = +d.MEANpctemploymentchange1990;
+	d.pctemploymentchange2000 = +d.pctemploymentchange2000;
+	d.MEANpctemploymentchange2000 = +d.MEANpctemploymentchange2000;
+	d.pctemploymentchange2013 = +d.pctemploymentchange2013;
+	d.MEANpctemploymentchange2013 = +d.MEANpctemploymentchange2013;
+	d.unemprate1980 = +d.unemprate1980;
+	d.MEANunemprate1980 = +d.MEANunemprate1980;
+	d.unemprate1990 = +d.unemprate1990;
+	d.MEANunemprate1990 = +d.MEANunemprate1990;
+	d.unemprate2000 = +d.unemprate2000;
+	d.MEANunemprate2000 = +d.MEANunemprate2000;
+	d.unemprate2013 = +d.unemprate2013;
+	d.MEANunemprate2013 = +d.MEANunemprate2013;
+	d.vacancyrate1980 = +d.vacancyrate1980;
+	d.MEANvacancyrate1980 = +d.MEANvacancyrate1980;
+	d.vacancyrate1990 = +d.vacancyrate1990;
+	d.MEANvacancyrate1990 = +d.MEANvacancyrate1990;
+	d.vacancyrate2000 = +d.vacancyrate2000;
+	d.MEANvacancyrate2000 = +d.MEANvacancyrate2000;
+	d.vacancyrate2013 = +d.vacancyrate2013;
+	d.MEANvacancyrate2013 = +d.MEANvacancyrate2013;
+	d.medfamincome1980 = +d.medfamincome1980;
+	d.MEANmedfamincome1980 = +d.MEANmedfamincome1980;
+	d.medfamincome1990 = +d.medfamincome1990;
+	d.MEANmedfamincome1990 = +d.MEANmedfamincome1990;
+	d.medfamincome2000 = +d.medfamincome2000;
+	d.MEANmedfamincome2000 = +d.MEANmedfamincome2000;
+	d.medfamincome2013 = +d.medfamincome2013;
+	d.MEANmedfamincome2013 = +d.MEANmedfamincome2013;
+	d.Citypctnonwhite1980 = +d.Citypctnonwhite1980;
+	d.MEANCitypctnonwhite1980 = +d.MEANCitypctnonwhite1980;
+	d.Citypctnonwhite1990 = +d.Citypctnonwhite1990;
+	d.MEANCitypctnonwhite1990 = +d.MEANCitypctnonwhite1990;
+	d.Citypctnonwhite2000 = +d.Citypctnonwhite2000;
+	d.MEANCitypctnonwhite2000 = +d.MEANCitypctnonwhite2000;
+	d.Citypctnonwhite2013 = +d.Citypctnonwhite2013;
+	d.MEANCitypctnonwhite2013 = +d.MEANCitypctnonwhite2013;
+	d.RacialSeg1980 = +d.RacialSeg1980;
+	d.MEANRacialSeg1980 = +d.MEANRacialSeg1980;
+	d.RacialSeg1990 = +d.RacialSeg1990;
+	d.MEANRacialSeg1990 = +d.MEANRacialSeg1990;
+	d.RacialSeg2000 = +d.RacialSeg2000;
+	d.MEANRacialSeg2000 = +d.MEANRacialSeg2000;
+	d.RacialSeg2013 = +d.RacialSeg2013;
+	d.MEANRacialSeg2013 = +d.MEANRacialSeg2013;
+	d.hogap1980 = +d.hogap1980;
+	d.MEANhogap1980 = +d.MEANhogap1980;
+	d.hogap1990 = +d.hogap1990;
+	d.MEANhogap1990 = +d.MEANhogap1990;
+	d.hogap2000 = +d.hogap2000;
+	d.MEANhogap2000 = +d.MEANhogap2000;
+	d.hogap2013 = +d.hogap2013;
+	d.MEANhogap2013 = +d.MEANhogap2013;
+	d.povgap1980 = +d.povgap1980;
+	d.MEANpovgap1980 = +d.MEANpovgap1980;
+	d.povgap1990 = +d.povgap1990;
+	d.MEANpovgap1990 = +d.MEANpovgap1990;
+	d.povgap2000 = +d.povgap2000;
+	d.MEANpovgap2000 = +d.MEANpovgap2000;
+	d.povgap2013 = +d.povgap2013;
+	d.MEANpovgap2013 = +d.MEANpovgap2013;
+	d.racialeducationgap1980 = +d.racialeducationgap1980;
+	d.MEANracialeducationgap1980 = +d.MEANracialeducationgap1980;
+	d.racialeducationgap1990 = +d.racialeducationgap1990;
+	d.MEANracialeducationgap1990 = +d.MEANracialeducationgap1990;
+	d.racialeducationgap2000 = +d.racialeducationgap2000;
+	d.MEANracialeducationgap2000 = +d.MEANracialeducationgap2000;
+	d.racialeducationgap2013 = +d.racialeducationgap2013;
+	d.MEANracialeducationgap2013 = +d.MEANracialeducationgap2013;
+	d.incseg1980 = +d.incseg1980;
+	d.MEANincseg1980 = +d.MEANincseg1980;
+	d.incseg1990 = +d.incseg1990;
+	d.MEANincseg1990 = +d.MEANincseg1990;
+	d.incseg2000 = +d.incseg2000;
+	d.MEANincseg2000 = +d.MEANincseg2000;
+	d.incseg2013 = +d.incseg2013;
+	d.MEANincseg2013 = +d.MEANincseg2013;
+	d.rentburden1980 = +d.rentburden1980;
+	d.MEANrentburden1980 = +d.MEANrentburden1980;
+	d.rentburden1990 = +d.rentburden1990;
+	d.MEANrentburden1990 = +d.MEANrentburden1990;
+	d.rentburden2000 = +d.rentburden2000;
+	d.MEANrentburden2000 = +d.MEANrentburden2000;
+	d.rentburden2013 = +d.rentburden2013;
+	d.MEANrentburden2013 = +d.MEANrentburden2013;
+	d.workingpoor1980 = +d.workingpoor1980;
+	d.MEANworkingpoor1980 = +d.MEANworkingpoor1980;
+	d.workingpoor1990 = +d.workingpoor1990;
+	d.MEANworkingpoor1990 = +d.MEANworkingpoor1990;
+	d.workingpoor2000 = +d.workingpoor2000;
+	d.MEANworkingpoor2000 = +d.MEANworkingpoor2000;
+	d.workingpoor2013 = +d.workingpoor2013;
+	d.MEANworkingpoor2013 = +d.MEANworkingpoor2013;
+	d.pct1619notinschool1980 = +d.pct1619notinschool1980;
+	d.MEANpct1619notinschool1980 = +d.MEANpct1619notinschool1980;
+	d.pct1619notinschool1990 = +d.pct1619notinschool1990;
+	d.MEANpct1619notinschool1990 = +d.MEANpct1619notinschool1990;
+	d.pct1619notinschool2000 = +d.pct1619notinschool2000;
+	d.MEANpct1619notinschool2000 = +d.MEANpct1619notinschool2000;
+	d.pct1619notinschool2013 = +d.pct1619notinschool2013;
+	d.MEANpct1619notinschool2013 = +d.MEANpct1619notinschool2013;
+
+
+
 	return d
 }, function(data){
 	function init(){
@@ -266,6 +373,9 @@ d3.csv(DATA_URL,function(d) {
         this._on( this.input, {
           autocompleteselect: function( event, ui ) {
             ui.item.option.selected = true;
+            if(ui.item.option.value != "default"){
+            	window.open("index.html?city=" + ui.item.option.value, "_blank")
+            }
             this._trigger( "select", event, {
               item: ui.item.option
             });
@@ -634,8 +744,7 @@ d3.csv(DATA_URL,function(d) {
 					d3.select("#tt-container").remove()
 				}
 			})
-		d3.select("#tt-title svg")
-			.on("click", function(){ console.log("ASDF")})
+
 		if(section == "size"){
 			tt.append("div")
 				.attr("class","tt-text")
@@ -1743,9 +1852,8 @@ d3.csv(DATA_URL,function(d) {
 	})
 
 	function buildCityPage(city, print){
-		console.log(print)
 		d3.select("body").classed("cityPage", true)
-		var heightScalar = .9;
+		var heightScalar = 1.1;
 		var datum = data.filter(function(o){ return o.className == city })[0]
 
 		var graphContainer = d3.select("#graphContainer")
@@ -1758,7 +1866,7 @@ d3.csv(DATA_URL,function(d) {
 
 		var marginSmall = {"left": 50, "right": 40, "top": 40, "bottom": 60},
 			topSize = 280,
-			moreSize = 200,
+			moreSize = 208,
 			wTop = topSize - marginSmall.left - marginSmall.right,
 			hTop = topSize*heightScalar - marginSmall.left - marginSmall.right,
 			wMore = moreSize - marginSmall.left - marginSmall.right,
@@ -1768,32 +1876,6 @@ d3.csv(DATA_URL,function(d) {
 			yTop = d3.scaleLinear().range([topSize*heightScalar - marginSmall.bottom, marginSmall.top]).domain([274,0]);
 
 		var topIndicators = ["econHealth","overall","race","econ"]
-		var moreIndicators = {
-			"econHealth":
-				[
-					["pctemploymentchange","Employment growth"],
-					["unemprate","Unemployment rate"],
-					["vacancyrate","Housing vacancy rate"],
-					["medfamincome","Median family income"]
-				],
-			"race":
-				[
-					["Citypctnonwhite","People of color as a share of the population"],
-					["RacialSeg","Racial segregation"],
-					["hogap","Racial homeownership gap"],
-					["povgap","Racial poverty gap"],
-					["racialeducationgap","Racial education gap"],
-				],
-			"econ":
-				[
-					["incseg","Income segregation"],
-					["rentburden","Rent-burdened residents"],
-					["workingpoor","Working–poor families"],
-					["pct1619notinschool","High school drop-out rate"],
-				]
-
-			}
-
 
 		for(var i = 0; i < topIndicators.length; i++){
 			var topDiv = topContainer.append("div").attr("class","topDiv")
@@ -1827,7 +1909,6 @@ d3.csv(DATA_URL,function(d) {
 		
 			svg.on("mousemove", function(d){
 				var ind = (d3.select(this).attr("data-indicator") == "econHealth") ? "rankeconhealth" : "rank" + d3.select(this).attr("data-indicator") + "inclusionindex"
-				console.log(ind)
 				mousemoveLineChart(d3.select(this), d, xTop, yTop, d3.event.offsetX, ind, false )			
 			})
 			.on("mouseout", function(){
@@ -1837,13 +1918,179 @@ d3.csv(DATA_URL,function(d) {
 				d3.selectAll(".smallTT").remove()
 			})
 			addLineSeries(svg, xTop, yTop, indicator, false, true);
-
-
-
-
 		}
 
+		var moreIndicators = [
+					["pctemploymentchange","Employment growth","econHealth", "Percent change"],
+					["unemprate","Unemployment rate","econHealth", "Percent"],
+					["vacancyrate","Housing vacancy rate","econHealth", "Percent"],
+					["medfamincome","Median family income","econHealth","Dollars"],
+					["Citypctnonwhite","People of color as a share of the population","race","Percent"],
+					["RacialSeg","Racial segregation","race","Index"],
+					["hogap","Racial homeownership gap","race","Percentage point difference"],
+					["povgap","Racial poverty gap","race","Percentage point difference"],
+					["racialeducationgap","Racial education gap","race","Percentage point difference"],
+					["incseg","Income segregation","econ","Index"],
+					["rentburden","Rent-burdened residents","econ","Percent"],
+					["workingpoor","Working–poor families","econ","Percent"],
+					["pct1619notinschool","High school drop-out rate","econ","Percent"]
+			]
 
+		if(!print){
+			var selectedType = (getInclusionType() == "overall") ? "econHealth" : getInclusionType();
+			var navTitles = {"econHealth": "Economic Health", "econ": "Economic Inclusion", "race": "Racial Inclusion"}
+			moreContainer.append("div")
+				.attr("id","more-head")
+				.text("More Info")
+			var nav = moreContainer.append("div")
+				.attr("id","more-navContainer")
+			var navs = ["econHealth", "race", "econ"]
+			nav.selectAll(".nav")
+				.data(navs)
+				.enter()
+				.append("div")
+					.attr("class", function(d){
+						var active = (selectedType == d) ? " active" : ""
+						return "nav " + d + active
+					})
+					.text(function(d){ return navTitles[d]})
+				.on("click", function(d){
+					d3.selectAll("#more-navContainer .nav").classed("active", false)
+					d3.select(this).classed("active", true)
+
+					d3.selectAll(".moreChartContainer").style("display","none")
+					d3.select(".moreChartContainer." + d).style("display","block")
+				})
+
+			moreContainer.selectAll(".moreChartContainer")
+				.data(navs)
+				.enter()
+				.append("div")
+				.attr("class", function(d){
+					return "moreChartContainer " + d
+				})
+				.style("display", function(d){
+					return (d == selectedType) ? "block" : "none"
+				})
+		}
+		
+
+		for(var i = 0; i < moreIndicators.length; i++){
+
+			var bounds = [
+				datum[moreIndicators[i][0] + "1980"],
+				datum[moreIndicators[i][0] + "1990"],
+				datum[moreIndicators[i][0] + "2000"],
+				datum[moreIndicators[i][0] + "2013"],
+				datum["MEAN" + moreIndicators[i][0] + "1980"],
+				datum["MEAN" + moreIndicators[i][0] + "1990"],
+				datum["MEAN" + moreIndicators[i][0] + "2000"],
+				datum["MEAN" + moreIndicators[i][0] + "2013"],
+			]
+
+			var yMore = d3.scaleLinear()
+				.range([moreSize*heightScalar - marginSmall.bottom, 10])
+				.domain(d3.extent(bounds));
+			var moreDiv = d3.select(".moreChartContainer." + moreIndicators[i][2])
+				// .selectAll(".moreDiv" + moreIndicators[i][2])
+				// .data(moreIndicators)
+				// .enter()
+				.append("div")
+				.attr("class","moreDiv " + moreIndicators[i][2])
+
+			moreDiv.append("div")
+				.attr("class", "chartTitle")
+				.text(moreIndicators[i][1])
+			moreDiv.append("div")
+				.attr("class", "chartSubtitle")
+				.text(moreIndicators[i][3])
+
+			var moreSvg = moreDiv.append("svg")
+				.attr("width", moreSize)
+				.attr("height", moreSize*heightScalar)
+
+			moreSvg.append("rect")
+				.attr("fill","#fff")
+				.attr("stroke","none")
+				.attr("x",0)
+				.attr("y",0)
+				.attr("width", wMore)
+				.attr("height", moreSize*heightScalar - 50)
+			
+			var tickFormat;
+			if (moreIndicators[i][0] == "RacialSeg"){
+				tickFormat = ".0f"
+			}
+			else if(moreIndicators[i][0] == "medfamincome"){
+				tickFormat = "$.2s"
+			}else{
+				tickFormat = ".0%"
+			}
+			moreSvg.append("g")
+				.attr("class", "axis axis--y")
+				.attr("transform", "translate(" + (moreSize - 10) + ",0)")
+				.call(d3.axisLeft(yMore)
+						.ticks(4)
+						.tickSize(moreSize - 50)
+						.tickFormat(d3.format(tickFormat))
+					);
+
+			moreSvg.append("g")
+				.attr("class", "axis axis--x")
+				.attr("transform", "translate(0," + (hMore + marginSmall.top) + ")")
+				.call(d3.axisBottom(xMore).tickValues([1980, 1990, 2000, 2013]).tickFormat(d3.format(".0f")));
+		
+			var years = ["1980", "1990", "2000", "2013"]
+
+			for(var j = 0; j < years.length; j++){
+				if(j != (years.length -1)){
+					moreSvg.append("line")
+						.attr("class", "changeLine " +  "rank"  + " y" + j)
+						.attr("x1", xMore(years[j]))
+						.attr("x2", xMore(years[j+1]))
+						.attr("y1", function(d){
+							return yMore(datum[moreIndicators[i][0] + years[j]])
+						})
+						.attr("y2", function(d){
+							return yMore(datum[moreIndicators[i][0] + years[j+1]])
+						})
+				}
+
+				moreSvg.append("circle")
+					.attr("class", "changeDot " +  "rank" + " y" + j)
+					.attr("cx", xMore(years[j]))
+					.attr("cy", function(d){
+						return yMore(datum[moreIndicators[i][0] + years[j]])
+					})
+					.attr("r", function(){
+						return 5
+					})
+
+				if(j != (years.length -1)){
+					moreSvg.append("line")
+						.attr("class", "changeLine " +  "econHealth"  + " y" + j)
+						.attr("x1", xMore(years[j]))
+						.attr("x2", xMore(years[j+1]))
+						.attr("y1", function(d){
+							return yMore(datum["MEAN" + moreIndicators[i][0] + years[j]])
+						})
+						.attr("y2", function(d){
+							return yMore(datum["MEAN" + moreIndicators[i][0] + years[j+1]])
+						})
+				}
+
+				moreSvg.append("circle")
+					.attr("class", "changeDot " +  "econHealth" + " y" + j)
+					.attr("cx", xMore(years[j]))
+					.attr("cy", function(d){
+						return yMore(datum["MEAN" + moreIndicators[i][0] + years[j]])
+					})
+					.attr("r", function(){
+						return 5
+					})
+
+			}
+		}
 
 	}
 
