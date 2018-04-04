@@ -1384,7 +1384,7 @@ d3.csv(DATA_URL,function(d) {
 				.attr("r",function(d){
 					return 4
 				})
-				.style("opacity",.75)
+				.style("opacity",.8)
 				.attr("fill", function(d){ return getRankColor(d[varName])});
 
 
