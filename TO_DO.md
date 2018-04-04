@@ -1,39 +1,37 @@
-fix scatter so click is on cell, not on dot
-dot grow on hover
-add "questions" header above q's
+favicon
+tracking
+in body copy, add link to paper ("click here")
+if footer update:
+	data button
+	report button
+	github link
+
+scroll popup thing -> "Scroll down for definitions" "Take me there"
+flow in real text
+
+Map
+align map legend w top of map box (when zoomed in)
+mobile and stylez
+
+Scatters
+mobile and stylez
+
+Change
+sticky sidebar menu
+
+City
+Print
+download/print/data menu "Download city fact sheet  |  Print city fact sheet  |  Download all data"
+			Add city dropdown/menu
+			mouseover
+			back to map
+add note
+print
+mobile and stylez
+add legend ("Average across cities")
 
 
-Mon - Tues
-- Build out city page
-- Add legend, to small multiple graphs
-- Build out print view
 
-Wed
-- Build out mobile/responsive behavior
-
-Thurs-Fri
-- Design audit and updates
-
-
-
-Mobile
-City page
-Print view
-all dots size increase on hover
-
-all
-	style
-		menu
-		header
-		graphic height
-map
-	positioning
-scatter
-	tooltips
-	axis labels
-recovery period
-	axes
-	legend and sticky
 
 
 

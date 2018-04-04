@@ -41,6 +41,9 @@ a{
 	color: #1696d2;
 	text-decoration: none;
 }
+a.scrollLink{
+	cursor: pointer;
+}
 a.standard{
 	color: #1696d2;
 	text-decoration: none;
@@ -207,7 +210,7 @@ select{
 #titleContainer{
 	width: 100%;
 	border-bottom: 1px solid #9D9D9D;
-    padding-bottom: 70px;
+    padding-bottom: 40px;
 }
 #title, #subtitle{
 	display: block;
@@ -248,7 +251,25 @@ select{
     line-height: 1.5;
     color: #333333;
 }
-
+#titleNavContainer{
+	width: 528px;
+	margin: 0 auto;
+}
+#titleNavContainer a{
+	font-size: 22px;
+    color: #000;
+    font-weight: 300;
+    display: inline-block;
+    margin-right: 18px;
+    margin-left: 18px;
+    margin-top: 40px;
+}
+#titleNavContainer a:hover{
+	color: #1696d2;
+}
+#titleNavContainer a svg{
+	margin-left: 10px;
+}
 
 /*********************************************************************************/
 /********************      PAGE TEXT COMPONENTS      *****************************/
@@ -305,6 +326,10 @@ select{
 .questionMenu.map.active{
 	display: none;
 }
+.questionMenu.map.cityPage{
+	top: -91px;	
+	cursor: pointer;
+}
 #graphContainer, #popupContainer, #sidebarContainer{
 	display: inline-block;
 	float: left;
@@ -351,7 +376,7 @@ select{
 .mapQuestion #legendContainer{
 	width: 140px;
     position: absolute;
-    top: 210px;
+    top: 134px;
     right: -150px;
 }
 #legend-title{
@@ -429,7 +454,7 @@ select{
 	top: -10px;
 }
 .states {
-  fill: #696969;
+  fill: #9D9D9D;
   stroke: #fff;
   stroke-width: 1px;
   stroke-linejoin: round;
@@ -520,7 +545,7 @@ select{
 	font-size: 34px;
 	font-weight: bold;
 	text-transform: uppercase;
-	display: inline-block;
+	display: block;
 }
 #topFooterHeader{
 	padding-top: 44px;
@@ -550,6 +575,24 @@ select{
 #copyright{
 	margin-bottom: 100px;
 	display: inline-block;
+}
+.footerButton{
+	display: inline-block;
+    width: 135px;
+    border: 1px solid #333;
+    cursor: pointer;
+    font: 13px Lato;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    margin-right: 10px;
+}
+.footerButton:hover{
+	background: #fdbf11;
+	color: #fff;
+	font-weight: bold;
 }
 
 
@@ -651,6 +694,9 @@ select{
 .chartDiv svg{
 	cursor: pointer;
 }
+svg.clone{
+	pointer-events: none;
+}
 .changeLine{
 	stroke-width: 2px;
 	fill: none;
@@ -669,6 +715,12 @@ select{
 }
 .changeDot.econHealth{
 	fill: #F7C100;
+}
+.changeLine.comparison{
+	stroke: #919191;
+}
+.changeDot.comparison{
+	fill: #919191;
 }
 .chartTitle{
 	margin-left: 10px;
@@ -704,6 +756,9 @@ select{
 */
 .smallTT text{
 	font-size: 12px;
+}
+.smallTT{
+	pointer-events: none;
 }
 /*********************************************************************************/
 /******************************      TOOL TIPS      ******************************/
@@ -770,13 +825,31 @@ body.cityPage #popupContainer{
 body.cityPage #questionContainer{
 	display: none;
 }
+#topContainer{
+	position: relative;
+}
+#dropdownContainer{
+    position: absolute;
+    top: -78px;
+    right: 0px;
+}
 .topDiv, .moreDiv{
 	display: inline-block;
+}
+.topDiv{
+	position: relative;
+}
+.clone{
+	position: absolute;
+	/*top: 0px;*/
+	left: 0px;
+
 }
 #moreContainer{
 	width: 1100px;
     margin: 0 auto;
     background: #F5F5F5;
+    position: relative;
 }
 #more-head{
 	width: 880px;
@@ -810,7 +883,9 @@ body.cityPage #questionContainer{
 }
 .moreChartContainer{
 	width: 880px;
+	padding-bottom: 30px;
 	margin: 0 auto;
+	position: relative;
 }
 .moreDiv{
 	background: white;
@@ -823,6 +898,49 @@ body.cityPage #questionContainer{
 .moreDiv .chartTitle{
 	width: 190px;
 }
+
+#moreLegendContainer{
+	position: absolute;
+    top: -23px;
+    right: 10px;
+}
+.moreLegend-text{
+    display: inline-block;
+    text-align: right;
+    font-size: 14px;
+    margin-right: 8px;
+    margin-left: 20px;
+}
+.moreLegend-symbol{
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    display: inline-block;
+}
+.moreLegend-symbol.all{
+	background: #fdbf11;
+}
+.moreLegend-symbol.city{
+	background: #12719E;
+}
+
+#consolidatedNoteContainer{
+    margin: auto;
+    margin-top: 40px;
+    width: 700px;
+    margin-bottom: 60px;
+    font-style: italic;
+    font-size: 16px;
+}
+.noteHeader{
+	font-weight: bold;
+	font-size: 20px;
+	margin-bottom: 20px;
+}
+.noteText{
+	line-height: 26px;
+}
+
 /*********************************************************************************/
 /**************************      CITY SEARCH      ********************************/
 /*********************************************************************************/
@@ -897,6 +1015,60 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
 	color: #ffffff !important;
 	font-family: Lato;
 }
+
+
+/*********************************************************************************/
+/**************************      CITY DROPDOWN      ******************************/
+/*********************************************************************************/
+
+/*#dropdownContainer{
+	width: 100%;
+    display: inline-block;
+    background: #696969;
+    height: 102px;
+    position: relative;
+}*/
+#dropdownContainer div.ui-widget{
+	width: 382px;
+    top: 19px;
+    margin: 0 auto;
+    position: relative;
+}
+#dropdownContainer .custom-combobox-input.ui-widget.ui-widget-content.ui-autocomplete-input{
+	width: 382px;
+    height: 43px;
+    border: 1px solid #707070;
+    border-radius: 0px;
+    background: white;
+}
+#dropdownContainer .ui-button .ui-icon {
+    background-image: url(../img/cityDropdownArrow.png);
+}
+#dropdownContainer .ui-button.ui-widget.ui-button-icon-only.custom-combobox-toggle.ui-corner-right{
+	width: 66px;
+	height: 63px;
+	position: absolute;
+	top: 4px;
+	right: -20px;
+	background: none;
+	border: none;
+}
+#dropdownContainer .ui-button-icon.ui-icon.ui-icon-triangle-1-s{
+    width: 62px;
+    height: 62px;
+    background-size: 32px;
+    top: 8px;
+    left: -12px;
+	background-position-x: 21px;
+	background-position-y: 14px;
+}
+#dropdownContainer input.custom-combobox-input.ui-widget.ui-widget-content.ui-state-default.ui-corner-left.ui-autocomplete-input{
+    font-family: Lato;
+    font-size: 21px;
+    padding-left: 23px	;
+}
+
+
 
 /*********************************************************************************/
 /**********************      INCLUSION DROPDOWN      *****************************/
@@ -998,11 +1170,14 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
 	display: inline-block;
 	margin-right: 10px;
 	margin-bottom: 20px;
-	cursor: pointer;
+	cursor: pointer !important;
 	font-size: 18px;
 }
 .yearSelect.active{
 	color: #1696d2;
+}
+.yearSelect text, .yearSelect circle{
+	cursor: pointer;
 }
 #yearContainer{
 	margin: 0 auto;
@@ -1080,3 +1255,186 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
 }
 
 
+/*********************************************************************************/
+/*************************      PRINT PAGE      **********************************/
+/*********************************************************************************/
+.printLogo{
+	display: none;
+}
+body.print .printLogo{
+	display: block;
+    width: 430px;
+    float: right;
+}
+.print.cover{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 1000;
+}
+.print.page{
+	height: 320mm;
+	position: relative;
+}
+.print.container, body.print .mainContent, body.print #footerContainer, body.print #footerContent{
+	width: 220mm;
+	overflow: hidden;
+	margin: 0px;
+}
+
+body.print .mainContent{
+	padding-top: 0px;
+    border: none;
+}
+body.print #titleContainer{
+	border: none;
+	padding-bottom: 0px;
+}
+body.print #datePublished{
+	font-size: 14px;
+    display: block;
+    margin: 0px;
+    margin-bottom: 20px;
+    margin-top: -7px;
+}
+body.print #topContainer{
+	height: 250px;
+	border-bottom: 1px solid #959595;
+}
+body.print #title, body.print #subtitle{
+	display: inline-block;
+	font-size: 28px;
+	width: auto;
+	margin-bottom: 8px;
+	margin-top: 12px;
+}
+body.print #menuBar, body.print #header-pinned,  body.print #searchContainer, body.print #titleNavContainer, body.print #dropdownContainer, body.print .questionMenu, body.print #more-head, body.print #more-navContainer {
+	display: none;
+}
+body.print #questionTitle{
+	display: none;
+}
+body.print #footerContainer{
+	background: none;
+}
+body.print .footerButton{
+	display: none !important;
+}
+body.print .introText{
+    margin: 0;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.2;
+}
+body.print #moreContainer{
+	background: none;
+	margin-top: 30px;
+}
+body.print .moreDiv{
+    margin-right: 2mm;
+    margin-left: 1mm;
+    margin-top: 24px;
+    margin-bottom: 46px;
+    width: 51mm;
+    border: 1px solid #ffffff;
+}
+
+body.print .moreDiv.racialeducationgap{
+	margin-top: -40px;
+}
+body.print #moreLegendContainer{
+	right: 30px;
+    top: 36px;
+}
+body.print .moreLegend-symbol.city {
+    border: 5px solid #12719E;
+    background: none;
+    width: 0px;
+    height: 0px;
+}
+body.print .moreLegend-symbol.all {
+    border: 5px solid #fdbf11;
+    background: none;
+    width: 0px;
+    height: 0px;
+}
+body.print .moreChartContainer {
+    width: 220mm;
+    padding-bottom: 30px;
+    margin: 0px;
+    position: relative;
+    display: block !important;
+}
+body.print .printContainerHeader{
+ 	font-size: 26px;
+    font-weight: bold;
+    position: relative;
+    height: 32px;
+    border-left: 10px solid #D9D9D9;
+    padding-left: 7px;
+}
+
+body.print #consolidatedNoteContainer{
+	margin: 0px;
+    font-size: 14px;
+    line-height: 0px;
+    margin-top: -40px;
+}
+body.print .noteHeader{
+	font-size: 16px;
+    margin-bottom: 12px;
+}
+body.print .noteText{
+	line-height: 18px;
+}
+body.print #homeCopy{
+    width: 220mm;
+    margin: 0px;
+    margin-top: 60px;
+    border-top: 1px solid #959595;
+    padding-top: 32px;
+}
+body.print .copyP, body.print .footerAbout{
+	font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 22px;
+}
+body.print .copyHeader{
+	margin-bottom: 9px;
+}
+body.print .copyOl li{
+	padding-bottom: 19px;
+	line-height: 20px;
+}
+body.print .copyUl li{
+	line-height: 20px;
+}
+body.print .footerCredits{
+	margin-bottom: 30px;
+    line-height: 20px;
+    font-size: 14px;
+}
+body.print .creditsNames{
+	margin-bottom: 20px;
+}
+body.print #copyright{
+	margin-bottom: 40px;
+    display: block;
+}
+@media print{
+  @page {
+    size: 210mm 297mm; /* portrait 
+    /* you can also specify margins here: */
+    margin: 15mm;	
+   /*margin-right: 45mm;  for compatibility with both A4 and Letter */
+  }
+   body.print a:after{
+   	 content:" (" attr(href) ") ";font-size:0.8em;font-weight:normal;
+   }
+   body.print .buttonLink:after{
+   	content: none !important;
+   }
+   body.print .page-break { height:0; page-break-after:always; margin:0; border-top:none; }
+}

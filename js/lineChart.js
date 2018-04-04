@@ -1,4 +1,4 @@
-function addLineSeries(svg, x, y, indicator, animate, isCityTop){
+function addLineSeries(svg, x, y, indicator, isComparisonCity, isCityTop){
 	var colorClass, newIndicator;
 	if(indicator == "econHealth"){
 		colorClass = (isCityTop) ? "rank" : "econHealth"
@@ -7,6 +7,11 @@ function addLineSeries(svg, x, y, indicator, animate, isCityTop){
 		colorClass = "rank"
 		newIndicator = "rank" + indicator + "inclusionindex"
 	}
+	if(isComparisonCity){ colorClass = "comparison"}
+	if(isComparisonCity){
+		svg.selectAll(".comparison").remove()
+	}
+	var opacity = (isComparisonCity) ? 0 : 1;
 	var years = ["1980", "1990", "2000", "2013"]
 	for(var i = 0; i < years.length; i++){
 		if(i != (years.length -1)){
@@ -20,6 +25,7 @@ function addLineSeries(svg, x, y, indicator, animate, isCityTop){
 				.attr("y2", function(d){
 					return y(d[newIndicator + years[i+1]])
 				})
+				.style("opacity",opacity)
 		}
 
 		svg.append("circle")
@@ -31,7 +37,29 @@ function addLineSeries(svg, x, y, indicator, animate, isCityTop){
 			.attr("r", function(){
 				return 5
 			})
+			.style("opacity",opacity)
 
+	}
+	if(isComparisonCity){
+		d3.selectAll(".comparison")
+			.transition()
+			.style("opacity",1)
+	}
+
+}
+function addCityLine(datum){
+	var topIndicators = ["econHealth","overall","race","econ"]
+	// console.log(datum)
+
+	for (var i = 0; i<topIndicators.length; i++){
+		var indicator = topIndicators[i]
+				// 	topDiv.append("div")
+				// .attr("class", "dataStore")
+				// .attr("id", "dataStore" + indicator)
+				// .datum({"svg": svg, "xTop":xTop,"yTop":yTop,"indicator": indicator})
+		var containerDatum = d3.select("#dataStore" + indicator).datum()
+		containerDatum.svg.classed("visible", true).datum(datum)
+		addLineSeries(containerDatum.svg, containerDatum.x, containerDatum.y, indicator, true, true)
 	}
 
 }
@@ -117,8 +145,15 @@ function updateCorrelationRect(svg, x, y, indicator1, indicator2){
 			return (dir1 == dir2) ? "#E4F3E2" : "#FFCCCC"
 		})
 }
-function mousemoveLineChart(svg, d, x, y, mouseX, indicator1, indicator2){
-	d3.selectAll(".smallTT").remove()
+function mousemoveLineChart(svg, d, x, y, mouseX, indicator1, indicator2,formatString, axisFlip, isClone){
+	var clone = d3.select(svg.node().parentNode).select(".clone")
+	if(clone.node() != null){
+		if(clone.classed("visible") && !isClone){
+			var datum = clone.datum()
+			mousemoveLineChart(clone, datum, x, y, mouseX, indicator1, indicator2, formatString, axisFlip, true)
+		}
+	}
+	svg.selectAll(".smallTT").remove()
 	var yrs = [1980, 1990, 2000, 2013]
 	var diffs = yrs.map(function(a){ return Math.abs(a- x.invert(mouseX))})
 	var year = yrs[diffs.indexOf(d3.min(diffs))]
@@ -144,10 +179,11 @@ function mousemoveLineChart(svg, d, x, y, mouseX, indicator1, indicator2){
 	}else{
 		top = d[indicator1 + year]
 	}
+	var scootch = (axisFlip) ? -15 : 15;
 	var tt1 = svg.append("g")
 		.attr("class","smallTT")
 		.attr("transform", function(){
-			return "translate(" + (x(year) - 10) + "," + (y(top) - 10) + ")"
+			return "translate(" + (x(year) - 10) + "," + (y(top) + (5 + scootch)) + ")"
 		})
 	tt1.append("rect")
 		.style("fill","rgba(255,255,255,.7)")
@@ -156,13 +192,13 @@ function mousemoveLineChart(svg, d, x, y, mouseX, indicator1, indicator2){
 		.attr("height",16)
 		.attr("width", 30)
 
-	tt1.append("text").text(d3.format(".0f")(top))
+	tt1.append("text").text(d3.format(formatString)(top))
 
 	if(indicator2){
 		var tt2 = svg.append("g")
 			.attr("class","smallTT")
 			.attr("transform", function(){
-				return "translate(" + (x(year) - 10) + "," + (y(bottom) + 20) + ")"
+				return "translate(" + (x(year) - 10) + "," + (y(bottom) + (5 - scootch)) + ")"
 			})
 		tt2.append("rect")
 			.style("fill","rgba(255,255,255,.7)")
@@ -171,6 +207,6 @@ function mousemoveLineChart(svg, d, x, y, mouseX, indicator1, indicator2){
 			.attr("height",16)
 			.attr("width", 30)
 
-		tt2.append("text").text(d3.format(".0f")(bottom))
+		tt2.append("text").text(d3.format(formatString)(bottom))
 	}
 }
