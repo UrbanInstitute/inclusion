@@ -35,6 +35,14 @@ function scrollToAnchor(a_href){
 				scrollTop: $(a_href).offset().top - 100
 			});
 }
+function hideInfoPopup(){
+	d3.selectAll(".infoPopup")
+		.transition()
+		.style("opacity",0)
+		.on("end", function(){
+			d3.select(this).remove()
+		})
+}
 
 
 function getScatterWidth(){
@@ -616,6 +624,29 @@ d3.csv(DATA_URL,function(d) {
 			// .text(function(d){ return d})
 
 	}
+	function buildInfoPopup(container, changePage){
+		var changeClass = (changePage) ? " changePage" : ""
+		var infoContainer = container.append("div")
+			.attr("class","infoContainer" + changeClass)
+		infoContainer.append("span")
+			.html("<i class=\"fas fa-info\"></i>")
+		infoContainer.on("mouseover", function(){
+			if(d3.selectAll(".infoPopup").nodes().length == 0){
+				var infoPopup = d3.select(this).append("div")
+					.attr("class", "infoPopup")
+				infoPopup.append("div")
+					.attr("class","infoPopupTop")
+					.text("Scroll down for definitions")
+				infoPopup.append("div")
+					.attr("class", "infoPopupLink")
+					.html("Take me there <i class=\"fas fa-arrow-down\"></i>")
+					.on("click", function(){
+						hideInfoPopup();
+						scrollToAnchor("#definitions")
+					})
+			}
+		})
+	}
 	function buildInclusionTypeSelector(container, section){
 		var buttonLabels = {"overall": "Overall inclusion rank", "econ": "Economic inclusion rank", "race": "Racial inclusion rank"}
 		container.
@@ -642,18 +673,8 @@ d3.csv(DATA_URL,function(d) {
 
 				}
 			})
-		container.append("div").text("foo")
+		buildInfoPopup(container, false)
 
-		// if(section == "map"){
-		// 	updateMap(getYear(),d) 
-		// }
-		// else if(section == "size"){
-		// 	updateSizeQuestion(getYear(), d, getScaleType())
-		// }
-		// else if(section == "health"){
-		// 	updateHealthQuestion(getYear(), d)
-
-		// }
 	}
 	function buildLegend(container, section){
 		container.append("div")
@@ -1540,6 +1561,8 @@ d3.csv(DATA_URL,function(d) {
 	}
 
 	function buildScaleTypeToggle(container, scaleType){
+
+		var left = (getScaleType() == "linear") ? "171px" : "194px"
 		container.append("div")
 			.attr("id","scaleLabel")
 			.text("Y-axis scale: ")
@@ -1573,6 +1596,7 @@ d3.csv(DATA_URL,function(d) {
 			.on("click", slide)
 		container.append("div")
 			.attr("id", "sliderButton")
+			.style("left", left)
 			.on("click", slide)
 		container
 			.append("div")
@@ -1720,6 +1744,8 @@ d3.csv(DATA_URL,function(d) {
 			}
 
   		});
+
+  		buildInfoPopup(container, true)
 
   		container.style("width", (SMALL_MULT_ROW_COUNT * 220 + (SMALL_MULT_ROW_COUNT-1) * 21)  + "px")
   		var legend = container.append("div")
@@ -2259,6 +2285,7 @@ function restoreSidebar(){
 }
 
 $(window).scroll(function(e){
+	hideInfoPopup()
 	var el = d3.select('#menuContainer');
 	var elSide = d3.select(".questionMenu.map")
 	if(el.node() == null){

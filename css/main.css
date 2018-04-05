@@ -1205,7 +1205,49 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
 	font-weight: bold;
 	background: #414141
 }
-
+.infoContainer{
+	display: inline-block;
+    position: relative;
+    border: 2px solid #12719E;
+    border-radius: 100%;
+    left: 15px;
+    top: 10px;
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+}
+.infoContainer.changePage{
+	left: -25px;
+    top: -1px;
+}
+.infoContainer span{
+    color: #12719E;
+    font-size: 17px;
+    position: absolute;
+    top: 2px;
+    left: 10px;
+}
+.infoPopup{
+	position: absolute;
+	width: 120px;
+    top: -70px;
+    left: 34px;
+    -webkit-box-shadow: 0px 16px 31px -11px rgba(105,105,105,0.62);
+    -moz-box-shadow: 0px 16px 31px -11px rgba(105,105,105,0.62);
+    box-shadow: 0px 16px 31px -11px rgba(105,105,105,0.62);
+    background: #eeeeee;
+    padding: 10px;
+}
+.infoPopupTop{
+	font-size: 16px;
+    padding-bottom: 20px;
+}
+.infoPopupLink{
+	float: right;
+    font-size: 14px;
+    color: #12719E;
+    font-weight: bold;
+}
 /*********************************************************************************/
 /**************************       SCALE SELECT      ******************************/
 /*********************************************************************************/
