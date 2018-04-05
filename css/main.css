@@ -864,6 +864,9 @@ body.cityPage #questionContainer{
 .topDiv{
 	position: relative;
 }
+.topDiv .chartTitle{
+	font-size: 18px;
+}
 .clone{
 	position: absolute;
 	/*top: 0px;*/
