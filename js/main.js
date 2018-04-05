@@ -1,7 +1,7 @@
 var DATA_URL = "data/data.csv";
 var DOT_RADIUS = 8;
-var SMALL_MULT_SIZE = 220;
-var SMALL_MULT_ROW_COUNT = 3;
+var SMALL_MULT_SIZE = d3.select("#popupContainer").node().getBoundingClientRect().width *.25;
+var SMALL_MULT_ROW_COUNT = 4;
 var SMALL_MULT_RIGHT_PADDING = 17;
 var SMALL_MULT_BOTTOM_PADDING = 22;
 var COLORS = ["#0a4c6a","#46abdb","#cfe8f3","#fff2cf","#fccb41","#ca5800"]
@@ -46,7 +46,7 @@ function hideInfoPopup(){
 
 
 function getScatterWidth(){
-	return 600;
+	return d3.select("#graphContainer").node().getBoundingClientRect().width
 }
 function getScatterHeight(){
 	return 500;
@@ -514,7 +514,7 @@ d3.csv(DATA_URL,function(d) {
   	} );
 }
 	function buildYearSelector(container, section){
-		var width = 390;
+		var width = container.node().getBoundingClientRect().width;
 		var height = 70;
 
 		container
@@ -545,24 +545,24 @@ d3.csv(DATA_URL,function(d) {
 			.on("click", function(d){
 				d3.select("g.active circle.outer")
 					.transition()
-					.attr("r", 9)
-					.attr("cx", 9)
+					.attr("r", 10)
+					.attr("cx", 10)
 				d3.select("g.active circle.inner")
 					.transition()
-					.attr("r", 7)
-					.attr("cx", 9)
+					.attr("r", 8)
+					.attr("cx", 10)
 					.style("fill", "#696969")
 				d3.select("g.active .yLabel")
 					.style("font-weight", "normal")
 
 				d3.select(this).select("circle.outer")
 					.transition()
-					.attr("r", 12)
-					.attr("cx", 12)
+					.attr("r", 13)
+					.attr("cx", 13)
 				d3.select(this).select("circle.inner")
 					.transition()
-					.attr("r", 10)
-					.attr("cx", 12)
+					.attr("r", 11)
+					.attr("cx", 13)
 					.style("fill", "#12719E")
 				d3.select(this).select(".yLabel")
 					.style("font-weight", "bold")
@@ -589,18 +589,18 @@ d3.csv(DATA_URL,function(d) {
 			.style("font-weight", function(d){
 				return (getYear() == d) ? "bold" : "normal";
 			})
-			.style("font-size", "16px")
-			.style("color", "##707070")
+			.style("font-size", "20px")
+			.style("color", "#707070")
 			.attr("y", 20)
-			.attr("x", -9.5)
+			.attr("x", -12.5)
 
 		g.append("circle")
 			.attr("class", "outer")
 			.attr("r", function(d){
-				return (getYear() == d) ? 12 : 9;
+				return (getYear() == d) ? 13 : 10;
 			})
 			.attr("cx", function(d){
-				return (getYear() == d) ? 12 : 9;
+				return (getYear() == d) ? 13 : 10;
 			})
 			.attr("cy", 40)
 			.style("stroke", "#707070")
@@ -608,10 +608,10 @@ d3.csv(DATA_URL,function(d) {
 		g.append("circle")
 			.attr("class", "inner")
 			.attr("r", function(d){
-				return (getYear() == d) ? 10 : 7;
+				return (getYear() == d) ? 11 : 8;
 			})
 			.attr("cx", function(d){
-				return (getYear() == d) ? 12 : 9;
+				return (getYear() == d) ? 13 : 10;
 			})
 			.attr("cy", 40)
 			.style("stroke", "none")
@@ -634,6 +634,9 @@ d3.csv(DATA_URL,function(d) {
 			if(d3.selectAll(".infoPopup").nodes().length == 0){
 				var infoPopup = d3.select(this).append("div")
 					.attr("class", "infoPopup")
+					.style("width", function(){
+						return (Math.ceil(d3.select("#popupContainer").node().getBoundingClientRect().width * .2) - 46 - 20) + "px"
+					})
 				infoPopup.append("div")
 					.attr("class","infoPopupTop")
 					.text("Scroll down for definitions")
@@ -1226,6 +1229,7 @@ d3.csv(DATA_URL,function(d) {
 
 	function showMap(){
 		d3.select("#questionTitle").html("")
+		d3.select(".questionContainer").attr("class", "map")
 		d3.selectAll(".cityRemove").remove()
 		d3.selectAll(".cityPage").classed("cityPage",false)
 		d3.selectAll(".questionMenu.map").classed("active", true)
@@ -1491,6 +1495,7 @@ d3.csv(DATA_URL,function(d) {
 	}
 
 	function showHealthQuestion(){
+		d3.select(".questionContainer").attr("class", "scatter")
 		d3.select("#questionTitle").html(d3.select(".questionMenu[data-section=health]").html())
 		updateQueryString("?topic=economic-health")
 		var year = getYear();
@@ -1613,6 +1618,7 @@ d3.csv(DATA_URL,function(d) {
 
 	}
 	function showSizeQuestion(){
+		d3.select(".questionContainer").attr("class", "scatter")
 		d3.select("#questionTitle").html(d3.select(".questionMenu[data-section=size]").html())
 		updateQueryString("?topic=city-size")
 		var scaleType = getScaleType();
@@ -1747,7 +1753,7 @@ d3.csv(DATA_URL,function(d) {
 
   		buildInfoPopup(container, true)
 
-  		container.style("width", (SMALL_MULT_ROW_COUNT * 220 + (SMALL_MULT_ROW_COUNT-1) * 21)  + "px")
+  		container.style("width", (SMALL_MULT_ROW_COUNT * SMALL_MULT_SIZE + (SMALL_MULT_ROW_COUNT-1) * 21)  + "px")
   		var legend = container.append("div")
   			.attr("id","smallLegend")
   		var legendLeft = legend.append("div")
@@ -1784,6 +1790,8 @@ d3.csv(DATA_URL,function(d) {
 	}
 
 	function showChangeQuestion(){
+		d3.select("#questionContainer").attr("class", "change")
+		d3.select("#popupContainer").attr("class", "change")
 		d3.select("#questionTitle").html(d3.select(".questionMenu[data-section=change]").html())
 		updateQueryString("?topic=economic-recovery")
 		var heightScalar = .9;
@@ -1976,6 +1984,7 @@ d3.csv(DATA_URL,function(d) {
 		var heightScalar = 1.1;
 		var datum = data.filter(function(o){ return o.className == city })[0]
 
+		d3.select(".questionContainer").attr("class", "city")
 		var graphContainer = d3.select("#graphContainer")
 		graphContainer.attr("class", "cityPage")
 
@@ -2295,13 +2304,13 @@ $(window).scroll(function(e){
 		var isPositionFixed = (el.style('position') == 'fixed');
 		var bottom = el.node().getBoundingClientRect().bottom
 		var topCharts = d3.select("#graphContainer").node().getBoundingClientRect().top
-		if (bottom < 152 && d3.select("#searchContainer").node().getBoundingClientRect().top > 156 && !isPositionFixed){ 
+		if (bottom < 162 && d3.select("#searchContainer").node().getBoundingClientRect().top > 156 && !isPositionFixed){ 
 			var sideLeft = ($("#sidebarContainer")[0].getBoundingClientRect().left + 18) + "px"
-			$('#menuContainer').css({'position': 'fixed', 'top': '98px', 'border-bottom': '6px solid #F5F5F5', "left": sideLeft}); 
+			$('#menuContainer').css({'position': 'fixed', 'top': '108px', 'border-bottom': '6px solid #F5F5F5', "left": sideLeft}); 
 			d3.select("#sidebarContainer").style("padding-bottom", "46px")
 		}
 		else if((bottom <= topCharts || d3.select("#searchContainer").node().getBoundingClientRect().top <= 156) && isPositionFixed){
-			$('#menuContainer').css({'position': 'static', 'top': '0px', 'border-bottom': '6px solid #ffffff', "left": "0px"}); 
+			$('#menuContainer').css({'position': 'relative', 'top': '0px', 'border-bottom': '6px solid #ffffff', "left": "0px"}); 
 			d3.select("#sidebarContainer").style("padding-bottom", "0px")
 		}
 
@@ -2309,19 +2318,19 @@ $(window).scroll(function(e){
 		var sideTop = elSide.node().getBoundingClientRect().top
 		var isSideFixed = (d3.select("#questionContainer").style("position") == "fixed")
 		if(
-			sideTop < 97
+			sideTop < 112
 			&&
 			!isSideFixed
 			&& d3.select("#searchContainer").node().getBoundingClientRect().top >= 556
 		){
 			d3.select("#questionContainer")
 				.style("position","fixed")
-				.style("top","180px")
+				.style("top","200px")
 			d3.select("#popupContainer")
-				.style("margin-left","195px")
+				.style("margin-left","171px")
 		}
 		else if (
-			sideTop > 97
+			sideTop >= 112
 			|| (isSideFixed && d3.select("#titleContainer").node().getBoundingClientRect().bottom > 24)
 			|| (isSideFixed && d3.select("#searchContainer").node().getBoundingClientRect().top < 556)
 			){

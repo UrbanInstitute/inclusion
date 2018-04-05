@@ -9,8 +9,12 @@ body{
 	width: 1120px;
 	margin: 0 auto;	
     border-top: 1px solid #9D9D9D;
-    margin-top: 80px;
+    margin-top: -143px;
     padding-top: 70px;
+}
+.mainContent.bottom{
+	margin-top: 40px;
+	padding-top: 60px;
 }
 
 .thinButton{
@@ -72,7 +76,7 @@ select{
     background: #F5F5F5;
     top: 49px;
     z-index: 98;
-    height: 49px;
+    height: 60px;
 }
 
 #tabWrapper{
@@ -89,9 +93,9 @@ select{
 .menuTab{
 	display: inline-block;
     text-transform: uppercase;
-	font-size:14px;
-	font-weight: bold;
-	margin-top:14px;
+    font-size: 20px;
+    font-weight: normal;
+    margin-top: 17px;
 }
 .menuTab:hover{
 	font-weight: bold;
@@ -210,7 +214,7 @@ select{
 #titleContainer{
 	width: 100%;
 	border-bottom: 1px solid #9D9D9D;
-    padding-bottom: 40px;
+    padding-bottom: 60px;
 }
 #title, #subtitle{
 	display: block;
@@ -222,14 +226,14 @@ select{
     margin: 0 auto;
     margin-top: 220px;
     font-weight: bold;
-    width: 80%;
+    width: 83%;
     text-align: left;
 }
 #datePublished{
 	color: #707070;
 	font-style: italic;
 	font-size: 20px;
-    width: 80%;
+    width: 83%;
     text-align: left;
     margin: 0 auto;
     margin-top: 10px;
@@ -243,9 +247,9 @@ select{
 }
 .introText{
     text-align: left;
-    width: 80%;
+    width: 83%;
     margin: 0 auto;
-    margin-top: 28px;
+    margin-top: 20px;
     font-size: 20px;
     font-weight: 300;
     line-height: 1.5;
@@ -278,31 +282,42 @@ select{
     font-size: 30px;
     font-weight: bold;
     width: 100%;
-    padding-left: 210px;
+    text-align: center;
     margin-top: 60px;
 }
 #questionContainer{
 	display: inline-block;
 	float: left;
-    width: 206px;
+    width: 16.666%;
     border-right: 1px solid #707070;
-    height: 600px;
     position: relative;
+}
+#questionContainer.change{
+	width: 170px !important;
+}
+#questionContainer.map{
+	height: 523px;
 }
 #popupContainer, #questionContainer{
 	margin-top: 30px;
+}
+#popupContainer{
+	width: 83%;
+}
+#popupContainer.change{
+	width: calc(100% - 172px)!important;
 }
 #questionMenuLabel{
 	font-size: 16px;
     font-weight: 300;
     margin-left: 10px;
-    margin-bottom: 19px;
+    margin-bottom: 40px;
 }
 #questionContainer .questionMenu{
-	width: 170px;
+	width: calc(100% - 20px);
 	font-size: 20px;
 	color: #666666;
-	margin-bottom: 20px;
+	margin-bottom: 28px;
 	padding-left: 10px;
 	cursor: pointer;
 }
@@ -312,10 +327,12 @@ select{
 }
 .questionMenu.map{
 	color: #AFAFAF !important;
-	text-transform: uppercase;
-	position: absolute;
-    top: -114px;
+    text-transform: uppercase;
+    position: absolute;
+    top: -119px;
     width: 210px !important;
+    padding-left: 0px !important;
+    font-size: 20px !important;
 }
 .questionMenu.map img{
 	height: 38px;
@@ -334,19 +351,24 @@ select{
 	display: inline-block;
 	float: left;
 }
+body.cityPage #graphContainer{
+	width: 100%;
+}
+#graphContainer{
+	width: 70%;
+}
 #sidebarContainer.healthQuestion, #sidebarContainer.sizeQuestion{
-	width: 190px;
-    margin-left: 20px;
+	width: calc(20% - 40px);
     margin-right: 20px;
 }
 #sidebarContainer.changeQuestion{
-	width: 700px;
+	width: 100%;
 	display: block;
 	margin-left: 20px;
 	float: none;
 }
 #graphContainer.changeQuestion{
-	width: 700px;
+	width: 100%;
 	margin-left: 20px;
 	position: relative;
 }
@@ -360,10 +382,10 @@ select{
 	display: none;
 }
 #paragraphContainer.sizeQuestion, #paragraphContainer.healthQuestion{
-    width: 210px;
+	width: 100%;
     margin-top: -18px;
-    margin-bottom: 40px;
-    font-size: 20px;
+    margin-bottom: 60px;
+    font-size: 16px;
 }
 #legendContainer.scatter{
 	position: relative;
@@ -377,7 +399,7 @@ select{
 	width: 140px;
     position: absolute;
     top: 134px;
-    right: -150px;
+    right: -28.6%;
 }
 #legend-title{
 	color: #414141;
@@ -419,7 +441,10 @@ select{
 
 #graphContainer.mapQuestion {
 	position: relative;
-	margin-left: 70px;
+	margin-top: -55px;
+	height: auto;
+    width: 70%;
+    margin-left: 10%;
 }
 .mapQuestion #inclusionContainer{
 	margin-top: 25px;
@@ -635,26 +660,26 @@ select{
 }
 #ml_y_1{
 	top: 90px;
-    left: 579px;
+    left: 94%;
 }
 #ml_y_2{
 	top: 450px;
-    left: 575px;
+    left: 94%;
 }
 #ml_x_1.size{
-	top: 30px;
+	bottom: 40px;
     left: 0px;
 }
 #ml_x_2.size{
-	top: 30px;
+	bottom: 40px;
     right: 62px;
 }
 #ml_x_1.econHealth{
-	top: 10px;
+	top: 0px;
     left: 0px;
 }
 #ml_x_2.econHealth{
-	top: 10px;
+	top: 0px;
     right: 62px;
 }
 .axisLabel.rotate {
@@ -846,7 +871,7 @@ body.cityPage #questionContainer{
 
 }
 #moreContainer{
-	width: 1100px;
+	width: 90%;
     margin: 0 auto;
     background: #F5F5F5;
     position: relative;
@@ -1082,7 +1107,7 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
     margin-top: 4px;
 }
 #menuContainer{
-    position: static;
+    position: relative;
     top: 0px;
     background: #ffffff;
     margin-left: -20px;
@@ -1183,18 +1208,28 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
 	margin: 0 auto;
     margin-bottom: 20px;
     margin-top: 20px;
+    width: 406px;
 }
 
 /*********************************************************************************/
 /*********************       INCLUSION SELECT      *******************************/
 /*********************************************************************************/
+#inclusionContainer{
+	position: relative;
+    width: 100%;
+}
+.sizeQuestion #inclusionContainer, .healthQuestion #inclusionContainer{
+	left: -14.2%;
+}
+
+
 .inclusionSelect{
     display: inline-block;
     margin-right: 0px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     cursor: pointer;
     font-size: 14px;
-    width: 161px;
+    width: calc(33% - 40px);
     border: 1px solid #95989A;
     padding: 10px 20px 10px 20px;
     text-align: center;
@@ -1206,19 +1241,18 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
 	background: #414141
 }
 .infoContainer{
-	display: inline-block;
-    position: relative;
+    position: absolute;
     border: 2px solid #12719E;
     border-radius: 100%;
-    left: 15px;
-    top: 10px;
+ 	top: 5px;
+    right: -40px;
     cursor: pointer;
     width: 26px;
     height: 26px;
 }
 .infoContainer.changePage{
-	left: -25px;
-    top: -1px;
+    left: 235px;
+    top: 16px;
 }
 .infoContainer span{
     color: #12719E;
@@ -1229,7 +1263,6 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
 }
 .infoPopup{
 	position: absolute;
-	width: 120px;
     top: -70px;
     left: 34px;
     -webkit-box-shadow: 0px 16px 31px -11px rgba(105,105,105,0.62);
@@ -1255,6 +1288,9 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
 	width: 340px;
 	margin: 0 auto;
 	position: relative;
+    margin-top: -34px;
+    margin-bottom: -70px;
+    z-index: 2;
 }
 #scaleLabel{
 	color: #ec008b;
@@ -1341,6 +1377,9 @@ body.print #datePublished{
     margin-bottom: 20px;
     margin-top: -7px;
 }
+body.print #popupContainer{
+	width: 230mm;
+}
 body.print #topContainer{
 	height: 250px;
 	border-bottom: 1px solid #959595;
@@ -1373,6 +1412,7 @@ body.print .introText{
 body.print #moreContainer{
 	background: none;
 	margin-top: 30px;
+	width: 100%;
 }
 body.print .moreDiv{
     margin-right: 2mm;
