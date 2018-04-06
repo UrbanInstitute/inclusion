@@ -1411,6 +1411,9 @@ body.print #datePublished{
 body.print #popupContainer{
 	width: 230mm;
 }
+body.print #graphContainer{
+	margin-left: 0px;
+}
 body.print #topContainer{
 	height: 250px;
 	border-bottom: 1px solid #959595;
@@ -1453,7 +1456,9 @@ body.print .moreDiv{
     width: 51mm;
     border: 1px solid #ffffff;
 }
-
+body.print .moreDiv .chartSubtitle {
+    margin-bottom: 0px;
+}
 body.print .moreDiv.racialeducationgap{
 	margin-top: -40px;
 }
