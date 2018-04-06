@@ -1,56 +1,25 @@
+Daniel:
+- csv icon
+- light fonts
+- scatter size decrease
+- on mouseover, legend dot increase size
+- city page, increase space under all subtitles except 2 line title
+	- decrease white space under x axis?
+- print page decrease spacing above "To learn more about why we selected these indicators and how we measured them, click here.
+"
+- open print dialogue on print page
+- when select city comparison, link appears under
+
+
+
+
+
 favicon
 tracking
 in body copy, add link to paper ("click here")
-if footer update:
-	data button
-	report button
-	github link
-
-scroll popup thing -> "Scroll down for definitions" "Take me there"
-flow in real text
-
-Map
-align map legend w top of map box (when zoomed in)
-mobile and stylez
-
-Scatters
-mobile and stylez
-
-Change
-sticky sidebar menu
-
-City
-Print
-download/print/data menu "Download city fact sheet  |  Print city fact sheet  |  Download all data"
-			Add city dropdown/menu
-			mouseover
-			back to map
-add note
-print
-mobile and stylez
-add legend ("Average across cities")
-
-
-
-
-
-
-
-- nice to have: dot transitions btwn map/scatter
-
-
-q's for researchers:
-
-- line charts, should 1 be at top and 274 at bottom?
-	-also health scatter plot
-
-- what var to use for indiv indicators (rank?)
-- how to sort small mults in change q
-	- change in inclusion (by type)
-- blue color of dots always overall 2013?
-
-
-
-
-- what up w names like: Athens-Clarke County unified government (bal, can we shorten?
-	- or Indianapolis city (remai
+on city page update header links
+in footer update:
+-data button
+-report button
+-github link
+update steven brown disp name?

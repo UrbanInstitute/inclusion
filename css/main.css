@@ -237,7 +237,7 @@ select{
     text-align: left;
     margin: 0 auto;
     margin-top: 10px;
-    font-weight: 300;
+    /*font-weight: 300;*/
 }
 #subtitle{
 	font-size: 14px;
@@ -251,9 +251,9 @@ select{
     margin: 0 auto;
     margin-top: 20px;
     font-size: 20px;
-    font-weight: 300;
+    /*font-weight: 300;*/
     line-height: 1.5;
-    color: #333333;
+    color: #696969;
 }
 #titleNavContainer{
 	width: 528px;
@@ -262,7 +262,7 @@ select{
 #titleNavContainer a{
 	font-size: 22px;
     color: #000;
-    font-weight: 300;
+    /*font-weight: 300;*/
     display: inline-block;
     margin-right: 18px;
     margin-left: 18px;
@@ -274,6 +274,12 @@ select{
 #titleNavContainer a svg{
 	margin-left: 10px;
 }
+#csvDownload img{
+    width: 20px;
+    position: relative;
+    top: 3px;
+    margin-left: 10px;
+}
 
 /*********************************************************************************/
 /********************      PAGE TEXT COMPONENTS      *****************************/
@@ -281,7 +287,8 @@ select{
 #questionTitle{
     font-size: 30px;
     font-weight: bold;
-    width: 100%;
+    width: 83%;
+    margin-left: 17%;
     text-align: center;
     margin-top: 60px;
 }
@@ -309,13 +316,13 @@ select{
 }
 #questionMenuLabel{
 	font-size: 16px;
-    font-weight: 300;
+    /*font-weight: 300;*/
     margin-left: 10px;
     margin-bottom: 40px;
 }
 #questionContainer .questionMenu{
 	width: calc(100% - 20px);
-	font-size: 20px;
+	font-size: 16px;
 	color: #666666;
 	margin-bottom: 28px;
 	padding-left: 10px;
@@ -355,7 +362,12 @@ body.cityPage #graphContainer{
 	width: 100%;
 }
 #graphContainer{
+	width: 65%;
+	margin-left: 5%;
+}
+#graphContainer.mapQuestion{
 	width: 70%;
+	margin-left: 0%;
 }
 #sidebarContainer.healthQuestion, #sidebarContainer.sizeQuestion{
 	width: calc(20% - 40px);
@@ -654,9 +666,9 @@ body.cityPage #graphContainer{
 .axisLabel{
 	position: absolute;
 	text-transform: uppercase;
-	color: #414141;
+	color: #656565;
 	font-size: 16px;
-	font-weight: bold;
+	font-weight: normal;
 }
 #ml_y_1{
 	top: 90px;
@@ -757,11 +769,17 @@ svg.clone{
 	margin-right: 10px;
 	float: right;
 }
+.moreDiv.Citypctnonwhite .chartSubtitle{
+	margin-bottom: 0px;
+}
 .chartSubtitle{
 	font-size: 12px;
 	margin-left: 10px;
     margin-top: 5px;
     width: 200px;
+}
+.moreDiv .chartSubtitle{
+	margin-bottom: 17px
 }
 /*.chartSubtitle .inclSpan{
     background: rgba(18,113,158,.8);
@@ -857,6 +875,14 @@ body.cityPage #questionContainer{
     position: absolute;
     top: -78px;
     right: 0px;
+}
+#dropdownViewOtherCity{
+    font-size: 14px;
+    position: absolute;
+    bottom: -22px;
+    right: 0px;
+    font-weight: bold;
+    opacity: 0;
 }
 .topDiv, .moreDiv{
 	display: inline-block;
@@ -1122,6 +1148,8 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
 #menuContainer .ui-selectmenu-text{
 	font-family: Lato;
     font-size: 16px;
+    top: -6px;
+    left: 0px;
 }
 #menuContainer .ui-selectmenu-button.ui-button.ui-widget{
 	background: none;
@@ -1507,6 +1535,24 @@ body.print .creditsNames{
 body.print #copyright{
 	margin-bottom: 40px;
     display: block;
+}
+body.print #customPrintSpacer{
+	margin-top: -31px;
+}
+#printCover{
+	display: none;
+	width: 0px;
+	height: 0px;
+}
+body.print #printCover{
+	position: fixed;
+	display: block;
+	background: transparent;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 999;
 }
 @media print{
   @page {

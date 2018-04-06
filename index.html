@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <meta name="description" content="DESC GOES HERE">
+<!--         <meta name="description" content="DESC GOES HERE">
         <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
         <title>Measuring Inclusion in America's Cities</title>
 
@@ -18,29 +18,29 @@
         <meta property="og:description" content="The financial health of a city is closely intertwined with that of its residents. Our data dashboard provides a unique snapshot of residents&rsquo; financial health, including credit bureau data, to tell the story of city financial health." />
         <meta property="og:image" content="http://apps.urban.org/features/city-financial-health/img/social.jpg" />
         <meta property="og:image:type" content="image/jpeg">
-        <meta property="og:url" content="urbn.is/cities">
+        <meta property="og:url" content="urbn.is/cities">-->
 
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic,900" rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <link rel="stylesheet" type="text/css" href="css/responsive.css">
-        <!-- <link rel="stylesheet" type="text/css" href="css/home-print.css"> -->
+        <link rel="stylesheet" type="text/css" href="css/home-print.css">
         <link rel="stylesheet" type="text/css" href="css/urban-header.css">
-        <!-- <link rel="stylesheet" type="text/css" href="css/vendor/jquery-ui.css"> -->
-          <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="css/vendor/jquery-ui.css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
 
         
         <script type="application/ld+json">
-        {
-                        "@context": "http://schema.org",
-                        "@type": "NewsArticle",
-                        "headline": "Financial Health of Residents: A City-Level Dashboard",
-                        "url": "http://apps.urban.org/features/city-financial-health",
-                        "thumbnailUrl": "http://apps.urban.org/features/city-financial-health/img/social.jpg",
-                        "dateCreated": "2017-11-09T05:00:00.000Z",
-                        "articleSection": "Interactive Feature",
-                        "creator": ["Caroline Ratcliffe","Cary Lou","Diana Elliott","Signe-Mary McKernan"],
-                        "keywords": ["Families","Finance","Income and Wealth","Neighborhoods, Cities, and Metros","Poverty, Vulnerability, and the Safety Net"]
-        }
+        // {
+        //                 "@context": "http://schema.org",
+        //                 "@type": "NewsArticle",
+        //                 "headline": "Financial Health of Residents: A City-Level Dashboard",
+        //                 "url": "http://apps.urban.org/features/city-financial-health",
+        //                 "thumbnailUrl": "http://apps.urban.org/features/city-financial-health/img/social.jpg",
+        //                 "dateCreated": "2017-11-09T05:00:00.000Z",
+        //                 "articleSection": "Interactive Feature",
+        //                 "creator": ["Caroline Ratcliffe","Cary Lou","Diana Elliott","Signe-Mary McKernan"],
+        //                 "keywords": ["Families","Finance","Income and Wealth","Neighborhoods, Cities, and Metros","Poverty, Vulnerability, and the Safety Net"]
+        // }
         </script>
 </head>
 <body>
@@ -64,6 +64,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <div id = "yearDatum"></div>
 <div id = "inclusionTypeDatum"></div>
 <div id = "scaleTypeDatum"></div>
+<div id = "printCover"></div>
 
 
   <!-- START HEADER -->
@@ -161,7 +162,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <li><em>Racial inclusion</em> reflects the ability of residents of color to contribute to and benefit from  economic prosperity. We measure this by examining the share of the city&rsquo;s population that are people of color, racial segregation, and racial gaps in homeownership, poverty, and educational attainment.</li>
 
       </ul>
-      <p class = "copyP">To learn more about why we selected these indicators and how we measured them, click <a>here</a>.</p>
+      <p class = "copyP" id = "customPrintSpacer">To learn more about why we selected these indicators and how we measured them, click <a>here</a>.</p>
 
       <div class = "copyHeader">How do we measure economic health?</div>
       <p class = "copyP"><em>Economic health</em> captures the strength of a city&rsquo;s local economy. We measure this by looking at employment growth, the unemployment rate, the housing vacancy rate, and median family income.</p>
@@ -243,18 +244,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script defer src="js/vendor/fontawesome-all.min.js"></script>
 
   <script>
-  (function (i, s, o, g, r, a, m) {
-  i['GoogleAnalyticsObject'] = r;
-  i[r] = i[r] || function () { 
-  (i[r].q = i[r].q || []).push(arguments)
-  }, i[r].l = 1 * new Date();
-  a = s.createElement(o),  m = s.getElementsByTagName(o)[0];
-  a.async = 1;
-  a.src = g;
-  m.parentNode.insertBefore(a, m) 
-  })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); 
-  ga('create', 'UA-57529944-1', 'auto'); 
-  ga('send', 'pageview');
+  // (function (i, s, o, g, r, a, m) {
+  // i['GoogleAnalyticsObject'] = r;
+  // i[r] = i[r] || function () { 
+  // (i[r].q = i[r].q || []).push(arguments)
+  // }, i[r].l = 1 * new Date();
+  // a = s.createElement(o),  m = s.getElementsByTagName(o)[0];
+  // a.async = 1;
+  // a.src = g;
+  // m.parentNode.insertBefore(a, m) 
+  // })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); 
+  // ga('create', 'UA-57529944-1', 'auto'); 
+  // ga('send', 'pageview');
   </script>
 
   <!-- START Parse.ly Include: Standard -->
@@ -262,15 +263,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <span id="parsely-cfg" data-parsely-site="urban.org"></span>
   </div>
   <script>
-  (function(s, p, d) {
-  var h=d.location.protocol, i=p+"-"+s,
-  e=d.getElementById(i), r=d.getElementById(p+"-root"),
-  u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
-  :"static."+p+".com";
-  if (e) return;
-  e = d.createElement(s); e.id = i; e.async = true;
-  e.src = h+"//"+u+"/p.js"; r.appendChild(e);
-  })("script", "parsely", document);
+  // (function(s, p, d) {
+  // var h=d.location.protocol, i=p+"-"+s,
+  // e=d.getElementById(i), r=d.getElementById(p+"-root"),
+  // u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+  // :"static."+p+".com";
+  // if (e) return;
+  // e = d.createElement(s); e.id = i; e.async = true;
+  // e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+  // })("script", "parsely", document);
   </script>
   <!-- END Parse.ly Include: Standard -->
 

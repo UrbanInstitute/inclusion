@@ -395,8 +395,11 @@ d3.csv(DATA_URL,function(d) {
 	            		var datum = data.filter(function(o){ return o.className == ui.item.option.value})[0]
 	            		addNotes(d3.select("#consolidatedNoteContainer"), datum)
 	            		addCityLine(datum)
+
+	            		d3.select("#dropdownViewOtherCity").transition().style("opacity",1)
+	            		d3.select("#dropdownViewOtherCity a").attr("href","index.html?city=" + ui.item.option.value).style("display","block")
 	            	}else{
-	            		window.open("index.html?city=" + ui.item.option.value, "_blank")	
+	            		window.open("index.html?city=" + ui.item.option.value, "_blank")
 	            	}
 	            	
 	            }else{
@@ -407,6 +410,8 @@ d3.csv(DATA_URL,function(d) {
 	            			.on("end", function(){
 	            				d3.select(this).remove()
 	            			})
+	            		d3.select("#dropdownViewOtherCity").transition().style("opacity",0)
+	            		d3.select("#dropdownViewOtherCity a").attr("href","").style("display","none")	
 	            	}
 	            }
 	            this._trigger( "select", event, {
@@ -692,6 +697,12 @@ d3.csv(DATA_URL,function(d) {
 			.attr("class","legendDot")
 			.style("background", function(d){ return d})
 			.on("mouseover", function(d,i){
+				d3.select(this).transition()
+					.style("width","26px")
+					.style("height","26px")
+    				.style("margin-bottom","-1px")
+    				.style("margin-left","-3px")
+
 				var r;
 				if(section == "map"){
 					var r = (d3.select(".states.active").node() == null) ? 8 : 4;
@@ -706,6 +717,11 @@ d3.csv(DATA_URL,function(d) {
 				})
 			})
 			.on("mouseout", function(d,i){
+				d3.select(this).transition()
+					.style("width","20px")
+					.style("height","20px")
+    				.style("margin-bottom","5px")
+    				.style("margin-left","0px")
 				var r;
 				if(section == "map"){
 					r = (d3.select(".states.active").node() == null) ? 4 : 2;
@@ -1201,8 +1217,15 @@ d3.csv(DATA_URL,function(d) {
 				.attr("target", "_blank")
 				.append("div").html("Print city fact sheet <i class=\"fa fa-print\" aria-hidden=\"true\"></i>")
 			titleNav.append("a")
+				.attr("id","csvDownload")
 				.attr("href","")
-				.append("div").html("Download all data <i class=\"fa fa-file-excel\" aria-hidden=\"true\"></i>")
+				.append("div").html("Download all data <img src =\"img/csvIcon.png\">")
+				.on("mouseover", function(){
+					d3.select(this).html("Download all data <img src =\"img/csvIconHover.png\">")
+				})
+				.on("mouseout", function(){
+					d3.select(this).html("Download all data <img src =\"img/csvIcon.png\">")
+				})
 
 			// factsheet.append("i")
 
@@ -2006,9 +2029,14 @@ d3.csv(DATA_URL,function(d) {
 			.text("Back to map")
 		
 
-		var selectEl = topContainer.append("div")
+		var dropdownContainer = topContainer.append("div")
 			.attr("id","dropdownContainer")
-			.append("select")
+		dropdownContainer.append("div")
+			.attr("id", "dropdownViewOtherCity")
+			.append("a")
+			.attr("target","_blank")
+			.html("Click to see city profile <i class=\"fas fa-arrow-right\"></i>")
+		var selectEl = dropdownContainer.append("select")
 			.attr("id", "cityDropdown")
 		buildSearchBox(selectEl, "cityDropdown", true, datum.className)
 
@@ -2277,6 +2305,10 @@ d3.csv(DATA_URL,function(d) {
 					})
 
 			}
+		}
+
+		if(print){
+			window.print()
 		}
 
 	}
