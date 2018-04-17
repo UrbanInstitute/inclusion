@@ -224,7 +224,7 @@ select{
 }
 #title{
     margin: 0 auto;
-    margin-top: 220px;
+    margin-top: 260px;
     font-weight: bold;
     width: 83%;
     text-align: left;
@@ -290,7 +290,8 @@ select{
     width: 83%;
     margin-left: 17%;
     text-align: center;
-    margin-top: 60px;
+    margin-top: 65px;
+	margin-bottom: 10px;
 }
 #questionContainer{
 	display: inline-block;
@@ -319,24 +320,26 @@ select{
     /*font-weight: 300;*/
     margin-left: 10px;
     margin-bottom: 40px;
+    text-decoration: underline;
 }
 #questionContainer .questionMenu{
 	width: calc(100% - 20px);
 	font-size: 16px;
-	color: #666666;
+	color: #12719E;
 	margin-bottom: 28px;
 	padding-left: 10px;
 	cursor: pointer;
+    font-weight: 500;	
 }
 #questionContainer .questionMenu.active{
 	font-weight: bold;
 	border-left: 1px solid #707070;
 }
 .questionMenu.map{
-	color: #AFAFAF !important;
+	color: #0A4C6A !important;
     text-transform: uppercase;
     position: absolute;
-    top: -119px;
+    top: -142px;
     width: 210px !important;
     padding-left: 0px !important;
     font-size: 20px !important;
@@ -354,6 +357,11 @@ select{
 	top: -91px;	
 	cursor: pointer;
 }
+ /*makes the links bold */
+.questionMenu:hover{
+	color: #0A4C6A !important;
+    font-weight: 600 !important;
+
 #graphContainer, #popupContainer, #sidebarContainer{
 	display: inline-block;
 	float: left;
@@ -1057,6 +1065,7 @@ body.cityPage #questionContainer{
 }
 .ui-menu.ui-widget.ui-widget-content.ui-autocomplete.ui-front{
 	width: 705px;
+    padding-left: 17px	;	
 }
 ul.ui-widget.ui-autocomplete li.ui-menu-item{
 	font-family: Lato;
@@ -1247,7 +1256,7 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
 #yearContainer{
 	margin: 0 auto;
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 0px;
     width: 406px;
 }
 
@@ -1280,6 +1289,13 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
 	font-weight: bold;
 	background: #414141
 }
+.inclusionSelect:hover{
+	color: #555555;
+	font-weight: bold;
+	background: #ECECEC
+
+}
+
 .infoContainer{
     position: absolute;
     border: 2px solid #12719E;
