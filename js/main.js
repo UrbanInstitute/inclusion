@@ -2252,6 +2252,8 @@ d3.csv(DATA_URL,function(d) {
   				.append("polygon")
   					.attr("points","0 0, 10 3.5, 0 7")
 
+  			var arrowText = (moreIndicators[i][2] == "econHealth") ? "More healthy" : "More inclusive";
+
 
 
 			if(flipIndicators.includes(moreIndicators[i][0]) == false){
@@ -2259,7 +2261,7 @@ d3.csv(DATA_URL,function(d) {
 			        	.attr("class","moreAxisLabel")
 			            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
 			            .attr("transform", "translate("+ 30 +","+(50 + hMore/2)+")rotate(90)")  // text is drawn off the screen top left, move down and out and rotate
-			            .text("More inclusive");
+			            .text(arrowText);
 			    moreSvg.append("line")
 			    	.attr("class", "moreAxisArrow")
 			    	.attr("x1", 20)
@@ -2273,7 +2275,7 @@ d3.csv(DATA_URL,function(d) {
 		        	.attr("class","moreAxisLabel")
 		            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
 		            .attr("transform", "translate("+ 20 +","+(50 + hMore/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
-		            .text("More inclusive");
+		            .text(arrowText);
 			    
 			    moreSvg.append("line")
 			    	.attr("class", "moreAxisArrow")
