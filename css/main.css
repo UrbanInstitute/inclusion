@@ -945,14 +945,23 @@ body.cityPage #questionContainer{
 	background: white;
     margin-right: 10px;
     border: 1px solid #CCCCCC;
-    width: 208px;
+    width: 260px;
     margin-bottom: 10px;
     vertical-align: top;
 }
 .moreDiv .chartTitle{
 	width: 190px;
 }
-
+.moreAxisLabel{
+	font-size: 14px;
+	font-style: italic;
+	color: #353535;
+}
+.moreAxisArrow{
+	stroke: #353535;
+	fill: none;
+	stroke-width: 1;
+}
 #moreLegendContainer{
 	position: absolute;
     top: -23px;

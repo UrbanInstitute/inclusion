@@ -84,10 +84,10 @@ function updateLineSeries(svg, x, y, indicator){
 					return y(d[newIndicator + years[i+1]])
 				})
 		}
-
 		svg.selectAll(".changeDot." +  colorClass + ".y" + i)
 			.transition()
 			.attr("cy", function(d){
+				console.log(d)
 				return y(d[newIndicator + years[i]])
 			})
 	}

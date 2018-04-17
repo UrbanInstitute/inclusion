@@ -1203,13 +1203,13 @@ d3.csv(DATA_URL,function(d) {
 			.html(function(d){ return d.rankeconhealth2000 })
 		ps.selectAll(".ch-healthWord")
 			.datum(datum)
-			.html(function(d){ return (d.rankeconhealth2013 > d.rankeconhealth2000) ? "increased" : "decreased" })
+			.html(function(d){ return (d.rankeconhealth2013 < d.rankeconhealth2000) ? "increased" : "decreased" })
 		ps.selectAll(".ch-overallWord")
 			.datum(datum)
-			.html(function(d){ return (d.rankoverallinclusionindex2013 > d.rankoverallinclusionindex2000) ? "more" : "less" })
+			.html(function(d){ return (d.rankoverallinclusionindex2013 < d.rankoverallinclusionindex2000) ? "more" : "less" })
 		ps.selectAll(".ch-overallWord2")
 			.datum(datum)
-			.html(function(d){ return (d.rankoverallinclusionindex2013 > d.rankoverallinclusionindex2000) ? "rising" : "falling" })
+			.html(function(d){ return (d.rankoverallinclusionindex2013 < d.rankoverallinclusionindex2000) ? "rising" : "falling" })
 		if(city != false){
 			var titleNav = d3.select("#titleContainer").append("div").attr("id","titleNavContainer").attr("class","cityRemove")
 			titleNav.append("a")
@@ -1869,6 +1869,7 @@ d3.csv(DATA_URL,function(d) {
 				return "<span class = \"inclSpan\">Overall inclusion</span> " + changeWord + " " + Math.abs(change) + " ranks during the <span class = \"healthSpan\">economic recovery</span> period."	
 			})
 		var svg = chartDiv.append("svg")
+			.attr("class","chartSvg")
 			.attr("width", SMALL_MULT_SIZE)
 			.attr("height", SMALL_MULT_SIZE*heightScalar)
 		
@@ -1938,7 +1939,7 @@ d3.csv(DATA_URL,function(d) {
 				return (Math.floor(i/SMALL_MULT_ROW_COUNT) * (SMALL_MULT_SIZE + SMALL_MULT_BOTTOM_PADDING)) + "px"
 			})
 
-		var svg = d3.selectAll(".chartDiv").select("svg")
+		var svg = d3.selectAll(".chartDiv").select("svg.chartSvg")
 		updateLineSeries(svg, x, y, inclusionType);
 		updateCorrelationRect(svg, x, y, inclusionType, "econHealth");
 	}
@@ -2043,14 +2044,15 @@ d3.csv(DATA_URL,function(d) {
 		var inclusionType = "overall"
 
 		var marginSmall = {"left": 50, "right": 40, "top": 40, "bottom": 60},
+			marginMore = {"left": 80, "right": 40, "top": 40, "bottom": 60},
 			topSize = (print) ? 209 : 280,
-			moreSize = (print) ? 192 : 208,
+			moreSize = (print) ? 192 : 248,
 			wTop = topSize - marginSmall.left - marginSmall.right,
 			hTop = topSize*heightScalar - marginSmall.left - marginSmall.right,
-			wMore = moreSize - marginSmall.left - marginSmall.right,
-			hMore = moreSize*heightScalar - marginSmall.left - marginSmall.right,
+			wMore = moreSize - marginMore.left* - marginMore.right,
+			hMore = moreSize*heightScalar - marginMore.left - marginMore.right,
 			xTop = d3.scaleLinear().range([marginSmall.left, topSize-marginSmall.right]).domain([1980, 2013]),
-			xMore = d3.scaleLinear().range([marginSmall.left, moreSize-marginSmall.right]).domain([1980, 2013]),
+			xMore = d3.scaleLinear().range([marginMore.left, moreSize-marginMore.right]).domain([1980, 2013]),
 			yTop = d3.scaleLinear().range([topSize*heightScalar - marginSmall.bottom, marginSmall.top]).domain([274,0]);
 
 		var topIndicators = ["econHealth","overall","race","econ"]
@@ -2122,6 +2124,8 @@ d3.csv(DATA_URL,function(d) {
 					["workingpoor","Working–poor families","econ","Percent",".0%"],
 					["pct1619notinschool","High school drop-out rate","econ","Percent",".0%"]
 			]
+
+		var flipIndicators = ["pctemploymentchange","medfamincome","Citypctnonwhite"]
 
 		var selectedType = (getInclusionType() == "overall") ? "econHealth" : getInclusionType();
 		var navTitles = {"econHealth": "Economic Health", "econ": "Economic Inclusion", "race": "Racial Inclusion"}
@@ -2229,23 +2233,68 @@ d3.csv(DATA_URL,function(d) {
 
 			moreSvg.append("g")
 				.attr("class", "axis axis--y")
-				.attr("transform", "translate(" + (moreSize - 10) + ",0)")
+				.attr("transform", "translate(" + (moreSize + marginMore.left - 60) + ",0)")
 				.call(d3.axisLeft(yMore)
 						.ticks(4)
 						.tickSize(moreSize - 50)
 						.tickFormat(d3.format(moreIndicators[i][4]))
 					);
 
+
+  			var defs = moreSvg.append("defs")
+  			defs.append("marker")
+  				.attr("id", "arrowhead_" + moreIndicators[i][0])
+  				.attr("markerWidth",10)
+  				.attr("markerHeight",7)
+  				.attr("refX",0)
+  				.attr("refY",3.5)
+  				.attr("orient","auto")
+  				.append("polygon")
+  					.attr("points","0 0, 10 3.5, 0 7")
+
+
+
+			if(flipIndicators.includes(moreIndicators[i][0]) == false){
+		        moreSvg.append("text")
+			        	.attr("class","moreAxisLabel")
+			            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+			            .attr("transform", "translate("+ 30 +","+(50 + hMore/2)+")rotate(90)")  // text is drawn off the screen top left, move down and out and rotate
+			            .text("More inclusive");
+			    moreSvg.append("line")
+			    	.attr("class", "moreAxisArrow")
+			    	.attr("x1", 20)
+			    	.attr("x2", 20)
+			    	.attr("y1", 80)
+			    	.attr("y2", 170)
+			    	.attr("marker-end","url(#arrowhead_" + moreIndicators[i][0] + ")")
+
+			}else{
+		        moreSvg.append("text")
+		        	.attr("class","moreAxisLabel")
+		            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+		            .attr("transform", "translate("+ 20 +","+(50 + hMore/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+		            .text("More inclusive");
+			    
+			    moreSvg.append("line")
+			    	.attr("class", "moreAxisArrow")
+			    	.attr("x1", 30)
+			    	.attr("x2", 30)
+			    	.attr("y1", 175)
+			    	.attr("y2", 80)
+			    	.attr("marker-end","url(#arrowhead_" + moreIndicators[i][0] + ")")
+
+			}
+
 			moreSvg.append("g")
 				.attr("class", "axis axis--x")
-				.attr("transform", "translate(0," + (hMore + marginSmall.top + 25) + ")")
+				.attr("transform", "translate(0," + (hMore + marginMore.top + 50) + ")")
 				.call(d3.axisBottom(xMore).tickValues([1980, 1990, 2000, 2013]).tickFormat(d3.format(".0f")));
 		
 			moreSvg.on("mousemove", function(d){
 				var newBounds = getBounds(d[0])
 
 				var newY = d3.scaleLinear()
-					.range([moreSize*heightScalar - marginSmall.bottom, 20])
+					.range([moreSize*heightScalar - marginMore.bottom, 20])
 					.domain(d3.extent(newBounds));
 				mousemoveLineChart(d3.select(this),datum, xMore, newY, d3.event.offsetX, d[0], "MEAN" + d[0], d[4], false, false)
 			})
