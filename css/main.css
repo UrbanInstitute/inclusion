@@ -361,6 +361,7 @@ select{
 .questionMenu:hover{
 	color: #0A4C6A !important;
     font-weight: 600 !important;
+}
 
 #graphContainer, #popupContainer, #sidebarContainer{
 	display: inline-block;
