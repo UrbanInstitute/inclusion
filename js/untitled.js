@@ -330,11 +330,6 @@ d3.csv(DATA_URL,function(d) {
 		}
 	}
 	function hideComparisonCity(){
-		// $("#cityDropdown").autocomplete("option", { source: "default" });
-		// console.log($.widget( "custom.combobox"))
-		d3.select("#removeCity")
-			.transition()
-			.style("opacity",0)
 		d3.selectAll(".comparison")
 			.transition()
 			.style("opacity",0)
@@ -346,6 +341,7 @@ d3.csv(DATA_URL,function(d) {
 			.style("opacity",0)
 		d3.select("#dropdownViewOtherCity").transition().style("opacity",0)
 		d3.select("#dropdownViewOtherCity a").attr("href","").style("display","none")	
+
 	}
 	function buildSearchBox(selectEl, selectID, isCityPage, filterCity){
 		var defaultText = (isCityPage) ? "Compare with another city" : "See how your city ranks"
@@ -373,7 +369,6 @@ d3.csv(DATA_URL,function(d) {
 	  $( function() {
 	    $.widget( "custom.combobox", {
 	      _create: function() {
-	      	console.log(this)
 	        this.wrapper = $( "<span>" )
 	          .addClass( "custom-combobox" )
 	          .insertAfter( this.element );
@@ -415,9 +410,6 @@ d3.csv(DATA_URL,function(d) {
 	            		d3.selectAll(".newCity")
 	            			.transition()
 	            			.style("opacity",1)
-						d3.select("#removeCity")
-							.transition()
-							.style("opacity",1)
 
 	            		d3.select("#dropdownViewOtherCity").transition().style("opacity",1)
 	            		d3.select("#dropdownViewOtherCity a").attr("href","index.html?city=" + ui.item.option.value).style("display","block")
@@ -427,7 +419,17 @@ d3.csv(DATA_URL,function(d) {
 	            	
 	            }else{
 	            	if(ui.item.label == "Compare with another city"){
-	            		hideComparisonCity();
+	            		d3.selectAll(".comparison")
+	            			.transition()
+	            			.style("opacity",0)
+	            			.on("end", function(){
+	            				d3.select(this).remove()
+	            			})
+	            		d3.selectAll(".newCity")
+	            			.transition()
+	            			.style("opacity",0)
+	            		d3.select("#dropdownViewOtherCity").transition().style("opacity",0)
+	            		d3.select("#dropdownViewOtherCity a").attr("href","").style("display","none")	
 	            	}
 	            }
 	            this._trigger( "select", event, {
@@ -2071,7 +2073,6 @@ d3.csv(DATA_URL,function(d) {
 				.on("mouseout", function(){
 					d3.select(this).style("color","#9D9D9D")
 				})
-				.on("click", hideComparisonCity)
 
 
 			var topLegend = topContainer.append("div")
