@@ -2090,13 +2090,13 @@ d3.csv(DATA_URL,function(d) {
 		var inclusionType = "overall"
 
 		var marginSmall = {"left": 50, "right": 40, "top": 40, "bottom": 60},
-			marginMore = {"left": 80, "right": 40, "top": 40, "bottom": 60},
+			marginMore = {"left": 50, "right": 70, "top": 40, "bottom": 60},
 			topSize = (print) ? 209 : 249,
-			moreSize = (print) ? 192 : 248,
+			moreSize = (print) ? 192 : 278,
 			wTop = topSize - marginSmall.left - marginSmall.right,
 			hTop = topSize*heightScalar - marginSmall.left - marginSmall.right,
 			wMore = moreSize - marginMore.left* - marginMore.right,
-			hMore = moreSize*heightScalar - marginMore.left - marginMore.right,
+			hMore = moreSize*heightScalar - marginMore.left - marginMore.right - 40,
 			xTop = d3.scaleLinear().range([marginSmall.left, topSize-marginSmall.right]).domain([1980, 2013]),
 			xMore = d3.scaleLinear().range([marginMore.left, moreSize-marginMore.right]).domain([1980, 2013]),
 			yTop = d3.scaleLinear().range([topSize*heightScalar - marginSmall.bottom, marginSmall.top]).domain([274,0]);
@@ -2256,7 +2256,7 @@ d3.csv(DATA_URL,function(d) {
 			var bounds = getBounds(moreIndicators[i][0])
 
 			var yMore = d3.scaleLinear()
-				.range([moreSize*heightScalar - 30, 20])
+				.range([moreSize*heightScalar - 30 - 40, 20])
 				.domain(d3.extent(bounds));
 			var moreDiv = d3.select(".moreChartContainer." + moreIndicators[i][2])
 				// .selectAll(".moreDiv" + moreIndicators[i][2])
@@ -2275,7 +2275,7 @@ d3.csv(DATA_URL,function(d) {
 			var moreSvg = moreDiv.append("svg")
 				.datum(moreIndicators[i])
 				.attr("width", moreSize)
-				.attr("height", moreSize*heightScalar)
+				.attr("height", moreSize*heightScalar - 40)
 
 			moreSvg.append("rect")
 				.attr("fill","#fff")
@@ -2283,16 +2283,16 @@ d3.csv(DATA_URL,function(d) {
 				.attr("x",0)
 				.attr("y",0)
 				.attr("width", moreSize)
-				.attr("height", moreSize*heightScalar)
+				.attr("height", moreSize*heightScalar - 40)
 			
 			var tickFormat;
 
 			moreSvg.append("g")
 				.attr("class", "axis axis--y")
-				.attr("transform", "translate(" + (moreSize + marginMore.left - 60) + ",0)")
+				.attr("transform", "translate(" + (moreSize + marginMore.left - 60 - 40) + ",0)")
 				.call(d3.axisLeft(yMore)
 						.ticks(4)
-						.tickSize(moreSize - 50)
+						.tickSize(moreSize - 50 - 40)
 						.tickFormat(d3.format(moreIndicators[i][4]))
 					);
 
@@ -2316,12 +2316,12 @@ d3.csv(DATA_URL,function(d) {
 		        moreSvg.append("text")
 			        	.attr("class","moreAxisLabel")
 			            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
-			            .attr("transform", "translate("+ 30 +","+(50 + hMore/2)+")rotate(90)")  // text is drawn off the screen top left, move down and out and rotate
+			            .attr("transform", "translate("+ 255 +","+(50 + hMore/2)+")rotate(90)")  // text is drawn off the screen top left, move down and out and rotate
 			            .text(arrowText);
 			    moreSvg.append("line")
 			    	.attr("class", "moreAxisArrow")
-			    	.attr("x1", 20)
-			    	.attr("x2", 20)
+			    	.attr("x1", 250)
+			    	.attr("x2", 250)
 			    	.attr("y1", 80)
 			    	.attr("y2", 170)
 			    	.attr("marker-end","url(#arrowhead_" + moreIndicators[i][0] + ")")
@@ -2330,13 +2330,13 @@ d3.csv(DATA_URL,function(d) {
 		        moreSvg.append("text")
 		        	.attr("class","moreAxisLabel")
 		            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
-		            .attr("transform", "translate("+ 20 +","+(50 + hMore/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+		            .attr("transform", "translate("+ 245 +","+(50 + hMore/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
 		            .text(arrowText);
 			    
 			    moreSvg.append("line")
 			    	.attr("class", "moreAxisArrow")
-			    	.attr("x1", 30)
-			    	.attr("x2", 30)
+			    	.attr("x1", 250)
+			    	.attr("x2", 250	)
 			    	.attr("y1", 175)
 			    	.attr("y2", 80)
 			    	.attr("marker-end","url(#arrowhead_" + moreIndicators[i][0] + ")")
