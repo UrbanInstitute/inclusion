@@ -1909,7 +1909,7 @@ d3.csv(DATA_URL,function(d) {
 		svg.append("g")
 			.attr("class", "axis axis--y")
 			.attr("transform", "translate(" + (SMALL_MULT_SIZE - 20) + ",0)")
-			.call(d3.axisLeft(y).tickValues([0,100,200,274]).tickSize(SMALL_MULT_SIZE - 50));
+			.call(d3.axisLeft(y).tickValues([1,100,200,274]).tickSize(SMALL_MULT_SIZE - 50));
 		svg.append("g")
 			.attr("class", "axis axis--x")
 			.attr("transform", "translate(0," + marginSmall.top + ")")
@@ -2143,7 +2143,7 @@ d3.csv(DATA_URL,function(d) {
 			svg.append("g")
 				.attr("class", "axis axis--y")
 				.attr("transform", "translate(" + (topSize - 20) + ",0)")
-				.call(d3.axisLeft(yTop).tickValues([0,100,200,274]).tickSize(topSize - 50));
+				.call(d3.axisLeft(yTop).tickValues([1,100,200,274]).tickSize(topSize - 50));
 			svg.append("g")
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + marginSmall.top + ")")
