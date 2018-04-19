@@ -2091,7 +2091,7 @@ d3.csv(DATA_URL,function(d) {
 
 		var marginSmall = {"left": 50, "right": 40, "top": 40, "bottom": 60},
 			marginMore = {"left": 80, "right": 40, "top": 40, "bottom": 60},
-			topSize = (print) ? 209 : 280,
+			topSize = (print) ? 209 : 249,
 			moreSize = (print) ? 192 : 248,
 			wTop = topSize - marginSmall.left - marginSmall.right,
 			hTop = topSize*heightScalar - marginSmall.left - marginSmall.right,
@@ -2104,8 +2104,9 @@ d3.csv(DATA_URL,function(d) {
 		var topIndicators = ["overall","econ","race","econHealth",]
 
 		for(var i = 0; i < topIndicators.length; i++){
-			var topDiv = topContainer.append("div").attr("class","topDiv")
+			
 			var indicator = topIndicators[i]
+			var topDiv = topContainer.append("div").attr("class","topDiv").attr("id", "td_" + indicator)
 			var titles = {"overall": "Overall inclusion rank", "econ": "Economic inclusion rank", "race": "Racial inclusion rank", "econHealth": "Economic health rank"}
 
 			topDiv.append("div")
@@ -2123,7 +2124,7 @@ d3.csv(DATA_URL,function(d) {
 				.attr("width", topSize)
 				.attr("height", topSize*heightScalar)
 			svg.append("rect")
-				.attr("fill","#fff")
+				.attr("fill","transparent")
 				.attr("stroke","none")
 				.attr("x",0)
 				.attr("y",0)
@@ -2181,6 +2182,8 @@ d3.csv(DATA_URL,function(d) {
 		var nav = moreContainer.append("div")
 			.attr("id","more-navContainer")
 		var navs = (print) ? ["econ", "race","econHealth"] : ["econ", "race","econHealth"]
+		d3.select("#td_" + selectedType)
+			.classed("active", true)
 		nav.selectAll(".nav")
 			.data(navs)
 			.enter()

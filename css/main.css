@@ -939,7 +939,12 @@ body.cityPage #questionContainer{
 	display: inline-block;
 }
 .topDiv{
-	position: relative;
+    border-left: 1px solid #BCBCBC;
+    height: 269px;
+    margin-right: 30px;
+}
+.topDiv.active{
+	background-color: #F5F5F5;
 }
 .topDiv .chartTitle{
 	font-size: 18px;
