@@ -1983,8 +1983,18 @@ d3.csv(DATA_URL,function(d) {
 		else if(section == "health"){ showHealthQuestion() }
 		else if(section == "size"){ showSizeQuestion() }
 		else if(section == "change"){ showChangeQuestion() }
-
-
+	})
+	.on("mouseover", function(){
+		d3.selectAll(".questionMenu.noMap")
+			.style("border-left", "1px solid white")
+		d3.select(this)
+			.style("border-left", "1px solid #707070")
+	})
+	.on("mouseout", function(){
+		d3.select(".noMap.active")
+			.style("border-left", "1px solid #707070")
+		d3.select(this)
+			.style("border-left", "1px solid #ffffff")
 	})
 
 	function addNotes(container, datum){

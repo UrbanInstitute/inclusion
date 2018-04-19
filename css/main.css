@@ -357,10 +357,12 @@ select{
 	top: -91px;	
 	cursor: pointer;
 }
- /*makes the links bold */
 .questionMenu:hover{
 	color: #0A4C6A !important;
     font-weight: 600 !important;
+}
+.questionMenu.noMap{
+	border-left: 1px solid white;
 }
 
 #graphContainer, #popupContainer, #sidebarContainer{
