@@ -2194,6 +2194,8 @@ d3.csv(DATA_URL,function(d) {
 				})
 				.text(function(d){ return navTitles[d]})
 			.on("click", function(d){
+				d3.selectAll(".topDiv").classed("active",false)
+				d3.select("#td_" + d).classed("active",true)
 				d3.selectAll("#more-navContainer .nav").classed("active", false)
 				d3.select(this).classed("active", true)
 

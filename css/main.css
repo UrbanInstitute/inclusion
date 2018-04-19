@@ -939,9 +939,13 @@ body.cityPage #questionContainer{
 	display: inline-block;
 }
 .topDiv{
+	position: relative;
     border-left: 1px solid #BCBCBC;
     height: 269px;
     margin-right: 30px;
+}
+.topDiv svg{
+	height: 254px;
 }
 .topDiv.active{
 	background-color: #F5F5F5;
@@ -1516,6 +1520,15 @@ body.print .introText{
     font-style: italic;
     line-height: 1.2;
     margin-bottom: 15px;
+}
+body.print .topDiv{
+	position: relative;
+    border-left: none;
+    height: auto;
+    margin-right: 0px;
+}
+body.print .topDiv.active{
+	background-color: transparent;
 }
 body.print #moreContainer{
 	background: none;
