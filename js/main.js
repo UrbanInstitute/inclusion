@@ -32,7 +32,7 @@ function updateQueryString(queryString){
 }
 function scrollToAnchor(a_href){
 	$('html, body').animate({
-				scrollTop: $(a_href).offset().top - 100
+				scrollTop: $(a_href).offset().top - 140
 			});
 }
 function hideInfoPopup(){
