@@ -1,7 +1,5 @@
 var DATA_URL = "data/data.csv";
 var DOT_RADIUS = 8;
-var SMALL_MULT_SIZE = d3.select("#popupContainer").node().getBoundingClientRect().width *.25;
-var SMALL_MULT_ROW_COUNT = 4;
 var SMALL_MULT_RIGHT_PADDING = 17;
 var SMALL_MULT_BOTTOM_PADDING = 22;
 var COLORS = ["#0a4c6a","#46abdb","#cfe8f3","#fff2cf","#fccb41","#ca5800"]
@@ -44,6 +42,24 @@ function hideInfoPopup(){
 		})
 }
 
+function getSmallMultSize(){
+	return d3.select("#popupContainer").node().getBoundingClientRect().width * 1/getSmallMultRowCount();
+}
+function widthUnder(w){
+	return d3.select("#breakpoint" + w).style("display") == "block"
+}
+
+function getSmallMultRowCount(){
+	if(widthUnder(1000)){
+		return 2;
+	}
+	else if(widthUnder(1250)){
+		return 3;
+	}else{
+		return 4;
+	}
+
+}
 
 function getScatterWidth(){
 	return d3.select("#graphContainer").node().getBoundingClientRect().width
@@ -1802,7 +1818,7 @@ d3.csv(DATA_URL,function(d) {
 
   		buildInfoPopup(container, true)
 
-  		container.style("width", (SMALL_MULT_ROW_COUNT * SMALL_MULT_SIZE + (SMALL_MULT_ROW_COUNT-1) * 21)  + "px")
+  		container.style("width", (getSmallMultRowCount() * getSmallMultSize() + (getSmallMultRowCount()-1) * 21)  + "px")
   		var legend = container.append("div")
   			.attr("id","smallLegend")
   		var legendLeft = legend.append("div")
@@ -1853,13 +1869,13 @@ d3.csv(DATA_URL,function(d) {
 		var paragraphContainer = d3.select("#sidebarContainer").attr("class","changeQuestion")
 		var inclusionType = getInclusionType()
 		var marginSmall = {"left": 50, "right": 40, "top": 40, "bottom": 60}
-		var w = SMALL_MULT_SIZE - marginSmall.left - marginSmall.right;
-		var h = SMALL_MULT_SIZE*heightScalar - marginSmall.left - marginSmall.right
+		var w = getSmallMultSize() - marginSmall.left - marginSmall.right;
+		var h = getSmallMultSize()*heightScalar - marginSmall.left - marginSmall.right
 
-		var x = d3.scaleLinear().range([marginSmall.left, SMALL_MULT_SIZE-marginSmall.right]).domain([1980, 2013])
-		var y = d3.scaleLinear().range([SMALL_MULT_SIZE*heightScalar - marginSmall.bottom, marginSmall.top]).domain([274,0])
+		var x = d3.scaleLinear().range([marginSmall.left, getSmallMultSize()-marginSmall.right]).domain([1980, 2013])
+		var y = d3.scaleLinear().range([getSmallMultSize()*heightScalar - marginSmall.bottom, marginSmall.top]).domain([274,0])
 
-		graphContainer.style("height", ((Math.ceil(changeData.length/SMALL_MULT_ROW_COUNT)) * (SMALL_MULT_SIZE + SMALL_MULT_BOTTOM_PADDING) )  + "px")
+		graphContainer.style("height", ((Math.ceil(changeData.length/getSmallMultRowCount())) * (getSmallMultSize() + SMALL_MULT_BOTTOM_PADDING) )  + "px")
 
 		var chartDiv = graphContainer
 			.selectAll(".chartDiv")
@@ -1867,13 +1883,13 @@ d3.csv(DATA_URL,function(d) {
 			.enter()
 			.append("div")
 			.attr("class", function(d){ return "chartDiv " + d.className })
-			.style("width", SMALL_MULT_SIZE + "px")
-			.style("height", SMALL_MULT_SIZE + "px")
+			.style("width", getSmallMultSize() + "px")
+			.style("height", getSmallMultSize() + "px")
 			.style("left", function(d, i){
-				return ((i%SMALL_MULT_ROW_COUNT) * (SMALL_MULT_SIZE + SMALL_MULT_RIGHT_PADDING)) + "px"
+				return ((i%getSmallMultRowCount()) * (getSmallMultSize() + SMALL_MULT_RIGHT_PADDING)) + "px"
 			})
 			.style("top", function(d, i){
-				return (Math.floor(i/SMALL_MULT_ROW_COUNT) * (SMALL_MULT_SIZE + SMALL_MULT_BOTTOM_PADDING)) + "px"
+				return (Math.floor(i/getSmallMultRowCount()) * (getSmallMultSize() + SMALL_MULT_BOTTOM_PADDING)) + "px"
 			})
 
 		chartDiv.append("div")
@@ -1896,20 +1912,20 @@ d3.csv(DATA_URL,function(d) {
 			})
 		var svg = chartDiv.append("svg")
 			.attr("class","chartSvg")
-			.attr("width", SMALL_MULT_SIZE)
-			.attr("height", SMALL_MULT_SIZE*heightScalar)
+			.attr("width", getSmallMultSize())
+			.attr("height", getSmallMultSize()*heightScalar)
 		
 		svg.append("rect")
 			.attr("fill","#fff")
 			.attr("stroke","none")
 			.attr("x",0)
 			.attr("y",0)
-			.attr("width", SMALL_MULT_SIZE)
-			.attr("height", SMALL_MULT_SIZE*heightScalar - 50)
+			.attr("width", getSmallMultSize())
+			.attr("height", getSmallMultSize()*heightScalar - 50)
 		svg.append("g")
 			.attr("class", "axis axis--y")
-			.attr("transform", "translate(" + (SMALL_MULT_SIZE - 20) + ",0)")
-			.call(d3.axisLeft(y).tickValues([1,100,200,274]).tickSize(SMALL_MULT_SIZE - 50));
+			.attr("transform", "translate(" + (getSmallMultSize() - 20) + ",0)")
+			.call(d3.axisLeft(y).tickValues([1,100,200,274]).tickSize(getSmallMultSize() - 50));
 		svg.append("g")
 			.attr("class", "axis axis--x")
 			.attr("transform", "translate(0," + marginSmall.top + ")")
@@ -1958,11 +1974,11 @@ d3.csv(DATA_URL,function(d) {
 			.duration(1000)
 			.style("left", function(d){
 				var i = sortData.indexOf(d.className)
-				return ((i%SMALL_MULT_ROW_COUNT) * (SMALL_MULT_SIZE + SMALL_MULT_RIGHT_PADDING)) + "px"
+				return ((i%getSmallMultRowCount()) * (getSmallMultSize() + SMALL_MULT_RIGHT_PADDING)) + "px"
 			})
 			.style("top", function(d){
 				var i = sortData.indexOf(d.className)
-				return (Math.floor(i/SMALL_MULT_ROW_COUNT) * (SMALL_MULT_SIZE + SMALL_MULT_BOTTOM_PADDING)) + "px"
+				return (Math.floor(i/getSmallMultRowCount()) * (getSmallMultSize() + SMALL_MULT_BOTTOM_PADDING)) + "px"
 			})
 
 		var svg = d3.selectAll(".chartDiv").select("svg.chartSvg")
@@ -1987,14 +2003,19 @@ d3.csv(DATA_URL,function(d) {
 	.on("mouseover", function(){
 		d3.selectAll(".questionMenu.noMap")
 			.style("border-left", "1px solid white")
-		d3.select(this)
-			.style("border-left", "1px solid #707070")
+		if(d3.select(this).classed("noMap")){
+			d3.select(this)
+				.style("border-left", "1px solid #707070")			
+		}
+
 	})
 	.on("mouseout", function(){
 		d3.select(".noMap.active")
 			.style("border-left", "1px solid #707070")
-		d3.select(this)
-			.style("border-left", "1px solid #ffffff")
+		if(d3.select(this).classed("noMap")){
+			d3.select(this)
+				.style("border-left", "1px solid #ffffff")
+		}
 	})
 
 	function addNotes(container, datum){
@@ -2098,10 +2119,21 @@ d3.csv(DATA_URL,function(d) {
 		}
 
 		var inclusionType = "overall"
-
+		var topSize;
+		if(print){
+			topSize = 209;
+		}else{
+			if(widthUnder(900)){
+				topSize = 290
+			}
+			else if(widthUnder(1250)){
+				topSize = 320;
+			}else{
+				topSize = 249
+			}
+		}
 		var marginSmall = {"left": 50, "right": 40, "top": 40, "bottom": 60},
 			marginMore = {"left": 50, "right": 70, "top": 40, "bottom": 60},
-			topSize = (print) ? 209 : 249,
 			moreSize = (print) ? 192 : 278,
 			wTop = topSize - marginSmall.left - marginSmall.right,
 			hTop = topSize*heightScalar - marginSmall.left - marginSmall.right,
@@ -2111,7 +2143,8 @@ d3.csv(DATA_URL,function(d) {
 			xMore = d3.scaleLinear().range([marginMore.left, moreSize-marginMore.right]).domain([1980, 2013]),
 			yTop = d3.scaleLinear().range([topSize*heightScalar - marginSmall.bottom, marginSmall.top]).domain([274,0]);
 
-		var topIndicators = ["overall","econ","race","econHealth",]
+
+		var topIndicators = ["overall","econ","race","econHealth"]
 
 		for(var i = 0; i < topIndicators.length; i++){
 			
@@ -2431,8 +2464,15 @@ d3.csv(DATA_URL,function(d) {
 	}
 
 	init();
-
+	$( window ).resize(function() {
+      	d3.selectAll("#sidebarContainer *").remove()
+      	d3.selectAll("#graphContainer *").remove()
+      	d3.selectAll(".cityRemove").remove()
+		init()
+	})
 })
+
+
 
 function restoreSidebar(){
 	d3.select("#questionContainer")

@@ -887,7 +887,7 @@ body.cityPage #questionContainer{
 #dropdownContainer{
     position: absolute;
     top: -78px;
-    right: 0px;
+    right: 56px;
 }
 #dropdownViewOtherCity{
     font-size: 14px;
@@ -903,7 +903,7 @@ body.cityPage #questionContainer{
     width: 100%;
     height: 7px;
     padding-top: 14px;
-    margin-bottom: 10px;
+    margin-bottom: 18px;
 }
 .topLegend-symbol{
     margin-top: 5px;
@@ -1664,3 +1664,6 @@ body.print #printCover{
    }
    body.print .page-break { height:0; page-break-after:always; margin:0; border-top:none; }
 }
+
+
+
