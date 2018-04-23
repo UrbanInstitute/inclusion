@@ -346,8 +346,6 @@ d3.csv(DATA_URL,function(d) {
 		}
 	}
 	function hideComparisonCity(){
-		// $("#cityDropdown").autocomplete("option", { source: "default" });
-		// console.log($.widget( "custom.combobox"))
 		d3.select("#removeCity")
 			.transition()
 			.style("opacity",0)
@@ -389,7 +387,6 @@ d3.csv(DATA_URL,function(d) {
 	  $( function() {
 	    $.widget( "custom.combobox", {
 	      _create: function() {
-	      	console.log(this)
 	        this.wrapper = $( "<span>" )
 	          .addClass( "custom-combobox" )
 	          .insertAfter( this.element );
@@ -672,7 +669,11 @@ d3.csv(DATA_URL,function(d) {
 				var infoPopup = d3.select(this).append("div")
 					.attr("class", "infoPopup")
 					.style("width", function(){
-						return (Math.ceil(d3.select("#popupContainer").node().getBoundingClientRect().width * .2) - 46 - 20) + "px"
+						if(widthUnder(1250)){
+							return "130px"
+						}else{
+							return (Math.ceil(d3.select("#popupContainer").node().getBoundingClientRect().width * .2) - 46 - 20) + "px"
+						}
 					})
 				infoPopup.append("div")
 					.attr("class","infoPopupTop")
@@ -1188,7 +1189,6 @@ d3.csv(DATA_URL,function(d) {
 		}else{
 			var baseText = (print) ? allText.printHeader : []
 			datum = data.filter(function(o){ return o.className == city })[0]
-			console.log(datum, city)
 			d3.select("#titleContainer #title").html(datum.place + ", " + datum.stateabrev)
 			d3.select("#titleContainer #datePublished").text("Population in 2013: " + d3.format(",")(datum.pop2013)).style("display","block")
 			if(datum.rankoverallinclusionindex2000 == datum.rankoverallinclusionindex2013){
@@ -2507,19 +2507,19 @@ $(window).scroll(function(e){
 		var sideTop = elSide.node().getBoundingClientRect().top
 		var isSideFixed = (d3.select("#questionContainer").style("position") == "fixed")
 		if(
-			sideTop < 112
+			sideTop < 142
 			&&
 			!isSideFixed
 			&& d3.select("#searchContainer").node().getBoundingClientRect().top >= 556
 		){
 			d3.select("#questionContainer")
 				.style("position","fixed")
-				.style("top","200px")
+				.style("top","230px")
 			d3.select("#popupContainer")
 				.style("margin-left","171px")
 		}
 		else if (
-			sideTop >= 112
+			sideTop >= 142
 			|| (isSideFixed && d3.select("#titleContainer").node().getBoundingClientRect().bottom > 24)
 			|| (isSideFixed && d3.select("#searchContainer").node().getBoundingClientRect().top < 556)
 			){

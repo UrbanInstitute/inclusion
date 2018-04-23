@@ -49,7 +49,6 @@ function addLineSeries(svg, x, y, indicator, isComparisonCity, isCityTop){
 }
 function addCityLine(datum){
 	var topIndicators = ["econHealth","overall","race","econ"]
-	// console.log(datum)
 
 	for (var i = 0; i<topIndicators.length; i++){
 		var indicator = topIndicators[i]
@@ -87,7 +86,6 @@ function updateLineSeries(svg, x, y, indicator){
 		svg.selectAll(".changeDot." +  colorClass + ".y" + i)
 			.transition()
 			.attr("cy", function(d){
-				console.log(d)
 				return y(d[newIndicator + years[i]])
 			})
 	}
