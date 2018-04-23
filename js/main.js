@@ -2077,6 +2077,7 @@ d3.csv(DATA_URL,function(d) {
 		backToMap.append("img")
 			.attr("src","img/close-button.png")
 
+		var backText = (widthUnder(768)) ? "Back" : "Back to map"
 		backToMap.append("span")
 			.text("Back to map")
 		
