@@ -2419,7 +2419,11 @@ d3.csv(DATA_URL,function(d) {
 					.tickValues([1980, 1990, 2000, 2013])
 					.tickFormat(function(t){
 						var stringTick = String(t)
-						return "'" + stringTick[2] + stringTick[3]
+						if(print){
+							return "'" + stringTick[2] + stringTick[3]
+						}else{
+							return stringTick
+						}
 					})
 				);
 		
@@ -2490,7 +2494,7 @@ d3.csv(DATA_URL,function(d) {
 		}
 
 		if(print){
-			// window.print()
+			window.print()
 		}
 
 	}
