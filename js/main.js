@@ -1,4 +1,4 @@
-var DATA_URL = "../data/data.csv";
+var DATA_URL = "data/data.csv";
 
 var SMALL_MULT_RIGHT_PADDING = 17;
 var SMALL_MULT_BOTTOM_PADDING = 22;
