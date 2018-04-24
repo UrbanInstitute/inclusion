@@ -310,7 +310,7 @@ d3.csv("data.csv",function(d) {
 
 	return o
 
-}, function(data){
+}, function(error, data){
 	function init(){
 		console.log("a", data)
 		var backText = (widthUnder(768)) ? "Back" : "Back to map"
