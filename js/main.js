@@ -168,7 +168,7 @@ function leastSquares(xSeries, ySeries) {
 
 
 
-d3.csv("data/data.csv",function(d) {
+d3.csv("data.csv",function(d) {
 	var o = {}
 	o[0] = +d.lon;
 	o[1] = +d.lat;
