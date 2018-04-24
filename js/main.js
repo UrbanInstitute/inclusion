@@ -2599,7 +2599,7 @@ $(window).scroll(function(e){
 		}
 
 
-		if(!widthUnder(768)){
+		if(!widthUnder(768) && navigator.userAgent.toLowerCase().indexOf('firefox') == -1){
 			var sideTop = elSide.node().getBoundingClientRect().top
 			var isSideFixed = (d3.select("#questionContainer").style("position") == "fixed")
 			if(
