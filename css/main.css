@@ -954,11 +954,12 @@ body.cityPage #questionContainer{
 .topDiv{
 	position: relative;
     border-left: 1px solid #BCBCBC;
-    height: 269px;
+    height: auto;
+    margin-bottom: 10px;
     margin-right: 30px;
 }
 .topDiv svg{
-	height: 254px;
+	/*height: 254px;*/
 }
 .topDiv.active{
 	background-color: #F5F5F5;
