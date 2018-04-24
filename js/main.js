@@ -2079,6 +2079,7 @@ d3.csv(DATA_URL,function(d) {
 		d3.select("body")
 			.classed("cityPage", true)
 			.classed("print", print)
+			.classed("noPrint", !print)
 
 		var heightScalar = 1.1;
 		var datum = data.filter(function(o){ return o.className == city })[0]
@@ -2414,7 +2415,13 @@ d3.csv(DATA_URL,function(d) {
 			moreSvg.append("g")
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + (hMore + marginMore.top + 50) + ")")
-				.call(d3.axisBottom(xMore).tickValues([1980, 1990, 2000, 2013]).tickFormat(d3.format(".0f")));
+				.call(d3.axisBottom(xMore)
+					.tickValues([1980, 1990, 2000, 2013])
+					.tickFormat(function(t){
+						var stringTick = String(t)
+						return "'" + stringTick[2] + stringTick[3]
+					})
+				);
 		
 			moreSvg.on("mousemove", function(d){
 				var newBounds = getBounds(d[0])
@@ -2483,7 +2490,7 @@ d3.csv(DATA_URL,function(d) {
 		}
 
 		if(print){
-			window.print()
+			// window.print()
 		}
 
 	}

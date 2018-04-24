@@ -8,122 +8,122 @@
 	display: none;
 }
 @media(max-width: 1250px){
-	#breakpoint1250{
+	body.noPrint #breakpoint1250{
 		display: block;
 	}
-	.mainContent,#smallFooter div{
+	body.noPrint .mainContent,body.noPrint #smallFooter div{
 		width: calc(100% - 122px);
 	}
-	#topContainer{
+	body.noPrint #topContainer{
 		width: 702px;
 		margin: 0 auto;
 	}
-	.topDiv{
+	body.noPrint .topDiv{
 		margin-left: 15px;
 		margin-right: 15px;
 	}
-	.infoPopup {
+	body.noPrint .infoPopup {
 	    left: -158px;
 	}
-	#removeCity {
+	body.noPrint #removeCity {
     	top: -24px;
     	right: 356px;
     }
 }
 @media(max-width: 1200px){
 /* home */
-	#inclusionContainer{
+	body.noPrint #inclusionContainer{
 		left: 0px !important;
 	}
-	.inclusionSelect {
+	body.noPrint .inclusionSelect {
 	    font-size: 12px;
 	    width: 135px;
 	    padding: 10px 2px 10px 2px;
 	}
-	.infoContainer{
+	body.noPrint .infoContainer{
 		right: 10px;
 	}
 
-	#breakpoint1200{
+	body.noPrint #breakpoint1200{
 		display: block;
 	}
-	.mainContent,#smallFooter div{
+	body.noPrint .mainContent,body.noPrint #smallFooter div{
 		width: 900px;
 	}
-	#topContainerLegend{
+	body.noPrint #topContainerLegend{
 		width: 695px;
 	}
-	.moreChartContainer, #more-head{
+	body.noPrint .moreChartContainer, body.noPrint #more-head{
 		width: 595px;
 	}
 }
 @media(max-width: 1000px){
 /* home */
-	#breakpoint1000{
+	body.noPrint #breakpoint1000{
 		display: block;
 	}
-	.mainContent,#smallFooter div{
+	body.noPrint .mainContent,body.noPrint #smallFooter div{
 		width: 800px;
 	}
-	#homeMap {
+	body.noPrint #homeMap {
 	    top: 320px;
 	}
-	#sidebarContainer, #graphContainer, #sidebarContainer.healthQuestion, #sidebarContainer.sizeQuestion, #graphContainer.mapQuestion{
+	body.noPrint #sidebarContainer, body.noPrint #graphContainer, body.noPrint #sidebarContainer.healthQuestion, body.noPrint #sidebarContainer.sizeQuestion, body.noPrint #graphContainer.mapQuestion{
 		width: 100%;
 	}
-	.mapQuestion #legendContainer{
+	body.noPrint .mapQuestion #legendContainer{
 	    position: relative;
 	    width: 348px !important;
 	    right: 0px !important;
 	    top: 4px;
 	    margin: 0 auto;
 	}
-	#legendContainer.scatter{
+	body.noPrint #legendContainer.scatter{
 		width: 348px !important;
 		margin: 0 auto;
 	}
 
 
-	#questionContainer{
+	body.noPrint #questionContainer{
 		width: 25%;
 	}
-	#popupContainer{
+	body.noPrint #popupContainer{
 		width: 74%;
 	}
-	.legendDot{
+	body.noPrint .legendDot{
 		display: inline-block;
 		margin-left: 6px !important;
 	}
-	#legend-dots{
+	body.noPrint #legend-dots{
 		margin-left: 95px
 	}
-	#legend-more, #legend-less {
+	body.noPrint #legend-more, body.noPrint #legend-less {
 	    width: 100px;
 	    position: relative;
 	    left: 0px;
 	}
-	#legend-more {
+	body.noPrint #legend-more {
     	top: -28px;
 	}
-	#legend-less {
+	body.noPrint #legend-less {
 	    top: -44px;
 	    left: 260px;
 	}
 
-	#smallLegend {
+	body.noPrint #smallLegend {
     	display: block;
     	float: left;
     	margin-top: 50px;
     	margin-left: -240px;
     	margin-bottom: 20px;
 	}
-	.smallLegendLabel {
+	body.noPrint .smallLegendLabel {
     	font-size: 14px;
     	display: block;
     	float: left;
     	clear: both;
     }
-	.legendSymbol {
+	body.noPrint .legendSymbol {
 	    margin-left: 0px;
 	    display: inline-block;
 	    float: left;
@@ -131,33 +131,33 @@
 	    margin-top: 3px;
 	}
 
-	#menuContainer .ui-selectmenu-button.ui-button.ui-widget{
+	body.noPrint #menuContainer .ui-selectmenu-button.ui-button.ui-widget{
 		float: left;
 		clear: both;
 	}
-	#menuContainer{
+	body.noPrint #menuContainer{
 		height: 110px;
 	}
 
 }
 @media(max-width: 900px){
 /* home */
-	#breakpoint900{
+	body.noPrint #breakpoint900{
 		display: block;
 	}
-	#homeCopy{
+	body.noPrint #homeCopy{
 		width: 100%;
 	}
-	.mainContent,#smallFooter div, #footerContent{
+	body.noPrint .mainContent,body.noPrint #smallFooter div, body.noPrint #footerContent{
 		width: calc(100% - 100px);
 	}
-	#homeMap {
+	body.noPrint #homeMap {
 	    top: 400px;
 	}
-	#topContainerLegend {
+	body.noPrint #topContainerLegend {
 	    width: 635px;
 	}
-	#questionTitle {
+	body.noPrint #questionTitle {
 	    width: 450px;
 	    margin-left: 220px;
 	    position: relative;
@@ -165,52 +165,52 @@
 	}
 }
 @media(max-width: 768px){
-	#breakpoint768{
+	body.noPrint #breakpoint768{
 		display: block;
 	}
-	#questionTitle {
+	body.noPrint #questionTitle {
 	    width: 100%;
 	    margin-left: auto;
 	}
-	#searchContainer .custom-combobox-input.ui-widget.ui-widget-content.ui-autocomplete-input {
+	body.noPrint #searchContainer .custom-combobox-input.ui-widget.ui-widget-content.ui-autocomplete-input {
 	    width: 262px;
 	    height: 30px;
 	}
-	#searchContainer div.ui-widget {
+	body.noPrint #searchContainer div.ui-widget {
     	width: 290px;
     }
-	#searchContainer .ui-button-icon.ui-icon.ui-icon-triangle-1-s {
+	body.noPrint #searchContainer .ui-button-icon.ui-icon.ui-icon-triangle-1-s {
 	    width: 39px;
 	    height: 39px;
 	    background-size: 19px;
 	    top: 0px;
 	    left: 7px;
     }
-    #searchContainer input.custom-combobox-input.ui-widget.ui-widget-content.ui-state-default.ui-corner-left.ui-autocomplete-input {
+	body.noPrint #searchContainer input.custom-combobox-input.ui-widget.ui-widget-content.ui-state-default.ui-corner-left.ui-autocomplete-input {
         font-size: 17px;
     }
-    #searchContainer{
+	body.noPrint #searchContainer{
     	height: 72px;
     }
 
-	.ui-menu.ui-widget.ui-widget-content.ui-autocomplete.ui-front{
+	body.noPrint .ui-menu.ui-widget.ui-widget-content.ui-autocomplete.ui-front{
 		width: 262px;
 	}
-	ul.ui-widget.ui-autocomplete li.ui-menu-item{
+	body.noPrint ul.ui-widget.ui-autocomplete li.ui-menu-item{
 	    width: 100%;
 	}
-	#graphContainer.mapQuestion{
+	body.noPrint #graphContainer.mapQuestion{
 		display: none;
 	}
 
-	#questionContainer, #questionContainer.change {
-    	width: calc(100% + 20px) !important;
+	body.noPrint #questionContainer, body.noPrint #questionContainer.change {
+    	width: 100%;
     	border: none;
     	background: #D9D9D9;
     	left: -10px;
     	padding-bottom: 30px;
     }
-	#questionContainer .questionMenu {
+	body.noPrint #questionContainer .questionMenu {
 	    width: calc(33% - 25px);
 	    display: inline-block;
 	    vertical-align: top;
@@ -228,13 +228,13 @@
 	    padding-top: 10px;
 	    border-left: 1px solid #707070;
     }
-    .questionMenu.health{
+	body.noPrint .questionMenu.health{
     	border-left: 1px solid #D9D9D9 !important;	
     }
-    .questionMenu.map.active{
+	body.noPrint .questionMenu.map.active{
     	display: none !important;
     }
-	#questionMenuLabel {
+	body.noPrint #questionMenuLabel {
 	    font-size: 13px;
 	    font-weight: bold;
 	    /* font-weight: 300; */
@@ -247,124 +247,124 @@
 	    padding-bottom: 5px;
 	    padding-top: 10px;
     }
-    .questionMenu.map{
+	body.noPrint .questionMenu.map{
     	display: none !important;
     }
-	#legendContainer.scatter {
+	body.noPrint #legendContainer.scatter {
     	width: 280px !important;
     	left: calc(50% - 141px);
     	height: 100px;
     	margin-left: 0px;
     }
-	#legend-dots {
+	body.noPrint #legend-dots {
 	    margin-left: 42px;
 	}
-	#legend-more, #legend-less {
+	body.noPrint #legend-more, body.noPrint #legend-less {
     	width: 80px;
     }
-	#legend-less {
+	body.noPrint #legend-less {
 	    top: -64px;
 	    left: 210px;
 	}
-	#yearContainer{
+	body.noPrint #yearContainer{
 		width: 290px !important;
 		position: relative;
 		left: calc(50% - 171px);
 		margin-left: 0px;
 		margin-bottom: 50px;
 	}
-	.yearSelect .yLabel{
+	body.noPrint .yearSelect .yLabel{
 		font-size: 16px !important;
 	}
-	#scaleLabel{
+	body.noPrint #scaleLabel{
 		display: block;
 	}
-	#sliderButton{
+	body.noPrint #sliderButton{
 		top: 37px;
 	}
-	#popupContainer{
+	body.noPrint #popupContainer{
 		width: 100%;
 	}
-	#sidebarContainer{
+	body.noPrint #sidebarContainer{
 		padding-left: 0px;
 	}
-	#ml_y_2,#ml_y_1{
+	body.noPrint #ml_y_2,body.noPrint #ml_y_1{
 		left: 84%;
 	}
-	.inclusionSelect {
+	body.noPrint .inclusionSelect {
     	display: block;
     	width: calc(100% - 50px);
     	margin-bottom: 10px;
     }
-	#popupContainer.change {
+	body.noPrint #popupContainer.change {
 	    width: 100% !important;
 	}
-	#sidebarContainer.changeQuestion{
+	body.noPrint #sidebarContainer.changeQuestion{
 		margin-left: 0px !important
 	}
-	#graphContainer.changeQuestion{
+	body.noPrint #graphContainer.changeQuestion{
 		margin-left: 0px !important;
 	}
-	#smallLegend {
+	body.noPrint #smallLegend {
 	    margin-top: -10px;
 	    margin-left: 20px;
 	    margin-bottom: 20px;
 	}
-	#menuContainer {
+	body.noPrint #menuContainer {
 	    height: 150px;
 	}
-	#graphContainer.cityPage{
+	body.noPrint #graphContainer.cityPage{
 		width: 0px;
 	}
-	#topContainer {
+	body.noPrint #topContainer {
     	width: 100%;
     }
-    .topDiv{
+	body.noPrint .topDiv{
     	margin: 0 auto;
     	margin-bottom: 30px;
     	display: table;
     }
-	#titleNavContainer {
+	body.noPrint #titleNavContainer {
     	width: 100%;
     }
-    #csvDownload{
+	body.noPrint #csvDownload{
     	margin-top: 10px !important;
     }
-    #dropdownContainer {
+	body.noPrint #dropdownContainer {
         right: 10px;
     }
-	#dropdownContainer .custom-combobox-input.ui-widget.ui-widget-content.ui-autocomplete-input {
+	body.noPrint #dropdownContainer .custom-combobox-input.ui-widget.ui-widget-content.ui-autocomplete-input {
     	width: 270px;
     }
-	#dropdownContainer input.custom-combobox-input.ui-widget.ui-widget-content.ui-state-default.ui-corner-left.ui-autocomplete-input {
+	body.noPrint #dropdownContainer input.custom-combobox-input.ui-widget.ui-widget-content.ui-state-default.ui-corner-left.ui-autocomplete-input {
     	font-size: 16px;
     }
-	#topContainerLegend {
+	body.noPrint #topContainerLegend {
 	    width: 100%;
 	}
-	#removeCity {
+	body.noPrint #removeCity {
 	    top: -27px;
 	    right: 186px;
 	    width: 110px;
 	}
-	.moreDiv{
+	body.noPrint .moreDiv{
 		position: relative;
 		left: calc(50% - 156px);
 	}
-	.moreChartContainer, #more-head {
+	body.noPrint .moreChartContainer, body.noPrint #more-head {
 	    width: 100%;
 	}
-	#moreContainer {
+	body.noPrint #moreContainer {
     	width: calc(100% - 3px);
     	left: -23px;
     	border-left: 22px solid #f5f5f5;
 	}
-	#moreLegendContainer {
+	body.noPrint #moreLegendContainer {
     	position: absolute;
     	top: -40px;
     	left: calc(50% - 173px);
 	}
-	#more-head{
+	body.noPrint #more-head{
 		background: #D9D9D9;
 		left: -24px;
 		position: relative;
@@ -372,7 +372,7 @@
 		font-size: 14px;
 		padding-bottom: 10px;
 	}
-	#more-navContainer {
+	body.noPrint #more-navContainer {
 	    display: block;
 	    width: calc(100% + 24px);
 	    left: -24px;
@@ -382,40 +382,40 @@
 	    margin-bottom: 70px;
 	    padding-bottom: 10px;
     }
-    #more-navContainer .nav{
+	body.noPrint #more-navContainer .nav{
     	font-size: 11px;
     }
-	.footerButton{
+	body.noPrint .footerButton{
 		margin-top: 10px;
 	}
 }
 @media(max-width: 725px){
 /* home */
-	#isMobile{
+	body.noPrint #isMobile{
 		display: block;
 	}
 }
 @media(max-width: 620px){
 /* home */
-	#isPhone{
+	body.noPrint #isPhone{
 		display: block;
 	}
-	.mainContent,#smallFooter div, #footerContent{
+	body.noPrint .mainContent,body.noPrint #smallFooter div, body.noPrint #footerContent{
 		width: calc(100% - 80px);
 	}
-	#title, #subtitle{
+	body.noPrint #title, body.noPrint #subtitle{
 		font-size: 26px;
 	}
-	.introText{
+	body.noPrint .introText{
 		font-size: 15px;
 	}
 }
 @media(max-width: 500px){
 /* home */
-	#breakpoint500{
+	body.noPrint #breakpoint500{
 		display: block;
 	}
-	.mainContent,#smallFooter div, #footerContent{
+	body.noPrint .mainContent,body.noPrint #smallFooter div, body.noPrint #footerContent{
 		width: calc(100% - 20px);
 	}
 }
