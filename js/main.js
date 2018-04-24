@@ -1,4 +1,4 @@
-var DATA_URL = "data/data.csv";
+// var DATA_URL = "data/data.csv";
 
 var SMALL_MULT_RIGHT_PADDING = 17;
 var SMALL_MULT_BOTTOM_PADDING = 22;
@@ -168,7 +168,7 @@ function leastSquares(xSeries, ySeries) {
 
 
 
-d3.csv(DATA_URL,function(d) {
+d3.csv("data/data.csv",function(d) {
 	console.log(d, DATA_URL)
 	d[0] = +d.lon;
 	d[1] = +d.lat;
