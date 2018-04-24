@@ -316,7 +316,6 @@ d3.csv("data.csv", function(error, data){
 	})
 
 	function init(){
-		console.log("b", data)
 		var backText = (widthUnder(768)) ? "Back" : "Back to map"
 		d3.select(".questionMenu.map span")
 			.text(backText)
@@ -2065,7 +2064,6 @@ d3.csv("data.csv", function(error, data){
 				noteText.select(".note-year")
 					.text(datum.consolidated)
 			}else{
-				console.log("foo")
 				container.selectAll("div").remove()
 				var oldDatum = container.datum()
 				var noteText = container.append("div")
