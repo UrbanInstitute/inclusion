@@ -1050,7 +1050,7 @@ body.cityPage #questionContainer{
 }
 
 #consolidatedNoteContainer{
-    margin: auto;
+    margin-left: calc(50% - 350px - 5%);
     margin-top: 40px;
     width: 700px;
     margin-bottom: 60px;

@@ -59,6 +59,13 @@
 }
 @media(max-width: 1000px){
 /* home */
+	body.noPrint #moreContainer{
+		width: 702px;
+	}
+	body.noPrint #consolidatedNoteContainer {
+    	margin-left: 0px;
+    	width: 100%;
+    }
 	body.noPrint #breakpoint1000{
 		display: block;
 	}
@@ -314,7 +321,7 @@
 	    height: 150px;
 	}
 	body.noPrint #graphContainer.cityPage{
-		width: 0px;
+		width: 100%;
 	}
 	body.noPrint #topContainer {
     	width: 100%;
@@ -349,7 +356,7 @@
 	}
 	body.noPrint .moreDiv{
 		position: relative;
-		left: calc(50% - 156px);
+		left: calc(50% - 296px);
 	}
 	body.noPrint .moreChartContainer, body.noPrint #more-head {
 	    width: 100%;
@@ -374,13 +381,13 @@
 	}
 	body.noPrint #more-navContainer {
 	    display: block;
-	    width: calc(100% + 24px);
+	    width: calc(50% + 169px);
 	    left: -24px;
 	    background: #D9D9D9;
-	    padding-left: 10px;
+	    padding-left: calc(50% - 145px);
 	    position: relative;
 	    margin-bottom: 70px;
-	    padding-bottom: 10px;
+	    padding-bottom: 20px;
     }
 	body.noPrint #more-navContainer .nav{
     	font-size: 11px;
@@ -393,6 +400,11 @@
 /* home */
 	body.noPrint #isMobile{
 		display: block;
+	}
+}
+@media(max-width: 691px){
+	body.noPrint .moreDiv{
+		left: calc(50% - 156px);
 	}
 }
 @media(max-width: 620px){
@@ -412,6 +424,10 @@
 }
 @media(max-width: 500px){
 /* home */
+	body.noPrint #consolidatedNoteContainer {
+    	margin-left: 0px;
+    	width: calc(100% - 40px);
+    }
 	body.noPrint #breakpoint500{
 		display: block;
 	}
