@@ -1118,12 +1118,12 @@ body.cityPage #questionContainer{
     font-weight: bold;
 }
 .ui-menu.ui-widget.ui-widget-content.ui-autocomplete.ui-front{
-	width: 705px;
-    padding-left: 17px	;	
+	width: 420px;
+    padding-left: 20px	;	
 }
 ul.ui-widget.ui-autocomplete li.ui-menu-item{
 	font-family: Lato;
-    width: 33%;
+    width: 50%;
     text-align: left;
     float: left;
 }
