@@ -7,6 +7,10 @@ var COLORS = ["#0a4c6a","#46abdb","#cfe8f3","#fff2cf","#fccb41","#ca5800"]
 var scatterMargin = {"left": 10, "right": 80, "top": 0, "bottom": 50}
 var scatterSvg;
 
+Math.log10 = Math.log10 || function(x) {
+  return Math.log(x) * Math.LOG10E;
+};
+
 
 function parseQueryString(query) {
         var obj = {},
