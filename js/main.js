@@ -1048,6 +1048,9 @@ d3.csv("data.csv", function(error, data){
 			var trendData = [[x1,y1,x2,y2]];
 		}
 
+		var scatterTopClass = (section == "size") ? "scatterTopNote topSize" : "scatterTopNote"
+		container.append("div").attr("class", scatterTopClass).text("Click a dot for more information")
+
 		scatterSvg = container.append("svg")
 			.attr("id", "scatterSvg")
 			.attr("width",width + margin.left + margin.right)
@@ -2553,7 +2556,7 @@ d3.csv("data.csv", function(error, data){
 		}
 
 		if(print){
-			// window.print()
+			window.print()
 		}
 
 	}
