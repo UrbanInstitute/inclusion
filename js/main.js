@@ -380,6 +380,7 @@ d3.csv("data.csv", function(error, data){
 		if(parameters.hasOwnProperty("topic")){
 			buildHeader(data, false, false)
 			d3.select("body").classed("cityPage", false)
+			d3.select("body").classed("noPrint", true)
 			if(parameters.topic == "economic-health"){
 				d3.select(".questionMenu.health").classed("active", true)
 				showHealthQuestion()
@@ -680,6 +681,31 @@ d3.csv("data.csv", function(error, data){
 					updateHealthQuestion(d, getInclusionType())
 
 				}
+			})
+			.on("mouseover", function(d){
+				d3.select(this).select("circle.inner")
+				.transition()
+					.style("fill", "#A2D4EC")
+				d3.select(this).select(".yLabel")
+					.style("font-weight", "bold")
+			})
+			.on("mouseout", function(d){
+				if(d3.select(this).classed("active")){
+					d3.select(this).select("circle.inner")
+						.transition()
+							.style("fill", "#12719E")
+					d3.select(this).select(".yLabel")
+						.style("font-weight", "bold")
+				}else{
+					d3.select(this).select("circle.inner")
+						.transition()
+							.style("fill", "#696969")
+					d3.select(this).select(".yLabel")
+						.style("font-weight", "normal")
+				}
+
+
+
 			})
 
 		g.append("text")
