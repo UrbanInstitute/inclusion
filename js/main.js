@@ -1939,7 +1939,7 @@ d3.csv(DATA_URL,function(d) {
 			.attr("height", getSmallMultSize()*heightScalar)
 		
 		svg.append("rect")
-			.attr("fill","#fff")
+			.attr("fill","transparent")
 			.attr("stroke","none")
 			.attr("x",0)
 			.attr("y",0)
@@ -2347,7 +2347,7 @@ d3.csv(DATA_URL,function(d) {
 				.attr("height", moreSize*heightScalar - 40)
 
 			moreSvg.append("rect")
-				.attr("fill","#fff")
+				.attr("fill","transparent")
 				.attr("stroke","none")
 				.attr("x",0)
 				.attr("y",0)
