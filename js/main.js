@@ -1,5 +1,5 @@
 var DATA_URL = "data/data.csv";
-var DOT_RADIUS = 8;
+
 var SMALL_MULT_RIGHT_PADDING = 17;
 var SMALL_MULT_BOTTOM_PADDING = 22;
 var COLORS = ["#0a4c6a","#46abdb","#cfe8f3","#fff2cf","#fccb41","#ca5800"]
@@ -41,7 +41,9 @@ function hideInfoPopup(){
 			d3.select(this).remove()
 		})
 }
-
+function getDotRadius(){
+	return (widthUnder(768)) ? 4 : 8
+}
 function getSmallMultSize(){
 	return d3.select("#popupContainer").node().getBoundingClientRect().width * 1/getSmallMultRowCount();
 }
@@ -50,7 +52,10 @@ function widthUnder(w){
 }
 
 function getSmallMultRowCount(){
-	if(widthUnder(1000)){
+	if(widthUnder(500)){
+		return 1
+	}
+	else if(widthUnder(1000)){
 		return 2;
 	}
 	else if(widthUnder(1250)){
@@ -307,6 +312,9 @@ d3.csv(DATA_URL,function(d) {
 	return d
 }, function(data){
 	function init(){
+		var backText = (widthUnder(768)) ? "Back" : "Back to map"
+		d3.select(".questionMenu.map span")
+			.text(backText)
 
 		setYear("2013");
 		setInclusionType("overall");
@@ -550,6 +558,7 @@ d3.csv(DATA_URL,function(d) {
 	function buildYearSelector(container, section){
 		var width = container.node().getBoundingClientRect().width;
 		var height = 70;
+		var lineBump = (widthUnder(768)) ? 20 : 40;
 
 		container
 			.style("width", width + "px")
@@ -559,7 +568,7 @@ d3.csv(DATA_URL,function(d) {
 			.append("g")
 		svg.append("line")
 			.attr("x1", 40)
-			.attr("x2", width - 40)
+			.attr("x2", width - lineBump)
 			.attr("y1", 40)
 			.attr("y2", 40)
 			.style("stroke", "#707070")
@@ -678,6 +687,7 @@ d3.csv(DATA_URL,function(d) {
 				infoPopup.append("div")
 					.attr("class","infoPopupTop")
 					.text("Scroll down for definitions")
+					.on("click", hideInfoPopup)
 				infoPopup.append("div")
 					.attr("class", "infoPopupLink")
 					.html("Take me there <i class=\"fas fa-arrow-down\"></i>")
@@ -730,6 +740,7 @@ d3.csv(DATA_URL,function(d) {
 			.attr("class","legendDot")
 			.style("background", function(d){ return d})
 			.on("mouseover", function(d,i){
+				if(widthUnder(768)){ return false }
 				d3.select(this).transition()
 					.style("width","26px")
 					.style("height","26px")
@@ -750,6 +761,7 @@ d3.csv(DATA_URL,function(d) {
 				})
 			})
 			.on("mouseout", function(d,i){
+				if(widthUnder(768)){ return false }
 				d3.select(this).transition()
 					.style("width","20px")
 					.style("height","20px")
@@ -1077,7 +1089,7 @@ d3.csv(DATA_URL,function(d) {
 				var rank = COLORS.reverse().indexOf(getRankColor(d.rankoverallinclusionindex2013))
 				return "dot " + d.className + " r" + rank;
 			})
-			.attr("r", DOT_RADIUS)
+			.attr("r", getDotRadius())
 			.attr("cx", function(d){
 				return x(d[xVar])
 			})
@@ -1097,6 +1109,7 @@ d3.csv(DATA_URL,function(d) {
 			scatterSvg._tooltipped = scatterSvg._voronoi = null;
 			scatterSvg
 				.on('mousemove', function() {
+					if(widthUnder(768)) return false
 					var scales = getScatterScales(width, height, margin, section, getYear(), getInclusionType(), getScaleType())
 					var x = scales[0]
 					var y = scales[1]
@@ -1120,6 +1133,7 @@ d3.csv(DATA_URL,function(d) {
 					}
 				})
 				.on("click", function(){
+					if(widthUnder(768)) return false
 					var scales = getScatterScales(width, height, margin, section, getYear(), getInclusionType(), getScaleType())
 					var x = scales[0]
 					var y = scales[1]
@@ -1631,8 +1645,12 @@ d3.csv(DATA_URL,function(d) {
 	}
 
 	function buildScaleTypeToggle(container, scaleType){
-
-		var left = (getScaleType() == "linear") ? "171px" : "194px"
+		var left;
+		if(widthUnder(768)){
+			left = (getScaleType() == "linear") ? "63px" : "86px"
+		}else{
+			left = (getScaleType() == "linear") ? "171px" : "194px"
+		}
 		container.append("div")
 			.attr("id","scaleLabel")
 			.text("Y-axis scale: ")
@@ -1708,8 +1726,13 @@ d3.csv(DATA_URL,function(d) {
 	}
 	function updateSizeQuestion(year, inclusionType, scaleType){
 		removeTooltip(true)
-		if(scaleType == "linear"){ d3.select("#sliderButton").transition().style("left","171px") }
-		else{ d3.select("#sliderButton").transition().style("left","194px") }
+		if(widthUnder(768)){
+			if(scaleType == "linear"){ d3.select("#sliderButton").transition().style("left","63px") }
+			else{ d3.select("#sliderButton").transition().style("left","86px") }
+		}else{
+			if(scaleType == "linear"){ d3.select("#sliderButton").transition().style("left","171px") }
+			else{ d3.select("#sliderButton").transition().style("left","194px") }
+		}
 
 		scatterSvg._voronoi = null;
 
@@ -1794,7 +1817,7 @@ d3.csv(DATA_URL,function(d) {
 	function buildChangeDropdown(container, x, y){
 		container.append("div")
 			.attr("id","smallMenuLabel")
-			.text("Compare economic health to:")
+			.text("Compare economic health to")
 
 		var inclusionType = getInclusionType();
 		var menu = container.append("select")
@@ -2024,7 +2047,7 @@ d3.csv(DATA_URL,function(d) {
 			return false;
 		}
 		else{
-			if(d3.select(".noteHeader").node() == null){
+			if(d3.select(".noteText").node() == null){
 				container.datum(datum)
 				var noteText = container.append("div")
 					.attr("class","noteText")
@@ -2034,6 +2057,7 @@ d3.csv(DATA_URL,function(d) {
 				noteText.select(".note-year")
 					.text(datum.consolidated)
 			}else{
+				console.log("foo")
 				container.selectAll("div").remove()
 				var oldDatum = container.datum()
 				var noteText = container.append("div")
@@ -2079,7 +2103,7 @@ d3.csv(DATA_URL,function(d) {
 
 		var backText = (widthUnder(768)) ? "Back" : "Back to map"
 		backToMap.append("span")
-			.text("Back to map")
+			.text(backText)
 		
 
 		var dropdownContainer = topContainer.append("div")
@@ -2212,14 +2236,14 @@ d3.csv(DATA_URL,function(d) {
 					["racialeducationgap","Racial education gap","race","Percentage point difference",".0f"],
 					["incseg","Income segregation","econ","Index",".2f"],
 					["rentburden","Rent-burdened residents","econ","Percent",".0%"],
-					["workingpoor","Working–poor families","econ","Percent",".0%"],
+					["workingpoor","Working-poor families","econ","Percent",".0%"],
 					["pct1619notinschool","High school drop-out rate","econ","Percent",".0%"]
 			]
 
 		var flipIndicators = ["pctemploymentchange","medfamincome","Citypctnonwhite"]
 
 		var selectedType = (getInclusionType() == "overall") ? "econ" : getInclusionType();
-		var navTitles = {"econHealth": "Economic Health", "econ": "Economic Inclusion", "race": "Racial Inclusion"}
+		var navTitles = {"econHealth": "Economic health", "econ": "Economic inclusion", "race": "Racial inclusion"}
 		moreContainer.append("div")
 			.attr("id","more-head")
 			.text("Specific Indicators")
@@ -2505,26 +2529,28 @@ $(window).scroll(function(e){
 		}
 
 
-		var sideTop = elSide.node().getBoundingClientRect().top
-		var isSideFixed = (d3.select("#questionContainer").style("position") == "fixed")
-		if(
-			sideTop < 142
-			&&
-			!isSideFixed
-			&& d3.select("#searchContainer").node().getBoundingClientRect().top >= 556
-		){
-			d3.select("#questionContainer")
-				.style("position","fixed")
-				.style("top","230px")
-			d3.select("#popupContainer")
-				.style("margin-left","171px")
-		}
-		else if (
-			sideTop >= 142
-			|| (isSideFixed && d3.select("#titleContainer").node().getBoundingClientRect().bottom > 24)
-			|| (isSideFixed && d3.select("#searchContainer").node().getBoundingClientRect().top < 556)
+		if(!widthUnder(768)){
+			var sideTop = elSide.node().getBoundingClientRect().top
+			var isSideFixed = (d3.select("#questionContainer").style("position") == "fixed")
+			if(
+				sideTop < 142
+				&&
+				!isSideFixed
+				&& d3.select("#searchContainer").node().getBoundingClientRect().top >= 556
 			){
-			restoreSidebar();
+				d3.select("#questionContainer")
+					.style("position","fixed")
+					.style("top","230px")
+				d3.select("#popupContainer")
+					.style("margin-left","171px")
+			}
+			else if (
+				sideTop >= 142
+				|| (isSideFixed && d3.select("#titleContainer").node().getBoundingClientRect().bottom > 24)
+				|| (isSideFixed && d3.select("#searchContainer").node().getBoundingClientRect().top < 556)
+				){
+				restoreSidebar();
+			}
 		}
 
 	}

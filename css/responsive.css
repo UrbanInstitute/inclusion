@@ -1,4 +1,4 @@
-#breakpoint1250, #breakpoint1200, #breakpoint1000, #breakpoint900, #breakpoint768, #isMobile, #isPhone, #isSmallPhone, #isVerySmallPhone, #yearDatum, #inclusionTypeDatum, #scaleTypeDatum{
+#breakpoint1250, #breakpoint1200, #breakpoint1000, #breakpoint900, #breakpoint768, #breakpoint500, #isMobile, #isPhone, #isSmallPhone, #isVerySmallPhone, #yearDatum, #inclusionTypeDatum, #scaleTypeDatum{
 	position: fixed;
 	width: 0px;
 	height: 0px;
@@ -203,15 +203,15 @@
 		display: none;
 	}
 
-	#questionContainer {
-    	width: calc(100% + 20px);
+	#questionContainer, #questionContainer.change {
+    	width: calc(100% + 20px) !important;
     	border: none;
     	background: #D9D9D9;
     	left: -10px;
-    	padding-bottom: 20px;
+    	padding-bottom: 30px;
     }
 	#questionContainer .questionMenu {
-	    width: calc(33% - 22px);
+	    width: calc(33% - 25px);
 	    display: inline-block;
 	    vertical-align: top;
 	    padding: 0px;
@@ -248,15 +248,146 @@
 	    padding-top: 10px;
     }
     .questionMenu.map{
-	    position: fixed;
-	    top: 110px;
-	    z-index: 2999;
-	    background: rgba(255,255,255,.7);
-	    border: none !important;
-	    border-left: none !important;
-	    height: 58px !important;
+    	display: none !important;
     }
-
+	#legendContainer.scatter {
+    	width: 280px !important;
+    	left: calc(50% - 141px);
+    	height: 100px;
+    	margin-left: 0px;
+    }
+	#legend-dots {
+	    margin-left: 42px;
+	}
+	#legend-more, #legend-less {
+    	width: 80px;
+    }
+	#legend-less {
+	    top: -64px;
+	    left: 210px;
+	}
+	#yearContainer{
+		width: 290px !important;
+		position: relative;
+		left: calc(50% - 171px);
+		margin-left: 0px;
+		margin-bottom: 50px;
+	}
+	.yearSelect .yLabel{
+		font-size: 16px !important;
+	}
+	#scaleLabel{
+		display: block;
+	}
+	#sliderButton{
+		top: 37px;
+	}
+	#popupContainer{
+		width: 100%;
+	}
+	#sidebarContainer{
+		padding-left: 0px;
+	}
+	#ml_y_2,#ml_y_1{
+		left: 84%;
+	}
+	.inclusionSelect {
+    	display: block;
+    	width: calc(100% - 50px);
+    	margin-bottom: 10px;
+    }
+	#popupContainer.change {
+	    width: 100% !important;
+	}
+	#sidebarContainer.changeQuestion{
+		margin-left: 0px !important
+	}
+	#graphContainer.changeQuestion{
+		margin-left: 0px !important;
+	}
+	#smallLegend {
+	    margin-top: -10px;
+	    margin-left: 20px;
+	    margin-bottom: 20px;
+	}
+	#menuContainer {
+	    height: 150px;
+	}
+	#graphContainer.cityPage{
+		width: 0px;
+	}
+	#topContainer {
+    	width: 100%;
+    }
+    .topDiv{
+    	margin: 0 auto;
+    	margin-bottom: 30px;
+    	display: table;
+    }
+	#titleNavContainer {
+    	width: 100%;
+    }
+    #csvDownload{
+    	margin-top: 10px !important;
+    }
+    #dropdownContainer {
+        right: 10px;
+    }
+	#dropdownContainer .custom-combobox-input.ui-widget.ui-widget-content.ui-autocomplete-input {
+    	width: 270px;
+    }
+	#dropdownContainer input.custom-combobox-input.ui-widget.ui-widget-content.ui-state-default.ui-corner-left.ui-autocomplete-input {
+    	font-size: 16px;
+    }
+	#topContainerLegend {
+	    width: 100%;
+	}
+	#removeCity {
+	    top: -27px;
+	    right: 186px;
+	    width: 110px;
+	}
+	.moreDiv{
+		position: relative;
+		left: calc(50% - 156px);
+	}
+	.moreChartContainer, #more-head {
+	    width: 100%;
+	}
+	#moreContainer {
+    	width: calc(100% - 3px);
+    	left: -23px;
+    	border-left: 22px solid #f5f5f5;
+	}
+	#moreLegendContainer {
+    	position: absolute;
+    	top: -40px;
+    	left: calc(50% - 173px);
+	}
+	#more-head{
+		background: #D9D9D9;
+		left: -24px;
+		position: relative;
+		width: calc(100% + 24px);
+		font-size: 14px;
+		padding-bottom: 10px;
+	}
+	#more-navContainer {
+	    display: block;
+	    width: calc(100% + 24px);
+	    left: -24px;
+	    background: #D9D9D9;
+	    padding-left: 10px;
+	    position: relative;
+	    margin-bottom: 70px;
+	    padding-bottom: 10px;
+    }
+    #more-navContainer .nav{
+    	font-size: 11px;
+    }
+	.footerButton{
+		margin-top: 10px;
+	}
 }
 @media(max-width: 725px){
 /* home */
@@ -281,7 +412,7 @@
 }
 @media(max-width: 500px){
 /* home */
-	#isSmallPhone{
+	#breakpoint500{
 		display: block;
 	}
 	.mainContent,#smallFooter div, #footerContent{
