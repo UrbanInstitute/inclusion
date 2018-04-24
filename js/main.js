@@ -2437,35 +2437,36 @@ d3.csv("data.csv", function(error, data){
 
   			var arrowText = (moreIndicators[i][2] == "econHealth") ? "More healthy" : "More inclusive";
 
-
+  			var printScootch = (print) ? 80 : 0;
+  			var printScootchY = (print) ? 50 : 0;
 
 			if(flipIndicators.includes(moreIndicators[i][0]) == false){
 		        moreSvg.append("text")
 			        	.attr("class","moreAxisLabel")
 			            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
-			            .attr("transform", "translate("+ 255 +","+(50 + hMore/2)+")rotate(90)")  // text is drawn off the screen top left, move down and out and rotate
+			            .attr("transform", "translate("+ (255-printScootch) +","+(50 + hMore/2)+")rotate(90)")  // text is drawn off the screen top left, move down and out and rotate
 			            .text(arrowText);
 			    moreSvg.append("line")
 			    	.attr("class", "moreAxisArrow")
-			    	.attr("x1", 250)
-			    	.attr("x2", 250)
-			    	.attr("y1", 80)
-			    	.attr("y2", 170)
+			    	.attr("x1", 250 - printScootch)
+			    	.attr("x2", 250 - printScootch)
+			    	.attr("y1", 80 - printScootchY)
+			    	.attr("y2", 170 - printScootchY)
 			    	.attr("marker-end","url(#arrowhead_" + moreIndicators[i][0] + ")")
 
 			}else{
 		        moreSvg.append("text")
 		        	.attr("class","moreAxisLabel")
 		            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
-		            .attr("transform", "translate("+ 245 +","+(50 + hMore/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+		            .attr("transform", "translate("+ (245-printScootch) +","+(50 + hMore/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
 		            .text(arrowText);
 			    
 			    moreSvg.append("line")
 			    	.attr("class", "moreAxisArrow")
-			    	.attr("x1", 250)
-			    	.attr("x2", 250	)
-			    	.attr("y1", 175)
-			    	.attr("y2", 80)
+			    	.attr("x1", 250 - printScootch)
+			    	.attr("x2", 250	- printScootch)
+			    	.attr("y1", 175 - printScootchY)
+			    	.attr("y2", 80 - printScootchY)
 			    	.attr("marker-end","url(#arrowhead_" + moreIndicators[i][0] + ")")
 
 			}
@@ -2552,7 +2553,7 @@ d3.csv("data.csv", function(error, data){
 		}
 
 		if(print){
-			window.print()
+			// window.print()
 		}
 
 	}
