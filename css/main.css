@@ -477,6 +477,7 @@ body.cityPage #graphContainer{
 }
 .mapQuestion #plotContainer svg{
 	/*cursor: pointer;*/
+	overflow: hidden;
 }
 #zoomOut{
     position: absolute;
