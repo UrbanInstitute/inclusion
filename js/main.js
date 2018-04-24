@@ -311,6 +311,7 @@ d3.csv(DATA_URL,function(d) {
 
 	return d
 }, function(data){
+	console.log(data)
 	function init(){
 		var backText = (widthUnder(768)) ? "Back" : "Back to map"
 		d3.select(".questionMenu.map span")
