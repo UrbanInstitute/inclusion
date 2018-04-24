@@ -1053,10 +1053,13 @@ d3.csv(DATA_URL,function(d) {
 				.text("More inclusive")
 		}
 		if(section == "size"){
-			scatterSvg.append("g")
+			var tickFormat = (scaleType == "log") ? "" : d3.format(".2s")
+
+
+			var sizeYaxis = scatterSvg.append("g")
 				.attr("class", "axis axis--y")
 				.attr("transform", "translate(" + (width + 20) + ",0)")
-				.call(d3.axisRight(y).ticks(5).tickSize(-width-20));			
+				.call(d3.axisRight(y).ticks(5).tickSize(-width-20).tickFormat(tickFormat));	
 		}else{
 			scatterSvg.append("g")
 				.attr("class", "axis axis--y")
