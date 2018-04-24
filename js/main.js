@@ -169,7 +169,7 @@ function leastSquares(xSeries, ySeries) {
 
 
 d3.csv("data/data.csv",function(d) {
-	console.log(d, DATA_URL)
+	// console.log(d, DATA_URL)
 	d[0] = +d.lon;
 	d[1] = +d.lat;
 	d.className = d.place.toLowerCase().replace(/[^\w\s]+/g, "").replace(/\s/g,"_") + "_" + d.stateabrev;
@@ -308,9 +308,8 @@ d3.csv("data/data.csv",function(d) {
 	d.pct1619notinschool2013 = +d.pct1619notinschool2013;
 	d.MEANpct1619notinschool2013 = +d.MEANpct1619notinschool2013;
 
-
-
 	return d
+
 }, function(data){
 	console.log(data)
 	function init(){
