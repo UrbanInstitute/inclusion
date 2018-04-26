@@ -2588,11 +2588,16 @@ d3.csv("data.csv", function(error, data){
 	}
 
 	init();
+	var windowWidth = $(window).width();
 	$( window ).resize(function() {
-      	d3.selectAll("#sidebarContainer *").remove()
-      	d3.selectAll("#graphContainer *").remove()
-      	d3.selectAll(".cityRemove").remove()
-		init()
+		if ($(window).width() != windowWidth) {
+			windowWidth = $(window).width();
+
+	      	d3.selectAll("#sidebarContainer *").remove()
+	      	d3.selectAll("#graphContainer *").remove()
+	      	d3.selectAll(".cityRemove").remove()
+			init()
+		}
 	})
 })
 
