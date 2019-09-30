@@ -12,7 +12,7 @@ function addLineSeries(svg, x, y, indicator, isComparisonCity, isCityTop){
 		svg.selectAll(".comparison").remove()
 	}
 	var opacity = (isComparisonCity) ? 0 : 1;
-	var years = ["1980", "1990", "2000", "2013"]
+	var years = ["1990", "2000", "2010", "2015"]
 	for(var i = 0; i < years.length; i++){
 		if(i != (years.length -1)){
 			svg.append("line")
@@ -71,7 +71,7 @@ function updateLineSeries(svg, x, y, indicator){
 		colorClass = "rank"
 		newIndicator = "rank" + indicator + "inclusionindex"
 	}
-	var years = ["1980", "1990", "2000", "2013"]
+	var years = ["1990", "2000", "2010", "2015"]
 	for(var i = 0; i < years.length; i++){
 		if(i != (years.length -1)){
 			svg.selectAll(".changeLine." + colorClass + ".y" + i)
@@ -152,7 +152,7 @@ function mousemoveLineChart(svg, d, x, y, mouseX, indicator1, indicator2,formatS
 		}
 	}
 	svg.selectAll(".smallTT").remove()
-	var yrs = [1980, 1990, 2000, 2013]
+	var yrs = [1990, 2000, 2010, 2015]
 	var diffs = yrs.map(function(a){ return Math.abs(a- x.invert(mouseX))})
 	var year = yrs[diffs.indexOf(d3.min(diffs))]
 

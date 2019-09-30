@@ -156,7 +156,7 @@ function getVarName(year, inclusionType){
 }
 function getRankColor(rank){
 	var color = d3.scaleThreshold()
-    	.domain([0,45.666,45.666*2,45.666*3,45.666*4,45.666*5,274])
+    	.domain([0,45.666,45.666*2,45.666*3,45.666*4,45.666*5,2045])
     	.range(["#fff"].concat(COLORS));
     return color(rank)
 }
@@ -224,17 +224,14 @@ function leastSquares(xSeries, ySeries) {
 
 
 
-d3.csv("data.csv", function(error, data){
+d3.csv("data/data.csv", function(error, data){
 	data.forEach(function(d){
-		d[0] = +d.lon;
-		d[1] = +d.lat;
+		// console.log(d)
+		d[0] = 1;
+		d[1] = 1;
 		d.className = d.place.toLowerCase().replace(/[^\w\s]+/g, "").replace(/\s/g,"_") + "_" + d.stateabrev;
 		d.place = d.place;
 		d.stateabrev = d.stateabrev;
-		d.rankeconhealth1980 = +d.rankeconhealth1980;
-		d.rankeconinclusionindex1980 = +d.rankeconinclusionindex1980;
-		d.rankraceinclusionindex1980 = +d.rankraceinclusionindex1980;
-		d.rankoverallinclusionindex1980 = +d.rankoverallinclusionindex1980;
 		d.rankeconhealth1990 = +d.rankeconhealth1990;
 		d.rankeconinclusionindex1990 = +d.rankeconinclusionindex1990;
 		d.rankraceinclusionindex1990 = +d.rankraceinclusionindex1990;
@@ -243,126 +240,106 @@ d3.csv("data.csv", function(error, data){
 		d.rankeconinclusionindex2000 = +d.rankeconinclusionindex2000;
 		d.rankraceinclusionindex2000 = +d.rankraceinclusionindex2000;
 		d.rankoverallinclusionindex2000 = +d.rankoverallinclusionindex2000;
-		d.rankeconhealth2013 = +d.rankeconhealth2013;
-		d.rankeconinclusionindex2013 = +d.rankeconinclusionindex2013;
-		d.rankraceinclusionindex2013 = +d.rankraceinclusionindex2013;
-		d.rankoverallinclusionindex2013 = +d.rankoverallinclusionindex2013;
-		d.pop1980 = +d.pop1980;
+		d.rankeconhealth2010 = +d.rankeconhealth2010;
+		d.rankeconinclusionindex2010 = +d.rankeconinclusionindex2010;
+		d.rankraceinclusionindex2010 = +d.rankraceinclusionindex2010;
+		d.rankoverallinclusionindex2010 = +d.rankoverallinclusionindex2010;
+		d.rankeconhealth2015 = +d.rankeconhealth2015;
+		d.rankeconinclusionindex2015 = +d.rankeconinclusionindex2015;
+		d.rankraceinclusionindex2015 = +d.rankraceinclusionindex2015;
+		d.rankoverallinclusionindex2015 = +d.rankoverallinclusionindex2015;
 		d.pop1990 = +d.pop1990;
 		d.pop2000 = +d.pop2000;
-		d.pop2013 = +d.pop2013;
-		d.logpop1980 =  Math.log10(+d.pop1980);
-		d.logpop1990 = Math.log10(+d.pop1990);
+		d.pop2010 = +d.pop2010;
+		d.pop2015 = +d.pop2015;
+		d.logpop1990 =  Math.log10(+d.pop1990);
 		d.logpop2000 = Math.log10(+d.pop2000);
-		d.logpop2013 = Math.log10(+d.pop2013);
+		d.logpop2010 = Math.log10(+d.pop2010);
+		d.logpop2015 = Math.log10(+d.pop2015);
 		d.everrecover = (d.everrecover == 1);
-		d.recoverstart = (d.recovperiod != "x") ? +(d.recovperiod.split("-")[0]) : 0;
-		d.recoverend = (d.recovperiod != "x") ? +(d.recovperiod.split("-")[1]) : 0;
-		d.consolidated = +d.consolidated;
-		d.pctemploymentchange1980 = +d.pctemploymentchange1980;
-		d.MEANpctemploymentchange1980 = +d.MEANpctemploymentchange1980;
-		d.pctemploymentchange1990 = +d.pctemploymentchange1990;
-		d.MEANpctemploymentchange1990 = +d.MEANpctemploymentchange1990;
-		d.pctemploymentchange2000 = +d.pctemploymentchange2000;
-		d.MEANpctemploymentchange2000 = +d.MEANpctemploymentchange2000;
-		d.pctemploymentchange2013 = +d.pctemploymentchange2013;
-		d.MEANpctemploymentchange2013 = +d.MEANpctemploymentchange2013;
-		d.unemprate1980 = +d.unemprate1980;
-		d.MEANunemprate1980 = +d.MEANunemprate1980;
+		d.recoverstart = 0;
+		d.recoverend = 0;
+		d.consolidated = 0;
 		d.unemprate1990 = +d.unemprate1990;
 		d.MEANunemprate1990 = +d.MEANunemprate1990;
 		d.unemprate2000 = +d.unemprate2000;
 		d.MEANunemprate2000 = +d.MEANunemprate2000;
-		d.unemprate2013 = +d.unemprate2013;
-		d.MEANunemprate2013 = +d.MEANunemprate2013;
-		d.vacancyrate1980 = +d.vacancyrate1980;
-		d.MEANvacancyrate1980 = +d.MEANvacancyrate1980;
+		d.unemprate2010 = +d.unemprate2010;
+		d.MEANunemprate2010 = +d.MEANunemprate2010;
+		d.unemprate2015 = +d.unemprate2015;
+		d.MEANunemprate2015 = +d.MEANunemprate2015;
 		d.vacancyrate1990 = +d.vacancyrate1990;
 		d.MEANvacancyrate1990 = +d.MEANvacancyrate1990;
 		d.vacancyrate2000 = +d.vacancyrate2000;
 		d.MEANvacancyrate2000 = +d.MEANvacancyrate2000;
-		d.vacancyrate2013 = +d.vacancyrate2013;
-		d.MEANvacancyrate2013 = +d.MEANvacancyrate2013;
-		d.medfamincome1980 = +d.medfamincome1980;
-		d.MEANmedfamincome1980 = +d.MEANmedfamincome1980;
+		d.vacancyrate2010 = +d.vacancyrate2010;
+		d.MEANvacancyrate2010 = +d.MEANvacancyrate2010;
+		d.vacancyrate2015 = +d.vacancyrate2015;
+		d.MEANvacancyrate2015 = +d.MEANvacancyrate2015;
 		d.medfamincome1990 = +d.medfamincome1990;
 		d.MEANmedfamincome1990 = +d.MEANmedfamincome1990;
 		d.medfamincome2000 = +d.medfamincome2000;
 		d.MEANmedfamincome2000 = +d.MEANmedfamincome2000;
-		d.medfamincome2013 = +d.medfamincome2013;
-		d.MEANmedfamincome2013 = +d.MEANmedfamincome2013;
-		d.Citypctnonwhite1980 = +d.Citypctnonwhite1980;
-		d.MEANCitypctnonwhite1980 = +d.MEANCitypctnonwhite1980;
+		d.medfamincome2010 = +d.medfamincome2010;
+		d.MEANmedfamincome2010 = +d.MEANmedfamincome2010;
+		d.medfamincome2015 = +d.medfamincome2015;
+		d.MEANmedfamincome2015 = +d.MEANmedfamincome2015;
 		d.Citypctnonwhite1990 = +d.Citypctnonwhite1990;
 		d.MEANCitypctnonwhite1990 = +d.MEANCitypctnonwhite1990;
 		d.Citypctnonwhite2000 = +d.Citypctnonwhite2000;
 		d.MEANCitypctnonwhite2000 = +d.MEANCitypctnonwhite2000;
-		d.Citypctnonwhite2013 = +d.Citypctnonwhite2013;
-		d.MEANCitypctnonwhite2013 = +d.MEANCitypctnonwhite2013;
-		d.RacialSeg1980 = +d.RacialSeg1980;
-		d.MEANRacialSeg1980 = +d.MEANRacialSeg1980;
-		d.RacialSeg1990 = +d.RacialSeg1990;
-		d.MEANRacialSeg1990 = +d.MEANRacialSeg1990;
-		d.RacialSeg2000 = +d.RacialSeg2000;
-		d.MEANRacialSeg2000 = +d.MEANRacialSeg2000;
-		d.RacialSeg2013 = +d.RacialSeg2013;
-		d.MEANRacialSeg2013 = +d.MEANRacialSeg2013;
-		d.hogap1980 = +d.hogap1980 * 100;
-		d.MEANhogap1980 = +d.MEANhogap1980 * 100;
+		d.Citypctnonwhite2010 = +d.Citypctnonwhite2010;
+		d.MEANCitypctnonwhite2010 = +d.MEANCitypctnonwhite2010;
+		d.Citypctnonwhite2015 = +d.Citypctnonwhite2015;
+		d.MEANCitypctnonwhite2015 = +d.MEANCitypctnonwhite2015;
 		d.hogap1990 = +d.hogap1990 * 100;
 		d.MEANhogap1990 = +d.MEANhogap1990 * 100;
 		d.hogap2000 = +d.hogap2000 * 100;
 		d.MEANhogap2000 = +d.MEANhogap2000 * 100;
-		d.hogap2013 = +d.hogap2013 * 100;
-		d.MEANhogap2013 = +d.MEANhogap2013 * 100;
-		d.povgap1980 = +d.povgap1980 * 100;
-		d.MEANpovgap1980 = +d.MEANpovgap1980 * 100;
+		d.hogap2010 = +d.hogap2010 * 100;
+		d.MEANhogap2010 = +d.MEANhogap2010 * 100;
+		d.hogap2015 = +d.hogap2015 * 100;
+		d.MEANhogap2015 = +d.MEANhogap2015 * 100;
 		d.povgap1990 = +d.povgap1990 * 100;
 		d.MEANpovgap1990 = +d.MEANpovgap1990 * 100;
 		d.povgap2000 = +d.povgap2000 * 100;
 		d.MEANpovgap2000 = +d.MEANpovgap2000 * 100;
-		d.povgap2013 = +d.povgap2013 * 100;
-		d.MEANpovgap2013 = +d.MEANpovgap2013 * 100;
-		d.racialeducationgap1980 = +d.racialeducationgap1980 * 100;
-		d.MEANracialeducationgap1980 = +d.MEANracialeducationgap1980 * 100;
+		d.povgap2010 = +d.povgap2010 * 100;
+		d.MEANpovgap2010 = +d.MEANpovgap2010 * 100;
+		d.povgap2015 = +d.povgap2015 * 100;
+		d.MEANpovgap2015 = +d.MEANpovgap2015 * 100;
 		d.racialeducationgap1990 = +d.racialeducationgap1990 * 100;
 		d.MEANracialeducationgap1990 = +d.MEANracialeducationgap1990 * 100;
 		d.racialeducationgap2000 = +d.racialeducationgap2000 * 100;
 		d.MEANracialeducationgap2000 = +d.MEANracialeducationgap2000 * 100;
-		d.racialeducationgap2013 = +d.racialeducationgap2013 * 100;
-		d.MEANracialeducationgap2013 = +d.MEANracialeducationgap2013 * 100;
-		d.incseg1980 = +d.incseg1980;
-		d.MEANincseg1980 = +d.MEANincseg1980;
-		d.incseg1990 = +d.incseg1990;
-		d.MEANincseg1990 = +d.MEANincseg1990;
-		d.incseg2000 = +d.incseg2000;
-		d.MEANincseg2000 = +d.MEANincseg2000;
-		d.incseg2013 = +d.incseg2013;
-		d.MEANincseg2013 = +d.MEANincseg2013;
-		d.rentburden1980 = +d.rentburden1980;
-		d.MEANrentburden1980 = +d.MEANrentburden1980;
+		d.racialeducationgap2010 = +d.racialeducationgap2010 * 100;
+		d.MEANracialeducationgap2010 = +d.MEANracialeducationgap2010 * 100;
+		d.racialeducationgap2015 = +d.racialeducationgap2015 * 100;
+		d.MEANracialeducationgap2015 = +d.MEANracialeducationgap2015 * 100;
 		d.rentburden1990 = +d.rentburden1990;
 		d.MEANrentburden1990 = +d.MEANrentburden1990;
 		d.rentburden2000 = +d.rentburden2000;
 		d.MEANrentburden2000 = +d.MEANrentburden2000;
-		d.rentburden2013 = +d.rentburden2013;
-		d.MEANrentburden2013 = +d.MEANrentburden2013;
-		d.workingpoor1980 = +d.workingpoor1980;
-		d.MEANworkingpoor1980 = +d.MEANworkingpoor1980;
+		d.rentburden2010 = +d.rentburden2010;
+		d.MEANrentburden2010 = +d.MEANrentburden2010;
+		d.rentburden2015 = +d.rentburden2015;
+		d.MEANrentburden2015 = +d.MEANrentburden2015;
 		d.workingpoor1990 = +d.workingpoor1990;
 		d.MEANworkingpoor1990 = +d.MEANworkingpoor1990;
 		d.workingpoor2000 = +d.workingpoor2000;
 		d.MEANworkingpoor2000 = +d.MEANworkingpoor2000;
-		d.workingpoor2013 = +d.workingpoor2013;
-		d.MEANworkingpoor2013 = +d.MEANworkingpoor2013;
-		d.pct1619notinschool1980 = +d.pct1619notinschool1980;
-		d.MEANpct1619notinschool1980 = +d.MEANpct1619notinschool1980;
+		d.workingpoor2010 = +d.workingpoor2010;
+		d.MEANworkingpoor2010 = +d.MEANworkingpoor2010;
+		d.workingpoor2015 = +d.workingpoor2015;
+		d.MEANworkingpoor2015 = +d.MEANworkingpoor2015;
 		d.pct1619notinschool1990 = +d.pct1619notinschool1990;
 		d.MEANpct1619notinschool1990 = +d.MEANpct1619notinschool1990;
 		d.pct1619notinschool2000 = +d.pct1619notinschool2000;
 		d.MEANpct1619notinschool2000 = +d.MEANpct1619notinschool2000;
-		d.pct1619notinschool2013 = +d.pct1619notinschool2013;
-		d.MEANpct1619notinschool2013 = +d.MEANpct1619notinschool2013;
+		d.pct1619notinschool2010 = +d.pct1619notinschool2010;
+		d.MEANpct1619notinschool2010 = +d.MEANpct1619notinschool2010;
+		d.pct1619notinschool2015 = +d.pct1619notinschool2015;
+		d.MEANpct1619notinschool2015 = +d.MEANpct1619notinschool2015;
 
 
 	})
@@ -372,7 +349,7 @@ d3.csv("data.csv", function(error, data){
 		d3.select(".questionMenu.map span")
 			.text(backText)
 
-		setYear("2013");
+		setYear("2015");
 		setInclusionType("overall");
 		setScaleType("log");
 		buildSearchBox(d3.select("#combobox"),"combobox", false, null);
@@ -632,7 +609,7 @@ d3.csv("data.csv", function(error, data){
 
 
 		var g = svg.selectAll(".yearSelect")
-			.data(["1980","1990","2000","2013"])
+			.data(["1990","2000","2010","2015"])
 			.enter()
 			.append("g")
 			.attr("transform", function(d, i){
@@ -812,7 +789,7 @@ d3.csv("data.csv", function(error, data){
 	function buildLegend(container, section){
 		container.append("div")
 			.attr("id","legend-title")
-			.text("2013 overall inclusion")
+			.text("2015 overall inclusion")
 		var dotContainer = container.append("div")
 			.attr("id","legend-dots")
 		dotContainer.selectAll(".legendDot")
@@ -955,7 +932,7 @@ d3.csv("data.csv", function(error, data){
 				var varName = getVarName(year, inclusionType)
 				var fullTypes = {"overall": "overall inclusion", "econ": "economic inclusion", "race": "racial inclusion"}
 
-				return "Rank: " + d[varName] + " of 274 cities on " + fullTypes[inclusionType] + " in " + year
+				return "Rank: " + d[varName] + " of 2045 cities on " + fullTypes[inclusionType] + " in " + year
 			})
 
 		tt.append("div")
@@ -991,9 +968,9 @@ d3.csv("data.csv", function(error, data){
 		var yMax;
 		if(section == "size"){
 			if(scaleType == "linear"){
-				yMax = d3.max(data, function(d){ return d["pop" + "2013"]})
+				yMax = d3.max(data, function(d){ return d["pop" + "2015"]})
 			}else{
-				yMax = d3.max(data, function(d){ return d["logpop" + "2013"] })
+				yMax = d3.max(data, function(d){ return d["logpop" + "2015"] })
 			}
 		}else{
 			yMax = 0;
@@ -1001,16 +978,16 @@ d3.csv("data.csv", function(error, data){
 		var yMin;
 		if(section == "size"){
 			if(scaleType == "linear"){
-				yMin = d3.min(data, function(d){ return d["pop" + "1980"]})
+				yMin = d3.min(data, function(d){ return d["pop" + "1990"]})
 			}else{
-				yMin = d3.min(data, function(d){ return d["logpop" + "1980"] })
+				yMin = d3.min(data, function(d){ return d["logpop" + "1990"] })
 			}
 
 		}else{
-			yMin = 274;
+			yMin = 2045;
 		}
 
-		var x = d3.scaleLinear().range([margin.left, width]).domain([ 274, 0])
+		var x = d3.scaleLinear().range([margin.left, width]).domain([ 2045, 0])
 		var y = d3.scaleLinear().range([height, margin.bottom]).domain([yMin,yMax])
 		return [x,y]
 	}
@@ -1069,7 +1046,7 @@ d3.csv("data.csv", function(error, data){
 			
 			var x1 = 1;
 			var y1 = leastSquaresCoeff[0] + leastSquaresCoeff[1];
-			var x2 = 274;
+			var x2 = 2045;
 			var y2 = leastSquaresCoeff[0] * xVals.length + leastSquaresCoeff[1];
 			var trendData = [[x1,y1,x2,y2]];
 		}
@@ -1091,12 +1068,12 @@ d3.csv("data.csv", function(error, data){
 			scatterSvg.append("g")
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + (height) + ")")
-				.call(d3.axisBottom(x).tickValues([1,50,100,150,200,274]).tickSize(-height+margin.bottom));
+				.call(d3.axisBottom(x).tickValues([1,50,100,150,200,2045]).tickSize(-height+margin.bottom));
 		}else{
 			scatterSvg.append("g")
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + (40) + ")")
-				.call(d3.axisTop(x).tickValues([1,50,100,150,200,274]).tickSize(-height+margin.bottom - 24));		
+				.call(d3.axisTop(x).tickValues([1,50,100,150,200,2045]).tickSize(-height+margin.bottom - 24));		
 		}
 
 		container.style("position","relative")
@@ -1149,7 +1126,7 @@ d3.csv("data.csv", function(error, data){
 			scatterSvg.append("g")
 				.attr("class", "axis axis--y")
 				.attr("transform", "translate(" + (width + 10) + ",0)")
-				.call(d3.axisRight(y).tickValues([1,50,100,150,200,274]).tickSize(-width-20));	
+				.call(d3.axisRight(y).tickValues([1,50,100,150,200,2045]).tickSize(-width-20));	
 		}
 
 
@@ -1174,7 +1151,7 @@ d3.csv("data.csv", function(error, data){
 			.enter()
 			.append("circle")
 			.attr("class", function(d){
-				var rank = COLORS.reverse().indexOf(getRankColor(d.rankoverallinclusionindex2013))
+				var rank = COLORS.reverse().indexOf(getRankColor(d.rankoverallinclusionindex2015))
 				return "dot " + d.className + " r" + rank;
 			})
 			.attr("r", getDotRadius())
@@ -1189,7 +1166,7 @@ d3.csv("data.csv", function(error, data){
 				}
 			})
 			.attr("fill", function(d){
-				return getRankColor(d["rankoverallinclusionindex2013"])
+				return getRankColor(d["rankoverallinclusionindex2015"])
 			})
 			.style("opacity", .8)
 
@@ -1282,6 +1259,7 @@ d3.csv("data.csv", function(error, data){
 			
 	}
 	function buildHeader(data, city, print){
+		console.log(data)
 		var text = "",
 			datum = {}
 		if(city == false){
@@ -1292,15 +1270,15 @@ d3.csv("data.csv", function(error, data){
 			var baseText = (print) ? allText.printHeader : []
 			datum = data.filter(function(o){ return o.className == city })[0]
 			d3.select("#titleContainer #title").html(datum.place + ", " + datum.stateabrev)
-			d3.select("#titleContainer #datePublished").text("Population in 2013: " + d3.format(",")(datum.pop2013)).style("display","block")
-			if(datum.rankoverallinclusionindex2000 == datum.rankoverallinclusionindex2013){
-				if(datum.rankeconhealth2000 == datum.rankeconhealth2013){
+			d3.select("#titleContainer #datePublished").text("Population in 2015: " + d3.format(",")(datum.pop2015)).style("display","block")
+			if(datum.rankoverallinclusionindex2010 == datum.rankoverallinclusionindex2015){
+				if(datum.rankeconhealth2010 == datum.rankeconhealth2015){
 					text = baseText.concat(allText.cityHeaderNoChange)
 				}else{
 					text = baseText.concat(allText.cityHeaderNoOverallChange)
 				}
 			}
-			else if(datum.rankeconhealth2000 == datum.rankeconhealth2013){
+			else if(datum.rankeconhealth2010 == datum.rankeconhealth2015){
 				text = baseText.concat(allText.cityHeaderNoHealthChange)
 			}else{
 				text = baseText.concat(allText.cityHeaderBothChange)
@@ -1320,40 +1298,40 @@ d3.csv("data.csv", function(error, data){
 			.html(function(d){ return d.place })
 		ps.selectAll(".ch-overallRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankoverallinclusionindex2013 })
+			.html(function(d){ return d.rankoverallinclusionindex2015 })
 		ps.selectAll(".ch-econRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankeconinclusionindex2013 })
+			.html(function(d){ return d.rankeconinclusionindex2015 })
 		ps.selectAll(".ch-racialRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankraceinclusionindex2013 })
+			.html(function(d){ return d.rankraceinclusionindex2015 })
 		ps.selectAll(".ch-healthRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankeconhealth2013 })
+			.html(function(d){ return d.rankeconhealth2015 })
 		ps.selectAll(".ch-overallRank00")
 			.datum(datum)
-			.html(function(d){ return d.rankoverallinclusionindex2000 })
+			.html(function(d){ return d.rankoverallinclusionindex2010 })
 		ps.selectAll(".ch-healthRank00")
 			.datum(datum)
-			.html(function(d){ return d.rankeconhealth2000 })
+			.html(function(d){ return d.rankeconhealth2010 })
 		ps.selectAll(".ch-healthWord")
 			.datum(datum)
 			.html(function(d){
-				var baseWord = (d.rankeconhealth2013 < d.rankeconhealth2000) ? "increased" : "decreased",
-					slightWord = (Math.abs(d.rankeconhealth2013 - d.rankeconhealth2000) <= 2) ? " slightly" : ""
+				var baseWord = (d.rankeconhealth2015 < d.rankeconhealth2010) ? "increased" : "decreased",
+					slightWord = (Math.abs(d.rankeconhealth2015 - d.rankeconhealth2010) <= 2) ? " slightly" : ""
 				return baseWord + slightWord;
 			})
 		ps.selectAll(".ch-overallWord")
 			.datum(datum)
 			.html(function(d){
-				var baseWord = (d.rankoverallinclusionindex2013 < d.rankoverallinclusionindex2000) ? "more" : "less",
-					slightWord = (Math.abs(d.rankoverallinclusionindex2013 - d.rankoverallinclusionindex2000) <= 2) ? "slightly " : ""
+				var baseWord = (d.rankoverallinclusionindex2015 < d.rankoverallinclusionindex2010) ? "more" : "less",
+					slightWord = (Math.abs(d.rankoverallinclusionindex2015 - d.rankoverallinclusionindex2010) <= 2) ? "slightly " : ""
 				return slightWord + baseWord
 
 			})
 		ps.selectAll(".ch-overallWord2")
 			.datum(datum)
-			.html(function(d){ return (d.rankoverallinclusionindex2013 < d.rankoverallinclusionindex2000) ? "rising" : "falling" })
+			.html(function(d){ return (d.rankoverallinclusionindex2015 < d.rankoverallinclusionindex2010) ? "rising" : "falling" })
 		if(city != false){
 			var titleNav = d3.select("#titleContainer").append("div").attr("id","titleNavContainer").attr("class","cityRemove")
 			titleNav.append("a")
@@ -1718,14 +1696,14 @@ d3.csv("data.csv", function(error, data){
 		
 		var x1 = 1;
 		var y1 = leastSquaresCoeff[0] + leastSquaresCoeff[1];
-		var x2 = 274;
+		var x2 = 2045;
 		var y2 = leastSquaresCoeff[0] * xVals.length + leastSquaresCoeff[1];
 		var trendData = [[x1,y1,x2,y2]];
 
 		var fitLine = scatterSvg.selectAll(".fitLine")
 			.data(trendData)
 			.transition()
-			.duration(500 + 274*2)
+			.duration(500 + 2045*2)
 			.attr("y1", function(d) { return y(d[1]); })
 			.attr("y2", function(d) { return y(d[3]); })
 
@@ -1894,7 +1872,7 @@ d3.csv("data.csv", function(error, data){
 
 		var fitLine = d3.selectAll(".fitLine")
 			.transition()
-			.duration(500 + 274*2)
+			.duration(500 + 2045*2)
 			.attr("d", line(lineData))
 
 		fitLine.node().parentNode.appendChild(fitLine.node())
@@ -1983,8 +1961,8 @@ d3.csv("data.csv", function(error, data){
 		var w = getSmallMultSize() - marginSmall.left - marginSmall.right;
 		var h = getSmallMultSize()*heightScalar - marginSmall.left - marginSmall.right
 
-		var x = d3.scaleLinear().range([marginSmall.left, getSmallMultSize()-marginSmall.right]).domain([1980, 2013])
-		var y = d3.scaleLinear().range([getSmallMultSize()*heightScalar - marginSmall.bottom, marginSmall.top]).domain([274,0])
+		var x = d3.scaleLinear().range([marginSmall.left, getSmallMultSize()-marginSmall.right]).domain([1990, 2015])
+		var y = d3.scaleLinear().range([getSmallMultSize()*heightScalar - marginSmall.bottom, marginSmall.top]).domain([2045,0])
 
 		graphContainer.style("height", ((Math.ceil(changeData.length/getSmallMultRowCount())) * (getSmallMultSize() + SMALL_MULT_BOTTOM_PADDING) )  + "px")
 
@@ -2036,11 +2014,11 @@ d3.csv("data.csv", function(error, data){
 		svg.append("g")
 			.attr("class", "axis axis--y")
 			.attr("transform", "translate(" + (getSmallMultSize() - 20) + ",0)")
-			.call(d3.axisLeft(y).tickValues([1,100,200,274]).tickSize(getSmallMultSize() - 50));
+			.call(d3.axisLeft(y).tickValues([1,500,1500,2045]).tickSize(getSmallMultSize() - 50));
 		svg.append("g")
 			.attr("class", "axis axis--x")
 			.attr("transform", "translate(0," + marginSmall.top + ")")
-			.call(d3.axisTop(x).tickValues([1980, 1990, 2000, 2013]).tickFormat(d3.format(".0f")));
+			.call(d3.axisTop(x).tickValues([1990, 2000, 2010, 2015]).tickFormat(d3.format(".0f")));
 	
 		svg.on("mousemove", function(d){
 			mousemoveLineChart(d3.select(this), d, x, y, d3.event.offsetX, "rankeconhealth", "rank" + getInclusionType() + "inclusionindex",".0f", true, false)			
@@ -2252,9 +2230,9 @@ d3.csv("data.csv", function(error, data){
 			hTop = topSize*heightScalar - marginSmall.left - marginSmall.right,
 			wMore = moreSize - marginMore.left* - marginMore.right,
 			hMore = moreSize*heightScalar - marginMore.left - marginMore.right - 40,
-			xTop = d3.scaleLinear().range([marginSmall.left, topSize-marginSmall.right]).domain([1980, 2013]),
-			xMore = d3.scaleLinear().range([marginMore.left, moreSize-marginMore.right]).domain([1980, 2013]),
-			yTop = d3.scaleLinear().range([topSize*heightScalar - marginSmall.bottom, marginSmall.top]).domain([274,0]);
+			xTop = d3.scaleLinear().range([marginSmall.left, topSize-marginSmall.right]).domain([1990, 2015]),
+			xMore = d3.scaleLinear().range([marginMore.left, moreSize-marginMore.right]).domain([1990, 2015]),
+			yTop = d3.scaleLinear().range([topSize*heightScalar - marginSmall.bottom, marginSmall.top]).domain([2045,0]);
 
 
 		var topIndicators = ["overall","econ","race","econHealth"]
@@ -2289,11 +2267,11 @@ d3.csv("data.csv", function(error, data){
 			svg.append("g")
 				.attr("class", "axis axis--y")
 				.attr("transform", "translate(" + (topSize - 20) + ",0)")
-				.call(d3.axisLeft(yTop).tickValues([1,100,200,274]).tickSize(topSize - 50));
+				.call(d3.axisLeft(yTop).tickValues([1,500,1000,1500,2045]).tickSize(topSize - 50));
 			svg.append("g")
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + marginSmall.top + ")")
-				.call(d3.axisTop(xTop).tickValues([1980, 1990, 2000, 2013]).tickFormat(d3.format(".0f")));
+				.call(d3.axisTop(xTop).tickValues([1990, 2000, 2010, 2015]).tickFormat(d3.format(".0f")));
 		
 			svg.on("mousemove", function(d){
 				var ind = (d3.select(this).attr("data-indicator") == "econHealth") ? "rankeconhealth" : "rank" + d3.select(this).attr("data-indicator") + "inclusionindex"
@@ -2313,22 +2291,19 @@ d3.csv("data.csv", function(error, data){
 		}
 
 		var moreIndicators = [
-					["pctemploymentchange","Employment growth","econHealth", "Percent change",".0%"],
 					["unemprate","Unemployment rate","econHealth", "Percent",".0%"],
 					["vacancyrate","Housing vacancy rate","econHealth", "Percent",".0%"],
 					["medfamincome","Median family income","econHealth","Dollars","$.2s"],
 					["Citypctnonwhite","People of color as a share of the population","race","Percent",".0%"],
-					["RacialSeg","Racial segregation","race","Index",".0f"],
 					["hogap","Racial homeownership gap","race","Percentage point difference",".0f"],
 					["povgap","Racial poverty gap","race","Percentage point difference",".0f"],
 					["racialeducationgap","Racial education gap","race","Percentage point difference",".0f"],
-					["incseg","Income segregation","econ","Index",".2f"],
 					["rentburden","Rent-burdened residents","econ","Percent",".0%"],
 					["workingpoor","Working-poor families","econ","Percent",".0%"],
 					["pct1619notinschool","High school drop-out rate","econ","Percent",".0%"]
 			]
 
-		var flipIndicators = ["pctemploymentchange","medfamincome","Citypctnonwhite"]
+		var flipIndicators = ["medfamincome","Citypctnonwhite"]
 
 		var selectedType = (getInclusionType() == "overall") ? "econ" : getInclusionType();
 		var navTitles = {"econHealth": "Economic health", "econ": "Economic inclusion", "race": "Racial inclusion"}
@@ -2395,14 +2370,14 @@ d3.csv("data.csv", function(error, data){
 		
 		function getBounds(ind){
 			var bounds = [
-				datum[ind + "1980"],
 				datum[ind + "1990"],
 				datum[ind + "2000"],
-				datum[ind + "2013"],
-				datum["MEAN" + ind + "1980"],
+				datum[ind + "2010"],
+				datum[ind + "2015"],
 				datum["MEAN" + ind + "1990"],
 				datum["MEAN" + ind + "2000"],
-				datum["MEAN" + ind + "2013"],
+				datum["MEAN" + ind + "2010"],
+				datum["MEAN" + ind + "2015"],
 			]
 			return bounds
 		}
@@ -2504,7 +2479,7 @@ d3.csv("data.csv", function(error, data){
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + (hMore + marginMore.top + 50) + ")")
 				.call(d3.axisBottom(xMore)
-					.tickValues([1980, 1990, 2000, 2013])
+					.tickValues([1990, 2000, 2010, 2015])
 					.tickFormat(function(t){
 						var stringTick = String(t)
 						if(print){
@@ -2529,7 +2504,7 @@ d3.csv("data.csv", function(error, data){
 
 
 
-			var years = ["1980", "1990", "2000", "2013"]
+			var years = ["1990", "2000", "2010", "2015"]
 
 			for(var j = 0; j < years.length; j++){
 				if(j != (years.length -1)){
