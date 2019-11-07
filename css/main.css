@@ -1511,7 +1511,7 @@ body.print #topContainer{
 body.print #title, body.print #subtitle{
 	display: inline-block;
 	font-size: 28px;
-	width: auto;
+	width: 100%;
 	margin-bottom: 8px;
 	margin-top: 12px;
 }
@@ -1559,9 +1559,7 @@ body.print .moreDiv{
 body.print .moreDiv .chartSubtitle {
     margin-bottom: 0px;
 }
-body.print .moreDiv.racialeducationgap{
-	margin-top: -40px;
-}
+
 body.print #moreLegendContainer{
 	right: -530px;
     top: 0px;
@@ -1652,7 +1650,7 @@ body.print #customPrintSpacer{
 }
 body.print #printCover{
 	position: fixed;
-	display: block;
+	/*display: block;*/
 	background: transparent;
 	top: 0px;
 	left: 0px;
@@ -1660,13 +1658,8 @@ body.print #printCover{
 	height: 100%;
 	z-index: 999;
 }
-@media print{
-  @page {
-    size: 210mm 297mm; /* portrait 
-    /* you can also specify margins here: */
-    margin: 15mm;	
-   /*margin-right: 45mm;  for compatibility with both A4 and Letter */
-  }
+/*@media print{*/
+/**/
    body.print a:after{
    	 content:" (" attr(href) ") ";font-size:0.8em;font-weight:normal;
    }
@@ -1674,7 +1667,15 @@ body.print #printCover{
    	content: none !important;
    }
    body.print .page-break { height:0; page-break-after:always; margin:0; border-top:none; }
+/*}*/
+
+
+
+.errorBar{
+	stroke-width: 2;
+	stroke: red;
 }
 
-
-
+.changeDot, .changeLine{
+	opacity: .2
+}
