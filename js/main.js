@@ -1,5 +1,5 @@
 // var DATA_URL = "data/data.csv";
-
+var DOT_RADIUS = 3;
 var SMALL_MULT_RIGHT_PADDING = 17;
 var SMALL_MULT_BOTTOM_PADDING = 22;
 var COLORS = ["#0a4c6a","#46abdb","#cfe8f3","#fff2cf","#fccb41","#ca5800"]
@@ -292,6 +292,13 @@ d3.csv("data/data.csv", function(error, data){
 		d.MEANmedfamincome2010 = +d.MEANmedfamincome2010;
 		d.medfamincome2015 = +d.medfamincome2015;
 		d.MEANmedfamincome2015 = +d.MEANmedfamincome2015;
+		
+
+		d.lower_medfamincome2015 = +d.lower_medfamincome2015;
+		d.lower_medfamincome2010 = +d.lower_medfamincome2010;
+		d.upper_medfamincome2015 = +d.upper_medfamincome2015;
+		d.upper_medfamincome2010 = +d.upper_medfamincome2010;
+
 		d.Citypctnonwhite1990 = +d.Citypctnonwhite1990;
 		d.MEANCitypctnonwhite1990 = +d.MEANCitypctnonwhite1990;
 		d.Citypctnonwhite2000 = +d.Citypctnonwhite2000;
@@ -1295,7 +1302,6 @@ d3.csv("data/data.csv", function(error, data){
 			
 	}
 	function buildHeader(data, city, print){
-		console.log(data)
 		var text = "",
 			datum = {}
 		if(city == false){
@@ -2062,7 +2068,7 @@ d3.csv("data/data.csv", function(error, data){
 		.on("mouseout", function(){
 			d3.select(this).selectAll(".changeDot")
 				.transition()
-				.attr("r", 5)
+				.attr("r", DOT_RADIUS)
 			d3.selectAll(".smallTT").remove()
 		})
 		addCorrelationRect(svg, x, y, inclusionType, "econHealth");
@@ -2316,7 +2322,7 @@ d3.csv("data/data.csv", function(error, data){
 			.on("mouseout", function(){
 				d3.select(this).selectAll(".changeDot")
 					.transition()
-					.attr("r", 5)
+					.attr("r", DOT_RADIUS)
 				d3.selectAll(".smallTT").remove()
 			})
 			topDiv.append("div")
@@ -2406,6 +2412,10 @@ d3.csv("data/data.csv", function(error, data){
 		
 		function getBounds(ind){
 			var bounds = [
+				datum["lower_" + ind + "2010"],
+				datum["upper_" + ind + "2010"],
+				datum["lower_" + ind + "2015"],
+				datum["upper_" + ind + "2015"],
 				datum[ind + "1990"],
 				datum[ind + "2000"],
 				datum[ind + "2010"],
@@ -2413,8 +2423,9 @@ d3.csv("data/data.csv", function(error, data){
 				datum["MEAN" + ind + "1990"],
 				datum["MEAN" + ind + "2000"],
 				datum["MEAN" + ind + "2010"],
-				datum["MEAN" + ind + "2015"],
+				datum["MEAN" + ind + "2015"]
 			]
+			console.log(ind, bounds, datum)
 			return bounds
 		}
 
@@ -2566,7 +2577,7 @@ d3.csv("data/data.csv", function(error, data){
 						return yMore(datum[moreIndicators[i][0] + years[j]])
 					})
 					.attr("r", function(){
-						return 5
+						return DOT_RADIUS
 					})
 
 				if(j != (years.length -1)){
@@ -2590,7 +2601,7 @@ d3.csv("data/data.csv", function(error, data){
 						return yMore(datum["MEAN" + moreIndicators[i][0] + years[j]])
 					})
 					.attr("r", function(){
-						return 5
+						return DOT_RADIUS
 					})
 				// console.log(years[j])
 				if(years[j] == "2010" || years[j] == "2015"){
@@ -2599,7 +2610,6 @@ d3.csv("data/data.csv", function(error, data){
 						.attr("x1", xMore(years[j]))
 						.attr("x2", xMore(years[j]))
 						.attr("y1", function(d){
-							console.log(datum)
 							return yMore(datum["lower_" + moreIndicators[i][0] + years[j]])
 						})
 						.attr("y2", function(d){

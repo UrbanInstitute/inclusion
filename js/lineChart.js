@@ -35,7 +35,7 @@ function addLineSeries(svg, x, y, indicator, isComparisonCity, isCityTop){
 				return y(d[newIndicator + years[i]])
 			})
 			.attr("r", function(){
-				return 5
+				return DOT_RADIUS
 			})
 			.style("opacity",opacity)
 
@@ -160,7 +160,7 @@ function mousemoveLineChart(svg, d, x, y, mouseX, indicator1, indicator2,formatS
 	svg.selectAll(".changeDot")
 		.transition()
 		.attr("r", function(){
-			return (svg.classed("y" + ind)) ? 8 : 5;
+			return (svg.classed("y" + ind)) ? 3 : 3;
 		})
 
 	var top, bottom;

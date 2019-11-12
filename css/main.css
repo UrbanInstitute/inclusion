@@ -1673,9 +1673,9 @@ body.print #printCover{
 
 .errorBar{
 	stroke-width: 2;
-	stroke: red;
+	stroke: #353535;
 }
 
 .changeDot, .changeLine{
-	opacity: .2
+	/*opacity: .2*/
 }
