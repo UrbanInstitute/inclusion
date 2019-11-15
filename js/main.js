@@ -226,7 +226,6 @@ function leastSquares(xSeries, ySeries) {
 
 d3.csv("data/data.csv", function(error, data){
 	data.forEach(function(d){
-		// console.log(d)
 		d[0] = 1;
 		d[1] = 1;
 		d.className = d.TablePlace.toLowerCase().replace(/[^\w\s]+/g, "").replace(/\s/g,"_") + "_" + d.stateabrev;
@@ -2060,7 +2059,7 @@ d3.csv("data/data.csv", function(error, data){
 		svg.append("g")
 			.attr("class", "axis axis--x")
 			.attr("transform", "translate(0," + marginSmall.top + ")")
-			.call(d3.axisTop(x).tickValues([1990, 2000, 2010, 2015]).tickFormat(d3.format(".0f")));
+			.call(d3.axisTop(x).tickValues([1990, 2000, 2011, 2015]).tickFormat(d3.format(".0f")));
 	
 		svg.on("mousemove", function(d){
 			mousemoveLineChart(d3.select(this), d, x, y, d3.event.offsetX, "rankeconhealth", "rank" + getInclusionType() + "inclusionindex",".0f", true, false)			
@@ -2310,10 +2309,15 @@ d3.csv("data/data.csv", function(error, data){
 				.attr("class", "axis axis--y")
 				.attr("transform", "translate(" + (topSize - 20) + ",0)")
 				.call(d3.axisLeft(yTop).tickValues([1,500,1000,1563]).tickSize(topSize - 50));
-			svg.append("g")
+			var smallXAxis = svg.append("g")
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + marginSmall.top + ")")
 				.call(d3.axisTop(xTop).tickValues([1990, 2000, 2010, 2015]).tickFormat(d3.format(".0f")));
+
+			smallXAxis.selectAll(".tick text")
+				.attr("dx", function(d, i){
+					return (d == 2010) ? -10 : 0
+				})
 		
 			svg.on("mousemove", function(d){
 				var ind = (d3.select(this).attr("data-indicator") == "econHealth") ? "rankeconhealth" : "rank" + d3.select(this).attr("data-indicator") + "inclusionindex"
@@ -2425,7 +2429,6 @@ d3.csv("data/data.csv", function(error, data){
 				datum["MEAN" + ind + "2010"],
 				datum["MEAN" + ind + "2015"]
 			]
-			console.log(ind, bounds, datum)
 			return bounds
 		}
 
@@ -2522,7 +2525,7 @@ d3.csv("data/data.csv", function(error, data){
 
 			}
 
-			moreSvg.append("g")
+			var smallXAxisIndicators = moreSvg.append("g")
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + (hMore + marginMore.top + 50) + ")")
 				.call(d3.axisBottom(xMore)
@@ -2536,6 +2539,11 @@ d3.csv("data/data.csv", function(error, data){
 						}
 					})
 				);
+
+			smallXAxisIndicators.selectAll(".tick text")
+				.attr("dx", function(d, i){
+					return (d == 2010) ? -4 : 0
+				})
 		
 			moreSvg.on("mousemove", function(d){
 				var newBounds = getBounds(d[0])
