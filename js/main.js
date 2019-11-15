@@ -156,7 +156,7 @@ function getVarName(year, inclusionType){
 }
 function getRankColor(rank){
 	var color = d3.scaleThreshold()
-    	.domain([0,45.666,45.666*2,45.666*3,45.666*4,45.666*5,2045])
+    	.domain([0,45.666,45.666*2,45.666*3,45.666*4,45.666*5,1563])
     	.range(["#fff"].concat(COLORS));
     return color(rank)
 }
@@ -229,8 +229,8 @@ d3.csv("data/data.csv", function(error, data){
 		// console.log(d)
 		d[0] = 1;
 		d[1] = 1;
-		d.className = d.place.toLowerCase().replace(/[^\w\s]+/g, "").replace(/\s/g,"_") + "_" + d.stateabrev;
-		d.place = d.place;
+		d.className = d.TablePlace.toLowerCase().replace(/[^\w\s]+/g, "").replace(/\s/g,"_") + "_" + d.stateabrev;
+		d.place = d.TablePlace;
 		d.stateabrev = d.stateabrev;
 		d.rankeconhealth1990 = +d.rankeconhealth1990;
 		d.rankeconinclusionindex1990 = +d.rankeconinclusionindex1990;
@@ -975,7 +975,7 @@ d3.csv("data/data.csv", function(error, data){
 				var varName = getVarName(year, inclusionType)
 				var fullTypes = {"overall": "overall inclusion", "econ": "economic inclusion", "race": "racial inclusion"}
 
-				return "Rank: " + d[varName] + " of 2045 cities on " + fullTypes[inclusionType] + " in " + year
+				return "Rank: " + d[varName] + " of 1563 cities on " + fullTypes[inclusionType] + " in " + year
 			})
 
 		tt.append("div")
@@ -1027,10 +1027,10 @@ d3.csv("data/data.csv", function(error, data){
 			}
 
 		}else{
-			yMin = 2045;
+			yMin = 1563;
 		}
 
-		var x = d3.scaleLinear().range([margin.left, width]).domain([ 2045, 0])
+		var x = d3.scaleLinear().range([margin.left, width]).domain([ 1563, 0])
 		var y = d3.scaleLinear().range([height, margin.bottom]).domain([yMin,yMax])
 		return [x,y]
 	}
@@ -1089,7 +1089,7 @@ d3.csv("data/data.csv", function(error, data){
 			
 			var x1 = 1;
 			var y1 = leastSquaresCoeff[0] + leastSquaresCoeff[1];
-			var x2 = 2045;
+			var x2 = 1563;
 			var y2 = leastSquaresCoeff[0] * xVals.length + leastSquaresCoeff[1];
 			var trendData = [[x1,y1,x2,y2]];
 		}
@@ -1111,12 +1111,12 @@ d3.csv("data/data.csv", function(error, data){
 			scatterSvg.append("g")
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + (height) + ")")
-				.call(d3.axisBottom(x).tickValues([1,50,100,150,200,2045]).tickSize(-height+margin.bottom));
+				.call(d3.axisBottom(x).tickValues([1,50,100,150,200,1563]).tickSize(-height+margin.bottom));
 		}else{
 			scatterSvg.append("g")
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + (40) + ")")
-				.call(d3.axisTop(x).tickValues([1,50,100,150,200,2045]).tickSize(-height+margin.bottom - 24));		
+				.call(d3.axisTop(x).tickValues([1,50,100,150,200,1563]).tickSize(-height+margin.bottom - 24));		
 		}
 
 		container.style("position","relative")
@@ -1169,7 +1169,7 @@ d3.csv("data/data.csv", function(error, data){
 			scatterSvg.append("g")
 				.attr("class", "axis axis--y")
 				.attr("transform", "translate(" + (width + 10) + ",0)")
-				.call(d3.axisRight(y).tickValues([1,50,100,150,200,2045]).tickSize(-width-20));	
+				.call(d3.axisRight(y).tickValues([1,50,100,150,200,1563]).tickSize(-width-20));	
 		}
 
 
@@ -1738,14 +1738,14 @@ d3.csv("data/data.csv", function(error, data){
 		
 		var x1 = 1;
 		var y1 = leastSquaresCoeff[0] + leastSquaresCoeff[1];
-		var x2 = 2045;
+		var x2 = 1563;
 		var y2 = leastSquaresCoeff[0] * xVals.length + leastSquaresCoeff[1];
 		var trendData = [[x1,y1,x2,y2]];
 
 		var fitLine = scatterSvg.selectAll(".fitLine")
 			.data(trendData)
 			.transition()
-			.duration(500 + 2045*2)
+			.duration(500 + 1563*2)
 			.attr("y1", function(d) { return y(d[1]); })
 			.attr("y2", function(d) { return y(d[3]); })
 
@@ -1914,7 +1914,7 @@ d3.csv("data/data.csv", function(error, data){
 
 		var fitLine = d3.selectAll(".fitLine")
 			.transition()
-			.duration(500 + 2045*2)
+			.duration(500 + 1563*2)
 			.attr("d", line(lineData))
 
 		fitLine.node().parentNode.appendChild(fitLine.node())
@@ -2004,7 +2004,7 @@ d3.csv("data/data.csv", function(error, data){
 		var h = getSmallMultSize()*heightScalar - marginSmall.left - marginSmall.right
 
 		var x = d3.scaleLinear().range([marginSmall.left, getSmallMultSize()-marginSmall.right]).domain([1990, 2015])
-		var y = d3.scaleLinear().range([getSmallMultSize()*heightScalar - marginSmall.bottom, marginSmall.top]).domain([2045,0])
+		var y = d3.scaleLinear().range([getSmallMultSize()*heightScalar - marginSmall.bottom, marginSmall.top]).domain([1563,0])
 
 		graphContainer.style("height", ((Math.ceil(changeData.length/getSmallMultRowCount())) * (getSmallMultSize() + SMALL_MULT_BOTTOM_PADDING) )  + "px")
 
@@ -2056,7 +2056,7 @@ d3.csv("data/data.csv", function(error, data){
 		svg.append("g")
 			.attr("class", "axis axis--y")
 			.attr("transform", "translate(" + (getSmallMultSize() - 20) + ",0)")
-			.call(d3.axisLeft(y).tickValues([1,500,1500,2045]).tickSize(getSmallMultSize() - 50));
+			.call(d3.axisLeft(y).tickValues([1,500,1563]).tickSize(getSmallMultSize() - 50));
 		svg.append("g")
 			.attr("class", "axis axis--x")
 			.attr("transform", "translate(0," + marginSmall.top + ")")
@@ -2274,7 +2274,7 @@ d3.csv("data/data.csv", function(error, data){
 			hMore = moreSize*heightScalar - marginMore.left - marginMore.right - 40,
 			xTop = d3.scaleLinear().range([marginSmall.left, topSize-marginSmall.right]).domain([1990, 2015]),
 			xMore = d3.scaleLinear().range([marginMore.left, moreSize-marginMore.right]).domain([1990, 2015]),
-			yTop = d3.scaleLinear().range([topSize*heightScalar - marginSmall.bottom, marginSmall.top]).domain([2045,0]);
+			yTop = d3.scaleLinear().range([topSize*heightScalar - marginSmall.bottom, marginSmall.top]).domain([1563,0]);
 
 
 		var topIndicators = ["overall","econ","race","econHealth"]
@@ -2309,7 +2309,7 @@ d3.csv("data/data.csv", function(error, data){
 			svg.append("g")
 				.attr("class", "axis axis--y")
 				.attr("transform", "translate(" + (topSize - 20) + ",0)")
-				.call(d3.axisLeft(yTop).tickValues([1,500,1000,1500,2045]).tickSize(topSize - 50));
+				.call(d3.axisLeft(yTop).tickValues([1,500,1000,1563]).tickSize(topSize - 50));
 			svg.append("g")
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + marginSmall.top + ")")
@@ -2603,8 +2603,9 @@ d3.csv("data/data.csv", function(error, data){
 					.attr("r", function(){
 						return DOT_RADIUS
 					})
-				// console.log(years[j])
+				
 				if(years[j] == "2010" || years[j] == "2015"){
+				//draw error bars
 					moreSvg.append("line")
 						.attr("class", "errorBar" + " y" + j)
 						.attr("x1", xMore(years[j]))
@@ -2614,6 +2615,28 @@ d3.csv("data/data.csv", function(error, data){
 						})
 						.attr("y2", function(d){
 							return yMore(datum["upper_" + moreIndicators[i][0] + years[j]])
+						})
+
+					moreSvg.append("line")
+						.attr("class", "errorBar errorCapUpper" + " y" + j)
+						.attr("x1", xMore(years[j]) - 3)
+						.attr("x2", xMore(years[j]) + 3)
+						.attr("y1", function(d){
+							return yMore(datum["upper_" + moreIndicators[i][0] + years[j]])
+						})
+						.attr("y2", function(d){
+							return yMore(datum["upper_" + moreIndicators[i][0] + years[j]])
+						})
+
+					moreSvg.append("line")
+						.attr("class", "errorBar errorCapLower" + " y" + j)
+						.attr("x1", xMore(years[j]) - 3)
+						.attr("x2", xMore(years[j]) + 3)
+						.attr("y1", function(d){
+							return yMore(datum["lower_" + moreIndicators[i][0] + years[j]])
+						})
+						.attr("y2", function(d){
+							return yMore(datum["lower_" + moreIndicators[i][0] + years[j]])
 						})
 
 
