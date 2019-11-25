@@ -216,6 +216,10 @@ select{
 	border-bottom: 1px solid #9D9D9D;
     padding-bottom: 60px;
 }
+#standaloneTitle {
+    margin-top: 0;
+    font-size: 20px;
+}
 #title, #subtitle{
 	display: block;
 	font-size: 40px;
@@ -247,7 +251,7 @@ select{
 }
 .introText{
     text-align: left;
-    width: 83%;
+    /*width: 83%;*/
     margin: 0 auto;
     margin-top: 20px;
     font-size: 20px;
