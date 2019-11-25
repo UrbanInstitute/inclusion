@@ -2337,16 +2337,16 @@ d3.csv("data/data.csv", function(error, data){
 		}
 
 		var moreIndicators = [
-					["unemprate","Unemployment rate","econHealth", "Percent",".0%"],
-					["vacancyrate","Housing vacancy rate","econHealth", "Percent",".0%"],
+					["unemprate","Unemployment rate","econHealth", "Percentage",".0%"],
+					["vacancyrate","Housing vacancy rate","econHealth", "Percentage",".0%"],
 					["medfamincome","Median family income","econHealth","Dollars","$.2s"],
-					["Citypctnonwhite","People of color as a share of the population","race","Percent",".0%"],
+					["Citypctnonwhite","People of color as a share of the population","race","Percentage",".0%"],
 					["hogap","Racial homeownership gap","race","Percentage point difference",".0f"],
 					["povgap","Racial poverty gap","race","Percentage point difference",".0f"],
 					["racialeducationgap","Racial education gap","race","Percentage point difference",".0f"],
-					["rentburden","Rent-burdened residents","econ","Percent",".0%"],
-					["workingpoor","Working-poor families","econ","Percent",".0%"],
-					["pct1619notinschool","High school drop-out rate","econ","Percent",".0%"]
+					["rentburden","Rent-burdened residents","econ","Percentage",".0%"],
+					["workingpoor","Working-poor families","econ","Percentage",".0%"],
+					["pct1619notinschool","High school drop out rate","econ","Percentage",".0%"]
 			]
 
 		var flipIndicators = ["medfamincome","Citypctnonwhite"]
