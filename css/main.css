@@ -561,14 +561,15 @@ body.cityPage #graphContainer{
     font-size: 16px;
     line-height: 26px;
     margin-bottom: 22px;
+    width: auto;
 }
 #customPrintSpacer{
 	margin-top: -28px;
 }
-.copyUl{
+/*.copyUl{
 	padding-left: 21px;
 	width: calc(100% - 21px);
-}
+}*/
 .copyUl li{
 	text-align: left;
     list-style: initial;
