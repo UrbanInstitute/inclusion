@@ -24,8 +24,8 @@ def getPlaceSlug(place, state):
 
 options = {"javascript-delay": 300}
 for row in cr:
-	place = row[h["place"]]
-	state = row[h["stateabrev"]]
-	placeSlug = getPlaceSlug(place, state)
-	if not path.exists('factsheets/full/%s.pdf'%placeSlug):
-		pdfkit.from_url('http://localhost:8080/index.html?city=%s&print=true'%placeSlug, 'factsheets/full/%s.pdf'%placeSlug, options=options)
+    place = row[h["TablePlace"]]
+    state = row[h["stateabrev"]]
+    placeSlug = getPlaceSlug(place, state)
+    if not path.exists('factsheets/full/%s.pdf'%placeSlug):
+        pdfkit.from_url('http://localhost:8080/index.html?city=%s&print=true'%placeSlug, 'factsheets/full/%s.pdf'%placeSlug, options=options)
