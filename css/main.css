@@ -552,19 +552,20 @@ body.cityPage #graphContainer{
     margin-right: auto;
 }
 .copyHeader{
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: bold;
 	margin-bottom: 0px;
-    margin-top: 35px;
+    /*margin-top: 20px;*/
+    clear: both;
 }
 .copyP, .copyUl{
-    font-size: 16px;
-    line-height: 26px;
-    margin-bottom: 22px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 16px;
     width: auto;
 }
 #customPrintSpacer{
-	margin-top: -28px;
+	/*margin-top: -28px;*/
 }
 /*.copyUl{
 	padding-left: 21px;
@@ -574,7 +575,7 @@ body.cityPage #graphContainer{
 	text-align: left;
     list-style: initial;
     padding-left: 20px;
-    padding-bottom: 30px;
+    padding-bottom: 16px;
 }
 
 .copyOl li {
@@ -598,13 +599,13 @@ body.cityPage #graphContainer{
 .footerHeader{
 	margin-top: 50px;
 	margin-bottom: 8px;
-	font-size: 34px;
+	font-size: 16px;
 	font-weight: bold;
 	text-transform: uppercase;
 	display: block;
 }
 #topFooterHeader{
-	padding-top: 44px;
+	/*padding-top: 44px;*/
 }
 .footerAbout, .footerCredits, .footerSpecialCredit{
     font-size: 16px;
@@ -619,14 +620,14 @@ body.cityPage #graphContainer{
 	margin-bottom: 45px;
 }
 .creditsHeader{
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: bold;
 	text-transform: uppercase;
 }
 .creditsNames{
 	margin-bottom: 30px;
 	margin-top: 5px;
-	font-size: 16px;
+	font-size: 14px;
 }
 #copyright{
 	margin-bottom: 100px;
@@ -1462,6 +1463,14 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
 /*********************************************************************************/
 /*************************      PRINT PAGE      **********************************/
 /*********************************************************************************/
+@page {
+    size: letter;
+
+    @bottom-left-corner {
+        content: "Page";
+    }
+}
+
 .printLogo{
 	display: none;
 }
@@ -1534,10 +1543,10 @@ body.print .footerButton{
 }
 body.print .introText{
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
     font-style: italic;
-    line-height: 1.2;
-    margin-bottom: 15px;
+    line-height: 1.5;
+    margin-bottom: 16px;
 }
 body.print .topDiv{
 	position: relative;
@@ -1590,7 +1599,7 @@ body.print .moreChartContainer {
     display: block !important;
 }
 body.print .printContainerHeader{
- 	font-size: 26px;
+ 	font-size: 20px;
     font-weight: bold;
     position: relative;
     height: 32px;
@@ -1616,23 +1625,24 @@ body.print #homeCopy{
     width: 220mm;
     margin: 0px;
     margin-top: 60px;
-    border-top: 1px solid #959595;
+    /*border-top: 1px solid #959595;*/
     padding-top: 32px;
 }
 body.print .copyP, body.print .footerAbout{
-	font-size: 16px;
-    line-height: 20px;
-    margin-bottom: 22px;
+	font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 16px;
 }
 body.print .copyHeader{
 	margin-bottom: 9px;
 }
 body.print .copyOl li{
-	padding-bottom: 19px;
-	line-height: 20px;
+	padding-bottom: 16px;
+	line-height: 1.5;
+    font-size: 14px;
 }
 body.print .copyUl li{
-	line-height: 20px;
+	line-height: 1.5;
 }
 body.print .footerCredits{
 	margin-bottom: 30px;
@@ -1647,7 +1657,7 @@ body.print #copyright{
     display: block;
 }
 body.print #customPrintSpacer{
-	margin-top: -31px;
+	/*margin-top: -31px;*/
 }
 #printCover{
 	display: none;
