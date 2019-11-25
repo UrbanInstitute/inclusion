@@ -2408,11 +2408,11 @@ d3.csv("data/data.csv", function(error, data){
 				return (d == selectedType) ? "block" : "none"
 			})
 		if(print){
-			// <div class = "page-break"></div>
-			moreChartContainer.append("div")
-				.attr("class", function(d){
-					return (d == "race") ? "page-break" : "hide"
-				})
+            d3.select("#moreContainer").insert("div", ".moreChartContainer.econ + *").attr("class", "page-break")
+			// moreChartContainer.append("div")
+			// 	.attr("class", function(d){
+			// 		return (d == "race") ? "page-break" : "hide"
+			// 	})
 			moreChartContainer.append("div")
 				.attr("class", "printContainerHeader")
 				.text(function(d){ return navTitles[d] })

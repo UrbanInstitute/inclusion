@@ -605,6 +605,7 @@ body.cityPage #graphContainer{
 	display: block;
 }
 #topFooterHeader{
+    margin-top: 0;
 	/*padding-top: 44px;*/
 }
 .footerAbout, .footerCredits, .footerSpecialCredit{
@@ -1478,6 +1479,7 @@ body.print .printLogo{
 	display: block;
     width: 430px;
     float: right;
+    margin-top: 2in;
 }
 .print.cover{
 	position: fixed;
@@ -1597,6 +1599,9 @@ body.print .moreChartContainer {
     margin: 0px;
     position: relative;
     display: block !important;
+}
+body.print .moreChartContainer.race {
+    margin-top: 3in;
 }
 body.print .printContainerHeader{
  	font-size: 20px;
