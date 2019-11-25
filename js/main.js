@@ -2149,36 +2149,37 @@ d3.csv("data/data.csv", function(error, data){
 	})
 
 	function addNotes(container, datum){
+        d3.select("#consolidatedNoteContainer").text(datum);
 		// container.text(city)
-		if(datum.consolidated == 0 || isNaN(datum.consolidated)){
-			return false;
-		}
-		else{
-			if(d3.select(".noteText").node() == null){
-				container.datum(datum)
-				var noteText = container.append("div")
-					.attr("class","noteText")
-					.html(allText.consolidatedNote)
-				noteText.select(".note-cityName")
-					.text(datum.place)
-				noteText.select(".note-year")
-					.text(datum.consolidated)
-			}else{
-				container.selectAll("div").remove()
-				var oldDatum = container.datum()
-				var noteText = container.append("div")
-					.attr("class","noteText")
-					.html(allText.consolidatedNoteTwoCities)
-				noteText.select(".note-cityName")
-					.text(oldDatum.place + ", " + stateNames[oldDatum.stateabrev] + ",")
-				noteText.select(".note-year")
-					.text(oldDatum.consolidated)
-				noteText.select(".note2-cityName")
-					.text(datum.place + ", " + stateNames[datum.stateabrev] + ",")
-				noteText.select(".note2-year")
-					.text(datum.consolidated)
-			}
-		}
+		// if(datum.consolidated == 0 || isNaN(datum.consolidated)){
+		// 	return false;
+		// }
+		// else{
+		// 	if(d3.select(".noteText").node() == null){
+		// 		container.datum(datum)
+		// 		var noteText = container.append("div")
+		// 			.attr("class","noteText")
+		// 			.html(allText.consolidatedNote)
+		// 		noteText.select(".note-cityName")
+		// 			.text(datum.place)
+		// 		noteText.select(".note-year")
+		// 			.text(datum.consolidated)
+		// 	}else{
+		// 		container.selectAll("div").remove()
+		// 		var oldDatum = container.datum()
+		// 		var noteText = container.append("div")
+		// 			.attr("class","noteText")
+		// 			.html(allText.consolidatedNoteTwoCities)
+		// 		noteText.select(".note-cityName")
+		// 			.text(oldDatum.place + ", " + stateNames[oldDatum.stateabrev] + ",")
+		// 		noteText.select(".note-year")
+		// 			.text(oldDatum.consolidated)
+		// 		noteText.select(".note2-cityName")
+		// 			.text(datum.place + ", " + stateNames[datum.stateabrev] + ",")
+		// 		noteText.select(".note2-year")
+		// 			.text(datum.consolidated)
+		// 	}
+		// }
 
 	}
 	function buildCityPage(city, print){
@@ -2196,9 +2197,9 @@ d3.csv("data/data.csv", function(error, data){
 
 		var topContainer = graphContainer.append("div").attr("id", "topContainer").attr("class","cityRemove")
 		var moreContainer = graphContainer.append("div").attr("id", "moreContainer").attr("class","cityRemove")
-		var consolidatedNoteContainer = graphContainer.append("div").attr("id", "consolidatedNoteContainer").attr("class","cityRemove")
+		var consolidatedNoteContainer = graphContainer.append("div").attr("id", "consolidatedNoteContainer");
 
-		addNotes(consolidatedNoteContainer, datum)
+		addNotes(consolidatedNoteContainer, "We display margin-of-error bars to show the upper and lower bounds of each indicator in 2010 and 2015. These demonstrate the possible range of values given random sampling error in the American Community Survey, which can be particularly large when dealing with smaller populations. Margins of error for the long-form decennial census were not readily available.")
 
 		var backToMap = topContainer.append("div")
 			.attr("class","questionMenu map cityPage")

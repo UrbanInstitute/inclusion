@@ -1601,8 +1601,9 @@ body.print .printContainerHeader{
 body.print #consolidatedNoteContainer{
 	margin: 0px;
     font-size: 14px;
-    line-height: 0px;
+    /*line-height: 0px;*/
     margin-top: -40px;
+    width: auto;
 }
 body.print .noteHeader{
 	font-size: 16px;
