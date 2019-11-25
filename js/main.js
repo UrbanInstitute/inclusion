@@ -1300,6 +1300,22 @@ d3.csv("data/data.csv", function(error, data){
 			.html(function(d){ return d})
 
 	}
+
+    // crude way to add comma separators and turn numbers into ordinals
+    function numberFormatter(number) {
+        var lastDigit = number % 10;
+        var suffix = "th";
+        if(lastDigit == 1) {
+            suffix = "st";
+        }
+        else if(lastDigit == 2) {
+            suffix = "nd";
+        }
+        else if(lastDigit == 3) {
+            suffix = "rd";
+        }
+        return d3.format(",")(number) + suffix;
+    }
 	function buildHeader(data, city, print){
 		var text = "",
 			datum = {}
@@ -1339,22 +1355,22 @@ d3.csv("data/data.csv", function(error, data){
 			.html(function(d){ return d.place })
 		ps.selectAll(".ch-overallRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankoverallinclusionindex2015 })
+			.html(function(d){ return numberFormatter(d.rankoverallinclusionindex2015) })
 		ps.selectAll(".ch-econRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankeconinclusionindex2015 })
+			.html(function(d){ return numberFormatter(d.rankeconinclusionindex2015) })
 		ps.selectAll(".ch-racialRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankraceinclusionindex2015 })
+			.html(function(d){ return numberFormatter(d.rankraceinclusionindex2015) })
 		ps.selectAll(".ch-healthRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankeconhealth2015 })
+			.html(function(d){ return numberFormatter(d.rankeconhealth2015) })
 		ps.selectAll(".ch-overallRank00")
 			.datum(datum)
-			.html(function(d){ return d.rankoverallinclusionindex2010 })
+			.html(function(d){ return numberFormatter(d.rankoverallinclusionindex2010) })
 		ps.selectAll(".ch-healthRank00")
 			.datum(datum)
-			.html(function(d){ return d.rankeconhealth2010 })
+			.html(function(d){ return numberFormatter(d.rankeconhealth2010) })
 		ps.selectAll(".ch-healthWord")
 			.datum(datum)
 			.html(function(d){
