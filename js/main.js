@@ -423,6 +423,12 @@ d3.csv("data/data.csv", function(error, data){
 			buildCityPage(parameters.city, print)
             if(parameters.hasOwnProperty("brief")) {
                 console.log("version for brief");  // TODO: hide elements that don't need to be shown in non-standalone version
+                d3.select("#standaloneTitle").style("display", "none");
+                d3.select(".mainContent #titleContainer p:first-of-type").style("display", "none");
+                d3.select(".mainContent #titleContainer p.introText ~ p.introText").style("display", "none");  /* hide the second intro text element in appendix version */
+                d3.select(".mainContent.bottom").style("display", "none");
+                d3.select("#footerContainer").style("display", "none");
+                d3.select(".moreChartContainer.race").style("margin-top", "5in");
             }
 		}
 		else{
