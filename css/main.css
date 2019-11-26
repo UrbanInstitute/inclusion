@@ -218,7 +218,8 @@ select{
 }
 #standaloneTitle {
     margin-top: 0;
-    font-size: 20px;
+    font-size: 16px;
+    text-transform: uppercase;
 }
 #title, #subtitle{
 	display: block;
@@ -257,7 +258,7 @@ select{
     font-size: 20px;
     /*font-weight: 300;*/
     line-height: 1.5;
-    color: #696969;
+    color: #353535;
 }
 #titleNavContainer{
 	width: 528px;
@@ -552,14 +553,14 @@ body.cityPage #graphContainer{
     margin-right: auto;
 }
 .copyHeader{
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: bold;
 	margin-bottom: 0px;
     /*margin-top: 20px;*/
     clear: both;
 }
 .copyP, .copyUl{
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.5;
     margin-bottom: 16px;
     width: auto;
@@ -599,7 +600,7 @@ body.cityPage #graphContainer{
 .footerHeader{
 	margin-top: 50px;
 	margin-bottom: 8px;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: bold;
 	text-transform: uppercase;
 	display: block;
@@ -621,14 +622,14 @@ body.cityPage #graphContainer{
 	margin-bottom: 45px;
 }
 .creditsHeader{
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: bold;
 	text-transform: uppercase;
 }
 .creditsNames{
 	margin-bottom: 30px;
 	margin-top: 5px;
-	font-size: 14px;
+	font-size: 16px;
 }
 #copyright{
 	margin-bottom: 100px;
@@ -1477,9 +1478,9 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
 }
 body.print .printLogo{
 	display: block;
-    width: 430px;
+    width: 570px;
     float: right;
-    margin-top: 2in;
+    margin-top: 0.2in;
 }
 .print.cover{
 	position: fixed;
@@ -1545,8 +1546,8 @@ body.print .footerButton{
 }
 body.print .introText{
     margin: 0;
-    font-size: 14px;
-    font-style: italic;
+    font-size: 16px;
+    /*font-style: italic;*/
     line-height: 1.5;
     margin-bottom: 16px;
 }
@@ -1577,7 +1578,7 @@ body.print .moreDiv .chartSubtitle {
 }
 
 body.print #moreLegendContainer{
-	right: -530px;
+	right: -510px;
     top: 0px;
     position: relative;
 }
@@ -1634,7 +1635,7 @@ body.print #homeCopy{
     padding-top: 32px;
 }
 body.print .copyP, body.print .footerAbout{
-	font-size: 14px;
+	font-size: 16px;
     line-height: 1.5;
     margin-bottom: 16px;
 }
@@ -1644,7 +1645,7 @@ body.print .copyHeader{
 body.print .copyOl li{
 	padding-bottom: 16px;
 	line-height: 1.5;
-    font-size: 14px;
+    font-size: 16px;
 }
 body.print .copyUl li{
 	line-height: 1.5;
@@ -1652,7 +1653,7 @@ body.print .copyUl li{
 body.print .footerCredits{
 	margin-bottom: 30px;
     line-height: 20px;
-    font-size: 14px;
+    font-size: 16px;
 }
 body.print .creditsNames{
 	margin-bottom: 20px;
