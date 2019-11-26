@@ -1314,14 +1314,15 @@ d3.csv("data/data.csv", function(error, data){
     // crude way to add comma separators and turn numbers into ordinals
     function numberFormatter(number) {
         var lastDigit = number % 10;
+        var lastTwoDigits = number % 100;
         var suffix = "th";
-        if(lastDigit == 1) {
+        if(lastDigit === 1  && lastTwoDigits !== 11) {
             suffix = "st";
         }
-        else if(lastDigit == 2) {
+        else if(lastDigit === 2 && lastTwoDigits !== 12) {
             suffix = "nd";
         }
-        else if(lastDigit == 3) {
+        else if(lastDigit === 3 && lastTwoDigits !== 13) {
             suffix = "rd";
         }
         return d3.format(",")(number) + suffix;
