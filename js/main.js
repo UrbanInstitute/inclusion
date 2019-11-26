@@ -428,7 +428,8 @@ d3.csv("data/data.csv", function(error, data){
                 d3.select(".mainContent #titleContainer p.introText ~ p.introText").style("display", "none");  /* hide the second intro text element in appendix version */
                 d3.select(".mainContent.bottom").style("display", "none");
                 d3.select("#footerContainer").style("display", "none");
-                d3.select(".moreChartContainer.race").style("margin-top", "5in");
+                d3.select(".moreChartContainer.race").style("margin-top", "0in");
+                d3.select(".moreChartContainer.econHealth").style("margin-top", "2in");
             }
 		}
 		else{
