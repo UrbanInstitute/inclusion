@@ -421,6 +421,9 @@ d3.csv("data/data.csv", function(error, data){
 			var print = (parameters.hasOwnProperty("print"))
 			buildHeader(data, parameters.city, print)
 			buildCityPage(parameters.city, print)
+            if(parameters.hasOwnProperty("brief")) {
+                console.log("version for brief");  // TODO: hide elements that don't need to be shown in non-standalone version
+            }
 		}
 		else{
 			buildHeader(data, false, false)
@@ -2363,7 +2366,7 @@ d3.csv("data/data.csv", function(error, data){
 					["racialeducationgap","Racial education gap","race","Percentage point difference",".0f"],
 					["rentburden","Rent-burdened residents","econ","Percentage",".0%"],
 					["workingpoor","Working-poor families","econ","Percentage",".0%"],
-					["pct1619notinschool","High school drop out rate","econ","Percentage",".0%"]
+					["pct1619notinschool","High school dropout rate","econ","Percentage",".0%"]
 			]
 
 		var flipIndicators = ["medfamincome","Citypctnonwhite"]

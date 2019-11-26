@@ -42,7 +42,7 @@ body{
 	margin-bottom: 50px;
 }
 a{
-	color: #353535;
+	color: rgb(10, 76, 106);
 	text-decoration: none;
 }
 a.scrollLink{
@@ -1617,7 +1617,7 @@ body.print #consolidatedNoteContainer{
     font-size: 14px;
     /*line-height: 0px;*/
     margin-top: -40px;
-    width: auto;
+    width: 830px;
 }
 body.print .noteHeader{
 	font-size: 16px;
