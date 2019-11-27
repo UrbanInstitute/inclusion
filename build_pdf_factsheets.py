@@ -28,4 +28,9 @@ for row in cr:
     state = row[h["stateabrev"]]
     placeSlug = getPlaceSlug(place, state)
     if not path.exists('factsheets/full/%s.pdf'%placeSlug):
+        print "Making standalone factsheet for: %s"%placeSlug
         pdfkit.from_url('http://localhost:8080/index.html?city=%s&print=true'%placeSlug, 'factsheets/full/%s.pdf'%placeSlug, options=options)
+    if not path.exists('factsheets/brief/%s.pdf'%placeSlug):
+        print "Making appendix factsheet for: %s"%placeSlug
+        pdfkit.from_url('http://localhost:8080/index.html?city=%s&print=true&brief=true'%placeSlug, 'factsheets/brief/%s.pdf'%placeSlug, options=options)
+        ## NOTE: when combining all the abbreviated factsheets for the brief appendix, be sure to move Newport RI to be after New London, CT and before Norwich, CT
