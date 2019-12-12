@@ -13,32 +13,46 @@ function addLineSeries(svg, x, y, indicator, isComparisonCity, isCityTop){
 	}
 	var opacity = (isComparisonCity) ? 0 : 1;
 	var years = ["1990", "2000", "2010", "2015"]
-	for(var i = 0; i < years.length; i++){
-		if(i != (years.length -1)){
-			svg.append("line")
-				.attr("class", "changeLine " +  colorClass  + " y" + i)
-				.attr("x1", x(years[i]))
-				.attr("x2", x(years[i+1]))
-				.attr("y1", function(d){
-					return y(d[newIndicator + years[i]])
-				})
-				.attr("y2", function(d){
-					return y(d[newIndicator + years[i+1]])
-				})
-				.style("opacity",opacity)
-		}
-
-		svg.append("circle")
-			.attr("class", "changeDot " +  colorClass + " y" + i)
-			.attr("cx", x(years[i]))
-			.attr("cy", function(d){
-				return y(d[newIndicator + years[i]])
-			})
-			.attr("r", function(){
-				return DOT_RADIUS
-			})
-			.style("opacity",opacity)
-
+	var data = svg.data()[0];
+    for(var i = 0; i < years.length; i++){
+        // don't draw a line segment if there's missing data which d3 has parsed as zeroes
+        if((data[newIndicator + years[i]] === 0) || (data[newIndicator + years[i+1]])===0) {
+            continue;
+        }
+        else {
+            if(i != (years.length -1)){
+                svg.append("line")
+                    .attr("class", "changeLine " +  colorClass  + " y" + i)
+                    .attr("x1", x(years[i]))
+                    .attr("x2", x(years[i+1]))
+                    .attr("y1", function(d){
+                        console.log(newIndicator+years[i], d[newIndicator + years[i]]);
+                        return y(d[newIndicator + years[i]])
+                    })
+                    .attr("y2", function(d){
+                        return y(d[newIndicator + years[i+1]])
+                    })
+                    .style("opacity",opacity)
+            }
+        }
+    }
+    for(var i = 0; i < years.length; i++){
+        // don't draw a dot if data is missing for that year
+        if(data[newIndicator + years[i]] === 0) {
+            continue;
+        }
+        else {
+            svg.append("circle")
+                .attr("class", "changeDot " +  colorClass + " y" + i)
+                .attr("cx", x(years[i]))
+                .attr("cy", function(d){
+                    return y(d[newIndicator + years[i]])
+                })
+                .attr("r", function(){
+                    return DOT_RADIUS
+                })
+                .style("opacity",opacity)
+        }
 	}
 	if(isComparisonCity){
 		d3.selectAll(".comparison")
