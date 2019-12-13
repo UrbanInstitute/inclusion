@@ -2461,7 +2461,7 @@ d3.csv("data/data.csv", function(error, data){
 		}
 
 		for(var i = 0; i < moreIndicators.length; i++){
-            var missingVals = [-9999999, -999999900]
+            var missingVals = [-9999999, -999999900, -99999990000]
 			var bounds = getBounds(moreIndicators[i][0]).filter(function(i) { return missingVals.indexOf(i) === -1; })
             // console.log(bounds);
 			var yMore = d3.scaleLinear()
