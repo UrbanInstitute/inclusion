@@ -1,7 +1,7 @@
 import csv
 import xlrd
 
-sourceXLSX = xlrd.open_workbook('data/source/WCCCities_12_6_19.xlsx')
+sourceXLSX = xlrd.open_workbook('data/source/WCCCities_12_13_19.xlsx')
 sourceSheet = sourceXLSX.sheet_by_index(0)
 sourceCSV = open('data/source/source.csv', 'wb')
 sourceWriter = csv.writer(sourceCSV, quoting=csv.QUOTE_ALL)

@@ -2461,9 +2461,9 @@ d3.csv("data/data.csv", function(error, data){
 		}
 
 		for(var i = 0; i < moreIndicators.length; i++){
-
-			var bounds = getBounds(moreIndicators[i][0])
-
+            var missingVals = [-9999999, -999999900]
+			var bounds = getBounds(moreIndicators[i][0]).filter(function(i) { return missingVals.indexOf(i) === -1; })
+            // console.log(bounds);
 			var yMore = d3.scaleLinear()
 				.range([moreSize*heightScalar - 30 - 40, 20])
 				.domain(d3.extent(bounds));
@@ -2585,37 +2585,36 @@ d3.csv("data/data.csv", function(error, data){
 				d3.selectAll(".smallTT").remove()
 			})
 
-
-
 			var years = ["1990", "2000", "2010", "2015"]
-
 			for(var j = 0; j < years.length; j++){
+                // if missing any values for the current year or next year, don't add a line
+                if(missingVals.indexOf(datum[moreIndicators[i][0] + years[j]]) === -1 && missingVals.indexOf(datum[moreIndicators[i][0] + years[j+1]]) === -1) {
+    				if(j != (years.length -1)){
+    					moreSvg.append("line")
+    						.attr("class", "changeLine " +  "rank"  + " y" + j)
+    						.attr("x1", xMore(years[j]))
+    						.attr("x2", xMore(years[j+1]))
+    						.attr("y1", function(d){
+    							return yMore(datum[moreIndicators[i][0] + years[j]])
+    						})
+    						.attr("y2", function(d){
+    							return yMore(datum[moreIndicators[i][0] + years[j+1]])
+    						})
+    				}
+                }
 
-
-
-				if(j != (years.length -1)){
-					moreSvg.append("line")
-						.attr("class", "changeLine " +  "rank"  + " y" + j)
-						.attr("x1", xMore(years[j]))
-						.attr("x2", xMore(years[j+1]))
-						.attr("y1", function(d){
-							return yMore(datum[moreIndicators[i][0] + years[j]])
-						})
-						.attr("y2", function(d){
-							return yMore(datum[moreIndicators[i][0] + years[j+1]])
-						})
-				}
-
-				moreSvg.append("circle")
-					.attr("class", "changeDot " +  "rank" + " y" + j)
-					.attr("cx", xMore(years[j]))
-					.attr("cy", function(d){
-						return yMore(datum[moreIndicators[i][0] + years[j]])
-					})
-					.attr("r", function(){
-						return DOT_RADIUS
-					})
-
+                // if missing a value for that year, don't add a dot
+                if(missingVals.indexOf(datum[moreIndicators[i][0] + years[j]]) === -1) {
+    				moreSvg.append("circle")
+    					.attr("class", "changeDot " +  "rank" + " y" + j)
+    					.attr("cx", xMore(years[j]))
+    					.attr("cy", function(d){
+    						return yMore(datum[moreIndicators[i][0] + years[j]])
+    					})
+    					.attr("r", function(){
+    						return DOT_RADIUS
+    					})
+                }
 				if(j != (years.length -1)){
 					moreSvg.append("line")
 						.attr("class", "changeLine " +  "econHealth"  + " y" + j)

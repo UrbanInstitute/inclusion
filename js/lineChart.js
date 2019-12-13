@@ -15,8 +15,8 @@ function addLineSeries(svg, x, y, indicator, isComparisonCity, isCityTop){
 	var years = ["1990", "2000", "2010", "2015"]
 	var data = svg.data()[0];
     for(var i = 0; i < years.length; i++){
-        // don't draw a line segment if there's missing data which d3 has parsed as zeroes
-        if((data[newIndicator + years[i]] === 0) || (data[newIndicator + years[i+1]])===0) {
+        // don't draw a line segment if there's missing data
+        if((data[newIndicator + years[i]] === -9999999) || (data[newIndicator + years[i+1]])===-9999999) {
             continue;
         }
         else {
@@ -26,7 +26,6 @@ function addLineSeries(svg, x, y, indicator, isComparisonCity, isCityTop){
                     .attr("x1", x(years[i]))
                     .attr("x2", x(years[i+1]))
                     .attr("y1", function(d){
-                        console.log(newIndicator+years[i], d[newIndicator + years[i]]);
                         return y(d[newIndicator + years[i]])
                     })
                     .attr("y2", function(d){
@@ -38,7 +37,7 @@ function addLineSeries(svg, x, y, indicator, isComparisonCity, isCityTop){
     }
     for(var i = 0; i < years.length; i++){
         // don't draw a dot if data is missing for that year
-        if(data[newIndicator + years[i]] === 0) {
+        if(data[newIndicator + years[i]] === -9999999) {
             continue;
         }
         else {
