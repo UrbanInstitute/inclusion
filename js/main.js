@@ -2466,7 +2466,7 @@ d3.csv("data/data.csv", function(error, data){
             // console.log(bounds);
 			var yMore = d3.scaleLinear()
 				.range([moreSize*heightScalar - 30 - 40, 20])
-				.domain(d3.extent(bounds));
+				.domain(d3.extent(bounds)).nice();
 			var moreDiv = d3.select(".moreChartContainer." + moreIndicators[i][2])
 				// .selectAll(".moreDiv" + moreIndicators[i][2])
 				// .data(moreIndicators)
