@@ -2373,7 +2373,7 @@ d3.csv("data/data.csv", function(error, data){
 					["povgap","Racial poverty gap","race","Percentage point difference",".0f"],
 					["racialeducationgap","Racial education gap","race","Percentage point difference",".0f"],
 					["rentburden","Rent-burdened residents","econ","Percentage",".0%"],
-					["workingpoor","Working-poor families","econ","Percentage",".0%"],
+					["workingpoor","Working-poor families","econ","Percentage",".1%"],
 					["pct1619notinschool","High school dropout rate","econ","Percentage",".0%"]
 			]
 
