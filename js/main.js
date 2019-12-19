@@ -2176,7 +2176,7 @@ d3.csv("data/data.csv", function(error, data){
 	})
 
 	function addNotes(container, datum){
-        d3.select("#consolidatedNoteContainer").text(datum);
+        d3.select("#consolidatedNoteContainer").html(datum);
 		// container.text(city)
 		// if(datum.consolidated == 0 || isNaN(datum.consolidated)){
 		// 	return false;
@@ -2226,7 +2226,7 @@ d3.csv("data/data.csv", function(error, data){
 		var moreContainer = graphContainer.append("div").attr("id", "moreContainer").attr("class","cityRemove")
 		var consolidatedNoteContainer = graphContainer.append("div").attr("id", "consolidatedNoteContainer");
 
-		addNotes(consolidatedNoteContainer, "We display margin-of-error bars to show the upper and lower bounds of each indicator in 2010 and 2015. These demonstrate the possible range of values given random sampling error in the American Community Survey, which can be particularly large when dealing with smaller populations. Margins of error for the long-form decennial census were not readily available. Data were missing for some measures in earlier years of the decennial census, likely because of small sample sizes. When a city was missing data for an index in a given year, we did not include it in the index ranking calculation.")
+		addNotes(consolidatedNoteContainer, "<p>We display margin-of-error bars to show the upper and lower bounds of each indicator in 2010 and 2015. These demonstrate the possible range of values given random sampling error in the American Community Survey, which can be particularly large when dealing with smaller populations. Margins of error for the long-form decennial census were not readily available.</p><p>Data were missing for some measures in earlier years of the decennial census, likely because of small sample sizes. When a city was missing data for an index in a given year, we did not include it in the index ranking calculation.</p>")
 
 		var backToMap = topContainer.append("div")
 			.attr("class","questionMenu map cityPage")
