@@ -52,7 +52,7 @@ if (!Array.prototype.includes) {
         if (sameValueZero(o[k], searchElement)) {
           return true;
         }
-        // c. Increase k by 1. 
+        // c. Increase k by 1.
         k++;
       }
 
@@ -171,7 +171,7 @@ function array_sum(arr){
 }
 
 function exp_regression(Y){
- 
+
   var n = Y.length;
   var X = d3.range(1,n+1);
 
@@ -202,23 +202,23 @@ function exp_regression(Y){
 // linear regression from from http://bl.ocks.org/benvandyke/8459843
 function leastSquares(xSeries, ySeries) {
 	var reduceSumFunc = function(prev, cur) { return prev + cur; };
-	
+
 	var xBar = xSeries.reduce(reduceSumFunc) * 1.0 / xSeries.length;
 	var yBar = ySeries.reduce(reduceSumFunc) * 1.0 / ySeries.length;
 
 	var ssXX = xSeries.map(function(d) { return Math.pow(d - xBar, 2); })
 		.reduce(reduceSumFunc);
-	
+
 	var ssYY = ySeries.map(function(d) { return Math.pow(d - yBar, 2); })
 		.reduce(reduceSumFunc);
-		
+
 	var ssXY = xSeries.map(function(d, i) { return (d - xBar) * (ySeries[i] - yBar); })
 		.reduce(reduceSumFunc);
-		
+
 	var slope = ssXY / ssXX;
 	var intercept = yBar - (xBar * slope);
 	var rSquare = Math.pow(ssXY, 2) / (ssXX * ssYY);
-	
+
 	return [slope, intercept, rSquare];
 }
 
@@ -424,7 +424,7 @@ d3.csv("data.csv", function(error, data){
 			.transition()
 			.style("opacity",0)
 		d3.select("#dropdownViewOtherCity").transition().style("opacity",0)
-		d3.select("#dropdownViewOtherCity a").attr("href","").style("display","none")	
+		d3.select("#dropdownViewOtherCity a").attr("href","").style("display","none")
 	}
 	function buildSearchBox(selectEl, selectID, isCityPage, filterCity){
 		var defaultText = (isCityPage) ? "Compare with another city" : "See how your city ranks"
@@ -455,16 +455,16 @@ d3.csv("data.csv", function(error, data){
 	        this.wrapper = $( "<span>" )
 	          .addClass( "custom-combobox" )
 	          .insertAfter( this.element );
-	 
+
 	        this.element.hide();
 	        this._createAutocomplete();
 	        this._createShowAllButton();
 	      },
-	 
+
 	      _createAutocomplete: function() {
 	        var selected = this.element.children( ":selected" ),
 	          value = selected.val() ? selected.text() : "";
-	 
+
 	        this.input = $( "<input>" )
 	          .appendTo( this.wrapper )
 	          .val( value )
@@ -480,7 +480,7 @@ d3.csv("data.csv", function(error, data){
 	              "ui-tooltip": "ui-state-highlight"
 	            }
 	          });
-	 
+
 	        this._on( this.input, {
 	          autocompleteselect: function( event, ui ) {
 	            ui.item.option.selected = true;
@@ -502,7 +502,7 @@ d3.csv("data.csv", function(error, data){
 	            	}else{
 	            		window.open("index.html?city=" + ui.item.option.value, "_blank")
 	            	}
-	            	
+
 	            }else{
 	            	if(ui.item.label == "Compare with another city"){
 	            		hideComparisonCity();
@@ -512,15 +512,15 @@ d3.csv("data.csv", function(error, data){
 	              item: ui.item.option
 	            });
 	          },
-	 
+
 	          autocompletechange: "_removeIfInvalid"
 	        });
 	      },
-	 
+
 	      _createShowAllButton: function() {
 	        var input = this.input,
 	          wasOpen = false;
-	 
+
 	        $( "<a>" )
 	          .attr( "tabIndex", -1 )
 	          .attr( "title", "Click to see all cities" )
@@ -539,17 +539,17 @@ d3.csv("data.csv", function(error, data){
 	          })
 	          .on( "click", function() {
 	            input.trigger( "focus" );
-	 
+
 	            // Close if already visible
 	            if ( wasOpen ) {
 	              return;
 	            }
-	 
+
 	            // Pass empty string as value to search for, displaying all results
 	            input.autocomplete( "search", "" );
 	          });
 	      },
-	 
+
 	      _source: function( request, response ) {
 	        var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
 	        response( this.element.children( "option" ).map(function() {
@@ -562,14 +562,14 @@ d3.csv("data.csv", function(error, data){
 	            };
 	        }) );
 	      },
-	 
+
 	      _removeIfInvalid: function( event, ui ) {
-	 
+
 	        // Selected an item, nothing to do
 	        if ( ui.item ) {
 	          return;
 	        }
-	 
+
 	        // Search for a match (case-insensitive)
 	        var value = this.input.val(),
 	          valueLowerCase = value.toLowerCase(),
@@ -580,12 +580,12 @@ d3.csv("data.csv", function(error, data){
 	            return false;
 	          }
 	        });
-	 
+
 	        // Found a match, nothing to do
 	        if ( valid ) {
 	          return;
 	        }
-	 
+
 	        // Remove invalid value
 	        this.input
 	          .val( "" )
@@ -597,13 +597,13 @@ d3.csv("data.csv", function(error, data){
 	        }, 2500 );
 	        this.input.autocomplete( "instance" ).term = "";
 	      },
-	 
+
 	      _destroy: function() {
 	        this.wrapper.remove();
 	        this.element.show();
 	      }
 	    });
-	 
+
 	    $( "#" +selectID ).combobox();
 	    $( "#toggle" ).on( "click", function() {
 	      $( "#" + selectID ).toggle();
@@ -910,7 +910,7 @@ d3.csv("data.csv", function(error, data){
 			transY = (up) ? y - tth  : y + 10
 		}else{
 			transX = (left) ? (x - ttw - 2) : x + 20,
-			transY = (up) ? y - tth + 18  : y + 28			
+			transY = (up) ? y - tth + 18  : y + 28
 		}
 
 
@@ -977,7 +977,7 @@ d3.csv("data.csv", function(error, data){
 		// 	.attr("y", 25)
 
 
-// 
+//
 
 
 
@@ -1066,7 +1066,7 @@ d3.csv("data.csv", function(error, data){
 			var xVals = data.map(function(a){ return a[xVar]})
 			var yVals = data.map(function(a){ return a[yVar]})
 			var leastSquaresCoeff = leastSquares(xVals, yVals);
-			
+
 			var x1 = 1;
 			var y1 = leastSquaresCoeff[0] + leastSquaresCoeff[1];
 			var x2 = 274;
@@ -1096,7 +1096,7 @@ d3.csv("data.csv", function(error, data){
 			scatterSvg.append("g")
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + (40) + ")")
-				.call(d3.axisTop(x).tickValues([1,50,100,150,200,274]).tickSize(-height+margin.bottom - 24));		
+				.call(d3.axisTop(x).tickValues([1,50,100,150,200,274]).tickSize(-height+margin.bottom - 24));
 		}
 
 		container.style("position","relative")
@@ -1144,12 +1144,12 @@ d3.csv("data.csv", function(error, data){
 			var sizeYaxis = scatterSvg.append("g")
 				.attr("class", "axis axis--y")
 				.attr("transform", "translate(" + (width + 20) + ",0)")
-				.call(d3.axisRight(y).ticks(5).tickSize(-width-20).tickFormat(tickFormat));	
+				.call(d3.axisRight(y).ticks(5).tickSize(-width-20).tickFormat(tickFormat));
 		}else{
 			scatterSvg.append("g")
 				.attr("class", "axis axis--y")
 				.attr("transform", "translate(" + (width + 10) + ",0)")
-				.call(d3.axisRight(y).tickValues([1,50,100,150,200,274]).tickSize(-width-20));	
+				.call(d3.axisRight(y).tickValues([1,50,100,150,200,274]).tickSize(-width-20));
 		}
 
 
@@ -1166,7 +1166,7 @@ d3.csv("data.csv", function(error, data){
 				.text(function(d){
 					var f = d3.format(".2n")
 					return f(d)
-				})	
+				})
 		}
 
 		scatterSvg.selectAll(".dot")
@@ -1279,7 +1279,7 @@ d3.csv("data.csv", function(error, data){
 			.enter()
 			.append("p")
 			.html(function(d){ return d})
-			
+
 	}
 	function buildHeader(data, city, print){
 		var text = "",
@@ -1373,7 +1373,7 @@ d3.csv("data.csv", function(error, data){
 
 			// factsheet.append("i")
 
-			
+
 
 
 		}
@@ -1395,13 +1395,13 @@ d3.csv("data.csv", function(error, data){
 	}
 
 	function showMap(){
-		d3.select("#questionTitle").html("")
+		// d3.select("#questionTitle").html("")
 		d3.select(".questionContainer").attr("class", "map")
 		d3.selectAll(".cityRemove").remove()
 		d3.selectAll(".cityPage").classed("cityPage",false)
 		d3.selectAll(".questionMenu.map").classed("active", true)
 		buildHeader(data, false, false)
-		
+
 		updateQueryString("?topic=map")
 		var year = getYear();
 		var inclusionType = getInclusionType();
@@ -1417,7 +1417,7 @@ d3.csv("data.csv", function(error, data){
 		var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
 		var legendContainer = graphContainer.append("div").attr("id", "legendContainer")
 		var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
-		d3.select("#sidebarContainer").attr("class","map")
+		// d3.select("#sidebarContainer").attr("class","map")
 
 		graphContainer.style("height", "auto")
 
@@ -1465,7 +1465,7 @@ d3.csv("data.csv", function(error, data){
 				offsetX = 0
 				offsetY = 0
 			}
-	
+
 			startx = +d3.event.x - offsetX
 			starty = +d3.event.y - offsetY
 
@@ -1490,7 +1490,7 @@ d3.csv("data.csv", function(error, data){
 		var drag = d3.drag()
 		    .on("start", dragStart)
 		    .on("drag", dragged)
-		    .on("end", dragEnd);	
+		    .on("end", dragEnd);
 
 		var active = d3.select(null);
 
@@ -1513,7 +1513,7 @@ d3.csv("data.csv", function(error, data){
 						d3.select(this).classed("hover", true)
 					})
 					.on("mouseout", function(d){
-						d3.select(this).classed("hover", false)	
+						d3.select(this).classed("hover", false)
 					})
 				    .on("click", function(d){
 				    	clicked(this, d)
@@ -1577,7 +1577,7 @@ d3.csv("data.csv", function(error, data){
 					.append("path")
 					.data(voronoi.polygons(mapData.map(projection)))
 					.attr("class", "cell-path")
-					.attr("d", function(d) { return d ? "M" + d.join("L") + "Z" : null; });	
+					.attr("d", function(d) { return d ? "M" + d.join("L") + "Z" : null; });
 			}
 
 			function reset() {
@@ -1661,76 +1661,76 @@ d3.csv("data.csv", function(error, data){
 		d3.select("#legendContainer").style("width", (140 + inclusionSpace[inclusionType]) + "px").style("right", (-150 - inclusionSpace[inclusionType]) + "px")
 	}
 
-	function showHealthQuestion(){
-		d3.select(".questionContainer").attr("class", "scatter")
-		d3.select("#questionTitle").html(d3.select(".questionMenu[data-section=health]").html())
-		updateQueryString("?topic=economic-health")
-		var year = getYear();
-		var inclusionType = getInclusionType();
-		var varName = getVarName(year, inclusionType);
+	// function showHealthQuestion(){
+	// 	d3.select(".questionContainer").attr("class", "scatter")
+	// 	d3.select("#questionTitle").html(d3.select(".questionMenu[data-section=health]").html())
+	// 	updateQueryString("?topic=economic-health")
+	// 	var year = getYear();
+	// 	var inclusionType = getInclusionType();
+	// 	var varName = getVarName(year, inclusionType);
 
-		var graphContainer = d3.select("#graphContainer")
-		graphContainer.attr("class", "healthQuestion")
-		graphContainer.style("height", "auto")
+	// 	var graphContainer = d3.select("#graphContainer")
+	// 	graphContainer.attr("class", "healthQuestion")
+	// 	graphContainer.style("height", "auto")
 
-		var yearContainer = graphContainer.append("div").attr("id", "yearContainer")
-		var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
-		var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
-		var paragraphContainer = d3.select("#sidebarContainer").attr("class","healthQuestion").append("div").attr("id","paragraphContainer")
-		var legendContainer = d3.select("#sidebarContainer").attr("class","healthQuestion").append("div").attr("id","legendContainer").attr("class", "scatter")
-
-
-		buildYearSelector(yearContainer, "health")
-		buildInclusionTypeSelector(inclusionContainer, "health")
-		buildScatterPlot(plotContainer, "health")
-		buildParagraphs(paragraphContainer, "healthQuestion")
-		buildLegend(legendContainer,"health")
-	}
-	function updateHealthQuestion(year, inclusionType){
-		removeTooltip(true)
-		scatterSvg._voronoi = null;
-
-		var scales = getScatterScales(getScatterWidth() - scatterMargin.left - scatterMargin.right, getScatterHeight() - scatterMargin.top - scatterMargin.bottom, scatterMargin, "health", year, inclusionType, "linear")
-		var x = scales[0]
-		var y = scales[1]
-
-		var xVar = getVarName(year, inclusionType);
-		var yVar = "rankeconhealth" + year
+	// 	var yearContainer = graphContainer.append("div").attr("id", "yearContainer")
+	// 	var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
+	// 	var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
+	// 	var paragraphContainer = d3.select("#sidebarContainer").attr("class","healthQuestion").append("div").attr("id","paragraphContainer")
+	// 	var legendContainer = d3.select("#sidebarContainer").attr("class","healthQuestion").append("div").attr("id","legendContainer").attr("class", "scatter")
 
 
-		scatterSvg.selectAll(".dot")
-			.transition()
-			.duration(500)
-			.delay(function(d, i){
-				return d[xVar]*2
-			})
-			.attr("cx", function(d){
-				return x(d[xVar])
-			})
-			.attr("cy", function(d){
-				return y(d[yVar])
-			})
+	// 	buildYearSelector(yearContainer, "health")
+	// 	buildInclusionTypeSelector(inclusionContainer, "health")
+	// 	buildScatterPlot(plotContainer, "health")
+	// 	buildParagraphs(paragraphContainer, "healthQuestion")
+	// 	buildLegend(legendContainer,"health")
+	// }
+	// function updateHealthQuestion(year, inclusionType){
+	// 	removeTooltip(true)
+	// 	scatterSvg._voronoi = null;
+
+	// 	var scales = getScatterScales(getScatterWidth() - scatterMargin.left - scatterMargin.right, getScatterHeight() - scatterMargin.top - scatterMargin.bottom, scatterMargin, "health", year, inclusionType, "linear")
+	// 	var x = scales[0]
+	// 	var y = scales[1]
+
+	// 	var xVar = getVarName(year, inclusionType);
+	// 	var yVar = "rankeconhealth" + year
 
 
-		var xVals = data.map(function(a){ return a[xVar]})
-		var yVals = data.map(function(a){ return a[yVar]})
-		var leastSquaresCoeff = leastSquares(xVals, yVals);
-		
-		var x1 = 1;
-		var y1 = leastSquaresCoeff[0] + leastSquaresCoeff[1];
-		var x2 = 274;
-		var y2 = leastSquaresCoeff[0] * xVals.length + leastSquaresCoeff[1];
-		var trendData = [[x1,y1,x2,y2]];
+	// 	scatterSvg.selectAll(".dot")
+	// 		.transition()
+	// 		.duration(500)
+	// 		.delay(function(d, i){
+	// 			return d[xVar]*2
+	// 		})
+	// 		.attr("cx", function(d){
+	// 			return x(d[xVar])
+	// 		})
+	// 		.attr("cy", function(d){
+	// 			return y(d[yVar])
+	// 		})
 
-		var fitLine = scatterSvg.selectAll(".fitLine")
-			.data(trendData)
-			.transition()
-			.duration(500 + 274*2)
-			.attr("y1", function(d) { return y(d[1]); })
-			.attr("y2", function(d) { return y(d[3]); })
 
-		fitLine.node().parentNode.appendChild(fitLine.node())
-	}
+	// 	var xVals = data.map(function(a){ return a[xVar]})
+	// 	var yVals = data.map(function(a){ return a[yVar]})
+	// 	var leastSquaresCoeff = leastSquares(xVals, yVals);
+
+	// 	var x1 = 1;
+	// 	var y1 = leastSquaresCoeff[0] + leastSquaresCoeff[1];
+	// 	var x2 = 274;
+	// 	var y2 = leastSquaresCoeff[0] * xVals.length + leastSquaresCoeff[1];
+	// 	var trendData = [[x1,y1,x2,y2]];
+
+	// 	var fitLine = scatterSvg.selectAll(".fitLine")
+	// 		.data(trendData)
+	// 		.transition()
+	// 		.duration(500 + 274*2)
+	// 		.attr("y1", function(d) { return y(d[1]); })
+	// 		.attr("y2", function(d) { return y(d[3]); })
+
+	// 	fitLine.node().parentNode.appendChild(fitLine.node())
+	// }
 
 	function buildScaleTypeToggle(container, scaleType){
 		var left;
@@ -1788,119 +1788,119 @@ d3.csv("data.csv", function(error, data){
 			})
 
 	}
-	function showSizeQuestion(){
-		d3.select(".questionContainer").attr("class", "scatter")
-		d3.select("#questionTitle").html(d3.select(".questionMenu[data-section=size]").html())
-		updateQueryString("?topic=city-size")
-		var scaleType = getScaleType();
+	// function showSizeQuestion(){
+	// 	d3.select(".questionContainer").attr("class", "scatter")
+	// 	d3.select("#questionTitle").html(d3.select(".questionMenu[data-section=size]").html())
+	// 	updateQueryString("?topic=city-size")
+	// 	var scaleType = getScaleType();
 
-		var graphContainer = d3.select("#graphContainer")
-		graphContainer.attr("class", "sizeQuestion")
-		var yearContainer = graphContainer.append("div").attr("id", "yearContainer")
-		var toggleContainer = graphContainer.append("div").attr("id", "toggleContainer")
-		var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
-		var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
-		var paragraphContainer = d3.select("#sidebarContainer").attr("class","sizeQuestion").append("div").attr("id","paragraphContainer")
-		var legendContainer = d3.select("#sidebarContainer").attr("class","sizeQuestion").append("div").attr("id","legendContainer").attr("class", "scatter")
-		graphContainer.style("height", "auto")
+	// 	var graphContainer = d3.select("#graphContainer")
+	// 	graphContainer.attr("class", "sizeQuestion")
+	// 	var yearContainer = graphContainer.append("div").attr("id", "yearContainer")
+	// 	var toggleContainer = graphContainer.append("div").attr("id", "toggleContainer")
+	// 	var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
+	// 	var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
+	// 	var paragraphContainer = d3.select("#sidebarContainer").attr("class","sizeQuestion").append("div").attr("id","paragraphContainer")
+	// 	var legendContainer = d3.select("#sidebarContainer").attr("class","sizeQuestion").append("div").attr("id","legendContainer").attr("class", "scatter")
+	// 	graphContainer.style("height", "auto")
 
-		buildYearSelector(yearContainer, "size")
-		buildInclusionTypeSelector(inclusionContainer, "size")
-		buildScatterPlot(plotContainer, "size")
-		buildScaleTypeToggle(toggleContainer, scaleType)
-		buildParagraphs(paragraphContainer, "sizeQuestion")
-		buildLegend(legendContainer, "size")
+	// 	buildYearSelector(yearContainer, "size")
+	// 	buildInclusionTypeSelector(inclusionContainer, "size")
+	// 	buildScatterPlot(plotContainer, "size")
+	// 	buildScaleTypeToggle(toggleContainer, scaleType)
+	// 	buildParagraphs(paragraphContainer, "sizeQuestion")
+	// 	buildLegend(legendContainer, "size")
 
-	}
-	function updateSizeQuestion(year, inclusionType, scaleType){
-		removeTooltip(true)
-		if(widthUnder(768)){
-			if(scaleType == "linear"){ d3.select("#sliderButton").transition().style("left","63px") }
-			else{ d3.select("#sliderButton").transition().style("left","86px") }
-		}else{
-			if(scaleType == "linear"){ d3.select("#sliderButton").transition().style("left","171px") }
-			else{ d3.select("#sliderButton").transition().style("left","194px") }
-		}
+	// }
+	// function updateSizeQuestion(year, inclusionType, scaleType){
+	// 	removeTooltip(true)
+	// 	if(widthUnder(768)){
+	// 		if(scaleType == "linear"){ d3.select("#sliderButton").transition().style("left","63px") }
+	// 		else{ d3.select("#sliderButton").transition().style("left","86px") }
+	// 	}else{
+	// 		if(scaleType == "linear"){ d3.select("#sliderButton").transition().style("left","171px") }
+	// 		else{ d3.select("#sliderButton").transition().style("left","194px") }
+	// 	}
 
-		scatterSvg._voronoi = null;
+	// 	scatterSvg._voronoi = null;
 
-		var scales = getScatterScales(getScatterWidth() - scatterMargin.left - scatterMargin.right, getScatterHeight() - scatterMargin.top - scatterMargin.bottom, scatterMargin, "size", year, inclusionType, scaleType)
-		var x = scales[0]
-		var y = scales[1]
-		var xVar = getVarName(year, inclusionType);
-		var yVar = "pop" + year
-
-
-		scatterSvg.selectAll(".dot")
-			.transition()
-			.duration(500)
-			.delay(function(d, i){
-				return d[xVar]*2
-			})
-			.attr("cx", function(d){
-				return x(d[xVar])
-			})
-			.attr("cy", function(d){
-				if(scaleType == "log"){
-					return y(d["log" + yVar])
-				}else{
-					return y(d[yVar])
-				}
-			})
-		var tickFormat = (scaleType == "log") ? "" : d3.format(".2s")
-		var oldScale = (d3.select(".axis--y .tick text tspan tspan").node() == null) ? "linear" : "log"
-		if(scaleType != oldScale){
-			d3.select(".axis.axis--y")
-				.transition()
-				.call(d3.axisRight(y).ticks(5).tickSize(-(+d3.select("#scatterSvg").attr("width")-scatterMargin.left-scatterMargin.right)-40).tickFormat(tickFormat))
-				.on("end", function(){
-					if(scaleType == "log"){
-						d3.selectAll(".axis.axis--y .tick text")
-							.text(null)
-							.append("tspan")
-							.attr("dx", "-.7em")
-							.text("10")
-							.append("tspan")
-							.attr("baseline-shift", "super")
-							.attr("font-size", "11px")
-							.text(function(d){
-								var f = d3.format(".2n")
-								return f(d)
-							})	
-					}
-				
-				})
-		}
+	// 	var scales = getScatterScales(getScatterWidth() - scatterMargin.left - scatterMargin.right, getScatterHeight() - scatterMargin.top - scatterMargin.bottom, scatterMargin, "size", year, inclusionType, scaleType)
+	// 	var x = scales[0]
+	// 	var y = scales[1]
+	// 	var xVar = getVarName(year, inclusionType);
+	// 	var yVar = "pop" + year
 
 
+	// 	scatterSvg.selectAll(".dot")
+	// 		.transition()
+	// 		.duration(500)
+	// 		.delay(function(d, i){
+	// 			return d[xVar]*2
+	// 		})
+	// 		.attr("cx", function(d){
+	// 			return x(d[xVar])
+	// 		})
+	// 		.attr("cy", function(d){
+	// 			if(scaleType == "log"){
+	// 				return y(d["log" + yVar])
+	// 			}else{
+	// 				return y(d[yVar])
+	// 			}
+	// 		})
+	// 	var tickFormat = (scaleType == "log") ? "" : d3.format(".2s")
+	// 	var oldScale = (d3.select(".axis--y .tick text tspan tspan").node() == null) ? "linear" : "log"
+	// 	if(scaleType != oldScale){
+	// 		d3.select(".axis.axis--y")
+	// 			.transition()
+	// 			.call(d3.axisRight(y).ticks(5).tickSize(-(+d3.select("#scatterSvg").attr("width")-scatterMargin.left-scatterMargin.right)-40).tickFormat(tickFormat))
+	// 			.on("end", function(){
+	// 				if(scaleType == "log"){
+	// 					d3.selectAll(".axis.axis--y .tick text")
+	// 						.text(null)
+	// 						.append("tspan")
+	// 						.attr("dx", "-.7em")
+	// 						.text("10")
+	// 						.append("tspan")
+	// 						.attr("baseline-shift", "super")
+	// 						.attr("font-size", "11px")
+	// 						.text(function(d){
+	// 							var f = d3.format(".2n")
+	// 							return f(d)
+	// 						})
+	// 				}
 
-		var yVals = exp_regression(data.map(function(a) {return a[yVar.replace("log","")];}))
-
-		var lineData = []
-		for(var i = 1; i < yVals.length+1; i++){
-			var lineDatum = {"x": i, "y": yVals[i-1]}
-			lineData.push(lineDatum)
-		}
-
-		var line = d3.line()
-			.x(function(d) {return x(d.x);})
-			.y(function(d) {
-				if(scaleType == "log"){
-					return y(Math.log10(d.y));
-				}else{
-					return y(d.y)
-				}
-			})
-
-		var fitLine = d3.selectAll(".fitLine")
-			.transition()
-			.duration(500 + 274*2)
-			.attr("d", line(lineData))
-
-		fitLine.node().parentNode.appendChild(fitLine.node())
+	// 			})
+	// 	}
 
 
-	}
+
+	// 	var yVals = exp_regression(data.map(function(a) {return a[yVar.replace("log","")];}))
+
+	// 	var lineData = []
+	// 	for(var i = 1; i < yVals.length+1; i++){
+	// 		var lineDatum = {"x": i, "y": yVals[i-1]}
+	// 		lineData.push(lineDatum)
+	// 	}
+
+	// 	var line = d3.line()
+	// 		.x(function(d) {return x(d.x);})
+	// 		.y(function(d) {
+	// 			if(scaleType == "log"){
+	// 				return y(Math.log10(d.y));
+	// 			}else{
+	// 				return y(d.y)
+	// 			}
+	// 		})
+
+	// 	var fitLine = d3.selectAll(".fitLine")
+	// 		.transition()
+	// 		.duration(500 + 274*2)
+	// 		.attr("d", line(lineData))
+
+	// 	fitLine.node().parentNode.appendChild(fitLine.node())
+
+
+	// }
 
 	function buildChangeDropdown(container, x, y){
 		container.append("div")
@@ -1942,7 +1942,7 @@ d3.csv("data.csv", function(error, data){
   			.text("Inclusion rank")
   			.append("span")
   				.attr("class","legendSymbol series inclusion")
-  		
+
   		legendLeft.append("div")
   			.attr("class","smallLegendLabel")
   			.text("Economic health rank")
@@ -1965,169 +1965,169 @@ d3.csv("data.csv", function(error, data){
 
 	}
 
-	function showChangeQuestion(){
-		d3.select("#questionContainer").attr("class", "change")
-		d3.select("#popupContainer").attr("class", "change")
-		d3.select("#questionTitle").html(d3.select(".questionMenu[data-section=change]").html())
-		updateQueryString("?topic=economic-recovery")
-		var heightScalar = .9;
-		var changeData = data.filter(function(a){ return a.everrecover })
-			.sort(function(a, b){ return (a["rankoverallinclusionindex" + a.recoverend] - a["rankoverallinclusionindex" + a.recoverstart]) - (b["rankoverallinclusionindex" + b.recoverend] - b["rankoverallinclusionindex" + b.recoverstart]) })
+	// function showChangeQuestion(){
+	// 	d3.select("#questionContainer").attr("class", "change")
+	// 	d3.select("#popupContainer").attr("class", "change")
+	// 	d3.select("#questionTitle").html(d3.select(".questionMenu[data-section=change]").html())
+	// 	updateQueryString("?topic=economic-recovery")
+	// 	var heightScalar = .9;
+	// 	var changeData = data.filter(function(a){ return a.everrecover })
+	// 		.sort(function(a, b){ return (a["rankoverallinclusionindex" + a.recoverend] - a["rankoverallinclusionindex" + a.recoverstart]) - (b["rankoverallinclusionindex" + b.recoverend] - b["rankoverallinclusionindex" + b.recoverstart]) })
 
-		var graphContainer = d3.select("#graphContainer")
-		graphContainer.attr("class", "changeQuestion")
+	// 	var graphContainer = d3.select("#graphContainer")
+	// 	graphContainer.attr("class", "changeQuestion")
 
-		var paragraphContainer = d3.select("#sidebarContainer").attr("class","changeQuestion")
-		var inclusionType = getInclusionType()
-		var marginSmall = {"left": 50, "right": 40, "top": 40, "bottom": 60}
-		var w = getSmallMultSize() - marginSmall.left - marginSmall.right;
-		var h = getSmallMultSize()*heightScalar - marginSmall.left - marginSmall.right
+	// 	var paragraphContainer = d3.select("#sidebarContainer").attr("class","changeQuestion")
+	// 	var inclusionType = getInclusionType()
+	// 	var marginSmall = {"left": 50, "right": 40, "top": 40, "bottom": 60}
+	// 	var w = getSmallMultSize() - marginSmall.left - marginSmall.right;
+	// 	var h = getSmallMultSize()*heightScalar - marginSmall.left - marginSmall.right
 
-		var x = d3.scaleLinear().range([marginSmall.left, getSmallMultSize()-marginSmall.right]).domain([1980, 2013])
-		var y = d3.scaleLinear().range([getSmallMultSize()*heightScalar - marginSmall.bottom, marginSmall.top]).domain([274,0])
+	// 	var x = d3.scaleLinear().range([marginSmall.left, getSmallMultSize()-marginSmall.right]).domain([1980, 2013])
+	// 	var y = d3.scaleLinear().range([getSmallMultSize()*heightScalar - marginSmall.bottom, marginSmall.top]).domain([274,0])
 
-		graphContainer.style("height", ((Math.ceil(changeData.length/getSmallMultRowCount())) * (getSmallMultSize() + SMALL_MULT_BOTTOM_PADDING) )  + "px")
+	// 	graphContainer.style("height", ((Math.ceil(changeData.length/getSmallMultRowCount())) * (getSmallMultSize() + SMALL_MULT_BOTTOM_PADDING) )  + "px")
 
-		var chartDiv = graphContainer
-			.selectAll(".chartDiv")
-			.data(changeData)
-			.enter()
-			.append("div")
-			.attr("class", function(d){ return "chartDiv " + d.className })
-			.style("width", getSmallMultSize() + "px")
-			.style("height", getSmallMultSize() + "px")
-			.style("left", function(d, i){
-				return ((i%getSmallMultRowCount()) * (getSmallMultSize() + SMALL_MULT_RIGHT_PADDING)) + "px"
-			})
-			.style("top", function(d, i){
-				return (Math.floor(i/getSmallMultRowCount()) * (getSmallMultSize() + SMALL_MULT_BOTTOM_PADDING)) + "px"
-			})
+	// 	var chartDiv = graphContainer
+	// 		.selectAll(".chartDiv")
+	// 		.data(changeData)
+	// 		.enter()
+	// 		.append("div")
+	// 		.attr("class", function(d){ return "chartDiv " + d.className })
+	// 		.style("width", getSmallMultSize() + "px")
+	// 		.style("height", getSmallMultSize() + "px")
+	// 		.style("left", function(d, i){
+	// 			return ((i%getSmallMultRowCount()) * (getSmallMultSize() + SMALL_MULT_RIGHT_PADDING)) + "px"
+	// 		})
+	// 		.style("top", function(d, i){
+	// 			return (Math.floor(i/getSmallMultRowCount()) * (getSmallMultSize() + SMALL_MULT_BOTTOM_PADDING)) + "px"
+	// 		})
 
-		chartDiv.append("div")
-			.attr("class","chartTitle")
-			.text(function(d){
-				return d.place + ", " + d.stateabrev
-			})
-			.append("span")
-				.html(function(d){
-					return "<a href = \"index.html?city=" + d.className + "\" target = \"_blank\"> See city <i class=\"fas fa-arrow-right\"></i></a>"
-			})
+	// 	chartDiv.append("div")
+	// 		.attr("class","chartTitle")
+	// 		.text(function(d){
+	// 			return d.place + ", " + d.stateabrev
+	// 		})
+	// 		.append("span")
+	// 			.html(function(d){
+	// 				return "<a href = \"index.html?city=" + d.className + "\" target = \"_blank\"> See city <i class=\"fas fa-arrow-right\"></i></a>"
+	// 		})
 
-		chartDiv.append("div")
-			.attr("class","chartSubtitle")
-			.html(function(d){
-				var change = d["rankoverallinclusionindex" + d.recoverend] - d["rankoverallinclusionindex" + d.recoverstart]
-				var changeWord = (change < 0) ? "rose" : "fell"
+	// 	chartDiv.append("div")
+	// 		.attr("class","chartSubtitle")
+	// 		.html(function(d){
+	// 			var change = d["rankoverallinclusionindex" + d.recoverend] - d["rankoverallinclusionindex" + d.recoverstart]
+	// 			var changeWord = (change < 0) ? "rose" : "fell"
 
-				return "<span class = \"inclSpan\">Overall inclusion</span> " + changeWord + " " + Math.abs(change) + " ranks during the <span class = \"healthSpan\">economic recovery</span> period."	
-			})
-		var svg = chartDiv.append("svg")
-			.attr("class","chartSvg")
-			.attr("width", getSmallMultSize())
-			.attr("height", getSmallMultSize()*heightScalar)
-		
-		svg.append("rect")
-			.attr("fill","transparent")
-			.attr("stroke","none")
-			.attr("x",0)
-			.attr("y",0)
-			.attr("width", getSmallMultSize())
-			.attr("height", getSmallMultSize()*heightScalar - 50)
-		svg.append("g")
-			.attr("class", "axis axis--y")
-			.attr("transform", "translate(" + (getSmallMultSize() - 20) + ",0)")
-			.call(d3.axisLeft(y).tickValues([1,100,200,274]).tickSize(getSmallMultSize() - 50));
-		svg.append("g")
-			.attr("class", "axis axis--x")
-			.attr("transform", "translate(0," + marginSmall.top + ")")
-			.call(d3.axisTop(x).tickValues([1980, 1990, 2000, 2013]).tickFormat(d3.format(".0f")));
-	
-		svg.on("mousemove", function(d){
-			mousemoveLineChart(d3.select(this), d, x, y, d3.event.offsetX, "rankeconhealth", "rank" + getInclusionType() + "inclusionindex",".0f", true, false)			
-		})
-		.on("mouseout", function(){
-			d3.select(this).selectAll(".changeDot")
-				.transition()
-				.attr("r", 5)
-			d3.selectAll(".smallTT").remove()
-		})
-		addCorrelationRect(svg, x, y, inclusionType, "econHealth");
-		addLineSeries(svg, x, y, inclusionType, false, false);
-		addLineSeries(svg, x, y, "econHealth", false, false);
-		buildParagraphs(paragraphContainer, "changeQuestion");
-		var menuContainer = paragraphContainer.append("div").attr("id", "menuContainer")
-		buildChangeDropdown(menuContainer, x, y)
+	// 			return "<span class = \"inclSpan\">Overall inclusion</span> " + changeWord + " " + Math.abs(change) + " ranks during the <span class = \"healthSpan\">economic recovery</span> period."
+	// 		})
+	// 	var svg = chartDiv.append("svg")
+	// 		.attr("class","chartSvg")
+	// 		.attr("width", getSmallMultSize())
+	// 		.attr("height", getSmallMultSize()*heightScalar)
 
+	// 	svg.append("rect")
+	// 		.attr("fill","transparent")
+	// 		.attr("stroke","none")
+	// 		.attr("x",0)
+	// 		.attr("y",0)
+	// 		.attr("width", getSmallMultSize())
+	// 		.attr("height", getSmallMultSize()*heightScalar - 50)
+	// 	svg.append("g")
+	// 		.attr("class", "axis axis--y")
+	// 		.attr("transform", "translate(" + (getSmallMultSize() - 20) + ",0)")
+	// 		.call(d3.axisLeft(y).tickValues([1,100,200,274]).tickSize(getSmallMultSize() - 50));
+	// 	svg.append("g")
+	// 		.attr("class", "axis axis--x")
+	// 		.attr("transform", "translate(0," + marginSmall.top + ")")
+	// 		.call(d3.axisTop(x).tickValues([1980, 1990, 2000, 2013]).tickFormat(d3.format(".0f")));
 
-	}
-	function updateChangeQuestion(inclusionType, x, y){
-		setInclusionType(inclusionType)
-
-		var sortData = data.filter(function(a){ return a.everrecover })
-			.sort(function(a, b){ return (a["rank" + inclusionType + "inclusionindex" + a.recoverend] - a["rank" + inclusionType + "inclusionindex" + a.recoverstart]) - (b["rank" + inclusionType + "inclusionindex" + b.recoverend] - b["rank" + inclusionType + "inclusionindex" + b.recoverstart]) })
-			.map(function(a){
-				return a.className
-			})
-
-		d3.selectAll(".chartSubtitle")
-			.text(function(d){
-				var change = d["rank" + inclusionType + "inclusionindex" + d.recoverend] - d["rank" + inclusionType + "inclusionindex" + d.recoverstart]
-				var changeWord = (change < 0) ? "rose" : "fell"
-				var changeTypes = {"overall": "Overall inclusion ", "econ": "Economic inclusion ", "race": "Racial inclusion "}
-				return changeTypes[inclusionType] + changeWord + " " + Math.abs(change) + " ranks during the economic recovery period."	
-			})
+	// 	svg.on("mousemove", function(d){
+	// 		mousemoveLineChart(d3.select(this), d, x, y, d3.event.offsetX, "rankeconhealth", "rank" + getInclusionType() + "inclusionindex",".0f", true, false)
+	// 	})
+	// 	.on("mouseout", function(){
+	// 		d3.select(this).selectAll(".changeDot")
+	// 			.transition()
+	// 			.attr("r", 5)
+	// 		d3.selectAll(".smallTT").remove()
+	// 	})
+	// 	addCorrelationRect(svg, x, y, inclusionType, "econHealth");
+	// 	addLineSeries(svg, x, y, inclusionType, false, false);
+	// 	addLineSeries(svg, x, y, "econHealth", false, false);
+	// 	buildParagraphs(paragraphContainer, "changeQuestion");
+	// 	var menuContainer = paragraphContainer.append("div").attr("id", "menuContainer")
+	// 	buildChangeDropdown(menuContainer, x, y)
 
 
+	// }
+	// function updateChangeQuestion(inclusionType, x, y){
+	// 	setInclusionType(inclusionType)
 
-		d3.selectAll(".chartDiv")
-			.transition()
-			.delay(500)
-			.duration(1000)
-			.style("left", function(d){
-				var i = sortData.indexOf(d.className)
-				return ((i%getSmallMultRowCount()) * (getSmallMultSize() + SMALL_MULT_RIGHT_PADDING)) + "px"
-			})
-			.style("top", function(d){
-				var i = sortData.indexOf(d.className)
-				return (Math.floor(i/getSmallMultRowCount()) * (getSmallMultSize() + SMALL_MULT_BOTTOM_PADDING)) + "px"
-			})
+	// 	var sortData = data.filter(function(a){ return a.everrecover })
+	// 		.sort(function(a, b){ return (a["rank" + inclusionType + "inclusionindex" + a.recoverend] - a["rank" + inclusionType + "inclusionindex" + a.recoverstart]) - (b["rank" + inclusionType + "inclusionindex" + b.recoverend] - b["rank" + inclusionType + "inclusionindex" + b.recoverstart]) })
+	// 		.map(function(a){
+	// 			return a.className
+	// 		})
 
-		var svg = d3.selectAll(".chartDiv").select("svg.chartSvg")
-		updateLineSeries(svg, x, y, inclusionType);
-		updateCorrelationRect(svg, x, y, inclusionType, "econHealth");
-	}
+	// 	d3.selectAll(".chartSubtitle")
+	// 		.text(function(d){
+	// 			var change = d["rank" + inclusionType + "inclusionindex" + d.recoverend] - d["rank" + inclusionType + "inclusionindex" + d.recoverstart]
+	// 			var changeWord = (change < 0) ? "rose" : "fell"
+	// 			var changeTypes = {"overall": "Overall inclusion ", "econ": "Economic inclusion ", "race": "Racial inclusion "}
+	// 			return changeTypes[inclusionType] + changeWord + " " + Math.abs(change) + " ranks during the economic recovery period."
+	// 		})
 
-	d3.selectAll(".questionMenu").on("click", function(){
-		restoreSidebar();
-		var section = d3.select(this).attr("data-section")
-		d3.selectAll(".questionMenu").classed("active", false)
-		d3.select(this).classed("active", true)
 
-		d3.select("#graphContainer").selectAll("*").remove()
-		d3.select("#sidebarContainer").selectAll("*").remove()
 
-		if(section == "map"){ showMap() }
-		else if(section == "health"){ showHealthQuestion() }
-		else if(section == "size"){ showSizeQuestion() }
-		else if(section == "change"){ showChangeQuestion() }
-	})
-	.on("mouseover", function(){
-		d3.selectAll(".questionMenu.noMap")
-			.style("border-left", "1px solid white")
-		if(d3.select(this).classed("noMap")){
-			d3.select(this)
-				.style("border-left", "1px solid #707070")			
-		}
+	// 	d3.selectAll(".chartDiv")
+	// 		.transition()
+	// 		.delay(500)
+	// 		.duration(1000)
+	// 		.style("left", function(d){
+	// 			var i = sortData.indexOf(d.className)
+	// 			return ((i%getSmallMultRowCount()) * (getSmallMultSize() + SMALL_MULT_RIGHT_PADDING)) + "px"
+	// 		})
+	// 		.style("top", function(d){
+	// 			var i = sortData.indexOf(d.className)
+	// 			return (Math.floor(i/getSmallMultRowCount()) * (getSmallMultSize() + SMALL_MULT_BOTTOM_PADDING)) + "px"
+	// 		})
 
-	})
-	.on("mouseout", function(){
-		d3.select(".noMap.active")
-			.style("border-left", "1px solid #707070")
-		if(d3.select(this).classed("noMap")){
-			d3.select(this)
-				.style("border-left", "1px solid #ffffff")
-		}
-	})
+	// 	var svg = d3.selectAll(".chartDiv").select("svg.chartSvg")
+	// 	updateLineSeries(svg, x, y, inclusionType);
+	// 	updateCorrelationRect(svg, x, y, inclusionType, "econHealth");
+	// }
+
+	// d3.selectAll(".questionMenu").on("click", function(){
+	// 	restoreSidebar();
+	// 	var section = d3.select(this).attr("data-section")
+	// 	d3.selectAll(".questionMenu").classed("active", false)
+	// 	d3.select(this).classed("active", true)
+
+	// 	d3.select("#graphContainer").selectAll("*").remove()
+	// 	d3.select("#sidebarContainer").selectAll("*").remove()
+
+	// 	if(section == "map"){ showMap() }
+	// 	else if(section == "health"){ showHealthQuestion() }
+	// 	else if(section == "size"){ showSizeQuestion() }
+	// 	else if(section == "change"){ showChangeQuestion() }
+	// })
+	// .on("mouseover", function(){
+	// 	d3.selectAll(".questionMenu.noMap")
+	// 		.style("border-left", "1px solid white")
+	// 	if(d3.select(this).classed("noMap")){
+	// 		d3.select(this)
+	// 			.style("border-left", "1px solid #707070")
+	// 	}
+
+	// })
+	// .on("mouseout", function(){
+	// 	d3.select(".noMap.active")
+	// 		.style("border-left", "1px solid #707070")
+	// 	if(d3.select(this).classed("noMap")){
+	// 		d3.select(this)
+	// 			.style("border-left", "1px solid #ffffff")
+	// 	}
+	// })
 
 	function addNotes(container, datum){
 		// container.text(city)
@@ -2160,7 +2160,7 @@ d3.csv("data.csv", function(error, data){
 					.text(datum.consolidated)
 			}
 		}
-		
+
 	}
 	function buildCityPage(city, print){
 		d3.select("body")
@@ -2185,14 +2185,14 @@ d3.csv("data.csv", function(error, data){
 			.attr("class","questionMenu map cityPage")
 			.attr("data-section","map")
 			.on("click", showMap)
-			
+
 		backToMap.append("img")
 			.attr("src","img/close-button.png")
 
 		var backText = (widthUnder(768)) ? "Back" : "Back to map"
 		backToMap.append("span")
 			.text(backText)
-		
+
 
 		var dropdownContainer = topContainer.append("div")
 			.attr("id","dropdownContainer")
@@ -2260,7 +2260,7 @@ d3.csv("data.csv", function(error, data){
 		var topIndicators = ["overall","econ","race","econHealth"]
 
 		for(var i = 0; i < topIndicators.length; i++){
-			
+
 			var indicator = topIndicators[i]
 			var topDiv = topContainer.append("div").attr("class","topDiv").attr("id", "td_" + indicator)
 			var titles = {"overall": "Overall inclusion rank", "econ": "Economic inclusion rank", "race": "Racial inclusion rank", "econHealth": "Economic health rank"}
@@ -2294,10 +2294,10 @@ d3.csv("data.csv", function(error, data){
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + marginSmall.top + ")")
 				.call(d3.axisTop(xTop).tickValues([1980, 1990, 2000, 2013]).tickFormat(d3.format(".0f")));
-		
+
 			svg.on("mousemove", function(d){
 				var ind = (d3.select(this).attr("data-indicator") == "econHealth") ? "rankeconhealth" : "rank" + d3.select(this).attr("data-indicator") + "inclusionindex"
-				mousemoveLineChart(d3.select(this), d, xTop, yTop, d3.event.offsetX, ind, false,".0f", true, false)			
+				mousemoveLineChart(d3.select(this), d, xTop, yTop, d3.event.offsetX, ind, false,".0f", true, false)
 			})
 			.on("mouseout", function(){
 				d3.select(this).selectAll(".changeDot")
@@ -2392,7 +2392,7 @@ d3.csv("data.csv", function(error, data){
 			.text(datum.place + ", " + datum.stateabrev)
 		legend.append("div")
 			.attr("class","moreLegend-symbol city")
-		
+
 		function getBounds(ind){
 			var bounds = [
 				datum[ind + "1980"],
@@ -2440,7 +2440,7 @@ d3.csv("data.csv", function(error, data){
 				.attr("y",0)
 				.attr("width", moreSize)
 				.attr("height", moreSize*heightScalar - 40)
-			
+
 			var tickFormat;
 
 			moreSvg.append("g")
@@ -2489,7 +2489,7 @@ d3.csv("data.csv", function(error, data){
 		            .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
 		            .attr("transform", "translate("+ (245-printScootch) +","+(50 + hMore/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
 		            .text(arrowText);
-			    
+
 			    moreSvg.append("line")
 			    	.attr("class", "moreAxisArrow")
 			    	.attr("x1", 250 - printScootch)
@@ -2514,7 +2514,7 @@ d3.csv("data.csv", function(error, data){
 						}
 					})
 				);
-		
+
 			moreSvg.on("mousemove", function(d){
 				var newBounds = getBounds(d[0])
 
@@ -2593,7 +2593,7 @@ d3.csv("data.csv", function(error, data){
 		if ($(window).width() != windowWidth) {
 			windowWidth = $(window).width();
 
-	      	d3.selectAll("#sidebarContainer *").remove()
+	      	// d3.selectAll("#sidebarContainer *").remove()
 	      	d3.selectAll("#graphContainer *").remove()
 	      	d3.selectAll(".cityRemove").remove()
 			init()
@@ -2608,7 +2608,7 @@ function restoreSidebar(){
 		.style("position","relative")
 		.style("top","0px")
 	d3.select("#popupContainer")
-		.style("margin-left","0px")	
+		.style("margin-left","0px")
 }
 
 $(window).scroll(function(e){
@@ -2622,14 +2622,14 @@ $(window).scroll(function(e){
 		var isPositionFixed = (el.style('position') == 'fixed');
 		var bottom = el.node().getBoundingClientRect().bottom
 		var topCharts = d3.select("#graphContainer").node().getBoundingClientRect().top
-		if (bottom < 162 && d3.select("#searchContainer").node().getBoundingClientRect().top > 156 && !isPositionFixed){ 
-			var sideLeft = ($("#sidebarContainer")[0].getBoundingClientRect().left + 18) + "px"
-			$('#menuContainer').css({'position': 'fixed', 'top': '108px', 'border-bottom': '6px solid #F5F5F5', "left": sideLeft}); 
-			d3.select("#sidebarContainer").style("padding-bottom", "46px")
+		if (bottom < 162 && d3.select("#searchContainer").node().getBoundingClientRect().top > 156 && !isPositionFixed){
+			// var sideLeft = ($("#sidebarContainer")[0].getBoundingClientRect().left + 18) + "px"
+			$('#menuContainer').css({'position': 'fixed', 'top': '108px', 'border-bottom': '6px solid #F5F5F5', "left": "0px"});
+			// d3.select("#sidebarContainer").style("padding-bottom", "46px")
 		}
 		else if((bottom <= topCharts || d3.select("#searchContainer").node().getBoundingClientRect().top <= 156) && isPositionFixed){
-			$('#menuContainer').css({'position': 'relative', 'top': '0px', 'border-bottom': '6px solid #ffffff', "left": "0px"}); 
-			d3.select("#sidebarContainer").style("padding-bottom", "0px")
+			$('#menuContainer').css({'position': 'relative', 'top': '0px', 'border-bottom': '6px solid #ffffff', "left": "0px"});
+			// d3.select("#sidebarContainer").style("padding-bottom", "0px")
 		}
 
 
@@ -2660,4 +2660,4 @@ $(window).scroll(function(e){
 	}
 
 
-})	
+})
