@@ -1759,7 +1759,7 @@ d3.csv("data/data.csv", function(error, data){
 	// 	fitLine.node().parentNode.appendChild(fitLine.node())
 	// }
 
-	function buildScaleTypeToggle(container, scaleType){
+	/*function buildScaleTypeToggle(container, scaleType){
 		var left;
 		if(widthUnder(768)){
 			left = (getScaleType() == "linear") ? "63px" : "86px"
@@ -1814,7 +1814,7 @@ d3.csv("data/data.csv", function(error, data){
 				updateSizeQuestion(getYear(), getInclusionType(), "log")
 			})
 
-	}
+	}*/
 	// function showSizeQuestion(){
 	// 	d3.select(".questionContainer").attr("class", "scatter")
 	// 	d3.select("#questionTitle").html(d3.select(".questionMenu[data-section=size]").html())
@@ -1929,7 +1929,7 @@ d3.csv("data/data.csv", function(error, data){
 
 	// }
 
-	function buildChangeDropdown(container, x, y){
+	/*function buildChangeDropdown(container, x, y){
 		container.append("div")
 			.attr("id","smallMenuLabel")
 			.text("Compare economic health to")
@@ -1990,7 +1990,7 @@ d3.csv("data/data.csv", function(error, data){
 
 
 
-	}
+	}*/
 
 	// function showChangeQuestion(){
 	// 	d3.select("#questionContainer").attr("class", "change")
@@ -2279,8 +2279,8 @@ d3.csv("data/data.csv", function(error, data){
 			hTop = topSize*heightScalar - marginSmall.left - marginSmall.right,
 			wMore = moreSize - marginMore.left* - marginMore.right,
 			hMore = moreSize*heightScalar - marginMore.left - marginMore.right - 40,
-			xTop = d3.scaleLinear().range([marginSmall.left, topSize-marginSmall.right]).domain([1980, 2013]),
-			xMore = d3.scaleLinear().range([marginMore.left, moreSize-marginMore.right]).domain([1980, 2013]),
+			xTop = d3.scaleLinear().range([marginSmall.left, topSize-marginSmall.right]).domain([1980, 2016]),
+			xMore = d3.scaleLinear().range([marginMore.left, moreSize-marginMore.right]).domain([1980, 2016]),
 			yTop = d3.scaleLinear().range([topSize*heightScalar - marginSmall.bottom, marginSmall.top]).domain([274,0]);
 
 
@@ -2320,7 +2320,7 @@ d3.csv("data/data.csv", function(error, data){
 			svg.append("g")
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + marginSmall.top + ")")
-				.call(d3.axisTop(xTop).tickValues([1980, 1990, 2000, 2013]).tickFormat(d3.format(".0f")));
+				.call(d3.axisTop(xTop).tickValues([1980, 1990, 2000, 2013, 2016]).tickFormat(d3.format(".0f")));
 
 			svg.on("mousemove", function(d){
 				var ind = (d3.select(this).attr("data-indicator") == "econHealth") ? "rankeconhealth" : "rank" + d3.select(this).attr("data-indicator") + "inclusionindex"
@@ -2426,10 +2426,12 @@ d3.csv("data/data.csv", function(error, data){
 				datum[ind + "1990"],
 				datum[ind + "2000"],
 				datum[ind + "2013"],
+                datum[ind + "2016"],
 				datum["MEAN" + ind + "1980"],
 				datum["MEAN" + ind + "1990"],
 				datum["MEAN" + ind + "2000"],
 				datum["MEAN" + ind + "2013"],
+                datum["MEAN" + ind + "2016"],
 			]
 			return bounds
 		}
@@ -2531,7 +2533,7 @@ d3.csv("data/data.csv", function(error, data){
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + (hMore + marginMore.top + 50) + ")")
 				.call(d3.axisBottom(xMore)
-					.tickValues([1980, 1990, 2000, 2013])
+					.tickValues([1980, 1990, 2000, 2013, 2016])
 					.tickFormat(function(t){
 						var stringTick = String(t)
 						if(print){
@@ -2556,7 +2558,7 @@ d3.csv("data/data.csv", function(error, data){
 
 
 
-			var years = ["1980", "1990", "2000", "2013"]
+			var years = ["1980", "1990", "2000", "2013", "2016"]
 
 			for(var j = 0; j < years.length; j++){
 				if(j != (years.length -1)){
@@ -2630,20 +2632,20 @@ d3.csv("data/data.csv", function(error, data){
 
 
 
-function restoreSidebar(){
-	d3.select("#questionContainer")
-		.style("position","relative")
-		.style("top","0px")
-	d3.select("#popupContainer")
-		.style("margin-left","0px")
-}
+// function restoreSidebar(){
+// 	d3.select("#questionContainer")
+// 		.style("position","relative")
+// 		.style("top","0px")
+// 	d3.select("#popupContainer")
+// 		.style("margin-left","0px")
+// }
 
 $(window).scroll(function(e){
 	hideInfoPopup()
 	var el = d3.select('#menuContainer');
 	var elSide = d3.select(".questionMenu.map")
 	if(el.node() == null){
-		restoreSidebar();
+		// restoreSidebar();
 	}else{
 		//sticky legend and dropdown
 		var isPositionFixed = (el.style('position') == 'fixed');
@@ -2680,7 +2682,7 @@ $(window).scroll(function(e){
 				|| (isSideFixed && d3.select("#titleContainer").node().getBoundingClientRect().bottom > 24)
 				|| (isSideFixed && d3.select("#searchContainer").node().getBoundingClientRect().top < 556)
 				){
-				restoreSidebar();
+				// restoreSidebar();
 			}
 		}
 
