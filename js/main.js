@@ -65,10 +65,10 @@ if (!Array.prototype.includes) {
 
 
 function parseQueryString(query) {
-        var obj = {},
-            qPos = query.indexOf("?"),
-	    tokens = query.substr(qPos + 1).split('&'),
-	    i = tokens.length - 1;
+    var obj = {},
+        qPos = query.indexOf("?"),
+    tokens = query.substr(qPos + 1).split('&'),
+    i = tokens.length - 1;
 	if (qPos !== -1 || query.indexOf("=") !== -1) {
 		for (; i >= 0; i--) {
 			var s = tokens[i].split('=');
@@ -82,12 +82,11 @@ function updateQueryString(queryString){
     	var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + queryString;
     	window.history.pushState({path:newurl},'',newurl);
 	}
-
 }
 function scrollToAnchor(a_href){
 	$('html, body').animate({
-				scrollTop: $(a_href).offset().top - 140
-			});
+			scrollTop: $(a_href).offset().top - 140
+		});
 }
 function hideInfoPopup(){
 	d3.selectAll(".infoPopup")
@@ -2313,19 +2312,19 @@ d3.csv("data.csv", function(error, data){
 		}
 
 		var moreIndicators = [
-					["pctemploymentchange","Employment growth","econHealth", "Percent change",".0%"],
-					["unemprate","Unemployment rate","econHealth", "Percent",".0%"],
-					["vacancyrate","Housing vacancy rate","econHealth", "Percent",".0%"],
+					["pctemploymentchange","Employment growth","econHealth", "Percentage change",".0%"],
+					["unemprate","Unemployment rate","econHealth", "Percentage",".0%"],
+					["vacancyrate","Housing vacancy rate","econHealth", "Percentage",".0%"],
 					["medfamincome","Median family income","econHealth","Dollars","$.2s"],
-					["Citypctnonwhite","People of color as a share of the population","race","Percent",".0%"],
+					["Citypctnonwhite","People of color as a share of the population","race","Percentage",".0%"],
 					["RacialSeg","Racial segregation","race","Index",".0f"],
 					["hogap","Racial homeownership gap","race","Percentage point difference",".0f"],
 					["povgap","Racial poverty gap","race","Percentage point difference",".0f"],
 					["racialeducationgap","Racial education gap","race","Percentage point difference",".0f"],
 					["incseg","Income segregation","econ","Index",".2f"],
-					["rentburden","Rent-burdened residents","econ","Percent",".0%"],
-					["workingpoor","Working-poor families","econ","Percent",".0%"],
-					["pct1619notinschool","High school drop-out rate","econ","Percent",".0%"]
+					["rentburden","Rent-burdened residents","econ","Percentage",".0%"],
+					["workingpoor","Working-poor families","econ","Percentage",".0%"],
+					["pct1619notinschool","High school dropout rate","econ","Percentage",".0%"]
 			]
 
 		var flipIndicators = ["pctemploymentchange","medfamincome","Citypctnonwhite"]
