@@ -2320,7 +2320,10 @@ d3.csv("data/data.csv", function(error, data){
 			svg.append("g")
 				.attr("class", "axis axis--x")
 				.attr("transform", "translate(0," + marginSmall.top + ")")
-				.call(d3.axisTop(xTop).tickValues([1980, 1990, 2000, 2013, 2016]).tickFormat(d3.format(".0f")));
+				.call(d3.axisTop(xTop).tickValues([1980, 1990, 2000, 2013, 2016]).tickFormat(function(d) { return (d > 2000) ? "'" + d%2000 : d;}));
+            d3.selectAll('.tick')
+                .filter(function(d) { return d === 2013; })
+                .style("text-anchor", "end");
 
 			svg.on("mousemove", function(d){
 				var ind = (d3.select(this).attr("data-indicator") == "econHealth") ? "rankeconhealth" : "rank" + d3.select(this).attr("data-indicator") + "inclusionindex"
@@ -2536,13 +2539,18 @@ d3.csv("data/data.csv", function(error, data){
 					.tickValues([1980, 1990, 2000, 2013, 2016])
 					.tickFormat(function(t){
 						var stringTick = String(t)
-						if(print){
+						if(print || t > 2000){
 							return "'" + stringTick[2] + stringTick[3]
 						}else{
 							return stringTick
 						}
 					})
 				);
+
+            // adjust the alignment of the 2013 tick mark so it doesn't overlap the 2016 label
+            d3.selectAll('.tick')
+                .filter(function(d) { return d === 2013; })
+                .style("text-anchor", "end");
 
 			moreSvg.on("mousemove", function(d){
 				var newBounds = getBounds(d[0])
