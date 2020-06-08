@@ -1318,15 +1318,15 @@ d3.csv("data/data.csv", function(error, data){
 			var baseText = (print) ? allText.printHeader : []
 			datum = data.filter(function(o){ return o.className == city })[0]
 			d3.select("#titleContainer #title").html(datum.place + ", " + datum.stateabrev)
-			d3.select("#titleContainer #datePublished").text("Population in 2016: " + d3.format(",")(datum.pop2013)).style("display","block")
-			if(datum.rankoverallinclusionindex2000 == datum.rankoverallinclusionindex2013){
-				if(datum.rankeconhealth2000 == datum.rankeconhealth2013){
+			d3.select("#titleContainer #datePublished").text("Population in 2016: " + d3.format(",")(datum.pop2016)).style("display","block")
+			if(datum.rankoverallinclusionindex2013 == datum.rankoverallinclusionindex2016){
+				if(datum.rankeconhealth2013 == datum.rankeconhealth2016){
 					text = baseText.concat(allText.cityHeaderNoChange)
 				}else{
 					text = baseText.concat(allText.cityHeaderNoOverallChange)
 				}
 			}
-			else if(datum.rankeconhealth2000 == datum.rankeconhealth2013){
+			else if(datum.rankeconhealth2013 == datum.rankeconhealth2016){
 				text = baseText.concat(allText.cityHeaderNoHealthChange)
 			}else{
 				text = baseText.concat(allText.cityHeaderBothChange)
@@ -1344,42 +1344,43 @@ d3.csv("data/data.csv", function(error, data){
 		ps.selectAll(".ch-cityName")
 			.datum(datum)
 			.html(function(d){ return d.place })
+        // Update: everything that used to be 13 should now be 16, 00 should now be 13
 		ps.selectAll(".ch-overallRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankoverallinclusionindex2013 })
+			.html(function(d){ return d.rankoverallinclusionindex2016 })
 		ps.selectAll(".ch-econRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankeconinclusionindex2013 })
+			.html(function(d){ return d.rankeconinclusionindex2016 })
 		ps.selectAll(".ch-racialRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankraceinclusionindex2013 })
+			.html(function(d){ return d.rankraceinclusionindex2016 })
 		ps.selectAll(".ch-healthRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankeconhealth2013 })
+			.html(function(d){ return d.rankeconhealth2016 })
 		ps.selectAll(".ch-overallRank00")
 			.datum(datum)
-			.html(function(d){ return d.rankoverallinclusionindex2000 })
+			.html(function(d){ return d.rankoverallinclusionindex2013 })
 		ps.selectAll(".ch-healthRank00")
 			.datum(datum)
-			.html(function(d){ return d.rankeconhealth2000 })
+			.html(function(d){ return d.rankeconhealth2013 })
 		ps.selectAll(".ch-healthWord")
 			.datum(datum)
 			.html(function(d){
-				var baseWord = (d.rankeconhealth2013 < d.rankeconhealth2000) ? "increased" : "decreased",
-					slightWord = (Math.abs(d.rankeconhealth2013 - d.rankeconhealth2000) <= 2) ? " slightly" : ""
+				var baseWord = (d.rankeconhealth2016 < d.rankeconhealth2013) ? "increased" : "decreased",
+					slightWord = (Math.abs(d.rankeconhealth2016 - d.rankeconhealth2013) <= 2) ? " slightly" : ""
 				return baseWord + slightWord;
 			})
 		ps.selectAll(".ch-overallWord")
 			.datum(datum)
 			.html(function(d){
-				var baseWord = (d.rankoverallinclusionindex2013 < d.rankoverallinclusionindex2000) ? "more" : "less",
-					slightWord = (Math.abs(d.rankoverallinclusionindex2013 - d.rankoverallinclusionindex2000) <= 2) ? "slightly " : ""
+				var baseWord = (d.rankoverallinclusionindex2016 < d.rankoverallinclusionindex2013) ? "more" : "less",
+					slightWord = (Math.abs(d.rankoverallinclusionindex2016 - d.rankoverallinclusionindex2013) <= 2) ? "slightly " : ""
 				return slightWord + baseWord
 
 			})
 		ps.selectAll(".ch-overallWord2")
 			.datum(datum)
-			.html(function(d){ return (d.rankoverallinclusionindex2013 < d.rankoverallinclusionindex2000) ? "rising" : "falling" })
+			.html(function(d){ return (d.rankoverallinclusionindex2016 < d.rankoverallinclusionindex2013) ? "rising" : "falling" })
 		if(city != false){
 			var titleNav = d3.select("#titleContainer").append("div").attr("id","titleNavContainer").attr("class","cityRemove")
 			titleNav.append("a")
