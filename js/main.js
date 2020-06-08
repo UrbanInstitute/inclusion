@@ -1286,13 +1286,13 @@ d3.csv("data.csv", function(error, data){
 			datum = {}
 		if(city == false){
 			d3.select("#titleContainer #title").html("Measuring Inclusion in America&rsquo;s Cities")
-			d3.select("#titleContainer #datePublished").text("April 25, 2018")
+			d3.select("#titleContainer #datePublished").text("Last updated MONTH DAY, 2020")
 			text = allText.mainHeader
 		}else{
 			var baseText = (print) ? allText.printHeader : []
 			datum = data.filter(function(o){ return o.className == city })[0]
 			d3.select("#titleContainer #title").html(datum.place + ", " + datum.stateabrev)
-			d3.select("#titleContainer #datePublished").text("Population in 2013: " + d3.format(",")(datum.pop2013)).style("display","block")
+			d3.select("#titleContainer #datePublished").text("Population in 2016: " + d3.format(",")(datum.pop2013)).style("display","block")
 			if(datum.rankoverallinclusionindex2000 == datum.rankoverallinclusionindex2013){
 				if(datum.rankeconhealth2000 == datum.rankeconhealth2013){
 					text = baseText.concat(allText.cityHeaderNoChange)
