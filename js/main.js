@@ -645,7 +645,8 @@ d3.csv("data/data.csv", function(error, data){
 	function buildYearSelector(container, section){
 		var width = container.node().getBoundingClientRect().width;
 		var height = 70;
-		var lineBump = (widthUnder(768)) ? 20 : 80;
+		var lineBump = (widthUnder(768)) ? 20 : 110;
+        var nudge = 40;
 
 		container
 			.style("width", width + "px")
@@ -654,8 +655,8 @@ d3.csv("data/data.csv", function(error, data){
 			.attr("height", height)
 			.append("g")
 		svg.append("line")
-			.attr("x1", 40)
-			.attr("x2", width - lineBump)
+			.attr("x1", nudge)
+			.attr("x2", width * 0.8 + nudge)
 			.attr("y1", 40)
 			.attr("y2", 40)
 			.style("stroke", "#707070")
@@ -666,8 +667,8 @@ d3.csv("data/data.csv", function(error, data){
 			.enter()
 			.append("g")
 			.attr("transform", function(d, i){
-				var nudge = 30;
-				return "translate(" + (i*((width*.8)/4) + nudge) + ",0)"
+				// var nudge = 30;
+				return "translate(" + (i*((width*.8)/4) + nudge - 5) + ",0)"
 			})
 			.attr("class", function(d){
 				return (getYear() == d) ? "yearSelect active" : "yearSelect"
