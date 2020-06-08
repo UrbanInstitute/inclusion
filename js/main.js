@@ -223,10 +223,10 @@ function leastSquares(xSeries, ySeries) {
 
 
 
-d3.csv("data.csv", function(error, data){
+d3.csv("data/data.csv", function(error, data){
 	data.forEach(function(d){
-		d[0] = +d.lon;
-		d[1] = +d.lat;
+		d[0] = +d.Long;
+		d[1] = +d.Lat;
 		d.className = d.place.toLowerCase().replace(/[^\w\s]+/g, "").replace(/\s/g,"_") + "_" + d.stateabrev;
 		d.place = d.place;
 		d.stateabrev = d.stateabrev;
@@ -246,17 +246,23 @@ d3.csv("data.csv", function(error, data){
 		d.rankeconinclusionindex2013 = +d.rankeconinclusionindex2013;
 		d.rankraceinclusionindex2013 = +d.rankraceinclusionindex2013;
 		d.rankoverallinclusionindex2013 = +d.rankoverallinclusionindex2013;
+        d.rankeconhealth2016 = +d.rankeconhealth2016;
+        d.rankeconinclusionindex2016 = +d.rankeconinclusionindex2016;
+        d.rankraceinclusionindex2016 = +d.rankraceinclusionindex2016;
+        d.rankoverallinclusionindex2016 = +d.rankoverallinclusionindex2016;
 		d.pop1980 = +d.pop1980;
 		d.pop1990 = +d.pop1990;
 		d.pop2000 = +d.pop2000;
 		d.pop2013 = +d.pop2013;
-		d.logpop1980 =  Math.log10(+d.pop1980);
+        d.pop2016 = +d.pop2016;
+		d.logpop1980 = Math.log10(+d.pop1980);
 		d.logpop1990 = Math.log10(+d.pop1990);
 		d.logpop2000 = Math.log10(+d.pop2000);
 		d.logpop2013 = Math.log10(+d.pop2013);
-		d.everrecover = (d.everrecover == 1);
-		d.recoverstart = (d.recovperiod != "x") ? +(d.recovperiod.split("-")[0]) : 0;
-		d.recoverend = (d.recovperiod != "x") ? +(d.recovperiod.split("-")[1]) : 0;
+        d.logpop2016 = Math.log10(+d.pop2016);
+		// d.everrecover = (d.everrecover == 1);
+		// d.recoverstart = (d.recovperiod != "x") ? +(d.recovperiod.split("-")[0]) : 0;
+		// d.recoverend = (d.recovperiod != "x") ? +(d.recovperiod.split("-")[1]) : 0;
 		d.consolidated = +d.consolidated;
 		d.pctemploymentchange1980 = +d.pctemploymentchange1980;
 		d.MEANpctemploymentchange1980 = +d.MEANpctemploymentchange1980;
@@ -266,6 +272,8 @@ d3.csv("data.csv", function(error, data){
 		d.MEANpctemploymentchange2000 = +d.MEANpctemploymentchange2000;
 		d.pctemploymentchange2013 = +d.pctemploymentchange2013;
 		d.MEANpctemploymentchange2013 = +d.MEANpctemploymentchange2013;
+        d.pctemploymentchange2016 = +d.pctemploymentchange2016;
+        d.MEANpctemploymentchange2016 = +d.MEANpctemploymentchange2016;
 		d.unemprate1980 = +d.unemprate1980;
 		d.MEANunemprate1980 = +d.MEANunemprate1980;
 		d.unemprate1990 = +d.unemprate1990;
@@ -274,6 +282,8 @@ d3.csv("data.csv", function(error, data){
 		d.MEANunemprate2000 = +d.MEANunemprate2000;
 		d.unemprate2013 = +d.unemprate2013;
 		d.MEANunemprate2013 = +d.MEANunemprate2013;
+        d.unemprate2016 = +d.unemprate2016;
+        d.MEANunemprate2016 = +d.MEANunemprate2016;
 		d.vacancyrate1980 = +d.vacancyrate1980;
 		d.MEANvacancyrate1980 = +d.MEANvacancyrate1980;
 		d.vacancyrate1990 = +d.vacancyrate1990;
@@ -282,6 +292,8 @@ d3.csv("data.csv", function(error, data){
 		d.MEANvacancyrate2000 = +d.MEANvacancyrate2000;
 		d.vacancyrate2013 = +d.vacancyrate2013;
 		d.MEANvacancyrate2013 = +d.MEANvacancyrate2013;
+        d.vacancyrate2016 = +d.vacancyrate2016;
+        d.MEANvacancyrate2016 = +d.MEANvacancyrate2016;
 		d.medfamincome1980 = +d.medfamincome1980;
 		d.MEANmedfamincome1980 = +d.MEANmedfamincome1980;
 		d.medfamincome1990 = +d.medfamincome1990;
@@ -290,6 +302,8 @@ d3.csv("data.csv", function(error, data){
 		d.MEANmedfamincome2000 = +d.MEANmedfamincome2000;
 		d.medfamincome2013 = +d.medfamincome2013;
 		d.MEANmedfamincome2013 = +d.MEANmedfamincome2013;
+        d.medfamincome2016 = +d.medfamincome2016;
+        d.MEANmedfamincome2016 = +d.MEANmedfamincome2016;
 		d.Citypctnonwhite1980 = +d.Citypctnonwhite1980;
 		d.MEANCitypctnonwhite1980 = +d.MEANCitypctnonwhite1980;
 		d.Citypctnonwhite1990 = +d.Citypctnonwhite1990;
@@ -298,6 +312,8 @@ d3.csv("data.csv", function(error, data){
 		d.MEANCitypctnonwhite2000 = +d.MEANCitypctnonwhite2000;
 		d.Citypctnonwhite2013 = +d.Citypctnonwhite2013;
 		d.MEANCitypctnonwhite2013 = +d.MEANCitypctnonwhite2013;
+        d.Citypctnonwhite2016 = +d.Citypctnonwhite2016;
+        d.MEANCitypctnonwhite2016 = +d.MEANCitypctnonwhite2016;
 		d.RacialSeg1980 = +d.RacialSeg1980;
 		d.MEANRacialSeg1980 = +d.MEANRacialSeg1980;
 		d.RacialSeg1990 = +d.RacialSeg1990;
@@ -306,6 +322,8 @@ d3.csv("data.csv", function(error, data){
 		d.MEANRacialSeg2000 = +d.MEANRacialSeg2000;
 		d.RacialSeg2013 = +d.RacialSeg2013;
 		d.MEANRacialSeg2013 = +d.MEANRacialSeg2013;
+        d.RacialSeg2016 = +d.RacialSeg2016;
+        d.MEANRacialSeg2016 = +d.MEANRacialSeg2016;
 		d.hogap1980 = +d.hogap1980 * 100;
 		d.MEANhogap1980 = +d.MEANhogap1980 * 100;
 		d.hogap1990 = +d.hogap1990 * 100;
@@ -314,6 +332,8 @@ d3.csv("data.csv", function(error, data){
 		d.MEANhogap2000 = +d.MEANhogap2000 * 100;
 		d.hogap2013 = +d.hogap2013 * 100;
 		d.MEANhogap2013 = +d.MEANhogap2013 * 100;
+        d.hogap2016 = +d.hogap2016 * 100;
+        d.MEANhogap2016 = +d.MEANhogap2016 * 100;
 		d.povgap1980 = +d.povgap1980 * 100;
 		d.MEANpovgap1980 = +d.MEANpovgap1980 * 100;
 		d.povgap1990 = +d.povgap1990 * 100;
@@ -322,6 +342,8 @@ d3.csv("data.csv", function(error, data){
 		d.MEANpovgap2000 = +d.MEANpovgap2000 * 100;
 		d.povgap2013 = +d.povgap2013 * 100;
 		d.MEANpovgap2013 = +d.MEANpovgap2013 * 100;
+        d.povgap2016 = +d.povgap2016 * 100;
+        d.MEANpovgap2016 = +d.MEANpovgap2016 * 100;
 		d.racialeducationgap1980 = +d.racialeducationgap1980 * 100;
 		d.MEANracialeducationgap1980 = +d.MEANracialeducationgap1980 * 100;
 		d.racialeducationgap1990 = +d.racialeducationgap1990 * 100;
@@ -330,6 +352,8 @@ d3.csv("data.csv", function(error, data){
 		d.MEANracialeducationgap2000 = +d.MEANracialeducationgap2000 * 100;
 		d.racialeducationgap2013 = +d.racialeducationgap2013 * 100;
 		d.MEANracialeducationgap2013 = +d.MEANracialeducationgap2013 * 100;
+        d.racialeducationgap2016 = +d.racialeducationgap2016 * 100;
+        d.MEANracialeducationgap2016 = +d.MEANracialeducationgap2016 * 100;
 		d.incseg1980 = +d.incseg1980;
 		d.MEANincseg1980 = +d.MEANincseg1980;
 		d.incseg1990 = +d.incseg1990;
@@ -338,6 +362,8 @@ d3.csv("data.csv", function(error, data){
 		d.MEANincseg2000 = +d.MEANincseg2000;
 		d.incseg2013 = +d.incseg2013;
 		d.MEANincseg2013 = +d.MEANincseg2013;
+        d.incseg2016 = +d.incseg2016;
+        d.MEANincseg2016 = +d.MEANincseg2016;
 		d.rentburden1980 = +d.rentburden1980;
 		d.MEANrentburden1980 = +d.MEANrentburden1980;
 		d.rentburden1990 = +d.rentburden1990;
@@ -346,6 +372,8 @@ d3.csv("data.csv", function(error, data){
 		d.MEANrentburden2000 = +d.MEANrentburden2000;
 		d.rentburden2013 = +d.rentburden2013;
 		d.MEANrentburden2013 = +d.MEANrentburden2013;
+        d.rentburden2016 = +d.rentburden2016;
+        d.MEANrentburden2016 = +d.MEANrentburden2016;
 		d.workingpoor1980 = +d.workingpoor1980;
 		d.MEANworkingpoor1980 = +d.MEANworkingpoor1980;
 		d.workingpoor1990 = +d.workingpoor1990;
@@ -354,6 +382,8 @@ d3.csv("data.csv", function(error, data){
 		d.MEANworkingpoor2000 = +d.MEANworkingpoor2000;
 		d.workingpoor2013 = +d.workingpoor2013;
 		d.MEANworkingpoor2013 = +d.MEANworkingpoor2013;
+        d.workingpoor2016 = +d.workingpoor2016;
+        d.MEANworkingpoor2016 = +d.MEANworkingpoor2016;
 		d.pct1619notinschool1980 = +d.pct1619notinschool1980;
 		d.MEANpct1619notinschool1980 = +d.MEANpct1619notinschool1980;
 		d.pct1619notinschool1990 = +d.pct1619notinschool1990;
@@ -362,7 +392,8 @@ d3.csv("data.csv", function(error, data){
 		d.MEANpct1619notinschool2000 = +d.MEANpct1619notinschool2000;
 		d.pct1619notinschool2013 = +d.pct1619notinschool2013;
 		d.MEANpct1619notinschool2013 = +d.MEANpct1619notinschool2013;
-
+        d.pct1619notinschool2016 = +d.pct1619notinschool2016;
+        d.MEANpct1619notinschool2016 = +d.MEANpct1619notinschool2016;
 
 	})
 
@@ -371,7 +402,7 @@ d3.csv("data.csv", function(error, data){
 		d3.select(".questionMenu.map span")
 			.text(backText)
 
-		setYear("2013");
+		setYear("2016");
 		setInclusionType("overall");
 		setScaleType("log");
 		buildSearchBox(d3.select("#combobox"),"combobox", false, null);
@@ -614,7 +645,7 @@ d3.csv("data.csv", function(error, data){
 	function buildYearSelector(container, section){
 		var width = container.node().getBoundingClientRect().width;
 		var height = 70;
-		var lineBump = (widthUnder(768)) ? 20 : 40;
+		var lineBump = (widthUnder(768)) ? 20 : 80;
 
 		container
 			.style("width", width + "px")
@@ -631,21 +662,21 @@ d3.csv("data.csv", function(error, data){
 
 
 		var g = svg.selectAll(".yearSelect")
-			.data(["1980","1990","2000","2013"])
+			.data(["1980","1990","2000","2013","2016"])
 			.enter()
 			.append("g")
 			.attr("transform", function(d, i){
 				var nudge = 30;
-				return "translate(" + (i*((width*.8)/3) + nudge) + ",0)"
+				return "translate(" + (i*((width*.8)/4) + nudge) + ",0)"
 			})
 			.attr("class", function(d){
 				return (getYear() == d) ? "yearSelect active" : "yearSelect"
 			})
 			.on("click", function(d){
-				d3.select("g.active circle.outer")
-					.transition()
-					.attr("r", 10)
-					.attr("cx", 10)
+				// d3.select("g.active circle.outer")
+				// 	.transition()
+				// 	.attr("r", 10)
+				// 	.attr("cx", 10)
 				d3.select("g.active circle.inner")
 					.transition()
 					.attr("r", 8)
@@ -654,10 +685,10 @@ d3.csv("data.csv", function(error, data){
 				d3.select("g.active .yLabel")
 					.style("font-weight", "normal")
 
-				d3.select(this).select("circle.outer")
-					.transition()
-					.attr("r", 13)
-					.attr("cx", 13)
+				// d3.select(this).select("circle.outer")
+				// 	.transition()
+				// 	.attr("r", 13)
+				// 	.attr("cx", 13)
 				d3.select(this).select("circle.inner")
 					.transition()
 					.attr("r", 11)
@@ -673,13 +704,13 @@ d3.csv("data.csv", function(error, data){
 				if(section == "map"){
 					updateMap(d, getInclusionType())
 				}
-				else if(section == "size"){
-					updateSizeQuestion(d, getInclusionType(), getScaleType())
-				}
-				else if(section == "health"){
-					updateHealthQuestion(d, getInclusionType())
+				// else if(section == "size"){
+				// 	updateSizeQuestion(d, getInclusionType(), getScaleType())
+				// }
+				// else if(section == "health"){
+				// 	updateHealthQuestion(d, getInclusionType())
 
-				}
+				// }
 			})
 			.on("mouseover", function(d){
 				d3.select(this).select("circle.inner")
@@ -718,17 +749,17 @@ d3.csv("data.csv", function(error, data){
 			.attr("y", 20)
 			.attr("x", -12.5)
 
-		g.append("circle")
-			.attr("class", "outer")
-			.attr("r", function(d){
-				return (getYear() == d) ? 13 : 10;
-			})
-			.attr("cx", function(d){
-				return (getYear() == d) ? 13 : 10;
-			})
-			.attr("cy", 40)
-			.style("stroke", "#707070")
-			.style("fill", "#ffffff")
+		// g.append("circle")
+		// 	.attr("class", "outer")
+		// 	.attr("r", function(d){
+		// 		return (getYear() == d) ? 13 : 10;
+		// 	})
+		// 	.attr("cx", function(d){
+		// 		return (getYear() == d) ? 13 : 10;
+		// 	})
+		// 	.attr("cy", 40)
+		// 	.style("stroke", "#707070")
+		// 	.style("fill", "#ffffff")
 		g.append("circle")
 			.attr("class", "inner")
 			.attr("r", function(d){
@@ -797,13 +828,13 @@ d3.csv("data.csv", function(error, data){
 				if(section == "map"){
 					updateMap(getYear(), d)
 				}
-				else if(section == "size"){
-					updateSizeQuestion(getYear(), d, getScaleType())
-				}
-				else if(section == "health"){
-					updateHealthQuestion(getYear(), d)
+				// else if(section == "size"){
+				// 	updateSizeQuestion(getYear(), d, getScaleType())
+				// }
+				// else if(section == "health"){
+				// 	updateHealthQuestion(getYear(), d)
 
-				}
+				// }
 			})
 		buildInfoPopup(container, false)
 
@@ -982,7 +1013,7 @@ d3.csv("data.csv", function(error, data){
 
 	}
 
-	function getScatterScales(width, height, margin, section, year, inclusionType, scaleType){
+	/*function getScatterScales(width, height, margin, section, year, inclusionType, scaleType){
 		// var year = getYear();
 		// var inclusionType = getInclusionType();
 		// var scaleType = getScaleType();
@@ -1012,12 +1043,12 @@ d3.csv("data.csv", function(error, data){
 		var x = d3.scaleLinear().range([margin.left, width]).domain([ 274, 0])
 		var y = d3.scaleLinear().range([height, margin.bottom]).domain([yMin,yMax])
 		return [x,y]
-	}
+	}*/
 
-	function removeScatterTooltip(d){
+	/*function removeScatterTooltip(d){
 		d3.selectAll(".dot").classed("hover", false)
-	}
-	function showScatterTooltip(d){
+	}*/
+	/*function showScatterTooltip(d){
 		d3.selectAll(".dot:not(." + d.className + ")")
 			.classed("hover", false)
 			.transition()
@@ -1029,8 +1060,8 @@ d3.csv("data.csv", function(error, data){
 		dot.node().parentNode.appendChild(dot.node())
 		var fitLine = d3.select(".fitLine")
 		fitLine.node().parentNode.appendChild(fitLine.node())
-	}
-	function buildScatterPlot(container, section){
+	}*/
+	/*function buildScatterPlot(container, section){
 		var year = getYear();
 		var inclusionType = getInclusionType();
 		var xVar = getVarName(year, inclusionType);
@@ -1263,12 +1294,7 @@ d3.csv("data.csv", function(error, data){
 					.attr("y2", function(d) { return y(d[3]); })
 
 			}
-
-
-
-
-
-	}
+	}*/
 
 	function buildParagraphs(container, key){
 		container
