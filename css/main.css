@@ -306,9 +306,9 @@ select{
 #questionContainer.map{
 	height: 523px;
 }
-#popupContainer, #questionContainer{
+/*#popupContainer, #questionContainer{
 	margin-top: 30px;
-}
+}*/
 /*#popupContainer{
 	width: 83%;
 }*/
@@ -421,8 +421,8 @@ body.cityPage #graphContainer{
 .mapQuestion #legendContainer{
 	width: 140px;
     position: absolute;
-    top: 134px;
-    right: -28.6%;
+    top: 250px;
+    right: 0;
 }
 #legend-title{
 	color: #414141;
@@ -466,14 +466,16 @@ body.cityPage #graphContainer{
 	position: relative;
 	/*margin-top: -55px;*/
 	height: auto;
-    width: 70%;
-    margin-left: 10%;
+    width: 80%;
+    margin: 0 10%;
+    padding: 5% 0;
 }
 .mapQuestion #inclusionContainer{
 	margin-top: 25px;
 }
 .mapQuestion #plotContainer{
 	position: relative;
+    width: 80%;
 }
 .mapQuestion #plotContainer svg{
 	/*cursor: pointer;*/

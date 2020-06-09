@@ -646,7 +646,7 @@ d3.csv("data/data.csv", function(error, data){
 		var width = container.node().getBoundingClientRect().width;
 		var height = 70;
 		var lineBump = (widthUnder(768)) ? 20 : 110;
-        var nudge = 40;
+        var nudge = 65;
 
 		container
 			.style("width", width + "px")
@@ -679,9 +679,9 @@ d3.csv("data/data.csv", function(error, data){
 				// 	.attr("r", 10)
 				// 	.attr("cx", 10)
 				d3.select("g.active circle.inner")
-					.transition()
+					// .transition()
 					.attr("r", 8)
-					.attr("cx", 10)
+					// .attr("cx", 10)
 					.style("fill", "#696969")
 				d3.select("g.active .yLabel")
 					.style("font-weight", "normal")
@@ -691,9 +691,9 @@ d3.csv("data/data.csv", function(error, data){
 				// 	.attr("r", 13)
 				// 	.attr("cx", 13)
 				d3.select(this).select("circle.inner")
-					.transition()
+					// .transition()
 					.attr("r", 11)
-					.attr("cx", 13)
+					// .attr("cx", 13)
 					.style("fill", "#12719E")
 				d3.select(this).select(".yLabel")
 					.style("font-weight", "bold")
@@ -1440,10 +1440,10 @@ d3.csv("data/data.csv", function(error, data){
 		var graphContainer = d3.select("#graphContainer")
 		graphContainer.attr("class", "mapQuestion")
 		var yearContainer = graphContainer.append("div").attr("id", "yearContainer")
+        var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
 		var note = graphContainer.append("div").attr("id","noteContainer")
 		var plotContainer = graphContainer.append("div").attr("id", "plotContainer")
 		var legendContainer = graphContainer.append("div").attr("id", "legendContainer")
-		var inclusionContainer = graphContainer.append("div").attr("id", "inclusionContainer")
 		// d3.select("#sidebarContainer").attr("class","map")
 
 		graphContainer.style("height", "auto")
@@ -1454,7 +1454,7 @@ d3.csv("data/data.csv", function(error, data){
 
 		note.text("Click to zoom in")
 
-		var w = getScatterWidth();
+		var w = d3.select("#plotContainer").node().getBoundingClientRect().width;
 		var h = w*.618;
 
 		var projection = d3.geoAlbersUsa()
@@ -1666,7 +1666,7 @@ d3.csv("data/data.csv", function(error, data){
 		var inclusionSpace = {"econ": 18, "race": -10, "overall": 0}
 
 		d3.select("#legend-title").text(year + inclusionText[inclusionType])
-		d3.select("#legendContainer").style("width", (140 + inclusionSpace[inclusionType]) + "px").style("right", (-150 - inclusionSpace[inclusionType]) + "px")
+		d3.select("#legendContainer").style("width", (140 + inclusionSpace[inclusionType]) + "px").style("right", (0 - inclusionSpace[inclusionType]) + "px")
 
 	}
 	function updateMap(year, inclusionType){
@@ -1685,7 +1685,7 @@ d3.csv("data/data.csv", function(error, data){
 				return getRankColor(d[getVarName(year, inclusionType)])
 			})
 		d3.select("#legend-title").text(year + inclusionText[inclusionType])
-		d3.select("#legendContainer").style("width", (140 + inclusionSpace[inclusionType]) + "px").style("right", (-150 - inclusionSpace[inclusionType]) + "px")
+		d3.select("#legendContainer").style("width", (140 + inclusionSpace[inclusionType]) + "px").style("right", (0 - inclusionSpace[inclusionType]) + "px")
 	}
 
 	// function showHealthQuestion(){
