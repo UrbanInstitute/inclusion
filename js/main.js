@@ -263,7 +263,7 @@ d3.csv("data/data.csv", function(error, data){
 		// d.everrecover = (d.everrecover == 1);
 		// d.recoverstart = (d.recovperiod != "x") ? +(d.recovperiod.split("-")[0]) : 0;
 		// d.recoverend = (d.recovperiod != "x") ? +(d.recovperiod.split("-")[1]) : 0;
-		d.consolidated = +d.consolidated;
+		// d.consolidated = +d.consolidated;
 		d.pctemploymentchange1980 = +d.pctemploymentchange1980;
 		d.MEANpctemploymentchange1980 = +d.MEANpctemploymentchange1980;
 		d.pctemploymentchange1990 = +d.pctemploymentchange1990;
