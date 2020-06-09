@@ -572,6 +572,10 @@ body.cityPage #graphContainer{
     padding-bottom: 30px;
 }
 
+.copyOl {
+    line-height: 1.65;
+}
+
 .copyOl li {
     text-align: left;
     padding-left: 20px;
@@ -603,7 +607,7 @@ body.cityPage #graphContainer{
 }
 .footerAbout, .footerCredits, .footerSpecialCredit{
     font-size: 16px;
-    line-height: 26px;
+    line-height: 1.65;
 }
 .footerCredits, .footerSpecialCredit{
 	font-size: 14px;
@@ -622,6 +626,7 @@ body.cityPage #graphContainer{
 	margin-bottom: 30px;
 	margin-top: 5px;
 	font-size: 16px;
+    line-height: 1.65;
 }
 #copyright{
 	margin-bottom: 100px;
