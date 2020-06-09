@@ -1336,7 +1336,6 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
 	left: -14.2%;
 }
 
-
 .inclusionSelect{
     display: inline-block;
     margin-right: 0px;
@@ -1345,9 +1344,13 @@ ul.ui-widget.ui-autocomplete li.ui-menu-item{
     font-size: 14px;
     width: calc(33% - 40px);
     border: 1px solid #95989A;
+    border-right: none;
     padding: 10px 20px 10px 20px;
     text-align: center;
     color: #414141;
+}
+.inclusionSelect:nth-child(3) {
+    border-right: 1px solid #95989A;
 }
 .inclusionSelect.active{
 	color: #ffffff;
