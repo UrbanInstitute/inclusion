@@ -1310,6 +1310,22 @@ d3.csv("data/data.csv", function(error, data){
 			.html(function(d){ return d})
 
 	}
+    // crude way to add comma separators and turn numbers into ordinals
+    function numberFormatter(number) {
+        var lastDigit = number % 10;
+        var lastTwoDigits = number % 100;
+        var suffix = "th";
+        if(lastDigit === 1  && lastTwoDigits !== 11) {
+            suffix = "st";
+        }
+        else if(lastDigit === 2 && lastTwoDigits !== 12) {
+            suffix = "nd";
+        }
+        else if(lastDigit === 3 && lastTwoDigits !== 13) {
+            suffix = "rd";
+        }
+        return d3.format(",")(number) + suffix;
+    }
 	function buildHeader(data, city, print){
 		var text = "",
 			datum = {}
@@ -1350,22 +1366,22 @@ d3.csv("data/data.csv", function(error, data){
         // Update: everything that used to be 13 should now be 16, 00 should now be 13
 		ps.selectAll(".ch-overallRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankoverallinclusionindex2016 })
+			.html(function(d){ return numberFormatter(d.rankoverallinclusionindex2016); })
 		ps.selectAll(".ch-econRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankeconinclusionindex2016 })
+			.html(function(d){ return numberFormatter(d.rankeconinclusionindex2016); })
 		ps.selectAll(".ch-racialRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankraceinclusionindex2016 })
+			.html(function(d){ return numberFormatter(d.rankraceinclusionindex2016); })
 		ps.selectAll(".ch-healthRank13")
 			.datum(datum)
-			.html(function(d){ return d.rankeconhealth2016 })
+			.html(function(d){ return numberFormatter(d.rankeconhealth2016); })
 		ps.selectAll(".ch-overallRank00")
 			.datum(datum)
-			.html(function(d){ return d.rankoverallinclusionindex2013 })
+			.html(function(d){ return numberFormatter(d.rankoverallinclusionindex2013); })
 		ps.selectAll(".ch-healthRank00")
 			.datum(datum)
-			.html(function(d){ return d.rankeconhealth2013 })
+			.html(function(d){ return numberFormatter(d.rankeconhealth2013); })
 		ps.selectAll(".ch-healthWord")
 			.datum(datum)
 			.html(function(d){
