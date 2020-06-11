@@ -26,7 +26,7 @@
 	    left: -158px;
 	}
 	body.noPrint #removeCity {
-    	top: -24px;
+    	/*top: -24px;*/
     	right: 356px;
     }
 }
