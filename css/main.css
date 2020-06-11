@@ -374,7 +374,7 @@ body.cityPage #graphContainer{
 }
 #graphContainer{
 	width: 65%;
-	margin-left: 5%;
+	/*margin-left: 5%;*/
 }
 #graphContainer.mapQuestion{
 	width: 70%;
@@ -981,8 +981,8 @@ body.cityPage #questionContainer{
 
 }
 #moreContainer{
-	width: 90%;
-    margin: 0 auto;
+	/*width: 90%;*/
+    /*margin: 0 auto;*/
     background: #F5F5F5;
     position: relative;
 }
