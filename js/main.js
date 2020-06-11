@@ -127,6 +127,7 @@ function getScatterWidth(){
 function getScatterHeight(){
 	return 500;
 }
+
 function setYear(year){
 	d3.select("#yearDatum").datum(year)
 }
@@ -160,6 +161,7 @@ function getRankColor(rank){
     return color(rank)
 }
 
+/*
 //exponential regression from https://stackoverflow.com/questions/13590922/how-can-i-use-d3-js-to-create-a-trend-exponential-regression-line
 function square(x){return Math.pow(x,2);};
 
@@ -220,7 +222,7 @@ function leastSquares(xSeries, ySeries) {
 
 	return [slope, intercept, rSquare];
 }
-
+*/
 
 
 d3.csv("data/data.csv", function(error, data){
@@ -509,7 +511,8 @@ d3.csv("data/data.csv", function(error, data){
 	            classes: {
 	              "ui-tooltip": "ui-state-highlight"
 	            }
-	          });
+	          })
+              .on("click", function() { $(this).val(""); });
 
 	        this._on( this.input, {
 	          autocompleteselect: function( event, ui ) {
