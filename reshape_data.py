@@ -11,16 +11,16 @@ for e in head:
 	h[e] = i
 	i += 1
 
-include = ["place","stateabrev",
-            "rankeconhealth1980",
+include = ["TablePlace","stateabrev",
+            "rankeconhealthindex1980",
             "rankeconinclusionindex1980","rankraceinclusionindex1980","rankoverallinclusionindex1980",
-            "rankeconhealth1990",
+            "rankeconhealthindex1990",
             "rankeconinclusionindex1990","rankraceinclusionindex1990","rankoverallinclusionindex1990",
-            "rankeconhealth2000",
+            "rankeconhealthindex2000",
             "rankeconinclusionindex2000","rankraceinclusionindex2000","rankoverallinclusionindex2000",
-            "rankeconhealth2013",
+            "rankeconhealthindex2013",
             "rankeconinclusionindex2013","rankraceinclusionindex2013","rankoverallinclusionindex2013",
-            "rankeconhealth2016",
+            "rankeconhealthindex2016",
             "rankeconinclusionindex2016","rankraceinclusionindex2016","rankoverallinclusionindex2016",
             "pop1980","pop1990","pop2000",
             #"everrecover",
