@@ -1427,14 +1427,14 @@ d3.csv("data/data.csv", function(error, data){
 
 	function mapdeHover(d){
 		d3.selectAll(".dot")
-			.classed("hover", false)
+			// .classed("hover", false)
 			.transition()
 			.attr("r",2)
 	}
 	function mapHover(d){
 		d3.selectAll(".dot").classed("hover", false)
 		var dot = d3.select(".dot." + d.className)
-			.classed("hover", true)
+			// .classed("hover", true)
 			.transition()
 			.attr("r",5)
 		dot.node().parentNode.appendChild(dot.node())

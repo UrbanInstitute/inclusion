@@ -673,9 +673,9 @@ body.cityPage #graphContainer{
 .scatterTopNote.topSize{
 	top: 61px;
 }
-.dot.hover{
+/*.dot.hover{
 	fill: #ec008b;
-}
+}*/
 .fitLine{
 	stroke: #ec008b;
 	fill: none;
