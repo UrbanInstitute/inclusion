@@ -71,23 +71,23 @@ select{
 /*********************************************************************************/
 
 #menuBar{
-	position: fixed;
-    width: 100%;
-    background: #F5F5F5;
-    top: 49px;
-    z-index: 98;
-    height: 60px;
+	/*position: fixed;*/
+    /*width: 100%;*/
+    /*background: #F5F5F5;*/
+    margin-top: 150px;
+    /*z-index: 98;*/
+    /*height: 60px;*/
 }
 
-#tabWrapper{
+/*#tabWrapper{
 	width: 69px;
     display: block;
     margin: 0 auto;
     cursor: pointer;
     background: none;
-}
+}*/
 #tabWrapper a{
-	text-align: center;
+	/*text-align: center;*/
 	color: #333;
 }
 .menuTab{
@@ -102,7 +102,7 @@ select{
 	color: #1696d2;
 }
 .menuTab.home{
-	width: 69px;
+	width: 100%;
 }
 .menuTab.cities{
 	width: 98px;

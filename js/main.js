@@ -400,9 +400,9 @@ d3.csv("data/data.csv", function(error, data){
 	})
 
 	function init(){
-		var backText = (widthUnder(768)) ? "Back" : "Back to map"
-		d3.select(".questionMenu.map span")
-			.text(backText)
+		// var backText = (widthUnder(768)) ? "Back" : "Back to map"
+		// d3.select(".questionMenu.map span")
+		// 	.text(backText)
 
 		setYear("2016");
 		setInclusionType("overall");
@@ -2227,17 +2227,17 @@ d3.csv("data/data.csv", function(error, data){
 
 		addNotes(consolidatedNoteContainer, datum)
 
-		var backToMap = topContainer.append("div")
-			.attr("class","questionMenu map cityPage")
-			.attr("data-section","map")
-			.on("click", showMap)
+		// var backToMap = topContainer.append("div")
+		// 	.attr("class","questionMenu map cityPage")
+		// 	.attr("data-section","map")
+		// 	.on("click", showMap)
 
-		backToMap.append("img")
-			.attr("src","img/close-button.png")
+		// backToMap.append("img")
+		// 	.attr("src","img/close-button.png")
 
-		var backText = (widthUnder(768)) ? "Back" : "Back to map"
-		backToMap.append("span")
-			.text(backText)
+		// var backText = (widthUnder(768)) ? "Back" : "Back to map"
+		// backToMap.append("span")
+		// 	.text(backText)
 
 
 		var dropdownContainer = topContainer.append("div")
