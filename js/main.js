@@ -662,7 +662,7 @@ d3.csv("data/data.csv", function(error, data){
 			.attr("x2", width * 0.8 + nudge)
 			.attr("y1", 40)
 			.attr("y2", 40)
-			.style("stroke", "#707070")
+			.style("stroke", "#9D9D9D")
 
 
 		var g = svg.selectAll(".yearSelect")
@@ -685,7 +685,7 @@ d3.csv("data/data.csv", function(error, data){
 					// .transition()
 					.attr("r", 8)
 					// .attr("cx", 10)
-					.style("fill", "#696969")
+					.style("fill", "#9D9D9D")
 				d3.select("g.active .yLabel")
 					.style("font-weight", "normal")
 
@@ -733,7 +733,7 @@ d3.csv("data/data.csv", function(error, data){
 				}else{
 					d3.select(this).select("circle.inner")
 						.transition()
-							.style("fill", "#696969")
+							.style("fill", "#9D9D9D")
 					d3.select(this).select(".yLabel")
 						.style("font-weight", "normal")
 				}
@@ -775,7 +775,7 @@ d3.csv("data/data.csv", function(error, data){
 			.attr("cy", 40)
 			.style("stroke", "none")
 			.style("fill", function(d){
-				return (getYear() == d) ? "#12719E" : "#696969";
+				return (getYear() == d) ? "#12719E" : "#9D9D9D";
 				"#ffffff"
 			})
 
