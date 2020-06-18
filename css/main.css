@@ -516,7 +516,9 @@ body.cityPage #graphContainer{
 	pointer-events: none;
 }
 .states.hover{
-	fill: #ec008b;
+	fill: #d2d2d2;
+    /*stroke: #353535;*/
+    /*stroke-width: 2px;*/
 }
 .cityText{
 	font-family: Lato;
