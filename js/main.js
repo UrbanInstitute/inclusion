@@ -989,7 +989,7 @@ d3.csv("data/data.csv", function(error, data){
 				var varName = getVarName(year, inclusionType)
 				var fullTypes = {"overall": "overall inclusion", "econ": "economic inclusion", "race": "racial inclusion"}
 
-				return "Rank: " + d[varName] + " of 274 cities on " + fullTypes[inclusionType] + " in " + year
+				return "Rank: " + numberFormatter(d[varName]) + " of 274 cities on " + fullTypes[inclusionType] + " in " + year
 			})
 
 		tt.append("div")
