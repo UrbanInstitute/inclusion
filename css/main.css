@@ -568,12 +568,13 @@ body.cityPage #graphContainer{
 .copyUl{
 	padding-left: 21px;
 	width: calc(100% - 21px);
+    margin-bottom: 0;
 }
 .copyUl li{
 	text-align: left;
     list-style: initial;
     padding-left: 20px;
-    padding-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .copyOl {
