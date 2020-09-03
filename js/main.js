@@ -1331,7 +1331,7 @@ d3.csv("data/data.csv", function(error, data){
 			datum = {}
 		if(city == false){
 			d3.select("#titleContainer #title").html("Measuring Inclusion in America&rsquo;s Cities")
-			d3.select("#titleContainer #datePublished").text("Last updated MONTH DAY, 2020")
+			d3.select("#titleContainer #datePublished").text("Last updated September 15, 2020")
 			text = allText.mainHeader
 		}else{
 			var baseText = (print) ? allText.printHeader : []
